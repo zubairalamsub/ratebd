@@ -1,0 +1,368 @@
+---
+// Every statement on this page was checked against the linked primary sources on FACTS_CHECKED.
+// Update the date and the facts together when Bangladesh Bank or the Finance Division changes the rules.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CORRIDORS, rowsFor } from "../lib/data";
+import { date, money, sendAmount } from "../i18n/format";
+import { corridorPath, localePath } from "../i18n/routes";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const FACTS_CHECKED = "2026-10-17";
+const RATE = 2.5;
+
+const S = {
+  fecl01_2022: "https://www.bb.org.bd/mediaroom/circulars/fepd/jan022022fepdl01.pdf",
+  fecl45_2022: "https://www.bb.org.bd/mediaroom/circulars/fepd/dec042022fepdl45.pdf",
+  fec31_2019: "https://www.bb.org.bd/mediaroom/circulars/fepd/aug062019fepd31.pdf",
+  fecl15_2022: "https://www.bb.org.bd/mediaroom/circulars/fepd/may222022fepdl15e.pdf",
+  fecl03_2025: "https://www.bb.org.bd/mediaroom/circulars/fepd/jan192025fepdl03e.pdf",
+  psd13_2023: "https://www.bb.org.bd/mediaroom/circulars/psd/dec062023psd13.pdf",
+  fecl36_2020: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep302020fepdl36.pdf",
+  fecl04_2022: "https://www.bb.org.bd/mediaroom/circulars/fepd/jan202022fepdl04.pdf",
+  fec16_2024: "https://www.bb.org.bd/mediaroom/circulars/fepd/sep122024fepd16.pdf",
+  fecl08_2020: "https://www.bb.org.bd/mediaroom/circulars/fepd/mar112020fepdl08.pdf",
+  budget2026:
+    "https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/office-mof/2026/5/c229ec5f-66f8-4a4c-9beb-1e2e2ba71bce.pdf",
+  tbs20261013: "https://www.tbsnews.net/bangladesh/probashi-card-holders-get-3-remittance-incentive-state-minister-nur-1571196",
+  ds20261013: "https://www.thedailystar.net/news/work-and-migration/news/probashi-card-being-tested-4-5-countries-nur-4297681",
+  imf2026: "https://www.imf.org/-/media/files/publications/cr/2026/english/1bgdea2026001-source-pdf.pdf",
+};
+
+type Fact = { term: string; text: string; sources: (keyof typeof S)[] };
+type Content = {
+  lead: string;
+  factsTitle: string;
+  facts: Fact[];
+  meaningTitle: string;
+  meaning: string;
+  example: (v: { amount: string; name: string; receive: string; bonus: string; total: string }) => string;
+  qualifies: string;
+  proposedTitle: string;
+  proposed: { text: string; sources: (keyof typeof S)[] }[];
+  sourcesTitle: string;
+  sourceNames: Record<keyof typeof S, string>;
+  checked: (d: string) => string;
+  sourceLabel: string;
+  faq: { q: string; a: string }[];
+};
+
+const content: Record<Locale, Content> = {
+  en: {
+    lead:
+      "Money that Bangladeshi wage earners abroad send home through legal channels earns a cash incentive from the government of Bangladesh, paid in taka to the recipient. It comes on top of what the provider delivers, so it is not included in our comparison tables.",
+    factsTitle: "The rules in brief",
+    facts: [
+      {
+        term: "How much",
+        text: "2.5% of the taka amount. This rate has applied to remittances received since 1 January 2022; it was 2% from 1 July 2019.",
+        sources: ["fecl01_2022", "fecl45_2022"],
+      },
+      {
+        term: "Still in force?",
+        text: "Yes. The national budget speech for 2026–27 (11 June 2026) says the 2.5% cash incentive on remittances sent through legal channels will continue.",
+        sources: ["budget2026"],
+      },
+      {
+        term: "Who receives it",
+        text: "The recipient in Bangladesh. The bank that collects the remittance converts it to taka and adds the incentive when it credits the recipient's account or pays them, including when it forwards the money by BEFTN, RTGS, NPSB or mobile financial services.",
+        sources: ["fec31_2019"],
+      },
+      {
+        term: "Which money qualifies",
+        text: "Wage earners' remittances that arrive through foreign exchange houses or banks working under agreements with banks in Bangladesh. Separate circulars extend it to retirement benefits paid by an employer, compensation for Bangladeshis who died or were injured working abroad, and the overseas pay of Bangladeshi mariners, pilots and international-organisation staff.",
+        sources: ["fec31_2019", "fecl04_2022", "fec16_2024", "fecl08_2020"],
+      },
+      {
+        term: "Documents",
+        text: "None. Since 23 May 2022 the incentive is paid without any documents from the sender, until Bangladesh Bank instructs otherwise.",
+        sources: ["fecl15_2022"],
+      },
+      {
+        term: "How to spot it",
+        text: "The recipient's SMS or receipt must show the incentive separately. Since 1 February 2025 banks must also show the source currency, the conversion rate, the remittance paid and the incentive in taka.",
+        sources: ["fec31_2019", "fecl03_2025"],
+      },
+      {
+        term: "Mobile wallets",
+        text: "A bank may credit a remittance straight to the recipient's mobile financial services account, up to Tk 2,50,000 per remittance not counting the incentive.",
+        sources: ["psd13_2023"],
+      },
+      {
+        term: "Not eligible",
+        text: "Remittance money invested in Wage Earner Development Bonds, US Dollar Investment Bonds or US Dollar Premium Bonds.",
+        sources: ["fecl36_2020"],
+      },
+    ],
+    meaningTitle: "What it means for the amounts on ratebd",
+    meaning:
+      "Our “You receive” column is what the provider delivers. If the transfer qualifies, the recipient's bank adds 2.5% of that taka amount.",
+    example: (v) =>
+      `Example from today's data: the most taka for ${v.amount} came from ${v.name}, ${v.receive}. A 2.5% incentive on that is ${v.bonus}, for ${v.total} in total.`,
+    qualifies:
+      "Whether a particular transfer qualifies depends on how it reaches Bangladesh. Several providers say on their own help pages that their transfers carry the incentive, but we have not verified each provider. Ask the provider or the recipient's bank, and check that the incentive appears on the recipient's SMS or receipt.",
+    proposedTitle: "Announced changes, not yet in effect",
+    proposed: [
+      {
+        text: "On 13 October 2026 the state minister for expatriates' welfare said holders of the planned Probashi Card would receive a 3% incentive once the card is finalised and distributed. As of the date below there is no Bangladesh Bank circular or effective date.",
+        sources: ["tbs20261013", "ds20261013"],
+      },
+      {
+        text: "The IMF's 2025 Article IV report (January 2026) recommended phasing the incentive out. The government kept it in the 2026–27 budget.",
+        sources: ["imf2026", "budget2026"],
+      },
+    ],
+    sourcesTitle: "Sources",
+    sourceNames: {
+      fecl01_2022: "Bangladesh Bank FE Circular Letter 01 (2 Jan 2022): rate raised to 2.5%",
+      fecl45_2022: "Bangladesh Bank FE Circular Letter 45 (4 Dec 2022): 2% to Dec 2021, 2.5% from Jan 2022",
+      fec31_2019: "Bangladesh Bank FE Circular 31 (6 Aug 2019): incentive guidelines",
+      fecl15_2022: "Bangladesh Bank FE Circular Letter 15 (23 May 2022): no documents required",
+      fecl03_2025: "Bangladesh Bank FE Circular Letter 03 (19 Jan 2025): receipt details",
+      psd13_2023: "Bangladesh Bank PSD Circular 13 (6 Dec 2023): remittances to MFS accounts",
+      fecl36_2020: "Bangladesh Bank FE Circular Letter 36 (30 Sep 2020): bond exclusions",
+      fecl04_2022: "Bangladesh Bank FE Circular Letter 04 (20 Jan 2022): retirement benefits",
+      fec16_2024: "Bangladesh Bank FE Circular 16 (12 Sep 2024): compensation payments",
+      fecl08_2020: "Bangladesh Bank FE Circular Letter 08 (11 Mar 2020): mariners, pilots, international organisations",
+      budget2026: "Finance Division: National Budget Speech 2026–27 (11 Jun 2026), para 184",
+      tbs20261013: "The Business Standard (13 Oct 2026): Probashi Card holders to get 3%",
+      ds20261013: "The Daily Star (13 Oct 2026): Probashi Card being tested",
+      imf2026: "IMF Country Report No. 26/24 (Jan 2026), para 22",
+    },
+    checked: (d) => `Facts checked against these sources on ${d}. Bangladesh Bank circulars are the authority; rules can change.`,
+    sourceLabel: "source",
+    faq: [
+      {
+        q: "How much is the Bangladesh remittance incentive?",
+        a: "2.5% of the taka amount for wage earners' remittances through legal channels, in force since 1 January 2022 and continued in the 2026–27 budget.",
+      },
+      {
+        q: "Who receives the remittance incentive?",
+        a: "The recipient in Bangladesh. The collecting bank adds it when it credits or pays the recipient.",
+      },
+      {
+        q: "Are documents needed to get the incentive?",
+        a: "No. Since 23 May 2022 Bangladesh Bank has not required any documents from the sender.",
+      },
+    ],
+  },
+  bn: {
+    lead:
+      "বিদেশে কর্মরত বাংলাদেশিরা বৈধ পথে দেশে টাকা পাঠালে বাংলাদেশ সরকার নগদ প্রণোদনা দেয়, যা প্রাপককে টাকায় পরিশোধ করা হয়। এটি প্রতিষ্ঠানের পাঠানো অঙ্কের অতিরিক্ত, তাই আমাদের তুলনা টেবিলে ধরা হয়নি।",
+    factsTitle: "সংক্ষেপে নিয়ম",
+    facts: [
+      {
+        term: "কত",
+        text: "টাকায় রূপান্তরিত অঙ্কের ২.৫%। ১ জানুয়ারি ২০২২ থেকে প্রাপ্ত রেমিট্যান্সে এই হার প্রযোজ্য; ১ জুলাই ২০১৯ থেকে এটি ছিল ২%।",
+        sources: ["fecl01_2022", "fecl45_2022"],
+      },
+      {
+        term: "এখনো চালু?",
+        text: "হ্যাঁ। ২০২৬-২৭ অর্থবছরের জাতীয় বাজেট বক্তৃতায় (১১ জুন ২০২৬) বলা হয়েছে, বৈধ চ্যানেলে পাঠানো রেমিট্যান্সে ২.৫% নগদ প্রণোদনা অব্যাহত থাকবে।",
+        sources: ["budget2026"],
+      },
+      {
+        term: "কে পান",
+        text: "বাংলাদেশে প্রাপক। রেমিট্যান্স আহরণকারী ব্যাংক টাকায় রূপান্তর করে প্রাপকের হিসাবে জমা বা পরিশোধের সময় প্রণোদনা যোগ করে, বিইএফটিএন, আরটিজিএস, এনপিএসবি বা মোবাইল আর্থিক সেবার মাধ্যমে পাঠালেও।",
+        sources: ["fec31_2019"],
+      },
+      {
+        term: "কোন অর্থ যোগ্য",
+        text: "বাংলাদেশের ব্যাংকের সঙ্গে চুক্তির আওতায় পরিচালিত বিদেশি এক্সচেঞ্জ হাউস বা ব্যাংকের মাধ্যমে আসা প্রবাসী কর্মীদের আয়। আলাদা সার্কুলারে নিয়োগকর্তার দেওয়া অবসর সুবিধা, বিদেশে কর্মরত অবস্থায় মৃত্যু বা আহত হওয়ার ক্ষতিপূরণ, এবং বাংলাদেশি মেরিনার, পাইলট ও আন্তর্জাতিক সংস্থার কর্মকর্তাদের বিদেশি আয়ও অন্তর্ভুক্ত।",
+        sources: ["fec31_2019", "fecl04_2022", "fec16_2024", "fecl08_2020"],
+      },
+      {
+        term: "কাগজপত্র",
+        text: "লাগে না। ২৩ মে ২০২২ থেকে প্রেরকের কোনো কাগজপত্র ছাড়াই প্রণোদনা দেওয়া হচ্ছে, বাংলাদেশ ব্যাংকের পরবর্তী নির্দেশনা না দেওয়া পর্যন্ত।",
+        sources: ["fecl15_2022"],
+      },
+      {
+        term: "কীভাবে বুঝবেন",
+        text: "প্রাপকের এসএমএস বা রশিদে প্রণোদনার পরিমাণ আলাদাভাবে উল্লেখ থাকতে হবে। ১ ফেব্রুয়ারি ২০২৫ থেকে ব্যাংককে মূল মুদ্রা, রূপান্তর হার, পরিশোধিত রেমিট্যান্স ও প্রণোদনার পরিমাণ টাকায় দেখাতে হয়।",
+        sources: ["fec31_2019", "fecl03_2025"],
+      },
+      {
+        term: "মোবাইল ওয়ালেট",
+        text: "ব্যাংক সরাসরি প্রাপকের মোবাইল আর্থিক সেবা হিসাবে প্রতিবার সর্বোচ্চ ২,৫০,০০০ টাকা (প্রণোদনা বাদে) জমা দিতে পারে।",
+        sources: ["psd13_2023"],
+      },
+      {
+        term: "যোগ্য নয়",
+        text: "ওয়েজ আর্নার ডেভেলপমেন্ট বন্ড, ইউএস ডলার ইনভেস্টমেন্ট বন্ড বা ইউএস ডলার প্রিমিয়াম বন্ডে বিনিয়োগ করা রেমিট্যান্সের অর্থ।",
+        sources: ["fecl36_2020"],
+      },
+    ],
+    meaningTitle: "ratebd-এর পরিমাণের ক্ষেত্রে এর অর্থ",
+    meaning:
+      "আমাদের ‘প্রাপক পাবেন’ কলামটি প্রতিষ্ঠান যা পৌঁছে দেয় তা দেখায়। ট্রান্সফারটি যোগ্য হলে প্রাপকের ব্যাংক ওই টাকার ২.৫% যোগ করে।",
+    example: (v) =>
+      `আজকের তথ্য থেকে উদাহরণ: ${v.amount} পাঠালে সবচেয়ে বেশি টাকা দিয়েছে ${v.name}, ${v.receive}। এর ওপর ২.৫% প্রণোদনা ${v.bonus}, মোট ${v.total}।`,
+    qualifies:
+      "কোনো নির্দিষ্ট ট্রান্সফার যোগ্য কি না তা নির্ভর করে অর্থ কীভাবে বাংলাদেশে পৌঁছায় তার ওপর। কয়েকটি প্রতিষ্ঠান তাদের নিজস্ব সহায়তা পাতায় বলেছে যে তাদের ট্রান্সফারে প্রণোদনা পাওয়া যায়, তবে আমরা প্রতিটি প্রতিষ্ঠান যাচাই করিনি। প্রতিষ্ঠান বা প্রাপকের ব্যাংকের কাছে জেনে নিন, এবং প্রাপকের এসএমএস বা রশিদে প্রণোদনা আছে কি না দেখুন।",
+    proposedTitle: "ঘোষিত পরিবর্তন, এখনো কার্যকর নয়",
+    proposed: [
+      {
+        text: "১৩ অক্টোবর ২০২৬ প্রবাসীকল্যাণ প্রতিমন্ত্রী বলেছেন, পরিকল্পিত প্রবাসী কার্ড চূড়ান্ত ও বিতরণ হলে কার্ডধারীরা ৩% প্রণোদনা পাবেন। নিচের তারিখ পর্যন্ত এ বিষয়ে বাংলাদেশ ব্যাংকের কোনো সার্কুলার বা কার্যকর হওয়ার তারিখ নেই।",
+        sources: ["tbs20261013", "ds20261013"],
+      },
+      {
+        text: "আইএমএফ-এর ২০২৫ আর্টিকেল IV প্রতিবেদনে (জানুয়ারি ২০২৬) প্রণোদনা ধাপে ধাপে তুলে দেওয়ার সুপারিশ করা হয়েছে। সরকার ২০২৬-২৭ বাজেটে এটি বহাল রেখেছে।",
+        sources: ["imf2026", "budget2026"],
+      },
+    ],
+    sourcesTitle: "সূত্র",
+    sourceNames: {
+      fecl01_2022: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ০১ (২ জানু ২০২২): হার ২.৫%-এ উন্নীত",
+      fecl45_2022: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ৪৫ (৪ ডিসে ২০২২): ডিসে ২০২১ পর্যন্ত ২%, জানু ২০২২ থেকে ২.৫%",
+      fec31_2019: "বাংলাদেশ ব্যাংক এফই সার্কুলার ৩১ (৬ আগ ২০১৯): প্রণোদনা নির্দেশিকা",
+      fecl15_2022: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ১৫ (২৩ মে ২০২২): কাগজপত্র লাগবে না",
+      fecl03_2025: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ০৩ (১৯ জানু ২০২৫): রশিদের তথ্য",
+      psd13_2023: "বাংলাদেশ ব্যাংক পিএসডি সার্কুলার ১৩ (৬ ডিসে ২০২৩): এমএফএস হিসাবে রেমিট্যান্স",
+      fecl36_2020: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ৩৬ (৩০ সেপ্ট ২০২০): বন্ডে বিনিয়োগ বাদ",
+      fecl04_2022: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ০৪ (২০ জানু ২০২২): অবসর সুবিধা",
+      fec16_2024: "বাংলাদেশ ব্যাংক এফই সার্কুলার ১৬ (১২ সেপ্ট ২০২৪): ক্ষতিপূরণ",
+      fecl08_2020: "বাংলাদেশ ব্যাংক এফই সার্কুলার লেটার ০৮ (১১ মার্চ ২০২০): মেরিনার, পাইলট, আন্তর্জাতিক সংস্থা",
+      budget2026: "অর্থ বিভাগ: জাতীয় বাজেট বক্তৃতা ২০২৬-২৭ (১১ জুন ২০২৬), অনুচ্ছেদ ১৮৪",
+      tbs20261013: "দ্য বিজনেস স্ট্যান্ডার্ড (১৩ অক্টো ২০২৬): প্রবাসী কার্ডধারীরা পাবেন ৩%",
+      ds20261013: "দ্য ডেইলি স্টার (১৩ অক্টো ২০২৬): প্রবাসী কার্ডের পরীক্ষামূলক কার্যক্রম",
+      imf2026: "আইএমএফ কান্ট্রি রিপোর্ট নং ২৬/২৪ (জানু ২০২৬), অনুচ্ছেদ ২২",
+    },
+    checked: (d) => `${d} তারিখে এসব সূত্রের সঙ্গে তথ্য যাচাই করা হয়েছে। বাংলাদেশ ব্যাংকের সার্কুলারই চূড়ান্ত; নিয়ম বদলাতে পারে।`,
+    sourceLabel: "সূত্র",
+    faq: [
+      {
+        q: "বাংলাদেশে রেমিট্যান্স প্রণোদনা কত?",
+        a: "বৈধ পথে পাঠানো প্রবাসী আয়ের টাকার অঙ্কের ২.৫%, ১ জানুয়ারি ২০২২ থেকে কার্যকর এবং ২০২৬-২৭ বাজেটে বহাল।",
+      },
+      {
+        q: "রেমিট্যান্স প্রণোদনা কে পান?",
+        a: "বাংলাদেশে প্রাপক। আহরণকারী ব্যাংক প্রাপকের হিসাবে জমা বা পরিশোধের সময় এটি যোগ করে।",
+      },
+      {
+        q: "প্রণোদনা পেতে কি কাগজপত্র লাগে?",
+        a: "না। ২৩ মে ২০২২ থেকে বাংলাদেশ ব্যাংক প্রেরকের কাছ থেকে কোনো কাগজপত্র চায় না।",
+      },
+    ],
+  },
+};
+
+const c = content[locale];
+const title = t(locale, "incentive.title");
+const description = t(locale, "incentive.description");
+const corridor = CORRIDORS[0]!;
+const best = rowsFor(corridor.id, 1000).find((r) => !r.quote.stale);
+const exampleText = best
+  ? c.example({
+      amount: sendAmount(locale, best.quote.sendAmount, corridor.sendCurrency),
+      name: best.provider.name,
+      receive: money(locale, best.quote.receiveAmount, "BDT"),
+      bonus: money(locale, Math.round(best.quote.receiveAmount * RATE) / 100, "BDT"),
+      total: money(locale, Math.round(best.quote.receiveAmount * (100 + RATE)) / 100, "BDT"),
+    })
+  : null;
+const sourceKeys = Object.keys(S) as (keyof typeof S)[];
+const sourceNumber = (key: keyof typeof S) => sourceKeys.indexOf(key) + 1;
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: locale,
+    mainEntity: c.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  },
+];
+---
+
+<BaseLayout locale={locale} title={title} description={description} path="/government-incentive" jsonLd={jsonLd}>
+  <article class="prose-block max-w-3xl">
+    <h1 class="text-2xl sm:text-3xl">{title}</h1>
+    <p class="mt-4 text-lg">{c.lead}</p>
+
+    <section class="mt-8" aria-labelledby="facts">
+      <h2 id="facts" class="text-xl">{c.factsTitle}</h2>
+      <dl class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+        {
+          c.facts.map((f) => (
+            <div class="py-3 sm:grid sm:grid-cols-4 sm:gap-4">
+              <dt class="font-semibold text-slate-900">{f.term}</dt>
+              <dd class="mt-1 text-slate-700 sm:col-span-3 sm:mt-0">
+                {f.text}{" "}
+                {f.sources.map((key) => (
+                  <a href={`#source-${sourceNumber(key)}`} class="text-sm">
+                    [{c.sourceLabel} {sourceNumber(key)}]
+                  </a>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-8" aria-labelledby="meaning">
+      <h2 id="meaning" class="text-xl">{c.meaningTitle}</h2>
+      <p class="mt-2">{c.meaning}</p>
+      {exampleText && <p class="mt-3 rounded-lg border border-brand-100 bg-brand-50 p-4 tabular">{exampleText}</p>}
+      <p class="mt-3">{c.qualifies}</p>
+      <p class="mt-3">
+        {
+          CORRIDORS.map((x, i) => (
+            <>
+              {i > 0 && " · "}
+              <a href={localePath(locale, corridorPath(x.from))}>{x.sendCurrency} → BDT</a>
+            </>
+          ))
+        }
+      </p>
+    </section>
+
+    <section class="mt-8" aria-labelledby="proposed">
+      <h2 id="proposed" class="text-xl">{c.proposedTitle}</h2>
+      <ul class="mt-2 list-disc space-y-2 pl-6">
+        {
+          c.proposed.map((p) => (
+            <li>
+              {p.text}{" "}
+              {p.sources.map((key) => (
+                <a href={`#source-${sourceNumber(key)}`} class="text-sm">
+                  [{c.sourceLabel} {sourceNumber(key)}]
+                </a>
+              ))}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mt-10" aria-labelledby="faq">
+      <h2 id="faq" class="text-xl">{t(locale, "faq.title")}</h2>
+      <dl class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+        {
+          c.faq.map((f) => (
+            <div class="py-3">
+              <dt class="font-semibold text-slate-900">{f.q}</dt>
+              <dd class="mt-1 text-slate-700">{f.a}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-10" aria-labelledby="sources">
+      <h2 id="sources" class="text-xl">{c.sourcesTitle}</h2>
+      <ol class="mt-3 list-decimal space-y-1 pl-6 text-sm">
+        {
+          sourceKeys.map((key) => (
+            <li id={`source-${sourceNumber(key)}`}>
+              <a href={S[key]} rel="noopener">{c.sourceNames[key]}</a>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-4 text-sm text-slate-600">{c.checked(date(locale, FACTS_CHECKED))}</p>
+    </section>
+  </article>
+</BaseLayout>
