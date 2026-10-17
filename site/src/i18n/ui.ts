@@ -7,6 +7,7 @@ const en = {
   "site.tagline": "Compare money transfer rates to Bangladesh",
   "skip": "Skip to content",
   "nav.home": "Home",
+  "nav.routes": "All routes",
   "nav.providers": "Providers",
   "nav.howRatesWork": "How rates work",
   "nav.incentive": "Government incentive",
@@ -16,12 +17,17 @@ const en = {
 
   "country.uk": "the UK",
   "country.uae": "the UAE",
-  "country.uk.short": "UK",
-  "country.uae.short": "UAE",
+  "country.us": "the USA",
+  "country.it": "Italy",
+  "country.my": "Malaysia",
+  "country.sg": "Singapore",
+  "region.west": "Europe and North America",
+  "region.gulf": "Middle East",
+  "region.asia": "Asia",
 
   "home.title": "Compare money transfer rates to Bangladesh",
   "home.description":
-    "Daily comparison of what Wise, Remitly, Taptap Send, WorldRemit and Xe deliver in taka from the UK and UAE, measured against a mid-market benchmark based on Bangladesh Bank's USD/BDT rate.",
+    "Daily comparison of what Wise, Remitly, Taptap Send, WorldRemit and Xe deliver in taka from the UK, the USA, Italy, the UAE, Malaysia and Singapore, measured against a mid-market benchmark based on Bangladesh Bank's USD/BDT rate.",
   "home.lead":
     "Every day we ask each provider what your family in Bangladesh would receive and compare it with the mid-market rate, so you can see the real cost: the fee plus the exchange-rate margin.",
   "home.bestFor": "Most taka for {amount} today",
@@ -43,6 +49,7 @@ const en = {
     "Amounts below are what the recipient gets when you pay the stated amount in total, fees included. Sorted by the most taka received.",
   "corridor.amount": "Amount you send",
   "corridor.send": "Send {amount}",
+  "corridor.otherRoutes": "Other sending countries",
 
   "table.caption": "{from} → BDT quotes for sending {amount} in total, most taka first",
   "table.provider": "Provider",
@@ -104,6 +111,7 @@ const en = {
 
   "provider.title": "{name}: rates to Bangladesh",
   "provider.description": "Today's {name} exchange rates and fees for sending money to Bangladesh from {countries}, with a 7-day history.",
+  "provider.descriptionMany": "Today's {name} exchange rates and fees for sending money to Bangladesh from {n} countries, with a 7-day history.",
   "provider.lead": "What {name} delivered in taka on each route we track, from its public price calculator.",
   "provider.route": "{from} → BDT",
   "provider.notSupported": "Not available: {reason}",
@@ -145,6 +153,7 @@ const bn: Record<UiKey, string> = {
   "site.tagline": "বাংলাদেশে টাকা পাঠানোর রেট তুলনা করুন",
   "skip": "মূল অংশে যান",
   "nav.home": "হোম",
+  "nav.routes": "সব দেশ",
   "nav.providers": "প্রতিষ্ঠানসমূহ",
   "nav.howRatesWork": "রেট কীভাবে কাজ করে",
   "nav.incentive": "সরকারি প্রণোদনা",
@@ -154,12 +163,17 @@ const bn: Record<UiKey, string> = {
 
   "country.uk": "যুক্তরাজ্য",
   "country.uae": "সংযুক্ত আরব আমিরাত",
-  "country.uk.short": "যুক্তরাজ্য",
-  "country.uae.short": "আমিরাত",
+  "country.us": "যুক্তরাষ্ট্র",
+  "country.it": "ইতালি",
+  "country.my": "মালয়েশিয়া",
+  "country.sg": "সিঙ্গাপুর",
+  "region.west": "ইউরোপ ও উত্তর আমেরিকা",
+  "region.gulf": "মধ্যপ্রাচ্য",
+  "region.asia": "এশিয়া",
 
   "home.title": "বাংলাদেশে টাকা পাঠানোর রেট তুলনা করুন",
   "home.description":
-    "যুক্তরাজ্য ও আমিরাত থেকে Wise, Remitly, Taptap Send, WorldRemit ও Xe কত টাকা পৌঁছে দেয়, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের সঙ্গে তার প্রতিদিনের তুলনা।",
+    "যুক্তরাজ্য, যুক্তরাষ্ট্র, ইতালি, সংযুক্ত আরব আমিরাত, মালয়েশিয়া ও সিঙ্গাপুর থেকে Wise, Remitly, Taptap Send, WorldRemit ও Xe কত টাকা পৌঁছে দেয়, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের সঙ্গে তার প্রতিদিনের তুলনা।",
   "home.lead":
     "প্রতিদিন আমরা প্রতিটি প্রতিষ্ঠানের কাছ থেকে জেনে নিই বাংলাদেশে আপনার পরিবার কত টাকা পাবে, এবং তা মিড-মার্কেট রেটের সঙ্গে তুলনা করি। এতে আসল খরচ বোঝা যায়: ফি এবং বিনিময় হারের মার্জিন।",
   "home.bestFor": "আজ {amount} পাঠালে সবচেয়ে বেশি টাকা",
@@ -181,6 +195,7 @@ const bn: Record<UiKey, string> = {
     "নিচের পরিমাণগুলো হলো ফিসহ মোট উল্লিখিত অঙ্ক পরিশোধ করলে প্রাপক যত টাকা পান। সবচেয়ে বেশি টাকা যেখানে, সেটি সবার আগে।",
   "corridor.amount": "আপনি কত পাঠাবেন",
   "corridor.send": "{amount} পাঠালে",
+  "corridor.otherRoutes": "অন্যান্য প্রেরক দেশ",
 
   "table.caption": "মোট {amount} পাঠালে {from} → BDT কোট, সবচেয়ে বেশি টাকা আগে",
   "table.provider": "প্রতিষ্ঠান",
@@ -242,6 +257,7 @@ const bn: Record<UiKey, string> = {
 
   "provider.title": "{name}: বাংলাদেশে পাঠানোর রেট",
   "provider.description": "{countries} থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর আজকের বিনিময় হার ও ফি, ৭ দিনের ইতিহাসসহ।",
+  "provider.descriptionMany": "{n}টি দেশ থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর আজকের বিনিময় হার ও ফি, ৭ দিনের ইতিহাসসহ।",
   "provider.lead": "আমরা যে পথগুলো দেখি, তাতে {name}-এর পাবলিক ক্যালকুলেটর অনুযায়ী কত টাকা পৌঁছেছে।",
   "provider.route": "{from} → BDT",
   "provider.notSupported": "পাওয়া যায় না: {reason}",

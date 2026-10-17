@@ -1,8 +1,8 @@
 ---
 import "../styles/global.css";
-import { CORRIDORS, lastUpdated } from "../lib/data";
+import { lastUpdated } from "../lib/data";
 import { dateTime } from "../i18n/format";
-import { corridorPath, localePath } from "../i18n/routes";
+import { localePath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
 
 interface Props {
@@ -25,10 +25,7 @@ const fullTitle = path === "/" ? `${t(locale, "site.name")}: ${title}` : `${titl
 const ogImage = new URL("/og.png", site).href;
 const updated = lastUpdated();
 const nav = [
-  ...CORRIDORS.map((c) => ({
-    href: localePath(locale, corridorPath(c.from)),
-    text: `${c.sendCurrency} → BDT`,
-  })),
+  { href: localePath(locale, "/"), text: t(locale, "nav.routes") },
   { href: localePath(locale, "/how-rates-work"), text: t(locale, "nav.howRatesWork") },
   { href: localePath(locale, "/government-incentive"), text: t(locale, "nav.incentive") },
 ];

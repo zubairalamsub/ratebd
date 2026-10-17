@@ -2,13 +2,15 @@ import type { Locale } from "./ui";
 
 const intlLocale: Record<Locale, string> = { en: "en-GB", bn: "bn-BD" };
 
-export function money(locale: Locale, amount: number, currency: string, fractionDigits = 2): string {
+/** Formats money; without `fractionDigits` the currency's own minor units are used (2 for most, 3 for KWD/OMR). */
+export function money(locale: Locale, amount: number, currency: string, fractionDigits?: number): string {
   return new Intl.NumberFormat(intlLocale[locale], {
     style: "currency",
     currency,
     currencyDisplay: currency === "BDT" ? "narrowSymbol" : "symbol",
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
+    ...(fractionDigits === undefined
+      ? {}
+      : { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits }),
   }).format(amount);
 }
 
@@ -58,6 +60,11 @@ export function date(locale: Locale, iso: string): string {
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(iso.length === 10 ? `${iso}T00:00:00Z` : iso));
+}
+
+/** "A, B and C" / "A, B ও C" */
+export function list(locale: Locale, items: string[]): string {
+  return new Intl.ListFormat(intlLocale[locale], { style: "long", type: "conjunction" }).format(items);
 }
 
 export function integer(locale: Locale, value: number): string {

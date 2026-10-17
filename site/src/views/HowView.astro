@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { CORRIDORS, rowsFor, loadSnapshot } from "../lib/data";
+import { CORRIDORS, amountsFor, rowsFor, loadSnapshot } from "../lib/data";
 import { money, number, percent, rate, sendAmount } from "../i18n/format";
 import { corridorPath, localePath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
@@ -16,7 +16,7 @@ const description = t(locale, "how.description");
 // Worked example from today's data: the best non-stale GBP quote for the headline amount.
 const corridor = CORRIDORS[0]!;
 const snapshot = loadSnapshot(corridor.id);
-const example = rowsFor(corridor.id, 1000).find((r) => !r.quote.stale && r.marginPct !== null);
+const example = rowsFor(corridor.id, amountsFor(corridor.id)[0] ?? 0).find((r) => !r.quote.stale && r.marginPct !== null);
 const mid = snapshot.midMarket;
 
 type Section = { h: string; p: string[] };
@@ -29,7 +29,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "What we collect",
         p: [
-          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for a quote on sending 500 and 1,000 from the UK (GBP) and the UAE (AED) to Bangladesh (BDT). Rates and fees are taken exactly as each provider quotes them; we never type in or estimate a rate. The amount received is then normalised to the same total payment, as explained below.",
+          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for quotes on two typical amounts from each sending country we track, for example £500 and £1,000 from the UK or RM 1,000 and RM 2,000 from Malaysia. Rates and fees are taken exactly as each provider quotes them; we never type in or estimate a rate. The amount received is then normalised to the same total payment, as explained below.",
           "If a provider does not offer a route at all, for example a provider that does not serve senders in the UAE, it is listed as not offered rather than left out silently.",
         ],
       },
@@ -88,7 +88,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "আমরা কী সংগ্রহ করি",
         p: [
-          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে যুক্তরাজ্য (GBP) ও আমিরাত (AED) থেকে বাংলাদেশে (BDT) ৫০০ ও ১,০০০ পাঠানোর কোট চায়। প্রতিষ্ঠান যেভাবে দেয়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
+          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে আমাদের তালিকার প্রতিটি দেশ থেকে দুটি সাধারণ অঙ্ক পাঠানোর কোট চায়, যেমন যুক্তরাজ্য থেকে ৫০০ ও ১,০০০ পাউন্ড বা মালয়েশিয়া থেকে ১,০০০ ও ২,০০০ রিঙ্গিত। প্রতিষ্ঠান যেভাবে দেয়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
           "কোনো প্রতিষ্ঠান কোনো পথে সেবা না দিলে, যেমন আমিরাতের প্রেরকদের সেবা দেয় না এমন প্রতিষ্ঠান, সেটি চুপচাপ বাদ না দিয়ে ‘সেবা নেই’ হিসেবে দেখানো হয়।",
         ],
       },

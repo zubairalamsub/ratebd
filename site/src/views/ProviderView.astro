@@ -2,8 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Sparkline from "../components/Sparkline.astro";
 import StaleBadge from "../components/StaleBadge.astro";
-import { CORRIDORS, PROVIDERS, SEND_AMOUNTS, loadSnapshot, marginPct, statusFor, trendFor, windowEnd } from "../lib/data";
-import { date, dateTime, money, percent, rate, sendAmount } from "../i18n/format";
+import { CORRIDORS, PROVIDERS, amountsFor, loadSnapshot, marginPct, statusFor, trendFor, windowEnd } from "../lib/data";
+import { date, dateTime, integer, list, money, percent, rate, sendAmount } from "../i18n/format";
 import { isUnspecified, label } from "../i18n/labels";
 import { corridorPath, goPath, localePath, providerPath } from "../i18n/routes";
 import { t, type Locale, type UiKey } from "../i18n/ui";
@@ -21,19 +21,22 @@ const title = t(locale, "provider.title", { name: provider.name });
 const servedCountries = CORRIDORS.filter((c) => statusFor(c.id, provider.engineName)?.status !== "not_supported").map((c) =>
   t(locale, c.countryKey),
 );
-const description = t(locale, "provider.description", {
-  name: provider.name,
-  countries: servedCountries.join(locale === "bn" ? " ও " : " and "),
-});
-const headlineAmount = SEND_AMOUNTS[0];
+const description =
+  servedCountries.length > 3
+    ? t(locale, "provider.descriptionMany", { name: provider.name, n: integer(locale, servedCountries.length) })
+    : t(locale, "provider.description", {
+        name: provider.name,
+        countries: list(locale, servedCountries),
+      });
 
 const routes = CORRIDORS.map((corridor) => {
   const snapshot = loadSnapshot(corridor.id);
   const quotes = snapshot.quotes
     .filter((q) => q.provider === provider.engineName)
     .sort((a, b) => b.sendAmount - a.sendAmount);
+  const headlineAmount = amountsFor(corridor.id)[0] ?? 0;
   const history = trendFor(corridor.id, provider.engineName, headlineAmount);
-  return { corridor, snapshot, quotes, history, status: statusFor(corridor.id, provider.engineName) };
+  return { corridor, snapshot, quotes, history, headlineAmount, status: statusFor(corridor.id, provider.engineName) };
 });
 const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
 const td = "px-3 py-2 whitespace-nowrap";
@@ -52,7 +55,7 @@ const td = "px-3 py-2 whitespace-nowrap";
   </p>
 
   {
-    routes.map(({ corridor, snapshot, quotes, history, status }) => (
+    routes.map(({ corridor, snapshot, quotes, history, headlineAmount, status }) => (
       <section class="mt-10" aria-labelledby={`route-${corridor.id}`}>
         <h2 id={`route-${corridor.id}`} class="text-xl">
           {t(locale, "home.from", { country: t(locale, corridor.countryKey) })}

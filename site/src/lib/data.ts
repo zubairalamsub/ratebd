@@ -8,8 +8,11 @@ declare const __RATEBD_DATA_DIR__: string;
 const DATA_DIR = __RATEBD_DATA_DIR__;
 
 export const BENCHMARK = "MidMarket";
-export const SEND_AMOUNTS = [1000, 500] as const;
 export const SPARKLINE_DAYS = 7;
+
+export type CountryKey = "country.uk" | "country.uae" | "country.us" | "country.it" | "country.my" | "country.sg";
+
+export type RegionKey = "region.west" | "region.gulf" | "region.asia";
 
 export interface CorridorMeta {
   id: string;
@@ -18,13 +21,26 @@ export interface CorridorMeta {
   sendCurrency: string;
   receiveCurrency: string;
   /** Key into the i18n dictionaries for the sending country name */
-  countryKey: "country.uk" | "country.uae";
+  countryKey: CountryKey;
+  region: RegionKey;
 }
 
-export const CORRIDORS: CorridorMeta[] = [
-  { id: "gbp-bdt", from: "gbp", sendCurrency: "GBP", receiveCurrency: "BDT", countryKey: "country.uk" },
-  { id: "aed-bdt", from: "aed", sendCurrency: "AED", receiveCurrency: "BDT", countryKey: "country.uae" },
+export const REGIONS: RegionKey[] = ["region.west", "region.gulf", "region.asia"];
+
+const ALL_CORRIDORS: CorridorMeta[] = [
+  { id: "gbp-bdt", from: "gbp", sendCurrency: "GBP", receiveCurrency: "BDT", countryKey: "country.uk", region: "region.west" },
+  { id: "usd-bdt", from: "usd", sendCurrency: "USD", receiveCurrency: "BDT", countryKey: "country.us", region: "region.west" },
+  { id: "eur-bdt", from: "eur", sendCurrency: "EUR", receiveCurrency: "BDT", countryKey: "country.it", region: "region.west" },
+  { id: "aed-bdt", from: "aed", sendCurrency: "AED", receiveCurrency: "BDT", countryKey: "country.uae", region: "region.gulf" },
+  { id: "myr-bdt", from: "myr", sendCurrency: "MYR", receiveCurrency: "BDT", countryKey: "country.my", region: "region.asia" },
+  { id: "sgd-bdt", from: "sgd", sendCurrency: "SGD", receiveCurrency: "BDT", countryKey: "country.sg", region: "region.asia" },
 ];
+
+/**
+ * Corridors that have data. A corridor added to the engine appears on the site after the first run that writes
+ * data/{id}.json, so the build never fails on a new, not-yet-fetched corridor.
+ */
+export const CORRIDORS: CorridorMeta[] = ALL_CORRIDORS.filter((c) => existsSync(join(DATA_DIR, `${c.id}.json`)));
 
 export interface ProviderMeta {
   slug: string;
@@ -152,6 +168,11 @@ export function rowsFor(id: string, amount: number): Row[] {
         trend: trendFor(id, quote.provider, amount),
       }];
     });
+}
+
+/** Send amounts quoted on a corridor, largest (the headline amount) first. */
+export function amountsFor(id: string): number[] {
+  return [...new Set(loadSnapshot(id).quotes.map((q) => q.sendAmount))].sort((a, b) => b - a);
 }
 
 export function benchmarkQuote(id: string, amount: number): Quote | undefined {

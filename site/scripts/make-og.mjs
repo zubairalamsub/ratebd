@@ -9,7 +9,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <text x="80" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="96" font-weight="700" fill="#ffffff">ratebd</text>
   <text x="80" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="52" fill="#ffffff">Compare money transfer</text>
   <text x="80" y="370" font-family="Segoe UI, Arial, sans-serif" font-size="52" fill="#ffffff">rates to Bangladesh</text>
-  <text x="80" y="480" font-family="Segoe UI, Arial, sans-serif" font-size="34" fill="#cce8dc">GBP → BDT · AED → BDT · updated daily</text>
+  <text x="80" y="480" font-family="Segoe UI, Arial, sans-serif" font-size="34" fill="#cce8dc">6 sending countries · updated daily</text>
 </svg>`;
 
 const out = fileURLToPath(new URL("../public/og.png", import.meta.url));

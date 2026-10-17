@@ -2,7 +2,7 @@
 // Every statement on this page was checked against the linked primary sources on FACTS_CHECKED.
 // Update the date and the facts together when Bangladesh Bank or the Finance Division changes the rules.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { CORRIDORS, rowsFor } from "../lib/data";
+import { CORRIDORS, amountsFor, rowsFor } from "../lib/data";
 import { date, integer, money, sendAmount } from "../i18n/format";
 import { corridorPath, localePath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
@@ -254,7 +254,7 @@ const c = content[locale];
 const title = t(locale, "incentive.title");
 const description = t(locale, "incentive.description");
 const corridor = CORRIDORS[0]!;
-const best = rowsFor(corridor.id, 1000).find((r) => !r.quote.stale);
+const best = rowsFor(corridor.id, amountsFor(corridor.id)[0] ?? 0).find((r) => !r.quote.stale);
 const exampleText = best
   ? c.example({
       amount: sendAmount(locale, best.quote.sendAmount, corridor.sendCurrency),
