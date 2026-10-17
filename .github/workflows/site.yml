@@ -46,8 +46,14 @@ jobs:
 
       - name: Verify build output
         run: |
-          grep -q "^/go/wise " dist/_redirects
+          # Routes and providers come and go with what providers permit, so check what is always built plus at least
+          # one route and one /go redirect.
+          test -f dist/index.html
+          test -f dist/bn.html
+          test -f dist/bn/legal.html
+          test -f dist/legal.html
           test -f dist/sitemap-index.xml
-          test -f dist/send-money-gbp-to-bangladesh.html
-          test -f dist/bn/send-money-aed-to-bangladesh.html
+          ls dist/send-money-*-to-bangladesh.html > /dev/null
+          ls dist/bn/send-money-*-to-bangladesh.html > /dev/null
+          grep -q "^/go/" dist/_redirects
           echo "Pages: $(find dist -name '*.html' | wc -l); size: $(du -sh dist | cut -f1)"
