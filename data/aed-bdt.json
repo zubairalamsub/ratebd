@@ -2,7 +2,7 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T11:30:07.0482952Z",
+  "generatedAt": "2026-10-17T13:36:29.4960039Z",
   "midMarket": {
     "rate": 33.6147,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.6725,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
     "stale": false
   },
   "providers": [
@@ -57,7 +57,7 @@
       "receiveAmount": 16825.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:29:59.5829097Z",
+      "fetchedAt": "2026-10-17T13:36:22.7312914Z",
       "stale": false
     },
     {
@@ -70,7 +70,7 @@
       "receiveAmount": 16807.35,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -83,7 +83,7 @@
       "receiveAmount": 16468.14,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:30:03.6697166Z",
+      "fetchedAt": "2026-10-17T13:36:26.0507097Z",
       "stale": false
     },
     {
@@ -96,7 +96,7 @@
       "receiveAmount": 33650.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:29:59.5829097Z",
+      "fetchedAt": "2026-10-17T13:36:22.7312914Z",
       "stale": false
     },
     {
@@ -109,7 +109,7 @@
       "receiveAmount": 33614.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -122,8 +122,10 @@
       "receiveAmount": 33238.14,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:30:07.0473787Z",
+      "fetchedAt": "2026-10-17T13:36:29.4953895Z",
       "stale": false
     }
-  ]
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
 }

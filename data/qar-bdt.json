@@ -1,0 +1,293 @@
+{
+  "corridor": "qar-bdt",
+  "sendCurrency": "QAR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-17T13:37:00.2920017Z",
+  "midMarket": {
+    "rate": 33.9148,
+    "usdBdt": 123.4500,
+    "usdBdtDate": "2026-10-17",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 3.64,
+    "crossRateDate": "2026-10-17",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Wise",
+      "status": "not_supported",
+      "message": "Wise does not send QAR\u2192BDT (Sorry, you can\u0027t send between these currencies right now.)"
+    },
+    {
+      "name": "Remitly",
+      "status": "not_supported",
+      "message": "Remitly does not offer QA\u2192BD transfers"
+    },
+    {
+      "name": "TaptapSend",
+      "status": "not_supported",
+      "message": "Taptap Send does not list QA (QAR) as a send country"
+    },
+    {
+      "name": "WorldRemit",
+      "status": "not_supported",
+      "message": "WorldRemit offers no money-transfer payout method for QA\u2192BD"
+    },
+    {
+      "name": "Xe",
+      "status": "not_supported",
+      "message": "Xe Money Transfer is not available to senders in QA (isXemtSupported=false on xe.com)"
+    },
+    {
+      "name": "WesternUnion",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "sendAmount": 1000,
+      "rate": 33.9148,
+      "fee": 0,
+      "receiveAmount": 33914.80,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "stale": false
+    },
+    {
+      "provider": "WesternUnion",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "sendAmount": 1000,
+      "rate": 33.7945205,
+      "fee": 0,
+      "receiveAmount": 33794.52,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 1 day",
+      "fetchedAt": "2026-10-17T13:36:56.6207342Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "sendAmount": 2000,
+      "rate": 33.9148,
+      "fee": 0,
+      "receiveAmount": 67829.60,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "stale": false
+    },
+    {
+      "provider": "WesternUnion",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "sendAmount": 2000,
+      "rate": 33.7945205,
+      "fee": 0,
+      "receiveAmount": 67589.04,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 1 day",
+      "fetchedAt": "2026-10-17T13:37:00.2916328Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "OoredooMoney",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "GulfExchange",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AlZaman",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "HabibQatar",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AlMirqab",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.900144,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Same Day",
+      "partner": "Alzaman Exchange",
+      "feeNote": "Starting from QAR 20",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.900102,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Next bank working day",
+      "partner": "Arabian Exchange",
+      "feeNote": "Starting from QAR 20",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "HabibQatar",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.90,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-17T13:36:58.0543761Z",
+      "stale": false
+    },
+    {
+      "provider": "AlMirqab",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.88,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-17T13:36:58.3842983Z",
+      "stale": false
+    },
+    {
+      "provider": "AlZaman",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.86,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-17T13:36:57.3877289Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.86,
+      "deliveryMethod": "Bank deposit",
+      "speed": "1-2 working days",
+      "partner": "Transfast",
+      "feeNote": "20 QR to 30 QR",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.86,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Next working day",
+      "partner": "Aldar Exchange",
+      "feeNote": "Starting from QAR 20",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.851216,
+      "deliveryMethod": "Bank deposit",
+      "speed": "In a Few Hours",
+      "partner": "MoneyGram",
+      "feeNote": "Starting from QAR 20",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "GulfExchange",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.820346,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-17T13:36:59.415894Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.799359,
+      "deliveryMethod": "Mobile wallet",
+      "speed": "Next Working Day",
+      "partner": "Western Union",
+      "feeNote": "20 QR to 30 QR",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.750034,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Next working day",
+      "partner": "Gulf Exchange",
+      "feeNote": "Starting from QAR 20",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    },
+    {
+      "provider": "OoredooMoney",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.743127,
+      "deliveryMethod": "Mobile wallet (bKash)",
+      "speed": "In 1 Hour",
+      "partner": "Thunes",
+      "feeNote": "20 QR to 30 QR",
+      "publishedAt": "2026-10-17T13:34:25.529Z",
+      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "stale": false
+    }
+  ]
+}

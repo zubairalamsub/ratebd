@@ -2,7 +2,7 @@
   "corridor": "myr-bdt",
   "sendCurrency": "MYR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T11:30:17.1733593Z",
+  "generatedAt": "2026-10-17T13:36:40.0336536Z",
   "midMarket": {
     "rate": 30.2267,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 4.08413593,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
     "stale": false
   },
   "providers": [
@@ -57,7 +57,7 @@
       "receiveAmount": 30226.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -70,7 +70,7 @@
       "receiveAmount": 29964.43,
       "deliveryMethod": "Mobile wallet (bKash)",
       "speed": "Same day",
-      "fetchedAt": "2026-10-17T11:30:16.3709204Z",
+      "fetchedAt": "2026-10-17T13:36:39.2268343Z",
       "stale": false
     },
     {
@@ -82,8 +82,8 @@
       "fee": 21.01,
       "receiveAmount": 29487.77,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T11:30:15.0019942Z",
+      "speed": "Within 23 hours",
+      "fetchedAt": "2026-10-17T13:36:37.8833836Z",
       "stale": false
     },
     {
@@ -96,7 +96,7 @@
       "receiveAmount": 60453.40,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -109,7 +109,7 @@
       "receiveAmount": 60079.43,
       "deliveryMethod": "Mobile wallet (bKash)",
       "speed": "Same day",
-      "fetchedAt": "2026-10-17T11:30:17.1729052Z",
+      "fetchedAt": "2026-10-17T13:36:40.0332578Z",
       "stale": false
     },
     {
@@ -121,9 +121,11 @@
       "fee": 30.81,
       "receiveAmount": 59313.18,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T11:30:15.2404851Z",
+      "speed": "Within 23 hours",
+      "fetchedAt": "2026-10-17T13:36:38.1203063Z",
       "stale": false
     }
-  ]
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
 }

@@ -2,7 +2,7 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T11:30:10.86742Z",
+  "generatedAt": "2026-10-17T13:36:33.3160327Z",
   "midMarket": {
     "rate": 123.4500,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 1,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
     "stale": false
   },
   "providers": [
@@ -57,7 +57,7 @@
       "receiveAmount": 61725.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -70,7 +70,7 @@
       "receiveAmount": 61275.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:29:59.5829097Z",
+      "fetchedAt": "2026-10-17T13:36:22.7312914Z",
       "stale": false
     },
     {
@@ -83,7 +83,7 @@
       "receiveAmount": 61273.44,
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:30:07.4636426Z",
+      "fetchedAt": "2026-10-17T13:36:29.9012343Z",
       "stale": false
     },
     {
@@ -96,7 +96,7 @@
       "receiveAmount": 61040.44,
       "deliveryMethod": "Mobile wallet (bKash)",
       "speed": "Same day",
-      "fetchedAt": "2026-10-17T11:30:08.6949276Z",
+      "fetchedAt": "2026-10-17T13:36:31.3034196Z",
       "stale": false
     },
     {
@@ -109,7 +109,7 @@
       "receiveAmount": 60932.81,
       "deliveryMethod": "Bank deposit",
       "speed": "Typically 3 business days",
-      "fetchedAt": "2026-10-17T11:30:08.5899053Z",
+      "fetchedAt": "2026-10-17T13:36:31.0893627Z",
       "stale": false
     },
     {
@@ -121,8 +121,8 @@
       "fee": 11.79,
       "receiveAmount": 60049.83,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 9 days",
-      "fetchedAt": "2026-10-17T11:30:07.30464Z",
+      "speed": "Within 8 days",
+      "fetchedAt": "2026-10-17T13:36:29.7659517Z",
       "stale": false
     },
     {
@@ -135,7 +135,7 @@
       "receiveAmount": 123450.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -148,7 +148,7 @@
       "receiveAmount": 122848.40,
       "deliveryMethod": "Bank deposit",
       "speed": "Typically 3 business days",
-      "fetchedAt": "2026-10-17T11:30:10.1497571Z",
+      "fetchedAt": "2026-10-17T13:36:32.7413549Z",
       "stale": false
     },
     {
@@ -161,7 +161,7 @@
       "receiveAmount": 122668.44,
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:30:10.8668975Z",
+      "fetchedAt": "2026-10-17T13:36:33.3155367Z",
       "stale": false
     },
     {
@@ -174,7 +174,7 @@
       "receiveAmount": 122550.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:29:59.5829097Z",
+      "fetchedAt": "2026-10-17T13:36:22.7312914Z",
       "stale": false
     },
     {
@@ -187,7 +187,7 @@
       "receiveAmount": 122202.60,
       "deliveryMethod": "Mobile wallet (bKash)",
       "speed": "Same day",
-      "fetchedAt": "2026-10-17T11:30:09.6116249Z",
+      "fetchedAt": "2026-10-17T13:36:32.1179514Z",
       "stale": false
     },
     {
@@ -199,9 +199,11 @@
       "fee": 15.17,
       "receiveAmount": 121134.09,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 9 days",
-      "fetchedAt": "2026-10-17T11:30:07.5610037Z",
+      "speed": "Within 8 days",
+      "fetchedAt": "2026-10-17T13:36:30.0208959Z",
       "stale": false
     }
-  ]
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
 }

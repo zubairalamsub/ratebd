@@ -1,0 +1,259 @@
+{
+  "corridor": "kwd-bdt",
+  "sendCurrency": "KWD",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-17T13:36:56.1387251Z",
+  "midMarket": {
+    "rate": 397.1380,
+    "usdBdt": 123.4500,
+    "usdBdtDate": "2026-10-17",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.31084913,
+    "crossRateDate": "2026-10-17",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Wise",
+      "status": "not_supported",
+      "message": "Wise does not send KWD\u2192BDT (Sorry, you can\u0027t send between these currencies right now.)"
+    },
+    {
+      "name": "Remitly",
+      "status": "not_supported",
+      "message": "Remitly does not offer KW\u2192BD transfers"
+    },
+    {
+      "name": "TaptapSend",
+      "status": "not_supported",
+      "message": "Taptap Send does not list KW (KWD) as a send country"
+    },
+    {
+      "name": "WorldRemit",
+      "status": "not_supported",
+      "message": "WorldRemit offers no money-transfer payout method for KW\u2192BD"
+    },
+    {
+      "name": "Xe",
+      "status": "not_supported",
+      "message": "Xe Money Transfer is not available to senders in KW (isXemtSupported=false on xe.com)"
+    },
+    {
+      "name": "WesternUnion",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AlMulla",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Skrill",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Paysend",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 397.1380,
+      "fee": 0,
+      "receiveAmount": 39713.80,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "stale": false
+    },
+    {
+      "provider": "WesternUnion",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 400.8760545,
+      "fee": 1.25,
+      "receiveAmount": 39586.51,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 1 day",
+      "fetchedAt": "2026-10-17T13:36:48.4690563Z",
+      "stale": false
+    },
+    {
+      "provider": "AlMulla",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 400.8760545,
+      "fee": 1.250,
+      "receiveAmount": 39586.51,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 2 days",
+      "fetchedAt": "2026-10-17T13:36:51.7065946Z",
+      "stale": false
+    },
+    {
+      "provider": "Paysend",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 397.019303,
+      "fee": 0.5,
+      "receiveAmount": 39503.42,
+      "deliveryMethod": "Bank card",
+      "speed": "In a few minutes",
+      "fetchedAt": "2026-10-17T13:36:49.3269153Z",
+      "stale": false
+    },
+    {
+      "provider": "Skrill",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 376.7014,
+      "fee": 0.000,
+      "receiveAmount": 37670.14,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 1 day",
+      "fetchedAt": "2026-10-17T13:36:51.1727788Z",
+      "stale": false
+    },
+    {
+      "provider": "WesternUnion",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 400.8760545,
+      "fee": 1.25,
+      "receiveAmount": 79674.12,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 1 day",
+      "fetchedAt": "2026-10-17T13:36:52.0007757Z",
+      "stale": false
+    },
+    {
+      "provider": "AlMulla",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 400.8760545,
+      "fee": 1.250,
+      "receiveAmount": 79674.12,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 2 days",
+      "fetchedAt": "2026-10-17T13:36:56.1374468Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 397.1380,
+      "fee": 0,
+      "receiveAmount": 79427.60,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "stale": false
+    },
+    {
+      "provider": "Paysend",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 397.019303,
+      "fee": 0.5,
+      "receiveAmount": 79205.35,
+      "deliveryMethod": "Bank card",
+      "speed": "In a few minutes",
+      "fetchedAt": "2026-10-17T13:36:49.3269153Z",
+      "stale": false
+    },
+    {
+      "provider": "Skrill",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 376.7014,
+      "fee": 0.000,
+      "receiveAmount": 75340.28,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 1 day",
+      "fetchedAt": "2026-10-17T13:36:54.7619376Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "Joyalukkas",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AlAnsari",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Aman",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "Joyalukkas",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "rate": 400.8765,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-17T13:36:48.7239853Z",
+      "stale": false
+    },
+    {
+      "provider": "AlAnsari",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "rate": 396.1541,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-17T13:36:50.9216107Z",
+      "stale": false
+    },
+    {
+      "provider": "Aman",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "rate": 385.3817,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-17T11:54:17.8245Z",
+      "fetchedAt": "2026-10-17T13:36:49.7781998Z",
+      "stale": false
+    }
+  ]
+}

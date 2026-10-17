@@ -2,7 +2,7 @@
   "corridor": "sgd-bdt",
   "sendCurrency": "SGD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T11:30:21.0873641Z",
+  "generatedAt": "2026-10-17T13:36:43.7704283Z",
   "midMarket": {
     "rate": 96.4780,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 1.27956682,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
     "stale": false
   },
   "providers": [
@@ -57,7 +57,7 @@
       "receiveAmount": 48239.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -69,8 +69,8 @@
       "fee": 5.69,
       "receiveAmount": 47513.08,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T11:30:17.4310023Z",
+      "speed": "Within 23 hours",
+      "fetchedAt": "2026-10-17T13:36:40.3062281Z",
       "stale": false
     },
     {
@@ -83,7 +83,7 @@
       "receiveAmount": 46768.54,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:30:17.7059599Z",
+      "fetchedAt": "2026-10-17T13:36:40.4062516Z",
       "stale": false
     },
     {
@@ -96,7 +96,7 @@
       "receiveAmount": 96478.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T11:29:57.7690124Z",
+      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
       "stale": false
     },
     {
@@ -108,8 +108,8 @@
       "fee": 8.63,
       "receiveAmount": 95290.48,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T11:30:17.6736376Z",
+      "speed": "Within 23 hours",
+      "fetchedAt": "2026-10-17T13:36:40.5505737Z",
       "stale": false
     },
     {
@@ -122,8 +122,10 @@
       "receiveAmount": 94008.54,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T11:30:21.0869774Z",
+      "fetchedAt": "2026-10-17T13:36:43.7700881Z",
       "stale": false
     }
-  ]
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
 }
