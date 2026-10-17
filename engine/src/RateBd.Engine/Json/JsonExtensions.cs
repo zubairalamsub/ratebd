@@ -1,5 +1,7 @@
 using System.Globalization;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace RateBd.Engine.Json;
 
@@ -53,4 +55,8 @@ internal static class JsonExtensions
 
     public static string? GetStringOrNull(this JsonElement? element) =>
         element is { ValueKind: JsonValueKind.String } e ? e.GetString() : null;
+
+    /// <summary>Serialises a JSON body without reflection-based serialisation (Native AOT safe).</summary>
+    public static StringContent ToContent(this JsonNode body) =>
+        new(body.ToJsonString(), Encoding.UTF8, "application/json");
 }

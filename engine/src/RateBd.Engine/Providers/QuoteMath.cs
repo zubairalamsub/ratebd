@@ -9,6 +9,4 @@ internal static class QuoteMath
     /// </summary>
     public static decimal ReceiveFor(decimal sendAmount, decimal fee, decimal rate) =>
         Math.Round((sendAmount - fee) * rate, 2, MidpointRounding.AwayFromZero);
-
-    public const string NotSpecified = "Not specified";
 }

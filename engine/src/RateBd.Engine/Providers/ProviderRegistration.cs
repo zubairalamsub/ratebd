@@ -13,6 +13,7 @@ public static class ProviderRegistration
 
     public static IServiceCollection AddRateProviders(this IServiceCollection services, IConfiguration configuration)
     {
+        AddProvider<WiseProvider>(services, configuration, "Wise");
         return services;
     }
 
