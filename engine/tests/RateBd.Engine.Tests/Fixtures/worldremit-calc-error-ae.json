@@ -1,0 +1,1 @@
+{"data":{"createCalculation":{"calculation":null,"errors":[{"__typename":"GenericCalculationError","message":"Internal error, please try again later","genericType":"SERVER_ERROR"}]}}}

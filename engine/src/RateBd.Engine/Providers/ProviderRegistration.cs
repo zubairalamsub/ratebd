@@ -17,6 +17,7 @@ public static class ProviderRegistration
         // Remitly answers bursts with 429 "try again in a couple of minutes": back off for longer.
         AddProvider<RemitlyProvider>(services, configuration, "Remitly", o => o.Retry.Delay = TimeSpan.FromSeconds(6));
         AddProvider<TaptapSendProvider>(services, configuration, "TaptapSend");
+        AddProvider<WorldRemitProvider>(services, configuration, "WorldRemit");
         return services;
     }
 
