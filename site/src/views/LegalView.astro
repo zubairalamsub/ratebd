@@ -1,0 +1,201 @@
+---
+// Legal notice and disclaimer. Plain statements of what ratebd is and does; keep them true to the engine and site
+// (e.g. no cookies or analytics) and update LEGAL_UPDATED when anything here changes.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { date } from "../i18n/format";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const LEGAL_UPDATED = "2026-10-17";
+const ISSUES_URL = "https://github.com/zubairalamsub/ratebd/issues/new?template=correction-or-removal.yml";
+const CLOUDFLARE_PRIVACY = "https://www.cloudflare.com/privacypolicy/";
+
+type Link = { text: string; href: string };
+type Section = { id: string; h: string; p: string[]; links?: Link[] };
+
+const content: Record<Locale, { intro: string; sections: Section[] }> = {
+  en: {
+    intro:
+      "ratebd is an independent, free information service that compares what money transfer services and exchange houses deliver in taka to Bangladesh. Please read this notice before relying on anything on the site.",
+    sections: [
+      {
+        id: "what",
+        h: "What ratebd is, and what it is not",
+        p: [
+          "ratebd is not a bank, money transfer operator or exchange house. It does not send, receive or hold money, take payments, or ask for personal, identity or bank details. It is not a licensed financial service.",
+          "ratebd is not affiliated with, endorsed by or sponsored by any provider shown on the site, by Bangladesh Bank, or by any government body.",
+        ],
+      },
+      {
+        id: "sources",
+        h: "Where the numbers come from",
+        p: [
+          "Once a day an automated job reads the prices each provider shows to the public on its own website calculator or rate page, and the USD/BDT rate Bangladesh Bank publishes. It does not log in, create accounts, make transfers or use any private data, and it makes only a few requests per provider per day.",
+          "We check each source's published terms and robots.txt before collecting from it. We do not collect from a source whose terms prohibit it, and we stop collecting from any provider that asks us to.",
+          "The exact source for each provider is described on its page. Cross rates for the mid-market benchmark come from fawazahmed0/currency-api, a free open exchange-rate dataset.",
+        ],
+      },
+      {
+        id: "accuracy",
+        h: "Accuracy",
+        p: [
+          "Rates and fees are indicative: they are a snapshot taken at the time shown on each page, can change at any time, and can differ with the amount, payment and payout method, your account, promotions and your location. Exchange-house rates are shown without fees, which those houses do not publish.",
+          "We try to keep the information correct, but we do not guarantee that it is complete, accurate or up to date. Always confirm the final amount, fees and exchange rate with the provider before you send money.",
+          "To the extent the law allows, ratebd accepts no liability for any loss or damage arising from the use of this site or reliance on its information.",
+        ],
+      },
+      {
+        id: "advice",
+        h: "Not financial advice",
+        p: [
+          "Everything on ratebd is general information. It is not financial, legal or tax advice, and it is not a recommendation to use any particular provider. The government incentive page summarises official rules; the official circulars always take precedence.",
+        ],
+      },
+      {
+        id: "trademarks",
+        h: "Trademarks",
+        p: [
+          "Company and product names on this site, such as Wise, Remitly and Western Union, are trademarks or registered trademarks of their respective owners. They are used only to identify the services being compared. ratebd does not use their logos, and naming a company does not imply any affiliation or endorsement.",
+        ],
+      },
+      {
+        id: "links",
+        h: "Links and affiliate disclosure",
+        p: [
+          "Links to providers currently go to their official websites. Some may become affiliate links in future, which could earn ratebd a commission at no extra cost to you. That never changes the order of a comparison, which is always sorted by the amount received (or by rate, for exchange-house rates).",
+          "ratebd is not responsible for the content, services or availability of external websites.",
+        ],
+      },
+      {
+        id: "requests",
+        h: "Corrections and removal requests",
+        p: [
+          "If you represent a provider shown here, or you notice a mistake, please tell us. We review requests promptly, and if a provider asks us to stop collecting or showing its rates, we remove it.",
+          "Requests are made through a public GitHub issue, so please do not include personal or confidential information.",
+        ],
+        links: [{ text: "Request a correction or removal", href: ISSUES_URL }],
+      },
+      {
+        id: "privacy",
+        h: "Privacy",
+        p: [
+          "ratebd has no accounts, forms, cookies, advertising or analytics, and does not collect personal data. The site is hosted on Cloudflare Pages, which processes standard technical data such as IP addresses to deliver and protect the site.",
+        ],
+        links: [{ text: "Cloudflare privacy policy", href: CLOUDFLARE_PRIVACY }],
+      },
+    ],
+  },
+  bn: {
+    intro:
+      "ratebd একটি স্বাধীন, বিনামূল্যের তথ্যসেবা, যা মানি ট্রান্সফার সেবা ও এক্সচেঞ্জ হাউসগুলো বাংলাদেশে কত টাকা পৌঁছে দেয় তার তুলনা করে। সাইটের কোনো তথ্যের ওপর নির্ভর করার আগে অনুগ্রহ করে এই নোটিশটি পড়ুন।",
+    sections: [
+      {
+        id: "what",
+        h: "ratebd কী, আর কী নয়",
+        p: [
+          "ratebd কোনো ব্যাংক, মানি ট্রান্সফার প্রতিষ্ঠান বা এক্সচেঞ্জ হাউস নয়। এটি টাকা পাঠায় না, গ্রহণ করে না বা রাখে না, কোনো পেমেন্ট নেয় না, এবং ব্যক্তিগত, পরিচয় বা ব্যাংক সংক্রান্ত তথ্য চায় না। এটি কোনো লাইসেন্সপ্রাপ্ত আর্থিক সেবা নয়।",
+          "সাইটে দেখানো কোনো প্রতিষ্ঠান, বাংলাদেশ ব্যাংক বা কোনো সরকারি সংস্থার সঙ্গে ratebd-এর কোনো সম্পর্ক নেই, এবং তারা এটি অনুমোদন বা পৃষ্ঠপোষকতা করে না।",
+        ],
+      },
+      {
+        id: "sources",
+        h: "তথ্য কোথা থেকে আসে",
+        p: [
+          "প্রতিদিন একবার একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের নিজস্ব ওয়েবসাইটের ক্যালকুলেটর বা রেট পাতায় জনসাধারণের জন্য দেখানো দাম, এবং বাংলাদেশ ব্যাংকের প্রকাশিত ডলার/টাকা রেট পড়ে। এটি কোনো লগইন, অ্যাকাউন্ট খোলা, ট্রান্সফার বা ব্যক্তিগত তথ্য ব্যবহার করে না, এবং প্রতিটি প্রতিষ্ঠানে দিনে মাত্র কয়েকটি অনুরোধ পাঠায়।",
+          "কোনো উৎস থেকে তথ্য সংগ্রহের আগে আমরা তার প্রকাশিত শর্তাবলি ও robots.txt যাচাই করি। যে উৎসের শর্তে এটি নিষিদ্ধ, সেখান থেকে আমরা তথ্য সংগ্রহ করি না, এবং কোনো প্রতিষ্ঠান অনুরোধ করলে তার তথ্য সংগ্রহ বন্ধ করি।",
+          "প্রতিটি প্রতিষ্ঠানের সঠিক উৎস তার নিজস্ব পাতায় দেওয়া আছে। মিড-মার্কেট মানদণ্ডের ক্রস রেট আসে fawazahmed0/currency-api থেকে, যা একটি বিনামূল্যের উন্মুক্ত বিনিময় হারের ডেটাসেট।",
+        ],
+      },
+      {
+        id: "accuracy",
+        h: "তথ্যের নির্ভুলতা",
+        p: [
+          "রেট ও ফি আনুমানিক: এগুলো প্রতিটি পাতায় দেখানো সময়ের একটি স্ন্যাপশট, যেকোনো সময় বদলাতে পারে, এবং পাঠানোর অঙ্ক, পরিশোধ ও গ্রহণের পদ্ধতি, আপনার অ্যাকাউন্ট, প্রচারণা ও অবস্থানভেদে ভিন্ন হতে পারে। এক্সচেঞ্জ হাউসের রেট ফি ছাড়া দেখানো হয়, কারণ তারা ফি প্রকাশ করে না।",
+          "আমরা তথ্য সঠিক রাখার চেষ্টা করি, তবে তা সম্পূর্ণ, নির্ভুল বা হালনাগাদ থাকবে এমন কোনো নিশ্চয়তা দিই না। টাকা পাঠানোর আগে সবসময় প্রতিষ্ঠানের কাছ থেকে চূড়ান্ত অঙ্ক, ফি ও বিনিময় হার নিশ্চিত করুন।",
+          "আইন যতটুকু অনুমতি দেয়, এই সাইট ব্যবহার বা এর তথ্যের ওপর নির্ভর করার ফলে কোনো ক্ষতির জন্য ratebd দায়ী থাকবে না।",
+        ],
+      },
+      {
+        id: "advice",
+        h: "আর্থিক পরামর্শ নয়",
+        p: [
+          "ratebd-এর সব তথ্য সাধারণ তথ্য। এটি আর্থিক, আইনি বা কর সংক্রান্ত পরামর্শ নয়, এবং কোনো নির্দিষ্ট প্রতিষ্ঠান ব্যবহারের সুপারিশও নয়। সরকারি প্রণোদনার পাতাটি সরকারি নিয়মের সারসংক্ষেপ; সরকারি সার্কুলারই সবসময় প্রাধান্য পাবে।",
+        ],
+      },
+      {
+        id: "trademarks",
+        h: "ট্রেডমার্ক",
+        p: [
+          "এই সাইটে উল্লেখিত প্রতিষ্ঠান ও পণ্যের নাম, যেমন Wise, Remitly ও Western Union, তাদের নিজ নিজ মালিকের ট্রেডমার্ক বা নিবন্ধিত ট্রেডমার্ক। এগুলো শুধু তুলনা করা সেবাগুলো শনাক্ত করতে ব্যবহার করা হয়েছে। ratebd তাদের লোগো ব্যবহার করে না, এবং কোনো প্রতিষ্ঠানের নাম উল্লেখ করা মানে তার সঙ্গে কোনো সম্পর্ক বা অনুমোদন বোঝায় না।",
+        ],
+      },
+      {
+        id: "links",
+        h: "লিংক ও অ্যাফিলিয়েট ঘোষণা",
+        p: [
+          "প্রতিষ্ঠানগুলোর লিংক বর্তমানে তাদের অফিসিয়াল ওয়েবসাইটে যায়। ভবিষ্যতে কিছু লিংক অ্যাফিলিয়েট লিংক হতে পারে, যা থেকে ratebd আপনার কোনো বাড়তি খরচ ছাড়াই কমিশন পেতে পারে। তাতে তুলনার ক্রম কখনো বদলায় না, যা সবসময় প্রাপ্ত টাকার পরিমাণ (এক্সচেঞ্জ হাউসের ক্ষেত্রে রেট) অনুযায়ী সাজানো।",
+          "বাইরের ওয়েবসাইটের বিষয়বস্তু, সেবা বা প্রাপ্যতার জন্য ratebd দায়ী নয়।",
+        ],
+      },
+      {
+        id: "requests",
+        h: "সংশোধন ও অপসারণের অনুরোধ",
+        p: [
+          "আপনি যদি এখানে দেখানো কোনো প্রতিষ্ঠানের প্রতিনিধি হন, বা কোনো ভুল চোখে পড়ে, অনুগ্রহ করে আমাদের জানান। আমরা দ্রুত অনুরোধ পর্যালোচনা করি, এবং কোনো প্রতিষ্ঠান তার রেট সংগ্রহ বা প্রদর্শন বন্ধ করতে বললে তা সরিয়ে দিই।",
+          "অনুরোধ একটি পাবলিক GitHub ইস্যুর মাধ্যমে করা হয়, তাই অনুগ্রহ করে কোনো ব্যক্তিগত বা গোপনীয় তথ্য দেবেন না।",
+        ],
+        links: [{ text: "সংশোধন বা অপসারণের অনুরোধ করুন", href: ISSUES_URL }],
+      },
+      {
+        id: "privacy",
+        h: "গোপনীয়তা",
+        p: [
+          "ratebd-এ কোনো অ্যাকাউন্ট, ফর্ম, কুকি, বিজ্ঞাপন বা অ্যানালিটিক্স নেই, এবং এটি কোনো ব্যক্তিগত তথ্য সংগ্রহ করে না। সাইটটি Cloudflare Pages-এ হোস্ট করা, যা সাইট পরিবেশন ও সুরক্ষার জন্য আইপি ঠিকানার মতো সাধারণ কারিগরি তথ্য প্রক্রিয়া করে।",
+        ],
+        links: [{ text: "Cloudflare-এর গোপনীয়তা নীতি", href: CLOUDFLARE_PRIVACY }],
+      },
+    ],
+  },
+};
+
+const page = content[locale];
+const title = t(locale, "legal.title");
+const description = t(locale, "legal.description");
+---
+
+<BaseLayout locale={locale} title={title} description={description} path="/legal">
+  <article class="prose-block max-w-3xl">
+    <h1 class="text-2xl sm:text-3xl">{title}</h1>
+    <p class="mt-4 text-lg">{page.intro}</p>
+    <nav aria-label={t(locale, "legal.contents")} class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <p class="text-sm font-semibold text-slate-900">{t(locale, "legal.contents")}</p>
+      <ol class:list={["mt-2 space-y-1 pl-5 text-sm", locale === "bn" ? "[list-style-type:bengali]" : "list-decimal"]}>
+        {page.sections.map((s) => <li><a href={`#${s.id}`}>{s.h}</a></li>)}
+      </ol>
+    </nav>
+    {
+      page.sections.map((s) => (
+        <section id={s.id} class="mt-8 scroll-mt-4" aria-labelledby={`${s.id}-heading`}>
+          <h2 id={`${s.id}-heading`} class="text-xl">{s.h}</h2>
+          <div class="mt-2">
+            {s.p.map((para) => <p>{para}</p>)}
+          </div>
+          {s.links && (
+            <p class="mt-3 flex flex-wrap gap-3">
+              {s.links.map((l) => (
+                <a href={l.href} rel="noopener" class="inline-flex min-h-11 items-center rounded-lg border border-brand-700 px-4 font-medium text-brand-700 no-underline hover:bg-brand-50">
+                  {l.text}
+                </a>
+              ))}
+            </p>
+          )}
+        </section>
+      ))
+    }
+    <p class="mt-10 text-sm text-slate-600">{t(locale, "legal.updated", { date: date(locale, LEGAL_UPDATED) })}</p>
+  </article>
+</BaseLayout>

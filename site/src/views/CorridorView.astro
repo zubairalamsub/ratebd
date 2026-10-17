@@ -347,5 +347,8 @@ const jsonLd = [
     </div>
   </section>
 
-  <p class="mt-8 text-xs leading-relaxed text-slate-600">{t(locale, "disclaimer")} {t(locale, "updated.schedule")}</p>
+  <p class="mt-8 text-xs leading-relaxed text-slate-600">
+    {t(locale, "disclaimer")} {t(locale, "updated.schedule")}
+    <a href={localePath(locale, "/legal")}>{t(locale, "nav.legal")}</a>
+  </p>
 </BaseLayout>

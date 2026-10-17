@@ -11,6 +11,7 @@ const en = {
   "nav.providers": "Providers",
   "nav.howRatesWork": "How rates work",
   "nav.incentive": "Government incentive",
+  "nav.legal": "Legal notice and disclaimer",
   "nav.label": "Main",
   "lang.switch": "বাংলা",
   "lang.switchLabel": "পাতাটি বাংলায় পড়ুন (Read in Bengali)",
@@ -144,6 +145,7 @@ const en = {
   "provider.description": "Today's {name} exchange rates and fees for sending money to Bangladesh from {countries}, with a 7-day history.",
   "provider.descriptionMany": "Today's {name} exchange rates and fees for sending money to Bangladesh from {n} countries, with a 7-day history.",
   "provider.lead": "What {name} delivered in taka on each route we track, from its public price calculator.",
+  "provider.independent": "ratebd is independent and is not affiliated with or endorsed by {name}.",
   "provider.descriptionPosted": "The rate {name} posts for sending money to Bangladesh from {countries}, with a 7-day history.",
   "provider.leadPosted":
     "The rate {name} publishes on each route we track. It publishes no fee, so the rate is listed separately rather than ranked against full quotes.",
@@ -166,8 +168,6 @@ const en = {
     "Taptap Send's public rate feed, which gives one exchange rate per route. It lists no fee for Bangladesh, and gives no delivery method or delivery time.",
   "source.WorldRemit":
     "WorldRemit's public calculator. We price each payout method it offers for Bangladesh and show the one that delivers the most. Its fee is added on top, so we deduct it from the amount sent.",
-  "source.Xe":
-    "Xe's public money-transfer quote service, using Xe's default payment and delivery option. Its fee is added on top, so we deduct it from the amount sent.",
   "source.WesternUnion":
     "Western Union's public price calculator for Saudi Arabia, Kuwait and Qatar, as a website visitor sees it. We show its bank-deposit price; any fee is added on top, so we deduct it from the amount sent. Western Union's Oman site has no online calculator.",
   "source.AlMulla":
@@ -203,8 +203,15 @@ const en = {
 
   "footer.data": "Data updated daily from public provider calculators. Not financial advice.",
   "footer.source": "Source code and data",
+  "footer.independent":
+    "Independent comparison, not affiliated with any provider. Provider names are trademarks of their respective owners.",
   "footer.routes": "Sending countries",
   "footer.about": "About the data",
+  "legal.title": "Legal notice and disclaimer",
+  "legal.description":
+    "What ratebd is and is not, where its rates come from, how accurate they are, trademarks, affiliate links, privacy, and how providers can request a correction or removal.",
+  "legal.contents": "On this page",
+  "legal.updated": "Last updated {date}",
   "notFound.title": "Page not found",
   "notFound.body": "That page does not exist. Try the comparison for your route:",
 } as const;
@@ -220,6 +227,7 @@ const bn: Record<UiKey, string> = {
   "nav.providers": "প্রতিষ্ঠানসমূহ",
   "nav.howRatesWork": "রেট কীভাবে কাজ করে",
   "nav.incentive": "সরকারি প্রণোদনা",
+  "nav.legal": "আইনি নোটিশ ও দায়মুক্তি",
   "nav.label": "প্রধান",
   "lang.switch": "English",
   "lang.switchLabel": "Read this page in English (ইংরেজিতে পড়ুন)",
@@ -353,6 +361,7 @@ const bn: Record<UiKey, string> = {
   "provider.description": "{countries} থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর আজকের বিনিময় হার ও ফি, ৭ দিনের ইতিহাসসহ।",
   "provider.descriptionMany": "{n}টি দেশ থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর আজকের বিনিময় হার ও ফি, ৭ দিনের ইতিহাসসহ।",
   "provider.lead": "আমরা যে পথগুলো দেখি, তাতে {name}-এর পাবলিক ক্যালকুলেটর অনুযায়ী কত টাকা পৌঁছেছে।",
+  "provider.independent": "ratebd একটি স্বাধীন সেবা; {name}-এর সঙ্গে এর কোনো সম্পর্ক নেই এবং {name} এটি অনুমোদন করেনি।",
   "provider.descriptionPosted": "{countries} থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর ঘোষিত রেট, ৭ দিনের ইতিহাসসহ।",
   "provider.leadPosted":
     "আমরা যে পথগুলো দেখি, তাতে {name}-এর প্রকাশিত রেট। এর কোনো ফি প্রকাশিত নয়, তাই রেটটি পূর্ণ কোটের সঙ্গে তুলনা করে না সাজিয়ে আলাদাভাবে দেখানো হয়।",
@@ -375,8 +384,6 @@ const bn: Record<UiKey, string> = {
     "Taptap Send-এর পাবলিক রেট ফিড, যা প্রতিটি পথে একটি বিনিময় হার দেয়। বাংলাদেশের জন্য এতে কোনো ফি উল্লেখ নেই, এবং পাঠানোর পদ্ধতি বা সময়ও জানানো হয় না।",
   "source.WorldRemit":
     "WorldRemit-এর পাবলিক ক্যালকুলেটর। বাংলাদেশের জন্য তাদের প্রতিটি পেআউট পদ্ধতির দাম দেখে যেটিতে সবচেয়ে বেশি টাকা পৌঁছায় সেটি দেখাই। ফি আলাদাভাবে যোগ হয়, তাই আমরা তা পাঠানো অঙ্ক থেকে বাদ দিই।",
-  "source.Xe":
-    "Xe-এর পাবলিক মানি ট্রান্সফার কোট সেবা, Xe-এর ডিফল্ট পরিশোধ ও পাঠানোর পদ্ধতি ধরে। ফি আলাদাভাবে যোগ হয়, তাই আমরা তা পাঠানো অঙ্ক থেকে বাদ দিই।",
   "source.WesternUnion":
     "সৌদি আরব, কুয়েত ও কাতারের জন্য Western Union-এর পাবলিক দামের ক্যালকুলেটর, ওয়েবসাইটের একজন দর্শক যেভাবে দেখেন। আমরা ব্যাংক অ্যাকাউন্টে জমার দাম দেখাই; কোনো ফি থাকলে তা আলাদাভাবে যোগ হয়, তাই আমরা তা পাঠানো অঙ্ক থেকে বাদ দিই। ওমানের জন্য Western Union-এর ওয়েবসাইটে কোনো অনলাইন ক্যালকুলেটর নেই।",
   "source.AlMulla":
@@ -412,8 +419,15 @@ const bn: Record<UiKey, string> = {
 
   "footer.data": "প্রতিষ্ঠানগুলোর পাবলিক ক্যালকুলেটর থেকে প্রতিদিন হালনাগাদ। এটি আর্থিক পরামর্শ নয়।",
   "footer.source": "সোর্স কোড ও তথ্য",
+  "footer.independent":
+    "স্বাধীন তুলনা; কোনো প্রতিষ্ঠানের সঙ্গে সম্পর্কিত নয়। প্রতিষ্ঠানগুলোর নাম তাদের নিজ নিজ মালিকের ট্রেডমার্ক।",
   "footer.routes": "প্রেরক দেশ",
   "footer.about": "তথ্য সম্পর্কে",
+  "legal.title": "আইনি নোটিশ ও দায়মুক্তি",
+  "legal.description":
+    "ratebd কী এবং কী নয়, রেট কোথা থেকে আসে, কতটা নির্ভুল, ট্রেডমার্ক, অ্যাফিলিয়েট লিংক, গোপনীয়তা, এবং প্রতিষ্ঠানগুলো কীভাবে সংশোধন বা অপসারণের অনুরোধ করতে পারে।",
+  "legal.contents": "এই পাতায়",
+  "legal.updated": "সর্বশেষ হালনাগাদ {date}",
   "notFound.title": "পাতাটি পাওয়া যায়নি",
   "notFound.body": "এই পাতাটি নেই। আপনার পথের তুলনা দেখুন:",
 };

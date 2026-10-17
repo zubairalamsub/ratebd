@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Legal notice and disclaimer
+    url: https://ratebd.pages.dev/legal
+    about: What ratebd is, where its data comes from, and how requests are handled.

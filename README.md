@@ -178,6 +178,8 @@ The site has these pages. Every page also exists in Bengali under `/bn/...`.
 - `/providers/{slug}` for every provider in `site/src/config/providers.json`
 - `/how-rates-work`
 - `/government-incentive`
+- `/legal`: what ratebd is and is not, data sources, accuracy, trademarks, affiliate disclosure, privacy, and how a
+  provider asks for a correction or removal (a GitHub issue form, `.github/ISSUE_TEMPLATE/correction-or-removal.yml`)
 
 What the site does:
 - **Corridor table:** sorted by amount received. Columns are rate, fee, you receive, margin vs mid-market, delivery, speed and an inline-SVG 7-day sparkline. Rows show a stale badge when a quote was carried forward.

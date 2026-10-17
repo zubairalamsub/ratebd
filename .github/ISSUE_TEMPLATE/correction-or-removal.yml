@@ -1,0 +1,48 @@
+name: Correction or removal request
+description: Report a wrong rate, or ask ratebd to stop showing a provider's rates.
+title: "[Request] "
+labels: ["request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for getting in touch. This issue is **public**, so please don't include personal or confidential
+        information. Requests from providers to stop collecting or showing their rates are honoured.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Request type
+      options:
+        - Correct a rate, fee or other detail
+        - Stop collecting or showing a provider's rates
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Provider
+      placeholder: e.g. Western Union
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page on ratebd
+      placeholder: https://ratebd.pages.dev/send-money-kwd-to-bangladesh
+  - type: dropdown
+    id: who
+    attributes:
+      label: Who is asking?
+      options:
+        - I represent the provider
+        - Site visitor
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What is wrong, or what should change?
+    validations:
+      required: true
