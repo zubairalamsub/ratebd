@@ -2,7 +2,7 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T17:00:30.7721989Z",
+  "generatedAt": "2026-10-17T17:46:12.4307959Z",
   "midMarket": {
     "rate": 33.9148,
     "usdBdt": 123.4500,
@@ -11,17 +11,12 @@
     "sendPerUsd": 3.64,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+    "fetchedAt": "2026-10-17T17:46:01.0319088Z",
     "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "WesternUnion",
       "status": "ok",
       "message": null
     }
@@ -37,20 +32,7 @@
       "receiveAmount": 33914.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
-      "stale": false
-    },
-    {
-      "provider": "WesternUnion",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "sendAmount": 1000,
-      "rate": 33.7945205,
-      "fee": 0,
-      "receiveAmount": 33794.52,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T17:00:26.1993679Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     },
     {
@@ -63,39 +45,11 @@
       "receiveAmount": 67829.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
-      "stale": false
-    },
-    {
-      "provider": "WesternUnion",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "sendAmount": 2000,
-      "rate": 33.7945205,
-      "fee": 0,
-      "receiveAmount": 67589.04,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T17:00:29.7436649Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     }
   ],
   "postedRateProviders": [
-    {
-      "name": "OoredooMoney",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "GulfExchange",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "AlZaman",
-      "status": "ok",
-      "message": null
-    },
     {
       "name": "HabibQatar",
       "status": "ok",
@@ -109,32 +63,6 @@
   ],
   "postedRates": [
     {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.920152,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Same Day",
-      "partner": "Alzaman Exchange",
-      "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.920094,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Next bank working day",
-      "partner": "Arabian Exchange",
-      "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
       "provider": "HabibQatar",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
@@ -144,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:27.4403795Z",
+      "fetchedAt": "2026-10-17T17:46:12.4295706Z",
       "stale": false
     },
     {
@@ -157,111 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:28.3694957Z",
-      "stale": false
-    },
-    {
-      "provider": "AlZaman",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.86,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:26.9301776Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.86,
-      "deliveryMethod": "Bank deposit",
-      "speed": "1-2 working days",
-      "partner": "Transfast",
-      "feeNote": "20 QR to 30 QR",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.86,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Next working day",
-      "partner": "Aldar Exchange",
-      "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.851216,
-      "deliveryMethod": "Bank deposit",
-      "speed": "In a Few Hours",
-      "partner": "MoneyGram",
-      "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
-      "provider": "GulfExchange",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.820346,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:30.7712379Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.799359,
-      "deliveryMethod": "Mobile wallet",
-      "speed": "Next Working Day",
-      "partner": "Western Union",
-      "feeNote": "20 QR to 30 QR",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.750034,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Next working day",
-      "partner": "Gulf Exchange",
-      "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
-      "stale": false
-    },
-    {
-      "provider": "OoredooMoney",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.743127,
-      "deliveryMethod": "Mobile wallet (bKash)",
-      "speed": "In 1 Hour",
-      "partner": "Thunes",
-      "feeNote": "20 QR to 30 QR",
-      "publishedAt": "2026-10-17T16:58:21.034Z",
-      "fetchedAt": "2026-10-17T17:00:26.7313189Z",
+      "fetchedAt": "2026-10-17T17:46:11.0414536Z",
       "stale": false
     }
   ]

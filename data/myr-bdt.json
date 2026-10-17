@@ -2,7 +2,7 @@
   "corridor": "myr-bdt",
   "sendCurrency": "MYR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T17:00:13.4443181Z",
+  "generatedAt": "2026-10-17T17:46:01.0911941Z",
   "midMarket": {
     "rate": 30.2267,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 4.08413593,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+    "fetchedAt": "2026-10-17T17:46:01.0319088Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 30226.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 60453.40,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     }
   ],

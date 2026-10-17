@@ -2,7 +2,7 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T17:00:33.0704393Z",
+  "generatedAt": "2026-10-17T17:46:14.7007073Z",
   "midMarket": {
     "rate": 322.8239,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.38240659,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+    "fetchedAt": "2026-10-17T17:46:01.0319088Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 32282.39,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 64564.78,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     }
   ],
@@ -59,27 +59,9 @@
       "name": "PKExchange",
       "status": "ok",
       "message": null
-    },
-    {
-      "name": "Joyalukkas",
-      "status": "ok",
-      "message": null
     }
   ],
   "postedRates": [
-    {
-      "provider": "Joyalukkas",
-      "corridor": "omr-bdt",
-      "sendCurrency": "OMR",
-      "rate": 320.0216,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:31.3023894Z",
-      "stale": false
-    },
     {
       "provider": "PKExchange",
       "corridor": "omr-bdt",
@@ -90,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-16T20:00:00Z",
-      "fetchedAt": "2026-10-17T17:00:31.0677415Z",
+      "fetchedAt": "2026-10-17T17:46:12.7182972Z",
       "stale": false
     },
     {
@@ -103,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:33.0695747Z",
+      "fetchedAt": "2026-10-17T17:46:14.6997205Z",
       "stale": false
     }
   ]

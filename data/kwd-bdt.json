@@ -2,7 +2,7 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T17:00:25.7362583Z",
+  "generatedAt": "2026-10-17T17:46:09.2928622Z",
   "midMarket": {
     "rate": 397.1380,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.31084913,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
+    "fetchedAt": "2026-10-17T17:46:01.0319088Z",
     "stale": false
   },
   "providers": [
@@ -21,22 +21,7 @@
       "message": null
     },
     {
-      "name": "WesternUnion",
-      "status": "ok",
-      "message": null
-    },
-    {
       "name": "AlMulla",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "Skrill",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "Paysend",
       "status": "ok",
       "message": null
     }
@@ -52,20 +37,7 @@
       "receiveAmount": 39713.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
-      "stale": false
-    },
-    {
-      "provider": "WesternUnion",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 100,
-      "rate": 400.8760545,
-      "fee": 1.25,
-      "receiveAmount": 39586.51,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T17:00:18.1047396Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     },
     {
@@ -78,46 +50,7 @@
       "receiveAmount": 39586.51,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T17:00:21.293417Z",
-      "stale": false
-    },
-    {
-      "provider": "Paysend",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 100,
-      "rate": 397.019303,
-      "fee": 0.5,
-      "receiveAmount": 39503.42,
-      "deliveryMethod": "Bank card",
-      "speed": "In a few minutes",
-      "fetchedAt": "2026-10-17T17:00:18.8982602Z",
-      "stale": false
-    },
-    {
-      "provider": "Skrill",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 100,
-      "rate": 376.7014,
-      "fee": 0.000,
-      "receiveAmount": 37670.14,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T17:00:20.784226Z",
-      "stale": false
-    },
-    {
-      "provider": "WesternUnion",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 200,
-      "rate": 400.8760545,
-      "fee": 1.25,
-      "receiveAmount": 79674.12,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T17:00:21.7228687Z",
+      "fetchedAt": "2026-10-17T17:46:04.4675696Z",
       "stale": false
     },
     {
@@ -130,7 +63,7 @@
       "receiveAmount": 79674.12,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T17:00:25.7348017Z",
+      "fetchedAt": "2026-10-17T17:46:09.2905168Z",
       "stale": false
     },
     {
@@ -143,47 +76,11 @@
       "receiveAmount": 79427.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
-      "stale": false
-    },
-    {
-      "provider": "Paysend",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 200,
-      "rate": 397.019303,
-      "fee": 0.5,
-      "receiveAmount": 79205.35,
-      "deliveryMethod": "Bank card",
-      "speed": "In a few minutes",
-      "fetchedAt": "2026-10-17T17:00:18.8982602Z",
-      "stale": false
-    },
-    {
-      "provider": "Skrill",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 200,
-      "rate": 376.7014,
-      "fee": 0.000,
-      "receiveAmount": 75340.28,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T17:00:24.4043319Z",
+      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
       "stale": false
     }
   ],
   "postedRateProviders": [
-    {
-      "name": "Joyalukkas",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "AlAnsari",
-      "status": "ok",
-      "message": null
-    },
     {
       "name": "Aman",
       "status": "ok",
@@ -191,32 +88,6 @@
     }
   ],
   "postedRates": [
-    {
-      "provider": "Joyalukkas",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "rate": 400.8765,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:18.4260643Z",
-      "stale": false
-    },
-    {
-      "provider": "AlAnsari",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "rate": 396.1541,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:00:19.6742115Z",
-      "stale": false
-    },
     {
       "provider": "Aman",
       "corridor": "kwd-bdt",
@@ -227,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-17T11:54:17.8245Z",
-      "fetchedAt": "2026-10-17T17:00:19.4602448Z",
+      "fetchedAt": "2026-10-17T17:46:02.2085303Z",
       "stale": false
     }
   ]
