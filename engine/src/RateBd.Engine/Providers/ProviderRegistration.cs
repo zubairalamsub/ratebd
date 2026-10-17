@@ -14,7 +14,12 @@ public static class ProviderRegistration
     public static IServiceCollection AddRateProviders(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<MidMarketOptions>(configuration.GetSection(MidMarketOptions.Section));
-        AddProvider<MidMarketProvider>(services, configuration, "MidMarket");
+        // Two cross-rate mirrors must both fit inside Engine:ProviderTimeoutSeconds, so each gets a shorter budget.
+        AddProvider<MidMarketProvider>(services, configuration, "MidMarket", o =>
+        {
+            o.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
+            o.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
+        });
         AddProvider<WiseProvider>(services, configuration, "Wise");
         // Remitly's 429s cleared within seconds in testing; the provider itself retries once more with a fresh device ID.
         AddProvider<RemitlyProvider>(services, configuration, "Remitly");

@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Polly.Timeout;
 using RateBd.Engine.Models;
 using RateBd.Engine.Options;
 using RateBd.Engine.Parsing;
@@ -107,8 +108,11 @@ public sealed class MidMarketProvider(
             {
                 return CurrencyApiParser.Parse(await http.GetStringAsync(url, ct));
             }
+            // With the resilience handler, timeouts surface as Polly's TimeoutRejectedException rather than
+            // TaskCanceledException; both must fall through to the next mirror.
             catch (Exception ex) when (ex is HttpRequestException or FormatException or System.Text.Json.JsonException
-                                           or TaskCanceledException && !ct.IsCancellationRequested)
+                                           or TimeoutRejectedException
+                                       || (ex is OperationCanceledException && !ct.IsCancellationRequested))
             {
                 logger.LogWarning("Cross-rate source {Url} failed: {Message}", url, ex.Message);
                 errors.Add($"{url}: {ex.Message}");

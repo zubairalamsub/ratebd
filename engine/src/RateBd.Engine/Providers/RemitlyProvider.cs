@@ -1,5 +1,6 @@
 using System.Net;
 using Microsoft.Extensions.Logging;
+using Polly.Timeout;
 using RateBd.Engine.Models;
 using RateBd.Engine.Parsing;
 
@@ -23,6 +24,7 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
 
     internal static readonly TimeSpan PauseBetweenRequests = TimeSpan.FromSeconds(3);
     internal static readonly TimeSpan PauseBeforeFreshDeviceRetry = TimeSpan.FromSeconds(10);
+    internal static readonly TimeSpan DevicePageTimeout = TimeSpan.FromSeconds(15);
 
     // Remitly conduits use ISO 3166-1 alpha-3 country codes.
     private static readonly Dictionary<string, string> Alpha3 = new(StringComparer.OrdinalIgnoreCase)
@@ -34,6 +36,7 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
 
     private readonly SemaphoreSlim _gate = new(1, 1);
     private string? _deviceId;
+    private bool _deviceIdAttempted;
 
     public string Name => "Remitly";
 
@@ -104,17 +107,21 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
         await _gate.WaitAsync(ct);
         try
         {
-            if (_deviceId is not null && !refresh)
+            // Only one page fetch per run unless a 429 asks for a fresh ID, so a slow page cannot eat the provider budget.
+            if (!refresh && (_deviceId is not null || _deviceIdAttempted))
             {
                 return _deviceId;
             }
+            _deviceIdAttempted = true;
             var pageUrl = $"{SiteOrigin}/{c.SendCountry.ToLowerInvariant()}/en/currency-converter/" +
                           $"{c.SendCurrency.ToLowerInvariant()}-to-{c.ReceiveCurrency.ToLowerInvariant()}-rate";
+            using var pageCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            pageCts.CancelAfter(DevicePageTimeout);
             try
             {
-                using var response = await http.GetAsync(pageUrl, ct);
+                using var response = await http.GetAsync(pageUrl, pageCts.Token);
                 response.EnsureSuccessStatusCode();
-                var html = await response.Content.ReadAsStringAsync(ct);
+                var html = await response.Content.ReadAsStringAsync(pageCts.Token);
                 var cookies = response.Headers.TryGetValues("Set-Cookie", out var values) ? values : [];
                 _deviceId = RemitlyParser.ParseDeviceEnvironmentId(html, cookies) ?? _deviceId;
                 if (_deviceId is null)
@@ -122,7 +129,8 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
                     logger.LogWarning("No Remitly device ID found on {Url}; calling the estimate without it", pageUrl);
                 }
             }
-            catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException && !ct.IsCancellationRequested)
+            catch (Exception ex) when (ex is HttpRequestException or TimeoutRejectedException
+                                       || (ex is OperationCanceledException && !ct.IsCancellationRequested))
             {
                 logger.LogWarning("Could not load {Url} for a Remitly device ID ({Message}); calling the estimate without it",
                     pageUrl, ex.Message);

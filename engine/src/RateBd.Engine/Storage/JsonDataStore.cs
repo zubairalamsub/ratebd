@@ -48,7 +48,9 @@ public sealed class JsonDataStore(string root)
     {
         for (var dir = new DirectoryInfo(start); dir is not null; dir = dir.Parent)
         {
-            if (Directory.Exists(Path.Combine(dir.FullName, ".git")))
+            // .git is a directory in a normal clone and a file in linked worktrees and submodules.
+            var git = Path.Combine(dir.FullName, ".git");
+            if (Directory.Exists(git) || File.Exists(git))
             {
                 return Path.Combine(dir.FullName, "data");
             }
