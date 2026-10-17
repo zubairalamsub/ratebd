@@ -1,0 +1,107 @@
+name: fetch
+
+# Daily rate fetch. Runs the Native AOT engine and commits /data back to main,
+# which in turn triggers the Cloudflare Pages build of the site.
+on:
+  schedule:
+    - cron: "0 3 * * *" # 03:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch
+  cancel-in-progress: false
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      # The published binary is cached by a hash of the engine sources. On a hit (every day the engine
+      # code has not changed) no .NET SDK is installed or run at all.
+      - name: Restore cached engine binary
+        id: engine-cache
+        uses: actions/cache@v6
+        with:
+          path: engine/publish
+          key: engine-aot-linux-x64-${{ hashFiles('engine/src/**', 'engine/Directory.Build.props', 'engine/global.json') }}
+
+      # Install the SDK under the home directory so it can be cached between runs.
+      - name: Point .NET install at a cacheable directory
+        if: steps.engine-cache.outputs.cache-hit != 'true'
+        run: echo "DOTNET_INSTALL_DIR=$HOME/.dotnet" >> "$GITHUB_ENV"
+
+      - name: Cache .NET SDK
+        if: steps.engine-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v6
+        with:
+          path: ~/.dotnet
+          key: dotnet-sdk-10.0-${{ runner.os }}-${{ hashFiles('engine/global.json') }}
+
+      - name: Set up .NET
+        if: steps.engine-cache.outputs.cache-hit != 'true'
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+          cache: true
+          cache-dependency-path: engine/**/packages.lock.json
+
+      - name: Publish engine (Native AOT)
+        if: steps.engine-cache.outputs.cache-hit != 'true'
+        working-directory: engine
+        run: |
+          dotnet restore src/RateBd.Engine/RateBd.Engine.csproj --locked-mode
+          dotnet publish src/RateBd.Engine/RateBd.Engine.csproj -c Release -r linux-x64 --no-restore -o publish
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: engine/tools/bb-snapshot/package-lock.json
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('engine/tools/bb-snapshot/package-lock.json') }}
+
+      # Bangladesh Bank serves a JavaScript bot challenge to plain HTTP clients, so the page is saved with
+      # headless Chromium. If this fails, the engine logs MidMarket as failed and carries the last value forward.
+      - name: Snapshot Bangladesh Bank rate page
+        working-directory: engine/tools/bb-snapshot
+        continue-on-error: true
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps --only-shell chromium
+          node snapshot.mjs "$RUNNER_TEMP/bb.html"
+
+      - name: Fetch rates
+        id: engine
+        env:
+          RATEBD_Engine__DataDirectory: ${{ github.workspace }}/data
+          RATEBD_Providers__MidMarket__BangladeshBankHtmlPath: ${{ runner.temp }}/bb.html
+        run: ./engine/publish/ratebd-engine
+
+      # Commit whatever was written (including stale carry-forwards) even if the engine reported
+      # that nothing fresh was fetched, so the site shows the stale badges.
+      - name: Commit data
+        if: always() && steps.engine.outcome != 'skipped' && steps.engine.outcome != 'cancelled'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+            exit 0
+          fi
+          git commit -m "data: rates $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin HEAD:main
