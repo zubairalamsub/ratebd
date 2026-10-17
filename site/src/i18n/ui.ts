@@ -32,7 +32,7 @@ const en = {
 
   "home.title": "Compare money transfer rates to Bangladesh",
   "home.description":
-    "Daily comparison of the taka that Wise, Remitly, Western Union and other services deliver from the UK, the USA, Italy, Saudi Arabia, the UAE, Kuwait, Qatar, Oman, Malaysia and Singapore, with the rates Gulf exchange houses post, measured against a mid-market benchmark based on Bangladesh Bank's USD/BDT rate.",
+    "Daily comparison of the taka that money transfer services and exchange houses deliver to Bangladesh, measured against a mid-market benchmark based on Bangladesh Bank's USD/BDT rate. Only providers whose terms allow it are included.",
   "home.lead":
     "Every day we ask each provider what your family in Bangladesh would receive and compare it with the mid-market rate, so you can see the real cost: the fee plus the exchange-rate margin.",
   "home.bestFor": "Most taka for {amount} today",
@@ -161,13 +161,6 @@ const en = {
   "provider.compare": "Compare with other providers from {country}",
   "provider.allTitle": "Providers we track",
 
-  "source.Wise": "Wise's public quote endpoint, the one its website calculator uses, paying by bank transfer. Wise deducts its fee from the amount you send.",
-  "source.Remitly":
-    "Remitly's public calculator. We show the standard price (everyday rate and fee), not the one-off discount Remitly gives on a first transfer.",
-  "source.TaptapSend":
-    "Taptap Send's public rate feed, which gives one exchange rate per route. It lists no fee for Bangladesh, and gives no delivery method or delivery time.",
-  "source.WorldRemit":
-    "WorldRemit's public calculator. We price each payout method it offers for Bangladesh and show the one that delivers the most. Its fee is added on top, so we deduct it from the amount sent.",
   "source.WesternUnion":
     "Western Union's public price calculator for Saudi Arabia, Kuwait and Qatar, as a website visitor sees it. We show its bank-deposit price; any fee is added on top, so we deduct it from the amount sent. Western Union's Oman site has no online calculator.",
   "source.AlMulla":
@@ -248,7 +241,7 @@ const bn: Record<UiKey, string> = {
 
   "home.title": "বাংলাদেশে টাকা পাঠানোর রেট তুলনা করুন",
   "home.description":
-    "যুক্তরাজ্য, যুক্তরাষ্ট্র, ইতালি, সৌদি আরব, সংযুক্ত আরব আমিরাত, কুয়েত, কাতার, ওমান, মালয়েশিয়া ও সিঙ্গাপুর থেকে Wise, Remitly, Western Union ও অন্যান্য সেবা কত টাকা পৌঁছে দেয়, সঙ্গে উপসাগরীয় এক্সচেঞ্জ হাউসগুলোর ঘোষিত রেট, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের সঙ্গে তার প্রতিদিনের তুলনা।",
+    "মানি ট্রান্সফার সেবা ও এক্সচেঞ্জ হাউসগুলো বাংলাদেশে কত টাকা পৌঁছে দেয়, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের সঙ্গে তার প্রতিদিনের তুলনা। শুধু যেসব প্রতিষ্ঠানের শর্তে এটি অনুমোদিত, সেগুলোই অন্তর্ভুক্ত।",
   "home.lead":
     "প্রতিদিন আমরা প্রতিটি প্রতিষ্ঠানের কাছ থেকে জেনে নিই বাংলাদেশে আপনার পরিবার কত টাকা পাবে, এবং তা মিড-মার্কেট রেটের সঙ্গে তুলনা করি। এতে আসল খরচ বোঝা যায়: ফি এবং বিনিময় হারের মার্জিন।",
   "home.bestFor": "আজ {amount} পাঠালে সবচেয়ে বেশি টাকা",
@@ -377,13 +370,6 @@ const bn: Record<UiKey, string> = {
   "provider.compare": "{country} থেকে অন্যান্য প্রতিষ্ঠানের সঙ্গে তুলনা করুন",
   "provider.allTitle": "যেসব প্রতিষ্ঠান আমরা দেখি",
 
-  "source.Wise": "Wise-এর পাবলিক কোট সেবা (তাদের ওয়েবসাইটের ক্যালকুলেটরও এই সেবাটিই ব্যবহার করে), ব্যাংক ট্রান্সফারে পরিশোধ ধরে। Wise পাঠানো অঙ্ক থেকেই ফি কেটে নেয়।",
-  "source.Remitly":
-    "Remitly-এর পাবলিক ক্যালকুলেটর। আমরা সাধারণ দাম (নিয়মিত রেট ও ফি) দেখাই, প্রথম ট্রান্সফারে দেওয়া এককালীন ছাড় নয়।",
-  "source.TaptapSend":
-    "Taptap Send-এর পাবলিক রেট ফিড, যা প্রতিটি পথে একটি বিনিময় হার দেয়। বাংলাদেশের জন্য এতে কোনো ফি উল্লেখ নেই, এবং পাঠানোর পদ্ধতি বা সময়ও জানানো হয় না।",
-  "source.WorldRemit":
-    "WorldRemit-এর পাবলিক ক্যালকুলেটর। বাংলাদেশের জন্য তাদের প্রতিটি পেআউট পদ্ধতির দাম দেখে যেটিতে সবচেয়ে বেশি টাকা পৌঁছায় সেটি দেখাই। ফি আলাদাভাবে যোগ হয়, তাই আমরা তা পাঠানো অঙ্ক থেকে বাদ দিই।",
   "source.WesternUnion":
     "সৌদি আরব, কুয়েত ও কাতারের জন্য Western Union-এর পাবলিক দামের ক্যালকুলেটর, ওয়েবসাইটের একজন দর্শক যেভাবে দেখেন। আমরা ব্যাংক অ্যাকাউন্টে জমার দাম দেখাই; কোনো ফি থাকলে তা আলাদাভাবে যোগ হয়, তাই আমরা তা পাঠানো অঙ্ক থেকে বাদ দিই। ওমানের জন্য Western Union-এর ওয়েবসাইটে কোনো অনলাইন ক্যালকুলেটর নেই।",
   "source.AlMulla":

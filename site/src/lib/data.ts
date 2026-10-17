@@ -50,11 +50,6 @@ const ALL_CORRIDORS: CorridorMeta[] = [
   { id: "sgd-bdt", from: "sgd", sendCurrency: "SGD", receiveCurrency: "BDT", countryKey: "country.sg", region: "region.asia" },
 ];
 
-/**
- * Corridors that have data. A corridor added to the engine appears on the site after the first run that writes
- * data/{id}.json, so the build never fails on a new, not-yet-fetched corridor.
- */
-export const CORRIDORS: CorridorMeta[] = ALL_CORRIDORS.filter((c) => existsSync(join(DATA_DIR, `${c.id}.json`)));
 
 export interface ProviderMeta {
   slug: string;
@@ -78,6 +73,19 @@ export function corridorByFrom(from: string): CorridorMeta {
 
 const snapshotCache = new Map<string, CorridorSnapshot>();
 const historyCache = new Map<string, HistoryPoint[]>();
+
+/**
+ * Routes shown on the site: the engine has written data/{id}.json and at least one provider listed in
+ * providers.json has a quote or posted rate there. A route whose providers were all removed (for example because
+ * their terms forbid automated collection) stays hidden until a permitted provider has data again; a new route
+ * appears after its first run, so the build never fails on a not-yet-fetched corridor.
+ */
+export const CORRIDORS: CorridorMeta[] = ALL_CORRIDORS.filter((c) => {
+  if (!existsSync(join(DATA_DIR, `${c.id}.json`))) return false;
+  const listed = new Set(PROVIDERS.map((p) => p.engineName));
+  const snapshot = loadSnapshot(c.id);
+  return snapshot.quotes.some((q) => listed.has(q.provider)) || (snapshot.postedRates ?? []).some((r) => listed.has(r.provider));
+});
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T;
