@@ -40,7 +40,10 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time) : IRateP
             var conduit = Uri.EscapeDataString($"{from}:{c.SendCurrency}-{to}:{c.ReceiveCurrency}");
             var url = $"{EstimateUrl}?conduit={conduit}&anchor=SEND&amount={amount:0.##}" +
                       "&purpose=OTHER&customer_segment=UNRECOGNIZED&strict_promo=false";
-            using var response = await http.GetAsync(url, ct);
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Referrer = new Uri("https://www.remitly.com/");
+            request.Headers.Add("Origin", "https://www.remitly.com");
+            using var response = await http.SendAsync(request, ct);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync(ct);
             quotes.Add(RemitlyParser.Parse(json, c, amount, time.GetUtcNow().UtcDateTime));
