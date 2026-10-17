@@ -1,9 +1,9 @@
 # ratebd
 
 Remittance rate comparison for sending money to Bangladesh. It only collects from providers whose published terms allow
-it, so today the site shows Saudi Arabia (SAR), Kuwait (KWD), Qatar (QAR) and Oman (OMR). The engine also tracks the
-UK, USA, Italy, UAE, Malaysia and Singapore, and those routes reappear on the site as soon as a permitted provider has
-data for them (see "Removed providers" below).
+it, so today the site shows Kuwait (KWD), Qatar (QAR) and Oman (OMR). The engine also tracks Saudi Arabia, the UK,
+the USA, Italy, the UAE, Malaysia and Singapore, and those routes reappear on the site as soon as a permitted provider
+has data for them (see "Removed providers" below).
 
 **Live site:** https://ratebd.pages.dev (Cloudflare Pages, rebuilt on every push to `main`).
 Everything runs on free tiers: no servers, no database, no VMs.
@@ -47,10 +47,7 @@ in `engine/tests/RateBd.Engine.Tests/Fixtures`.
 
 | Provider | Source |
 |---|---|
-| Western Union (SA, KW, QA) | `POST westernunion.com/wuconnect/prices/catalog`, the send-money form's price catalogue; bank deposit |
-| Al Mulla Exchange (KW) | `POST app-kwt.almullaexchange.com/pub/xtrate/get`; best correspondent route (often Western Union's network, at Western Union's price) |
-| Skrill (KW) | `POST transfers.skrill.com/api/transfers/v4/marketing/preview` after the calculator's anonymous session |
-| Paysend (KW) | Rate and fee tariff embedded in `paysend.com/en/send-money/from-kuwait-to-bangladesh` |
+| Al Mulla Exchange (KW) | `POST app-kwt.almullaexchange.com/pub/xtrate/get`; best correspondent route |
 | MidMarket (benchmark) | Bangladesh Bank USD/BDT WAR, crossed with [fawazahmed0/currency-api](https://github.com/fawazahmed0/exchange-api) |
 
 **Posted rates (no fee published).** Many Gulf exchange houses publish a rate but not their fee, so there is no total
@@ -58,41 +55,40 @@ cost to rank. They are stored as `postedRates` and shown in a separate list unde
 
 | Exchange house | Country | Source |
 |---|---|---|
-| Ooredoo Money | QA | `POST mmapi.ooredoo.qa:4443/…/getIRDeliveryOptionList`: one rate per partner (MoneyGram, Western Union, Al Zaman, …) with a fee range |
-| Gulf Exchange | QA | `POST gulfexchange.com.qa/en/convert-currency` with the home page's session and CSRF token |
-| Al Zaman Exchange | QA | `GET alzamanexchange.com/api/getRate.php?cid=6` (TT rate) |
 | Habib Qatar International Exchange | QA | `GET hqie.com.qa/Account/ConvertCurr` |
 | Al Mirqab Exchange | QA | `GET almirqabexchange.com/view_rates.jsp` (DRAFT/TT column) |
 | Unimoni | OM | `POST unimoni.om/crm/live/rate` |
 | Purshottam Kanji Exchange | OM | `GET pkexchange.com.om/rates/` (TT column, dated page) |
-| Joyalukkas Exchange | KW, OM | `GET admin.joyalukkasexchange.com/api/currency-converter?region=1\|3` (TT rate) |
-| Al Ansari Exchange | KW | `alansariexchange.com.kw` converter (`admin-ajax.php`, page nonce) |
 | Aman Exchange | KW | `GET portal.amankuwait.com/amsweb/api/rate` (dated board) |
 
 A posted rate that its source dates more than three days back counts as a failure, so the last good rate stays on the
-site marked stale instead of being shown as current. Ooredoo Money's fee range ("Starting from QAR 20") is kept as
+site marked stale instead of being shown as current. A fee range a source publishes next to its rate is kept as
 `feeNote` and shown in place of "Not published".
 
 The Gulf routes use Gulf providers, researched and re-verified on 2026-10-17:
 
 | Route | Full quotes (ranked) | Posted rates (no fee) |
 |---|---|---|
-| SAR (Saudi Arabia) | Western Union | – |
-| KWD (Kuwait) | Western Union, Al Mulla, Skrill, Paysend | Joyalukkas, Al Ansari, Aman |
-| QAR (Qatar) | Western Union | Ooredoo Money (8 partners), Gulf Exchange, Al Zaman, Habib Qatar, Al Mirqab |
-| OMR (Oman) | – | Unimoni, PK Exchange, Joyalukkas |
+| SAR (Saudi Arabia) | – (hidden) | – |
+| KWD (Kuwait) | Al Mulla | Aman |
+| QAR (Qatar) | – | Habib Qatar, Al Mirqab |
+| OMR (Oman) | – | Unimoni, PK Exchange |
+
+For these six, no restricting clause was found in any readable robots.txt, website terms, customer terms or app listing
+(some in-app terms could not be opened).
 
 Checked and left out:
 - **App or login only:** Al Rajhi (Tahweel, urpay), STC Bank, Enjaz, ANB TeleMoney, LuLu Money, Global Money Exchange and most Gulf banks.
 - **No public quote source:** MoneyGram and Ria have no Gulf calculator.
-- **Terms forbid it:** Alfardan Exchange (robots.txt and terms ban automated access), Al Dar Exchange (terms bar storing site content) and BEC Kuwait (content for internal, non-commercial use only). Al Dar still appears as an Ooredoo Money partner.
+- **Terms forbid it:** Alfardan Exchange (robots.txt and terms ban automated access), Al Dar Exchange (terms bar storing site content) and BEC Kuwait (content for internal, non-commercial use only).
 - **Blocks non-browser clients:** KIECO (403 to .NET's HTTP client); no workaround is attempted.
 - **Not reliable enough:** Musandam Exchange (TLS certificate expired 2026-10-05) and Wasel Exchange (hand-edited branch boards).
 
 ### Removed providers
 
-Removed on 2026-10-17 after a terms review. Each can return only with the provider's written permission or through an
-official API (for example an affiliate programme). Their code is in git history up to commit `577d86b`.
+Removed on 2026-10-17 after a terms review of robots.txt, website terms and customer/user agreements. Each can return
+only with the provider's written permission or through an official API (for example an affiliate programme). The first
+five are in git history up to commit `577d86b`, the Gulf ones up to `6a0fea5`.
 
 | Provider | Why |
 |---|---|
@@ -101,18 +97,24 @@ official API (for example an affiliate programme). Their code is in git history 
 | Taptap Send | User agreements ban robots, spiders and scrapers and public or commercial reuse without permission |
 | WorldRemit | Terms ban monitoring or copying its channels with robots or automatic devices without written permission |
 | Wise | Ambiguous: its quote endpoint is publicly documented, but the customer agreement bans robots monitoring its websites and commercial use of its materials without permission. It can return through Wise's affiliate API with a token |
+| Western Union | Online terms for Saudi Arabia, Kuwait and Qatar (clause 10(a)) ban robots, spiders, scrapers and other automated access |
+| Skrill | robots.txt disallows the calculator's `?redirect` session URL, and `sso.skrill.com/robots.txt` errors (treated as disallow-all) |
+| Joyalukkas Exchange | Customer terms forbid automated systems and robots, copying, data collection and commercial use |
+| Gulf Exchange | Terms of use bar using site material in other electronic publications without written permission |
+| Al Ansari Exchange | The group terms its Kuwait site points to ban automated scraping and republishing without written permission |
+| Ooredoo Money | No element of the website may be copied or distributed without permission |
+| Al Zaman Exchange | The terms on the host it serves rates from have a "No Data Mining" clause |
+| Paysend | Owns all website content and bans reverse-engineering; ambiguous, removed to be safe |
 
 Source notes:
-- **Western Union** prices a request from a random `wu_device_id` cookie that its page script generates in the browser (no server involvement). Without one the API answers from a different price tier that the site never shows, so the provider sends a fresh random ID each run, exactly as a browser visit would, and rejects any response outside the website's price segment (`N00`). westernunion.com uses Akamai bot management; a 403 is reported as a failure and the last quote is carried forward.
-- **Skrill** opens the same anonymous session its calculator does (three GETs, no login) and echoes its `XSRF-TOKEN`. Its first-transfer discount is ignored.
 - **Bangladesh Bank** serves a JavaScript bot challenge to plain HTTP clients. CI saves the page with headless Chromium (`engine/tools/bb-snapshot`, Playwright), and the engine parses that file with AngleSharp. Mid rates are `USD/BDT ÷ units-per-USD` for each send currency.
 
 ### How quotes are normalised
 
 - `sendAmount` is the total the sender pays, fee included.
-- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Western Union, Al Mulla, Skrill). Paysend already deducts its fee from the amount sent.
+- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Al Mulla).
 - One quote per provider per amount:
-  - Western Union and Skrill use bank deposit; Al Mulla its best route.
+  - Al Mulla uses its best route.
 - Missing data is never invented. A field the source doesn't give shows as "Not specified".
 
 ### Data files
@@ -125,12 +127,12 @@ UTC day, and a rerun on the same day overwrites it.
   "corridor": "kwd-bdt", "sendCurrency": "KWD", "receiveCurrency": "BDT",
   "generatedAt": "2026-10-17T08:14:07Z",
   "midMarket": { "rate": 397.138, "usdBdt": 123.45, "usdBdtDate": "2026-10-17", "sendPerUsd": 0.3108, "stale": false, ... },
-  "providers": [ { "name": "WesternUnion", "status": "ok|failed|stale|not_supported", "message": null }, ... ],
-  "quotes": [ { "provider": "WesternUnion", "sendAmount": 200, "rate": 400.8760545, "fee": 1.25, "receiveAmount": 79674.12,
-                "deliveryMethod": "Bank deposit", "speed": "Within 1 day", "fetchedAt": "...", "stale": false }, ... ],
+  "providers": [ { "name": "AlMulla", "status": "ok|failed|stale|not_supported", "message": null }, ... ],
+  "quotes": [ { "provider": "AlMulla", "sendAmount": 200, "rate": 400.8760545, "fee": 1.25, "receiveAmount": 79674.12,
+                "deliveryMethod": "Bank deposit", "speed": "Within 2 days", "fetchedAt": "...", "stale": false }, ... ],
   "postedRateProviders": [ { "name": "Unimoni", "status": "ok", "message": null }, ... ],
-  "postedRates": [ { "provider": "OoredooMoney", "rate": 33.900144, "deliveryMethod": "Bank deposit", "speed": "Same Day",
-                     "partner": "Alzaman Exchange", "feeNote": "Starting from QAR 20", "publishedAt": "...",
+  "postedRates": [ { "provider": "Unimoni", "rate": 319.9995, "deliveryMethod": "Not specified", "speed": "Not specified",
+                     "partner": null, "feeNote": null, "publishedAt": null,
                      "fetchedAt": "...", "stale": false }, ... ]
 }
 ```
@@ -250,5 +252,5 @@ GitHub disables scheduled workflows in public repos after 60 days without reposi
 Every source is free and keyless. They can still change or block automated requests:
 - **Failing provider:** it shows as `stale` (last good quote) or `failed` in the data and on the site. The run continues.
 - **Bangladesh Bank** needs the headless-browser snapshot. If that fails, the benchmark is carried forward as stale.
-- **Gulf sources** were verified from a machine outside the Gulf; the first scheduled runs show whether any of them treat GitHub's runners differently. Western Union is the most likely to (Akamai).
+- **Gulf sources** were verified from a machine outside the Gulf; the first scheduled runs show whether any of them treat GitHub's runners differently.
 - **Alerts:** check the job summary of each `fetch` run, which has a status table per corridor.
