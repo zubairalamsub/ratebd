@@ -10,6 +10,7 @@ public sealed class EngineOptions
     /// empty means "the data folder at the root of the git checkout containing the current directory".</summary>
     public string? DataDirectory { get; set; }
 
+    /// <summary>Default amounts for corridors that do not set their own.</summary>
     public decimal[] SendAmounts { get; set; } = [];
 
     public List<CorridorOptions> Corridors { get; set; } = [];
@@ -28,6 +29,9 @@ public sealed class CorridorOptions
     public string ReceiveCurrency { get; set; } = "";
     public string SendCountry { get; set; } = "";
     public string ReceiveCountry { get; set; } = "";
+
+    /// <summary>Amounts quoted on this corridor; empty means <see cref="EngineOptions.SendAmounts"/>.</summary>
+    public decimal[] SendAmounts { get; set; } = [];
 
     public Corridor ToCorridor() => new(Id, SendCurrency, ReceiveCurrency, SendCountry, ReceiveCountry);
 }

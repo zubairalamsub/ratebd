@@ -96,6 +96,27 @@ public sealed class RateRunnerTests : IDisposable
     }
 
     [Fact]
+    public async Task Corridor_specific_amounts_override_the_default()
+    {
+        var options = new EngineOptions
+        {
+            SendAmounts = [500, 1000],
+            Corridors =
+            [
+                new CorridorOptions { Id = "kwd-bdt", SendCurrency = "KWD", ReceiveCurrency = "BDT", SendCountry = "KW", ReceiveCountry = "BD", SendAmounts = [100, 200] },
+                new CorridorOptions { Id = "usd-bdt", SendCurrency = "USD", ReceiveCurrency = "BDT", SendCountry = "US", ReceiveCountry = "BD" },
+            ],
+        };
+        var runner = new RateRunner([new FakeProvider("Echo", (c, a) => QuotesFor("Echo", c, a))], new JsonDataStore(_root),
+            Microsoft.Extensions.Options.Options.Create(options), TimeProvider.System, NullLogger<RateRunner>.Instance);
+
+        var snapshots = await runner.RunAsync(CancellationToken.None);
+
+        Assert.Equal([100m, 200m], snapshots[0].Quotes.Select(q => q.SendAmount));
+        Assert.Equal([500m, 1000m], snapshots[1].Quotes.Select(q => q.SendAmount));
+    }
+
+    [Fact]
     public async Task Empty_result_counts_as_failure()
     {
         var snapshots = await Runner(new FakeProvider("Empty", (_, _) => [])).RunAsync(CancellationToken.None);

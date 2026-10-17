@@ -21,18 +21,26 @@ public sealed class RateRunner(
 
     public async Task<IReadOnlyList<CorridorSnapshot>> RunAsync(CancellationToken ct)
     {
-        if (_options.Corridors.Count == 0 || _options.SendAmounts.Length == 0)
+        if (_options.Corridors.Count == 0)
         {
-            throw new InvalidOperationException("Engine:Corridors and Engine:SendAmounts must be configured.");
+            throw new InvalidOperationException("Engine:Corridors must be configured.");
+        }
+        var missingAmounts = _options.Corridors.Where(c => c.SendAmounts.Length == 0 && _options.SendAmounts.Length == 0).ToList();
+        if (missingAmounts.Count > 0)
+        {
+            throw new InvalidOperationException(
+                $"No send amounts for {string.Join(", ", missingAmounts.Select(c => c.Id))}: set Engine:SendAmounts or the corridor's SendAmounts.");
         }
 
         logger.LogInformation("Writing to {DataDirectory}; providers: {Providers}",
             store.Root, string.Join(", ", _providers.Select(p => p.Name)));
 
         var snapshots = new List<CorridorSnapshot>();
-        foreach (var corridor in _options.Corridors.Select(c => c.ToCorridor()))
+        foreach (var options in _options.Corridors)
         {
-            var results = await Task.WhenAll(_providers.Select(p => FetchAsync(p, corridor, ct)));
+            var corridor = options.ToCorridor();
+            var amounts = options.SendAmounts.Length > 0 ? options.SendAmounts : _options.SendAmounts;
+            var results = await Task.WhenAll(_providers.Select(p => FetchAsync(p, corridor, amounts, ct)));
             var benchmark = _providers.OfType<IBenchmarkProvider>()
                 .Select(p => p.GetBenchmark(corridor.Id))
                 .FirstOrDefault(b => b is not null);
@@ -51,14 +59,14 @@ public sealed class RateRunner(
         return snapshots;
     }
 
-    private async Task<ProviderResult> FetchAsync(IRateProvider provider, Corridor corridor, CancellationToken ct)
+    private async Task<ProviderResult> FetchAsync(IRateProvider provider, Corridor corridor, decimal[] amounts, CancellationToken ct)
     {
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
         timeout.CancelAfter(TimeSpan.FromSeconds(_options.ProviderTimeoutSeconds));
         var stopwatch = Stopwatch.StartNew();
         try
         {
-            var quotes = await provider.GetQuotesAsync(corridor, _options.SendAmounts, timeout.Token);
+            var quotes = await provider.GetQuotesAsync(corridor, amounts, timeout.Token);
             if (quotes.Count == 0)
             {
                 logger.LogError("{Provider} returned no quotes for {Corridor}", provider.Name, corridor.Id);
