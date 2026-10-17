@@ -1,0 +1,227 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CORRIDORS, rowsFor, loadSnapshot } from "../lib/data";
+import { money, number, percent, rate, sendAmount } from "../i18n/format";
+import { corridorPath, localePath } from "../i18n/routes";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const title = t(locale, "how.title");
+const description = t(locale, "how.description");
+
+// Worked example from today's data: the best non-stale GBP quote for the headline amount.
+const corridor = CORRIDORS[0]!;
+const snapshot = loadSnapshot(corridor.id);
+const example = rowsFor(corridor.id, 1000).find((r) => !r.quote.stale && r.marginPct !== null);
+const mid = snapshot.midMarket;
+
+type Section = { h: string; p: string[] };
+
+const content: Record<Locale, { intro: string; sections: Section[]; example?: string[]; faq: { q: string; a: string }[] }> = {
+  en: {
+    intro:
+      "ratebd answers one question: if you pay the same amount, how much taka arrives in Bangladesh with each provider? Here is exactly how we work that out.",
+    sections: [
+      {
+        h: "What we collect",
+        p: [
+          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for a quote on sending 500 and 1,000 from the UK (GBP) and the UAE (AED) to Bangladesh (BDT). Quotes are saved exactly as the provider returns them; we never type in or estimate a rate ourselves.",
+          "If a provider does not offer a route at all, for example a provider that does not serve senders in the UAE, it is listed as not offered rather than left out silently.",
+        ],
+      },
+      {
+        h: "The mid-market benchmark",
+        p: [
+          "The mid-market rate is the wholesale midpoint between buying and selling a currency, with no margin. For Bangladesh we start from Bangladesh Bank's published USD/BDT weighted average rate (WAR) and convert it to pounds or dirhams with a free daily USD cross-rate feed (fawazahmed0/currency-api).",
+          "Bangladesh Bank's figure reflects interbank trading on the previous business day, and the cross rate is a daily reference, so the benchmark can lag the live market a little. Occasionally a provider's rate is slightly above it; the table then says how far above rather than showing a negative margin.",
+        ],
+      },
+      {
+        h: "Same total payment for everyone",
+        p: [
+          "Providers charge in different ways: some take the fee out of the amount you send, others add it on top. To compare like with like, we treat the amount as the total you pay, fee included. For providers that add the fee on top, we work out what would arrive if the fee came out of that total: received = (amount − fee) × rate.",
+          "Where a provider offers several ways to pay or receive, we use one consistent option: Wise paid by bank transfer, Remitly's standard price rather than its first-transfer discount, the WorldRemit payout method that delivers most, and Xe's default option. Taptap Send publishes one rate per route with no fee for Bangladesh.",
+        ],
+      },
+      {
+        h: "Margin vs mid-market",
+        p: [
+          "The margin column combines the fee and the exchange-rate markup into one number: margin = (mid-market rate − received ÷ amount sent) ÷ mid-market rate. A lower margin means more of your money reaches your family.",
+        ],
+      },
+      {
+        h: "When a provider cannot be reached",
+        p: [
+          "Providers sometimes block automated requests or have outages. When that happens we keep showing that provider's last good quote, marked Stale with the time it was collected, instead of hiding it. The benchmark works the same way.",
+        ],
+      },
+      {
+        h: "What is not included",
+        p: [
+          "The Bangladesh government's cash incentive on formal remittances, any charges by the recipient's bank or wallet, and one-off promotional offers are not part of the amounts shown.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How is the margin calculated?",
+        a: "Margin = (mid-market rate − amount received ÷ amount sent) ÷ mid-market rate, using the total amount paid including any fee.",
+      },
+      {
+        q: "Why can a provider's rate be above the mid-market benchmark?",
+        a: "The benchmark uses Bangladesh Bank's previous-business-day weighted average rate and a daily cross rate, so it can lag the live market slightly.",
+      },
+      {
+        q: "Are first-transfer promotions included?",
+        a: "No. We show each provider's standard price so the comparison holds for repeat transfers.",
+      },
+    ],
+  },
+  bn: {
+    intro:
+      "ratebd একটি প্রশ্নের উত্তর দেয়: একই পরিমাণ অর্থ পরিশোধ করলে প্রতিটি প্রতিষ্ঠানের মাধ্যমে বাংলাদেশে কত টাকা পৌঁছায়? আমরা ঠিক কীভাবে তা হিসাব করি, নিচে দেওয়া হলো।",
+    sections: [
+      {
+        h: "আমরা কী সংগ্রহ করি",
+        p: [
+          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে যুক্তরাজ্য (GBP) ও আমিরাত (AED) থেকে বাংলাদেশে (BDT) ৫০০ ও ১,০০০ পাঠানোর কোট চায়। প্রতিষ্ঠান যেভাবে দেয়, কোট ঠিক সেভাবেই সংরক্ষণ করা হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না।",
+          "কোনো প্রতিষ্ঠান কোনো পথে সেবা না দিলে, যেমন আমিরাতের প্রেরকদের সেবা দেয় না এমন প্রতিষ্ঠান, সেটি চুপচাপ বাদ না দিয়ে ‘সেবা নেই’ হিসেবে দেখানো হয়।",
+        ],
+      },
+      {
+        h: "মিড-মার্কেট মানদণ্ড",
+        p: [
+          "মিড-মার্কেট রেট হলো পাইকারি বাজারে কোনো মুদ্রা কেনা ও বেচার মাঝামাঝি দাম, যাতে কোনো মার্জিন নেই। বাংলাদেশের জন্য আমরা বাংলাদেশ ব্যাংকের প্রকাশিত ডলার/টাকা ভারিত গড় রেট (WAR) থেকে শুরু করি এবং একটি বিনামূল্যের দৈনিক ডলার ক্রস রেট ফিড (fawazahmed0/currency-api) দিয়ে পাউন্ড বা দিরহামে রূপান্তর করি।",
+          "বাংলাদেশ ব্যাংকের রেট আগের কর্মদিবসের আন্তঃব্যাংক লেনদেনের ভিত্তিতে, আর ক্রস রেট দৈনিক রেফারেন্স, তাই মানদণ্ডটি লাইভ বাজার থেকে সামান্য পিছিয়ে থাকতে পারে। কখনো কোনো প্রতিষ্ঠানের রেট এর চেয়ে সামান্য বেশি হলে টেবিলে ঋণাত্মক মার্জিনের বদলে কতটা বেশি তা দেখানো হয়।",
+        ],
+      },
+      {
+        h: "সবার জন্য একই মোট পরিশোধ",
+        p: [
+          "প্রতিষ্ঠানগুলো ভিন্ন ভিন্নভাবে ফি নেয়: কেউ পাঠানো অঙ্ক থেকে ফি কাটে, কেউ ওপরে যোগ করে। সমানে সমান তুলনার জন্য আমরা অঙ্কটিকে ফিসহ মোট পরিশোধ হিসেবে ধরি। যারা ফি ওপরে যোগ করে, তাদের ক্ষেত্রে ফি ওই মোট থেকে কাটলে কত পৌঁছাত তা হিসাব করি: প্রাপ্ত = (অঙ্ক − ফি) × রেট।",
+          "কোনো প্রতিষ্ঠান একাধিক পরিশোধ বা গ্রহণের পদ্ধতি দিলে আমরা একটি সামঞ্জস্যপূর্ণ বিকল্প ব্যবহার করি: Wise-এ ব্যাংক ট্রান্সফারে পরিশোধ, Remitly-এর প্রথম ট্রান্সফারের ছাড় নয় বরং সাধারণ দাম, WorldRemit-এর যে পেআউট পদ্ধতিতে সবচেয়ে বেশি পৌঁছায়, এবং Xe-এর ডিফল্ট বিকল্প। Taptap Send প্রতিটি পথে একটি রেট প্রকাশ করে এবং বাংলাদেশের জন্য কোনো ফি উল্লেখ করে না।",
+        ],
+      },
+      {
+        h: "মিড-মার্কেটের তুলনায় মার্জিন",
+        p: [
+          "মার্জিন কলাম ফি এবং বিনিময় হারের বাড়তি অংশকে একটি সংখ্যায় মেলায়: মার্জিন = (মিড-মার্কেট রেট − প্রাপ্ত ÷ পাঠানো অঙ্ক) ÷ মিড-মার্কেট রেট। মার্জিন যত কম, আপনার অর্থের তত বেশি অংশ পরিবারের কাছে পৌঁছায়।",
+        ],
+      },
+      {
+        h: "কোনো প্রতিষ্ঠানের সঙ্গে যোগাযোগ করা না গেলে",
+        p: [
+          "প্রতিষ্ঠানগুলো কখনো স্বয়ংক্রিয় অনুরোধ আটকে দেয় বা সাময়িক বিভ্রাট হয়। তখন আমরা সেই প্রতিষ্ঠানকে লুকাই না, বরং সংগ্রহের সময়সহ ‘পুরোনো’ চিহ্ন দিয়ে তার সর্বশেষ সঠিক কোট দেখাই। মানদণ্ডের ক্ষেত্রেও একই নিয়ম।",
+        ],
+      },
+      {
+        h: "যা ধরা হয়নি",
+        p: [
+          "বৈধ পথে পাঠানো রেমিট্যান্সে বাংলাদেশ সরকারের নগদ প্রণোদনা, প্রাপকের ব্যাংক বা ওয়ালেটের কোনো চার্জ, এবং এককালীন প্রচারণামূলক অফার দেখানো পরিমাণে অন্তর্ভুক্ত নয়।",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "মার্জিন কীভাবে হিসাব করা হয়?",
+        a: "মার্জিন = (মিড-মার্কেট রেট − প্রাপ্ত অঙ্ক ÷ পাঠানো অঙ্ক) ÷ মিড-মার্কেট রেট, ফিসহ মোট পরিশোধ ধরে।",
+      },
+      {
+        q: "কোনো প্রতিষ্ঠানের রেট মিড-মার্কেট মানদণ্ডের চেয়ে বেশি হয় কেন?",
+        a: "মানদণ্ডটি বাংলাদেশ ব্যাংকের আগের কর্মদিবসের ভারিত গড় রেট ও দৈনিক ক্রস রেট ব্যবহার করে, তাই এটি লাইভ বাজার থেকে সামান্য পিছিয়ে থাকতে পারে।",
+      },
+      {
+        q: "প্রথম ট্রান্সফারের প্রচারণা কি ধরা হয়?",
+        a: "না। আমরা প্রতিটি প্রতিষ্ঠানের সাধারণ দাম দেখাই, যাতে নিয়মিত ট্রান্সফারেও তুলনাটি প্রযোজ্য থাকে।",
+      },
+    ],
+  },
+};
+
+const page = content[locale];
+const exampleLines =
+  example && mid
+    ? (() => {
+        const q = example.quote;
+        const vars = {
+          name: example.provider.name,
+          amount: sendAmount(locale, q.sendAmount, corridor.sendCurrency),
+          fee: money(locale, q.fee, corridor.sendCurrency),
+          rate: rate(locale, q.rate),
+          receive: money(locale, q.receiveAmount, "BDT"),
+          effective: number(locale, q.receiveAmount / q.sendAmount, 4),
+          mid: rate(locale, mid.rate),
+          margin: percent(locale, example.marginPct!),
+        };
+        return locale === "bn"
+          ? [
+              `আজকের উদাহরণ: ${vars.name}-এ মোট ${vars.amount} পাঠালে (ফি ${vars.fee}, রেট ${vars.rate}) পৌঁছায় ${vars.receive}।`,
+              `কার্যকর রেট = ${vars.receive} ÷ ${vars.amount} = ${vars.effective}। মিড-মার্কেট রেট ${vars.mid}। মার্জিন = ${vars.margin}।`,
+            ]
+          : [
+              `Today's example: paying ${vars.amount} in total with ${vars.name} (fee ${vars.fee}, rate ${vars.rate}) delivers ${vars.receive}.`,
+              `Effective rate = ${vars.receive} ÷ ${vars.amount} = ${vars.effective}. Mid-market rate ${vars.mid}. Margin = ${vars.margin}.`,
+            ];
+      })()
+    : [];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: locale,
+    mainEntity: page.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  },
+];
+---
+
+<BaseLayout locale={locale} title={title} description={description} path="/how-rates-work" jsonLd={jsonLd}>
+  <article class="prose-block max-w-3xl">
+    <h1 class="text-2xl sm:text-3xl">{title}</h1>
+    <p class="mt-4 text-lg">{page.intro}</p>
+    {
+      page.sections.map((s, i) => (
+        <section class="mt-8">
+          <h2 class="text-xl">{s.h}</h2>
+          <div class="mt-2">
+            {s.p.map((para) => <p>{para}</p>)}
+          </div>
+          {i === 3 && exampleLines.length > 0 && (
+            <div class="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm tabular">
+              {exampleLines.map((line) => <p>{line}</p>)}
+            </div>
+          )}
+        </section>
+      ))
+    }
+
+    <section class="mt-10">
+      <h2 class="text-xl">{t(locale, "faq.title")}</h2>
+      <dl class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+        {
+          page.faq.map((f) => (
+            <div class="py-3">
+              <dt class="font-semibold text-slate-900">{f.q}</dt>
+              <dd class="mt-1 text-slate-700">{f.a}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <p class="mt-8">
+      {
+        CORRIDORS.map((c, i) => (
+          <>
+            {i > 0 && " · "}
+            <a href={localePath(locale, corridorPath(c.from))}>{c.sendCurrency} → BDT</a>
+          </>
+        ))
+      }
+    </p>
+  </article>
+</BaseLayout>

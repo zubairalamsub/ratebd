@@ -1,0 +1,12 @@
+---
+import ProviderView from "../../../views/ProviderView.astro";
+import { PROVIDERS } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return PROVIDERS.map((p) => ({ params: { name: p.slug } }));
+}
+
+const { name } = Astro.params;
+---
+
+<ProviderView locale="bn" slug={name!} />

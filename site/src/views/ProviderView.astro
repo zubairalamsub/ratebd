@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Sparkline from "../components/Sparkline.astro";
+import StaleBadge from "../components/StaleBadge.astro";
+import { CORRIDORS, PROVIDERS, SEND_AMOUNTS, loadHistory, loadSnapshot, marginPct, statusFor } from "../lib/data";
+import { date, dateTime, money, percent, rate, sendAmount } from "../i18n/format";
+import { isUnspecified, label } from "../i18n/labels";
+import { corridorPath, goPath, localePath, providerPath } from "../i18n/routes";
+import { t, type Locale, type UiKey } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  slug: string;
+}
+
+const { locale, slug } = Astro.props;
+const provider = PROVIDERS.find((p) => p.slug === slug)!;
+const path = providerPath(slug);
+const title = t(locale, "provider.title", { name: provider.name });
+const description = t(locale, "provider.description", { name: provider.name });
+const headlineAmount = SEND_AMOUNTS[0];
+
+const routes = CORRIDORS.map((corridor) => {
+  const snapshot = loadSnapshot(corridor.id);
+  const quotes = snapshot.quotes
+    .filter((q) => q.provider === provider.engineName)
+    .sort((a, b) => b.sendAmount - a.sendAmount);
+  const history = loadHistory(corridor.id).map((h) => ({
+    date: h.date,
+    receive:
+      h.snapshot.quotes.find((q) => q.provider === provider.engineName && q.sendAmount === headlineAmount)?.receiveAmount ??
+      null,
+  }));
+  return { corridor, snapshot, quotes, history, status: statusFor(corridor.id, provider.engineName) };
+});
+const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
+const td = "px-3 py-2 whitespace-nowrap";
+---
+
+<BaseLayout locale={locale} title={title} description={description} path={path}>
+  <h1 class="text-2xl sm:text-3xl">{title}</h1>
+  <p class="mt-3 max-w-3xl text-slate-700">{t(locale, "provider.lead", { name: provider.name })}</p>
+  <p class="mt-4">
+    <a
+      href={goPath(provider.slug)}
+      rel="nofollow sponsored noopener"
+      class="inline-flex min-h-11 items-center rounded-md bg-brand-700 px-4 font-semibold text-white no-underline hover:bg-brand-800"
+      >{t(locale, "table.visit", { name: provider.name })}</a
+    >
+  </p>
+
+  {
+    routes.map(({ corridor, snapshot, quotes, history, status }) => (
+      <section class="mt-10" aria-labelledby={`route-${corridor.id}`}>
+        <h2 id={`route-${corridor.id}`} class="text-xl">
+          {t(locale, "home.from", { country: t(locale, corridor.countryKey) })}
+          <span class="ml-1 font-normal text-slate-600">({t(locale, "provider.route", { from: corridor.sendCurrency })})</span>
+        </h2>
+
+        {status?.status === "not_supported" && (
+          <p class="mt-2 text-slate-700">
+            {t(locale, "provider.notSupported", { reason: "" })}
+            <span lang="en">{status.message}</span>
+          </p>
+        )}
+        {status?.status === "failed" && <p class="mt-2 text-slate-700">{t(locale, "provider.failed")}</p>}
+
+        {quotes.length > 0 && (
+          <>
+            <div class="relative mt-3 overflow-x-auto rounded-lg border border-slate-200" role="region" tabindex="0"
+              aria-label={`${provider.name} ${corridor.sendCurrency} → BDT`}>
+              <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
+                <caption class="sr-only">{provider.name} {corridor.sendCurrency} → BDT</caption>
+                <thead class="bg-slate-50">
+                  <tr>
+                    <th scope="col" class={th}>{t(locale, "corridor.amount")}</th>
+                    <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.rate")}</th>
+                    <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.fee")}</th>
+                    <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.receive")}</th>
+                    <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.margin")}</th>
+                    <th scope="col" class={th}>{t(locale, "table.delivery")}</th>
+                    <th scope="col" class={th}>{t(locale, "table.speed")}</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  {quotes.map((q) => {
+                    const m = marginPct(q, snapshot.midMarket?.rate);
+                    return (
+                      <tr>
+                        <th scope="row" class:list={[td, "text-left font-medium"]}>
+                          <span class="flex items-center gap-2">
+                            {sendAmount(locale, q.sendAmount, corridor.sendCurrency)}
+                            {q.stale && <StaleBadge locale={locale} name={provider.name} fetchedAt={q.fetchedAt} />}
+                          </span>
+                        </th>
+                        <td class:list={[td, "text-right"]}>{rate(locale, q.rate)}</td>
+                        <td class:list={[td, "text-right"]}>{money(locale, q.fee, corridor.sendCurrency)}</td>
+                        <td class:list={[td, "text-right font-semibold"]}>{money(locale, q.receiveAmount, "BDT")}</td>
+                        <td class:list={[td, "text-right"]}>
+                          {m === null ? "–" : m < 0 ? t(locale, "margin.better", { value: percent(locale, -m) }) : percent(locale, m)}
+                        </td>
+                        <td class:list={[td, isUnspecified(q.deliveryMethod) && "text-slate-600"]}>{label(locale, q.deliveryMethod)}</td>
+                        <td class:list={[td, isUnspecified(q.speed) && "text-slate-600"]}>{label(locale, q.speed)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p class="mt-2 text-xs text-slate-600">
+              {t(locale, "updated.label", { date: dateTime(locale, snapshot.generatedAt) })}
+            </p>
+
+            <h3 class="mt-6 text-base">
+              {t(locale, "provider.history", { amount: sendAmount(locale, headlineAmount, corridor.sendCurrency) })}
+            </h3>
+            <div class="mt-2 flex flex-wrap items-start gap-6">
+              <Sparkline locale={locale} name={provider.name} values={history.map((h) => h.receive)} dates={history.map((h) => h.date)} />
+              <table class="text-sm tabular">
+                <caption class="sr-only">
+                  {t(locale, "provider.history", { amount: sendAmount(locale, headlineAmount, corridor.sendCurrency) })}
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col" class="pr-6 text-left font-semibold text-slate-600">{t(locale, "provider.date")}</th>
+                    <th scope="col" class="text-right font-semibold text-slate-600">{t(locale, "table.receive")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {history.map((h) => (
+                    <tr>
+                      <td class="pr-6">{date(locale, h.date)}</td>
+                      <td class="text-right">{h.receive === null ? "–" : money(locale, h.receive, "BDT")}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+
+        <p class="mt-4 text-sm">
+          <a href={localePath(locale, corridorPath(corridor.from))}>
+            {t(locale, "provider.compare", { country: t(locale, corridor.countryKey) })}
+          </a>
+        </p>
+      </section>
+    ))
+  }
+
+  <section class="mt-10" aria-labelledby="source-heading">
+    <h2 id="source-heading" class="text-xl">{t(locale, "provider.source")}</h2>
+    <p class="mt-2 max-w-3xl text-slate-700">{t(locale, `source.${provider.engineName}` as UiKey)}</p>
+  </section>
+
+  <p class="mt-8 text-xs leading-relaxed text-slate-600">{t(locale, "disclaimer")}</p>
+</BaseLayout>
