@@ -2,16 +2,16 @@
   "corridor": "gbp-bdt",
   "sendCurrency": "GBP",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T08:14:07.2059824Z",
+  "generatedAt": "2026-10-17T08:37:07.7052805Z",
   "midMarket": {
-    "rate": 164.2248,
+    "rate": 164.5458,
     "usdBdt": 123.4500,
     "usdBdtDate": "2026-10-17",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.7517136,
-    "crossRateDate": "2026-10-16",
+    "sendPerUsd": 0.75024697,
+    "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T08:13:53.9424097Z",
+    "fetchedAt": "2026-10-17T08:36:45.0337235Z",
     "stale": false
   },
   "providers": [
@@ -27,8 +27,8 @@
     },
     {
       "name": "Remitly",
-      "status": "ok",
-      "message": null
+      "status": "stale",
+      "message": "HttpRequestException: Response status code does not indicate success: 429 (Too Many Requests). (showing last good quote from 2026-10-17 08:13 UTC)"
     },
     {
       "name": "TaptapSend",
@@ -52,12 +52,12 @@
       "corridor": "gbp-bdt",
       "sendCurrency": "GBP",
       "sendAmount": 500,
-      "rate": 164.2248,
+      "rate": 164.5458,
       "fee": 0,
-      "receiveAmount": 82112.40,
+      "receiveAmount": 82272.90,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T08:13:53.9424097Z",
+      "fetchedAt": "2026-10-17T08:36:45.0337235Z",
       "stale": false
     },
     {
@@ -71,7 +71,7 @@
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
       "fetchedAt": "2026-10-17T08:13:59.0175669Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "TaptapSend",
@@ -83,7 +83,7 @@
       "receiveAmount": 81500.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T08:13:57.4170795Z",
+      "fetchedAt": "2026-10-17T08:36:45.2864847Z",
       "stale": false
     },
     {
@@ -96,7 +96,7 @@
       "receiveAmount": 81471.32,
       "deliveryMethod": "Bank deposit",
       "speed": "Typically within 48 hours",
-      "fetchedAt": "2026-10-17T08:13:55.841209Z",
+      "fetchedAt": "2026-10-17T08:36:46.6286122Z",
       "stale": false
     },
     {
@@ -109,7 +109,7 @@
       "receiveAmount": 81348.60,
       "deliveryMethod": "Mobile wallet (bKash)",
       "speed": "Same day",
-      "fetchedAt": "2026-10-17T08:13:56.000559Z",
+      "fetchedAt": "2026-10-17T08:36:45.6423287Z",
       "stale": false
     },
     {
@@ -122,7 +122,7 @@
       "receiveAmount": 81092.52,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T08:13:54.0814234Z",
+      "fetchedAt": "2026-10-17T08:36:45.1983257Z",
       "stale": false
     },
     {
@@ -130,12 +130,12 @@
       "corridor": "gbp-bdt",
       "sendCurrency": "GBP",
       "sendAmount": 1000,
-      "rate": 164.2248,
+      "rate": 164.5458,
       "fee": 0,
-      "receiveAmount": 164224.80,
+      "receiveAmount": 164545.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T08:13:53.9424097Z",
+      "fetchedAt": "2026-10-17T08:36:45.0337235Z",
       "stale": false
     },
     {
@@ -148,7 +148,7 @@
       "receiveAmount": 163926.20,
       "deliveryMethod": "Bank deposit",
       "speed": "Typically within 48 hours",
-      "fetchedAt": "2026-10-17T08:13:57.4301607Z",
+      "fetchedAt": "2026-10-17T08:36:48.3001827Z",
       "stale": false
     },
     {
@@ -162,7 +162,7 @@
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
       "fetchedAt": "2026-10-17T08:14:07.2042898Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "TaptapSend",
@@ -174,7 +174,7 @@
       "receiveAmount": 163000.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T08:13:57.4170795Z",
+      "fetchedAt": "2026-10-17T08:36:45.2864847Z",
       "stale": false
     },
     {
@@ -187,7 +187,7 @@
       "receiveAmount": 162859.39,
       "deliveryMethod": "Mobile wallet (bKash)",
       "speed": "Same day",
-      "fetchedAt": "2026-10-17T08:13:57.6813231Z",
+      "fetchedAt": "2026-10-17T08:36:46.1649425Z",
       "stale": false
     },
     {
@@ -200,7 +200,7 @@
       "receiveAmount": 162463.70,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T08:13:54.4531725Z",
+      "fetchedAt": "2026-10-17T08:36:45.3697266Z",
       "stale": false
     }
   ]
