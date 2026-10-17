@@ -22,81 +22,13 @@ public sealed class PostedRateTests : IDisposable
 
     // ---------------------------------------------------------------- Qatar
 
-    [Fact]
-    public void Ooredoo_lists_each_partners_best_rate()
-    {
-        var rates = OoredooMoneyParser.Parse(Fixture.Read("ooredoomoney-bgd-bdt.json"), Fixture.QarBdt, Fixture.FetchedAt);
-
-        Assert.Equal(8, rates.Count);
-        Assert.All(rates, r => Assert.Equal("OoredooMoney", r.Provider));
-        Assert.All(rates, r => Assert.Equal(new DateTime(2026, 10, 17, 12, 14, 32, 728, DateTimeKind.Utc), r.PublishedAt));
-
-        var alzaman = Assert.Single(rates, r => r.Partner == "Alzaman Exchange");
-        Assert.Equal(33.900144m, alzaman.Rate);
-        Assert.Equal("Bank deposit", alzaman.DeliveryMethod);
-        Assert.Equal("Same Day", alzaman.Speed);
-        Assert.Equal("Starting from QAR 20", alzaman.FeeNote);
-
-        // Western Union's wallet rate (33.7993594) beats its bank rate (33.7940826) and cash rate here.
-        var wu = Assert.Single(rates, r => r.Partner == "Western Union");
-        Assert.Equal(33.799359m, wu.Rate);
-        Assert.Equal("Mobile wallet", wu.DeliveryMethod);
-
-        // bKash and Nagad tie for Thunes; the first listed is kept, with the agent named.
-        var thunes = Assert.Single(rates, r => r.Partner == "Thunes");
-        Assert.Equal("Mobile wallet (bKash)", thunes.DeliveryMethod);
-        Assert.Equal(33.743127m, thunes.Rate);
-    }
-
-    [Fact]
-    public void Ooredoo_error_status_is_a_failure()
-    {
-        Assert.Throws<FormatException>(() =>
-            OoredooMoneyParser.Parse(Fixture.Read("ooredoomoney-error-99999.json"), Fixture.QarBdt, Fixture.FetchedAt));
-    }
-
-    [Fact]
-    public void GulfExchange_reads_the_token_and_the_converter_rate()
-    {
-        Assert.Equal("RedactedSessionToken0123456789abcdefghij",
-            GulfExchangeParser.ParseToken(Fixture.Read("gulfexchange-home-excerpt.html")));
-
-        var rate = GulfExchangeParser.Parse(Fixture.Read("gulfexchange-qar-bdt-1000.json"), Fixture.QarBdt, Fixture.FetchedAt);
-
-        Assert.Equal(33.820346m, rate.Rate);
-        Assert.Equal("Bank deposit", rate.DeliveryMethod);
-    }
-
-    [Fact]
-    public void GulfExchange_html_answer_means_the_session_was_rejected()
-    {
-        var ex = Assert.Throws<FormatException>(() =>
-            GulfExchangeParser.Parse("<!DOCTYPE html><html>…</html>", Fixture.QarBdt, Fixture.FetchedAt));
-        Assert.Contains("session", ex.Message);
-    }
-
-    [Fact]
-    public async Task GulfExchange_provider_posts_the_token_from_the_home_page()
-    {
-        var handler = new FakeHandler(request => request.Method == HttpMethod.Get
-            ? new HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new StringContent(Fixture.Read("gulfexchange-home-excerpt.html")) }
-            : FakeHandler.Json(Fixture.Read("gulfexchange-qar-bdt-1000.json")));
-
-        await new GulfExchangeProvider(new HttpClient(handler), TimeProvider.System).GetRatesAsync(Fixture.QarBdt, CancellationToken.None);
-
-        Assert.Contains("_token=RedactedSessionToken0123456789abcdefghij", handler.Bodies[1]);
-        Assert.Contains("payment_method=bank_transfer", handler.Bodies[1]);
-    }
-
     [Theory]
-    [InlineData("alzaman", 33.86, "Bank deposit")]
     [InlineData("habibqatar", 33.90, "Not specified")]
     [InlineData("almirqab", 33.88, "Bank deposit")]
     public void Qatar_rate_boards(string source, decimal rate, string delivery)
     {
         var posted = source switch
         {
-            "alzaman" => AlZamanParser.Parse(Fixture.Read("alzaman-bdt.json"), Fixture.QarBdt, Fixture.FetchedAt),
             "habibqatar" => HabibQatarParser.Parse(Fixture.Read("habibqatar-qar-bdt-1000.json"), Fixture.QarBdt, Fixture.FetchedAt),
             _ => AlMirqabParser.Parse(Fixture.Read("almirqab-view-rates.html"), Fixture.QarBdt, Fixture.FetchedAt),
         };
@@ -144,42 +76,7 @@ public sealed class PostedRateTests : IDisposable
         Assert.Contains("last updated", ex.Message);
     }
 
-    [Theory]
-    [InlineData("joyalukkas-region1-bdt.json", "kwd", 400.8765)] // 1 / 0.0024945340
-    [InlineData("joyalukkas-region3-bdt.json", "omr", 320.0216)] // 1 / 0.0031247890
-    public void Joyalukkas_inverts_the_tt_rate(string fixture, string from, decimal expected)
-    {
-        var corridor = from == "kwd" ? Fixture.KwdBdt : Fixture.OmrBdt;
-
-        var rate = JoyalukkasParser.Parse(Fixture.Read(fixture), corridor, Fixture.FetchedAt);
-
-        Assert.Equal(expected, rate.Rate);
-        Assert.Equal("Bank deposit", rate.DeliveryMethod);
-    }
-
     // ---------------------------------------------------------------- Kuwait
-
-    [Fact]
-    public void AlAnsari_uses_the_converter_nonce_not_the_first_one()
-    {
-        Assert.Equal("76a2864716", AlAnsariParser.ParseNonce(Fixture.Read("alansari-home-excerpt.html")));
-    }
-
-    [Fact]
-    public void AlAnsari_bank_transfer_rate()
-    {
-        var rate = AlAnsariParser.Parse(Fixture.Read("alansari-bt-1.json"), Fixture.KwdBdt, Fixture.FetchedAt);
-
-        Assert.Equal(396.1541m, rate.Rate);
-        Assert.Equal("Bank deposit", rate.DeliveryMethod);
-    }
-
-    [Fact]
-    public void AlAnsari_rejected_nonce_is_explained()
-    {
-        var ex = Assert.Throws<FormatException>(() => AlAnsariParser.Parse("-1", Fixture.KwdBdt, Fixture.FetchedAt));
-        Assert.Contains("nonce", ex.Message);
-    }
 
     [Fact]
     public void Aman_reads_the_transfer_rate_and_kuwait_time()
@@ -322,56 +219,24 @@ public sealed class PostedRateTests : IDisposable
     }
 
     [Fact]
-    public void Joyalukkas_rejects_an_answer_in_another_currency()
-    {
-        // The Kuwait (region 1) answer is quoted in KWD; read as Oman it must not become an OMR rate.
-        var ex = Assert.Throws<FormatException>(() =>
-            JoyalukkasParser.Parse(Fixture.Read("joyalukkas-region1-bdt.json"), Fixture.OmrBdt, Fixture.FetchedAt));
-        Assert.Contains("KWD", ex.Message);
-    }
-
-    [Fact]
-    public void AlAnsari_error_page_is_cut_short()
-    {
-        var page = "<!DOCTYPE html>\n<html><head><title>Service unavailable</title></head><body>" + new string('x', 5000) + "</body></html>";
-
-        var ex = Assert.Throws<FormatException>(() => AlAnsariParser.Parse(page, Fixture.KwdBdt, Fixture.FetchedAt));
-        Assert.True(ex.Message.Length < 160, ex.Message);
-        Assert.DoesNotContain("\n", ex.Message);
-    }
-
-    [Fact]
-    public async Task AlAnsari_http_error_is_reported_as_such()
-    {
-        var handler = new FakeHandler(request => request.Method == HttpMethod.Get
-            ? new HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new StringContent(Fixture.Read("alansari-home-excerpt.html")) }
-            : new HttpResponseMessage(System.Net.HttpStatusCode.ServiceUnavailable) { Content = new StringContent("<html>busy</html>") });
-
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            new AlAnsariProvider(new HttpClient(handler), TimeProvider.System).GetRatesAsync(Fixture.KwdBdt, CancellationToken.None));
-        Assert.Contains("503", ex.Message);
-        Assert.Contains("security=76a2864716", handler.Bodies[1]);
-    }
-
-    [Fact]
     public void Posted_rates_far_from_the_benchmark_are_dropped()
     {
         var mid = new MidMarketInfo(397.138m, 123.45m, "2026-10-17", "Bangladesh Bank", 0.3108m, "2026-10-17", "currency-api",
             Fixture.FetchedAt, Stale: false);
-        var plausible = PostedRates.Create("Joyalukkas", Fixture.KwdBdt, 400.8765m, Labels.BankDeposit, Fixture.FetchedAt);
-        var aedRate = PostedRates.Create("Joyalukkas", Fixture.KwdBdt, 33.40m, Labels.BankDeposit, Fixture.FetchedAt);
+        var plausible = PostedRates.Create("Aman", Fixture.KwdBdt, 400.8765m, Labels.BankDeposit, Fixture.FetchedAt);
+        var aedRate = PostedRates.Create("Aman", Fixture.KwdBdt, 33.40m, Labels.BankDeposit, Fixture.FetchedAt);
 
         var snapshot = SnapshotBuilder.Build(Fixture.KwdBdt, [], mid, null, Fixture.FetchedAt,
         [
-            PostedRateResult.Ok("Joyalukkas", [aedRate]),
-            PostedRateResult.Ok("Ooredoo", [plausible with { Provider = "Ooredoo" }, aedRate with { Provider = "Ooredoo" }]),
+            PostedRateResult.Ok("Aman", [aedRate]),
+            PostedRateResult.Ok("Unimoni", [plausible with { Provider = "Unimoni" }, aedRate with { Provider = "Unimoni" }]),
         ]);
 
-        var joyalukkas = Assert.Single(snapshot.PostedRateProviders, s => s.Name == "Joyalukkas");
-        Assert.Equal(ProviderStatus.Failed, joyalukkas.Status);
-        Assert.Contains("Implausible", joyalukkas.Message);
+        var aman = Assert.Single(snapshot.PostedRateProviders, s => s.Name == "Aman");
+        Assert.Equal(ProviderStatus.Failed, aman.Status);
+        Assert.Contains("Implausible", aman.Message);
         var kept = Assert.Single(snapshot.PostedRates);
         Assert.Equal(400.8765m, kept.Rate);
-        Assert.Contains("Dropped 1", Assert.Single(snapshot.PostedRateProviders, s => s.Name == "Ooredoo").Message);
+        Assert.Contains("Dropped 1", Assert.Single(snapshot.PostedRateProviders, s => s.Name == "Unimoni").Message);
     }
 }

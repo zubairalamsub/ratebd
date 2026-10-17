@@ -8,7 +8,6 @@ internal static class Labels
     public const string BankDeposit = "Bank deposit";
     public const string CashPickup = "Cash pickup";
     public const string MobileWallet = "Mobile wallet";
-    public const string BankCard = "Bank card";
 
     /// <summary>Turns a provider's estimated delivery time into "Within N hours/days".</summary>
     public static string Within(TimeSpan duration)

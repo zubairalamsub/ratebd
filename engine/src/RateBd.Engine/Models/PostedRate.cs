@@ -5,7 +5,7 @@ namespace RateBd.Engine.Models;
 /// <see cref="Quote"/>: with no fee there is no total cost, so it cannot be ranked against fee-inclusive quotes.
 /// </summary>
 /// <param name="Rate">Receive-currency units per one send-currency unit, as published.</param>
-/// <param name="Partner">For an aggregator such as Ooredoo Money, the exchange house behind the rate.</param>
+/// <param name="Partner">For an aggregator that lists several exchange houses, the one behind the rate.</param>
 /// <param name="FeeNote">Fee wording the source publishes next to the rate (e.g. "Starting from QAR 20"); null when none.</param>
 /// <param name="PublishedAt">When the source says the rate was set, if it says.</param>
 public sealed record PostedRate(

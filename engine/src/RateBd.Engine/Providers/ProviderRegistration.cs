@@ -23,27 +23,16 @@ public static class ProviderRegistration
         // Wise, Remitly, Taptap Send, WorldRemit and Xe were removed on 2026-10-17: their terms forbid automated
         // collection (Wise's is ambiguous). They return only with written permission or an official API.
 
-        // Gulf providers (Saudi Arabia, Kuwait, Qatar, Oman), verified 2026-10-17.
-        // Western Union's price depends on a cookie sent by hand, so its client must not manage cookies itself.
-        AddProvider<WesternUnionProvider>(services, configuration, "WesternUnion",
-            primaryHandler: _ => new HttpClientHandler { UseCookies = false });
+        // Gulf providers whose published terms and robots.txt allow this collection (checked 2026-10-17). Western Union,
+        // Skrill, Paysend, Joyalukkas, Gulf Exchange, Al Ansari, Ooredoo Money and Al Zaman were removed the same day
+        // because their terms or robots.txt restrict automated collection or reuse.
         AddProvider<AlMullaProvider>(services, configuration, "AlMulla");
-        // Skrill's XSRF token lives in a cookie; the provider reads it from a container it shares with its handler.
-        services.AddSingleton<SkrillCookies>();
-        AddProvider<SkrillProvider>(services, configuration, "Skrill",
-            primaryHandler: sp => new HttpClientHandler { CookieContainer = sp.GetRequiredService<SkrillCookies>().Container });
-        AddProvider<PaysendProvider>(services, configuration, "Paysend");
 
         // Exchange houses that publish a rate but no fee.
-        AddPostedRateProvider<OoredooMoneyProvider>(services, configuration, "OoredooMoney");
-        AddPostedRateProvider<GulfExchangeProvider>(services, configuration, "GulfExchange");
-        AddPostedRateProvider<AlZamanProvider>(services, configuration, "AlZaman");
         AddPostedRateProvider<HabibQatarProvider>(services, configuration, "HabibQatar");
         AddPostedRateProvider<AlMirqabProvider>(services, configuration, "AlMirqab");
         AddPostedRateProvider<UnimoniProvider>(services, configuration, "Unimoni");
         AddPostedRateProvider<PKExchangeProvider>(services, configuration, "PKExchange");
-        AddPostedRateProvider<JoyalukkasProvider>(services, configuration, "Joyalukkas");
-        AddPostedRateProvider<AlAnsariProvider>(services, configuration, "AlAnsari");
         AddPostedRateProvider<AmanProvider>(services, configuration, "Aman");
         return services;
     }
@@ -56,11 +45,10 @@ public static class ProviderRegistration
         IServiceCollection services,
         IConfiguration configuration,
         string name,
-        Action<HttpStandardResilienceOptions>? tune = null,
-        Func<IServiceProvider, HttpMessageHandler>? primaryHandler = null)
+        Action<HttpStandardResilienceOptions>? tune = null)
         where TProvider : class, IRateProvider
     {
-        if (AddClient<TProvider>(services, configuration, name, tune, primaryHandler))
+        if (AddClient<TProvider>(services, configuration, name, tune))
         {
             services.AddSingleton<IRateProvider>(sp => sp.GetRequiredService<TProvider>());
         }
@@ -73,7 +61,7 @@ public static class ProviderRegistration
         string name)
         where TProvider : class, IPostedRateProvider
     {
-        if (AddClient<TProvider>(services, configuration, name, tune: null, primaryHandler: null))
+        if (AddClient<TProvider>(services, configuration, name, tune: null))
         {
             services.AddSingleton<IPostedRateProvider>(sp => sp.GetRequiredService<TProvider>());
         }
@@ -87,8 +75,7 @@ public static class ProviderRegistration
         IServiceCollection services,
         IConfiguration configuration,
         string name,
-        Action<HttpStandardResilienceOptions>? tune,
-        Func<IServiceProvider, HttpMessageHandler>? primaryHandler)
+        Action<HttpStandardResilienceOptions>? tune)
         where TProvider : class
     {
         var options = new ProviderOptions();
@@ -105,10 +92,6 @@ public static class ProviderRegistration
             http.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/html;q=0.9, */*;q=0.8");
             http.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-GB,en;q=0.9");
         });
-        if (primaryHandler is not null)
-        {
-            client.ConfigurePrimaryHttpMessageHandler(primaryHandler);
-        }
         client.AddStandardResilienceHandler(o =>
         {
             o.Retry.MaxRetryAttempts = 3;
