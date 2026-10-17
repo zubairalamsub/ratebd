@@ -1,0 +1,55 @@
+---
+// "Change country": a native <details> disclosure (no JavaScript) listing every route by region.
+import Chevron from "./Chevron.astro";
+import { CORRIDORS, REGIONS, type CorridorMeta } from "../lib/data";
+import { corridorPath, localePath } from "../i18n/routes";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  current: CorridorMeta;
+}
+
+const { locale, current } = Astro.props;
+const groups = REGIONS.map((region) => ({ region, corridors: CORRIDORS.filter((c) => c.region === region) })).filter(
+  (g) => g.corridors.length > 0,
+);
+---
+
+<details class="group relative w-full sm:w-auto">
+  <summary
+    class="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-300 bg-white px-4 text-sm font-medium text-slate-800 hover:border-brand-700"
+  >
+    {t(locale, "corridor.changeCountry")}
+    <Chevron />
+  </summary>
+  <nav
+    aria-label={t(locale, "corridor.otherRoutes")}
+    class="mt-2 space-y-3 rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:absolute sm:right-0 sm:z-20 sm:w-[34rem]"
+  >
+    {
+      groups.map((g) => (
+        <div>
+          <p class="px-2 text-xs font-semibold uppercase tracking-wide text-slate-600">{t(locale, g.region)}</p>
+          <ul class="mt-1 grid grid-cols-2 gap-1 sm:grid-cols-3">
+            {g.corridors.map((c) => (
+              <li>
+                <a
+                  href={localePath(locale, corridorPath(c.from))}
+                  aria-current={c.id === current.id ? "page" : undefined}
+                  class:list={[
+                    "flex min-h-11 items-center justify-between gap-2 rounded-lg px-2 text-sm no-underline",
+                    c.id === current.id ? "bg-brand-700 font-semibold text-white" : "text-slate-800 hover:bg-brand-50",
+                  ]}
+                >
+                  <span>{t(locale, c.countryKey)}</span>
+                  <span class:list={["text-xs", c.id === current.id ? "text-brand-100" : "text-slate-600"]}>{c.sendCurrency}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </nav>
+</details>

@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StaleBadge from "../components/StaleBadge.astro";
-import { CORRIDORS, LISTED_PROVIDERS, REGIONS, amountsFor, loadSnapshot, postedRowsFor, rowsFor, topRows } from "../lib/data";
-import { dateTime, list, money, percent, rate, sendAmount } from "../i18n/format";
+import { CORRIDORS, LISTED_PROVIDERS, REGIONS, amountsFor, lastUpdated, postedRowsFor, rowsFor, topRows } from "../lib/data";
+import { dateTime, integer, list, money, percent, rate, sendAmount } from "../i18n/format";
 import { corridorPath, localePath, providerPath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
 
@@ -20,7 +20,6 @@ const cards = CORRIDORS.map((corridor) => {
   return {
     corridor,
     amount,
-    snapshot: loadSnapshot(corridor.id),
     best,
     // Providers tied at the same price are named together.
     bestNames:
@@ -34,6 +33,7 @@ const cards = CORRIDORS.map((corridor) => {
 const groups = REGIONS.map((region) => ({ region, cards: cards.filter((c) => c.corridor.region === region) })).filter(
   (g) => g.cards.length > 0,
 );
+const updated = lastUpdated();
 const title = t(locale, "home.title");
 const description = t(locale, "home.description");
 const site = Astro.site!;
@@ -50,51 +50,63 @@ const jsonLd = [
 ---
 
 <BaseLayout locale={locale} title={title} description={description} path="/" jsonLd={jsonLd}>
-  <h1 class="max-w-3xl text-3xl sm:text-4xl">{title}</h1>
-  <p class="mt-4 max-w-3xl text-lg text-slate-700">{t(locale, "home.lead")}</p>
+  <section class="rounded-2xl bg-gradient-to-br from-brand-50 to-white px-5 py-8 ring-1 ring-brand-100 sm:px-10 sm:py-12">
+    <h1 class="max-w-3xl text-3xl leading-tight sm:text-5xl">{title}</h1>
+    <p class="mt-4 max-w-2xl text-base text-slate-700 sm:text-lg">{t(locale, "home.lead")}</p>
+    <p class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-slate-700">
+      <span class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 font-medium ring-1 ring-slate-200">
+        <span class="h-2 w-2 rounded-full bg-brand-600" aria-hidden="true"></span>
+        {t(locale, "home.stats", { countries: integer(locale, CORRIDORS.length), providers: integer(locale, LISTED_PROVIDERS.length) })}
+      </span>
+      <time datetime={updated} class="text-slate-600">{t(locale, "updated.label", { date: dateTime(locale, updated) })}</time>
+    </p>
+  </section>
 
-  <h2 id="routes" class="mt-10 text-xl">{t(locale, "home.routes")}</h2>
+  <h2 id="routes" class="mt-10 text-xl sm:text-2xl">{t(locale, "home.routes")}</h2>
   {
     groups.map((group) => (
       <section aria-labelledby={`region-${group.region}`} class="mt-6">
         <h3 id={`region-${group.region}`} class="text-sm font-semibold uppercase tracking-wide text-slate-600">
           {t(locale, group.region)}
         </h3>
-        <div class="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {
-            group.cards.map(({ corridor, amount, snapshot, best, bestNames, bestPosted }) => (
-              <section class="flex flex-col rounded-xl border border-slate-200 p-5 shadow-sm" aria-labelledby={`card-${corridor.id}`}>
-                <h4 id={`card-${corridor.id}`} class="text-lg font-semibold">
-                  {t(locale, "home.from", { country: t(locale, corridor.countryKey) })}
-                  <span class="ml-1 font-normal text-slate-600">({corridor.sendCurrency} → BDT)</span>
+        <ul class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {group.cards.map(({ corridor, amount, best, bestNames, bestPosted }) => (
+            <li class="relative flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow focus-within:ring-2 focus-within:ring-brand-700 hover:border-brand-600 hover:shadow-md motion-reduce:transition-none">
+              <div class="min-w-0 flex-1">
+                <h4 class="flex flex-wrap items-baseline gap-x-2 text-base font-semibold">
+                  <a
+                    href={localePath(locale, corridorPath(corridor.from))}
+                    class="text-slate-900 no-underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+                  >
+                    {t(locale, "home.from", { country: t(locale, corridor.countryKey) })}
+                  </a>
+                  <span class="text-xs font-medium text-slate-600">{corridor.sendCurrency} → BDT</span>
                 </h4>
                 {best ? (
-                  <dl class="mt-3">
-                    <dt class="text-sm text-slate-600">
+                  <dl class="mt-2">
+                    <dt class="text-xs text-slate-600">
                       {t(locale, best.quote.stale ? "home.bestForStale" : "home.bestFor", {
                         amount: sendAmount(locale, amount, corridor.sendCurrency),
                       })}
                     </dt>
-                    <dd class="mt-1 text-2xl font-semibold text-brand-800 tabular">
-                      {money(locale, best.quote.receiveAmount, "BDT")}
-                    </dd>
-                    <dd class="flex flex-wrap items-center gap-2 text-sm text-slate-700">
+                    <dd class="text-xl font-bold text-brand-800 tabular">{money(locale, best.quote.receiveAmount, "BDT")}</dd>
+                    <dd class="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-700">
                       {bestNames}
                       {best.quote.stale && <StaleBadge locale={locale} name={best.provider.name} fetchedAt={best.quote.fetchedAt} />}
                       {best.marginPct !== null && best.marginPct >= 0 && (
-                        <span class="text-slate-600"> · {t(locale, "table.margin")}: {percent(locale, best.marginPct)}</span>
+                        <span class="text-slate-600">· {t(locale, "margin.short")} {percent(locale, best.marginPct)}</span>
                       )}
                     </dd>
                   </dl>
                 ) : bestPosted ? (
-                  <dl class="mt-3">
-                    <dt class="text-sm text-slate-600">
+                  <dl class="mt-2">
+                    <dt class="text-xs text-slate-600">
                       {t(locale, bestPosted.posted.stale ? "home.bestPostedStale" : "home.bestPosted")}
                     </dt>
-                    <dd class="mt-1 text-2xl font-semibold text-brand-800 tabular">
+                    <dd class="text-xl font-bold text-brand-800 tabular">
                       {t(locale, "posted.rateValue", { from: corridor.sendCurrency, rate: rate(locale, bestPosted.posted.rate) })}
                     </dd>
-                    <dd class="flex flex-wrap items-center gap-2 text-sm text-slate-700">
+                    <dd class="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-slate-700">
                       {bestPosted.posted.partner ?? bestPosted.provider.name}
                       {bestPosted.posted.stale && (
                         <StaleBadge locale={locale} name={bestPosted.provider.name} fetchedAt={bestPosted.posted.fetchedAt} />
@@ -102,48 +114,55 @@ const jsonLd = [
                     </dd>
                   </dl>
                 ) : (
-                  <p class="mt-3 text-slate-600">{t(locale, "home.noQuotes")}</p>
+                  <p class="mt-2 text-sm text-slate-600">{t(locale, "home.noQuotes")}</p>
                 )}
-                <p class="mt-2 text-xs text-slate-600">
-                  <time datetime={snapshot.generatedAt}>{t(locale, "updated.label", { date: dateTime(locale, snapshot.generatedAt) })}</time>
-                </p>
-                <a
-                  href={localePath(locale, corridorPath(corridor.from))}
-                  class="mt-4 inline-flex min-h-11 items-center justify-center rounded-md bg-brand-700 px-4 font-semibold text-white no-underline hover:bg-brand-800"
-                >
-                  {t(locale, "home.compare")}
-                  <span class="sr-only">: {corridor.sendCurrency} → BDT</span>
-                </a>
-              </section>
-            ))
-          }
-        </div>
+              </div>
+              <svg viewBox="0 0 20 20" class="h-5 w-5 shrink-0 text-slate-400" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M7.21 14.77a.75.75 0 0 1 .02-1.06L11.17 10 7.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02z"
+                ></path>
+              </svg>
+            </li>
+          ))}
+        </ul>
       </section>
     ))
   }
 
-  <section class="mt-12" aria-labelledby="why-heading">
-    <h2 id="why-heading" class="text-xl">{t(locale, "home.why.title")}</h2>
-    <ul class="mt-3 list-disc space-y-1 pl-6 text-slate-700">
-      <li>{t(locale, "home.why.1")}</li>
-      <li>{t(locale, "home.why.2")}</li>
-      <li>{t(locale, "home.why.3")}</li>
+  <section class="mt-14" aria-labelledby="why-heading">
+    <h2 id="why-heading" class="text-xl sm:text-2xl">{t(locale, "home.why.title")}</h2>
+    <ul class="mt-4 grid gap-3 sm:grid-cols-3">
+      {
+        [
+          { key: "home.why.1" as const, icon: "M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25V6.75Zm9 1.75a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" },
+          { key: "home.why.2" as const, icon: "M5 19 19 5M7.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm9 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" },
+          { key: "home.why.3" as const, icon: "M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" },
+        ].map((item) => (
+          <li class="rounded-xl border border-slate-200 bg-white p-4">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-brand-700" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d={item.icon}></path>
+            </svg>
+            <p class="mt-2 text-slate-700">{t(locale, item.key)}</p>
+          </li>
+        ))
+      }
     </ul>
-    <p class="mt-4">
-      <a href={localePath(locale, "/how-rates-work")}>{t(locale, "nav.howRatesWork")}</a> ·
-      <a href={localePath(locale, "/government-incentive")}>{t(locale, "nav.incentive")}</a>
+    <p class="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+      <a href={localePath(locale, "/how-rates-work")} class="inline-flex min-h-11 items-center">{t(locale, "nav.howRatesWork")} →</a>
+      <a href={localePath(locale, "/government-incentive")} class="inline-flex min-h-11 items-center">{t(locale, "nav.incentive")} →</a>
     </p>
   </section>
 
   <section class="mt-12" aria-labelledby="providers-heading">
-    <h2 id="providers-heading" class="text-xl">{t(locale, "provider.allTitle")}</h2>
-    <ul class="mt-3 flex flex-wrap gap-2">
+    <h2 id="providers-heading" class="text-xl sm:text-2xl">{t(locale, "provider.allTitle")}</h2>
+    <ul class="mt-4 flex flex-wrap gap-2">
       {
         LISTED_PROVIDERS.map((p) => (
           <li>
             <a
               href={localePath(locale, providerPath(p.slug))}
-              class="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-4 text-slate-800 no-underline hover:border-brand-700"
+              class="inline-flex min-h-11 items-center rounded-full border border-slate-300 bg-white px-4 text-sm text-slate-800 no-underline hover:border-brand-700"
             >
               {p.name}
             </a>

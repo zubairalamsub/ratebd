@@ -185,6 +185,7 @@ The site has these pages. Every page also exists in Bengali under `/bn/...`.
 What the site does:
 - **Corridor table:** sorted by amount received. Columns are rate, fee, you receive, margin vs mid-market, delivery, speed and an inline-SVG 7-day sparkline. Rows show a stale badge when a quote was carried forward.
 - **Exchange-house rates:** posted rates without a fee get their own list under the table, best rate first, with the fee shown as "Not published" (or the source's own fee wording). They are never ranked against full quotes. Oman, where no provider publishes a full quote, shows only this list.
+- **Phones and tablets:** below 1024 px each provider is a card (amount received first, then rate, fee and margin) instead of a table row, so nothing needs sideways scrolling. Corridor pages open with the day's best deal and the benchmark; the country picker, the "not offered" list and the FAQ are native `<details>` disclosures.
 - **Amount switch:** CSS only (`:has()`). The site ships no client-side JavaScript.
 - **SEO:** sitemap (`@astrojs/sitemap`, with hreflang), canonical and OpenGraph tags, and JSON-LD `Table` and `FAQPage`.
 - **Lighthouse (mobile, local preview):** 100 for performance, accessibility, best practices and SEO on the home, corridor, provider and methodology pages, in both languages.

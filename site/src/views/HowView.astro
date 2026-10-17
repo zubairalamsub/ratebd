@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Chevron from "../components/Chevron.astro";
 import { CORRIDORS, amountsFor, rowsFor, loadSnapshot } from "../lib/data";
 import { money, number, percent, rate, sendAmount } from "../i18n/format";
 import { corridorPath, localePath } from "../i18n/routes";
@@ -217,27 +218,37 @@ const jsonLd = [
 
     <section class="mt-10">
       <h2 class="text-xl">{t(locale, "faq.title")}</h2>
-      <dl class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+      <div class="mt-3 divide-y divide-slate-200 rounded-xl border border-slate-200">
         {
-          page.faq.map((f) => (
-            <div class="py-3">
-              <dt class="font-semibold text-slate-900">{f.q}</dt>
-              <dd class="mt-1 text-slate-700">{f.a}</dd>
-            </div>
+          page.faq.map((f, i) => (
+            <details class="group" open={i === 0}>
+              <summary class="flex min-h-12 items-center justify-between gap-4 px-4 py-3">
+                <h3 class="text-base font-semibold">{f.q}</h3>
+                <Chevron />
+              </summary>
+              <p class="px-4 pb-4 text-slate-700">{f.a}</p>
+            </details>
           ))
         }
-      </dl>
+      </div>
     </section>
 
-    <p class="mt-8">
-      {
-        CORRIDORS.map((c, i) => (
-          <>
-            {i > 0 && " · "}
-            <a href={localePath(locale, corridorPath(c.from))}>{c.sendCurrency} → BDT</a>
-          </>
-        ))
-      }
-    </p>
+    <nav aria-label={t(locale, "footer.routes")} class="mt-10">
+      <h2 class="text-base">{t(locale, "footer.routes")}</h2>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          CORRIDORS.map((c) => (
+            <li>
+              <a
+                href={localePath(locale, corridorPath(c.from))}
+                class="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-300 bg-white px-4 text-sm text-slate-800 no-underline hover:border-brand-700"
+              >
+                {t(locale, c.countryKey)} <span class="text-xs text-slate-600">{c.sendCurrency}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </article>
 </BaseLayout>
