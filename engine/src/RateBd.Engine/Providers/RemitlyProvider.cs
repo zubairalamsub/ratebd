@@ -31,7 +31,12 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
     {
         ["GB"] = "GBR",
         ["AE"] = "ARE",
+        ["US"] = "USA",
+        ["IT"] = "ITA",
+        ["SG"] = "SGP",
         ["BD"] = "BGD",
+        // Saudi Arabia, Kuwait, Qatar, Oman and Malaysia are not Remitly send countries (checked 2026-10-17: their
+        // conduits return 400 LEGACY_MERCHANDISING_BAD_REQUEST, also towards India), so they are left unmapped.
     };
 
     private readonly SemaphoreSlim _gate = new(1, 1);
@@ -70,8 +75,13 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
         {
             if (response.StatusCode != HttpStatusCode.TooManyRequests)
             {
+                var body = await response.Content.ReadAsStringAsync(ct);
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    RemitlyParser.ThrowIfUnsupportedCorridor(body, c);
+                }
                 response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync(ct);
+                return body;
             }
         }
 

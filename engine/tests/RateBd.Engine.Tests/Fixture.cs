@@ -9,6 +9,11 @@ internal static class Fixture
 
     public static readonly Corridor GbpBdt = new("gbp-bdt", "GBP", "BDT", "GB", "BD");
     public static readonly Corridor AedBdt = new("aed-bdt", "AED", "BDT", "AE", "BD");
+    public static readonly Corridor UsdBdt = new("usd-bdt", "USD", "BDT", "US", "BD");
+    public static readonly Corridor EurBdt = new("eur-bdt", "EUR", "BDT", "IT", "BD");
+    public static readonly Corridor MyrBdt = new("myr-bdt", "MYR", "BDT", "MY", "BD");
+    public static readonly Corridor SgdBdt = new("sgd-bdt", "SGD", "BDT", "SG", "BD");
+    public static readonly Corridor SarBdt = new("sar-bdt", "SAR", "BDT", "SA", "BD");
 
     public static readonly DateTime FetchedAt = new(2026, 10, 17, 8, 0, 0, DateTimeKind.Utc);
 

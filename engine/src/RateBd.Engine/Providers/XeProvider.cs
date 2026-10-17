@@ -18,11 +18,12 @@ public sealed class XeProvider(HttpClient http, TimeProvider time) : IRateProvid
     internal const string QuotesUrl = "https://launchpad-api.xe.com/v2/quotes";
 
     /// <summary>
-    /// Countries whose residents can use Xe Money Transfer. xe.com/send-money's <c>countryData</c> marks GB with
-    /// <c>isXemtSupported: true</c> and AE with <c>isXemtSupported: false</c>; the quote API still prices AED, but
-    /// that is not a product a UAE resident can buy.
+    /// Send countries of the tracked corridors whose residents can use Xe Money Transfer. xe.com/send-money's
+    /// <c>countryData</c> (checked 2026-10-17) marks GB, US and IT with <c>isXemtSupported: true</c>, and AE, SA, KW,
+    /// QA, OM, MY and SG with <c>false</c>. The quote API still prices some of the latter (AED, KWD, QAR, SGD), but
+    /// that is not a product their residents can buy.
     /// </summary>
-    private static readonly HashSet<string> SupportedSendCountries = new(StringComparer.OrdinalIgnoreCase) { "GB" };
+    private static readonly HashSet<string> SupportedSendCountries = new(StringComparer.OrdinalIgnoreCase) { "GB", "US", "IT" };
 
     public string Name => "Xe";
 
@@ -47,8 +48,12 @@ public sealed class XeProvider(HttpClient http, TimeProvider time) : IRateProvid
                 ["countryTo"] = c.ReceiveCountry,
             };
             using var response = await http.PostAsync(QuotesUrl, body.ToContent(), ct);
-            response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync(ct);
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                XeParser.ThrowIfCurrencyNotAvailable(json, c);
+            }
+            response.EnsureSuccessStatusCode();
             quotes.Add(XeParser.Parse(json, c, amount, time.GetUtcNow().UtcDateTime));
         }
         return quotes;

@@ -8,8 +8,9 @@ namespace RateBd.Engine.Providers;
 /// <summary>
 /// WorldRemit's public GraphQL API, the one worldremit.com's calculator calls. Introspection is disabled; the
 /// query and mutation below are the ones the site's own JavaScript bundle sends. For each send amount the provider
-/// prices every payout method and keeps the one that delivers the most. The UAE is not a WorldRemit send country,
-/// so AE→BD returns no payout methods and is reported as not supported.
+/// prices every payout method and keeps the one that delivers the most. Where WorldRemit offers no money-transfer
+/// payout (e.g. the UAE and Singapore list nothing; Saudi Arabia, Kuwait, Qatar and Oman list only airtime top-up)
+/// the corridor is reported as not supported.
 /// </summary>
 public sealed class WorldRemitProvider(HttpClient http, TimeProvider time) : IRateProvider
 {
@@ -41,8 +42,9 @@ public sealed class WorldRemitProvider(HttpClient http, TimeProvider time) : IRa
         var methods = WorldRemitParser.ParsePayOutMethods(methodsJson);
         if (methods.Count == 0)
         {
+            // Some send countries list only airtime top-up (ATP), which is skipped; others list nothing at all.
             throw new ProviderNotSupportedException(
-                $"WorldRemit lists no payout methods for {c.SendCountry}→{c.ReceiveCountry} ({c.SendCountry} is not a WorldRemit send country)");
+                $"WorldRemit offers no money-transfer payout method for {c.SendCountry}→{c.ReceiveCountry}");
         }
 
         var quotes = new List<Quote>();

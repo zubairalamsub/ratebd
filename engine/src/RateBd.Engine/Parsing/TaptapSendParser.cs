@@ -40,7 +40,7 @@ internal static class TaptapSendParser
 
     /// <summary>
     /// Fees come from <c>feeSchedule</c> ("standard" flat fee or "tiered" by minimum send amount) or
-    /// <c>senderCurrencyFlatFee</c>. Corridors that carry neither (both GB→BD and AE→BD at the time of writing)
+    /// <c>senderCurrencyFlatFee</c>. Corridors that carry neither (GB, AE, US and IT to BD at the time of writing)
     /// are treated as fee-free.
     /// </summary>
     internal static decimal FeeFor(JsonElement corridor, decimal amount)
@@ -50,7 +50,19 @@ internal static class TaptapSendParser
             switch (schedule.OptionalPath("type").GetStringOrNull())
             {
                 case "standard":
-                    return schedule.Path("flatFee").GetFlexibleDecimal();
+                {
+                    // e.g. {"type":"standard","feePercent":"1.00","flatFee":"0.00","maxFee":"100.00"} (US→VN)
+                    var fee = schedule.Path("flatFee").GetFlexibleDecimal();
+                    if (schedule.OptionalPath("feePercent") is { } percent)
+                    {
+                        fee += Math.Round(amount * percent.GetFlexibleDecimal() / 100m, 2, MidpointRounding.AwayFromZero);
+                    }
+                    if (schedule.OptionalPath("maxFee") is { } max)
+                    {
+                        fee = Math.Min(fee, max.GetFlexibleDecimal());
+                    }
+                    return fee;
+                }
                 case "tiered":
                     return schedule.Path("tiers").EnumerateArray()
                         .Select(t => (Min: t.Path("minValue").GetFlexibleDecimal(), Fee: t.Path("fee").GetFlexibleDecimal()))

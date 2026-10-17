@@ -26,7 +26,19 @@ internal static partial class RemitlyParser
             throw new FormatException($"Remitly returned an error: {key ?? root.GetRawText()}");
         }
 
-        var estimate = root.Path("estimate");
+        // The headline estimate is Remitly's default payout for the corridor (bank deposit from the UK, cash pickup
+        // from the USA and Italy). Bank deposit is used wherever it is offered so corridors compare like with like;
+        // the alternatives share the same shape as the headline estimate.
+        var candidates = new List<JsonElement> { root.Path("estimate") };
+        if (root.OptionalPath("pay_out_price_estimates", "estimates") is { ValueKind: JsonValueKind.Array } alternatives)
+        {
+            candidates.AddRange(alternatives.EnumerateArray());
+        }
+        var estimate = candidates.FirstOrDefault(e => e.OptionalPath("pay_out_method").GetStringOrNull() == "BANK_DEPOSIT");
+        if (estimate.ValueKind != JsonValueKind.Object)
+        {
+            estimate = candidates[0];
+        }
         var rate = estimate.Path("exchange_rate", "base_rate").GetFlexibleDecimal();
         var fee = estimate.Path("fee", "total_fee_amount").GetFlexibleDecimal();
 
@@ -42,6 +54,30 @@ internal static partial class RemitlyParser
         // The estimate has no delivery-time field, so speed is left unspecified rather than guessed.
         return new Quote("Remitly", corridor.Id, corridor.SendCurrency, sendAmount, rate, fee,
             QuoteMath.ReceiveFor(sendAmount, fee, rate), delivery, Labels.NotSpecified, fetchedAt, Stale: false);
+    }
+
+    /// <summary>
+    /// Remitly answers HTTP 400 <c>LEGACY_MERCHANDISING_BAD_REQUEST</c> ("unsupported corridor") for conduits it does
+    /// not serve; that is reported as not supported rather than as a failure.
+    /// </summary>
+    public static void ThrowIfUnsupportedCorridor(string json, Corridor corridor)
+    {
+        try
+        {
+            using var doc = JsonDocument.Parse(json);
+            if (doc.RootElement.ValueKind == JsonValueKind.Array
+                && doc.RootElement.EnumerateArray().Any(e =>
+                    e.ValueKind == JsonValueKind.Object
+                    && e.OptionalPath("error_key").GetStringOrNull() == "LEGACY_MERCHANDISING_BAD_REQUEST"))
+            {
+                throw new ProviderNotSupportedException(
+                    $"Remitly does not offer {corridor.SendCountry}→{corridor.ReceiveCountry} ({corridor.SendCurrency}→{corridor.ReceiveCurrency})");
+            }
+        }
+        catch (JsonException)
+        {
+            // Not a Remitly error body; the caller reports the HTTP status instead.
+        }
     }
 
     /// <summary>

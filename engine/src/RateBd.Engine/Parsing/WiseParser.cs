@@ -15,7 +15,11 @@ internal static class WiseParser
         var rate = root.Path("rate").GetDecimal();
 
         var options = root.Path("paymentOptions").EnumerateArray().ToList();
-        var enabled = options.Where(o => !o.Path("disabled").GetBoolean()).ToList();
+        // BALANCE means paying from money already held in a Wise account, which is not a way to send fresh money;
+        // its availability also depends on where the caller is, so it is never used.
+        var enabled = options
+            .Where(o => !o.Path("disabled").GetBoolean() && o.Path("payIn").GetString() != "BALANCE")
+            .ToList();
         if (enabled.Count == 0)
         {
             var reasons = options
@@ -57,5 +61,33 @@ internal static class WiseParser
 
         return new Quote("Wise", corridor.Id, corridor.SendCurrency, sendAmount, rate, fee, receive,
             delivery, speed, fetchedAt, Stale: false);
+    }
+
+    /// <summary>
+    /// Wise answers HTTP 422 with <c>error.route.not.supported</c> for currencies it cannot send from
+    /// (e.g. SAR, KWD, QAR, OMR); that is reported as not supported rather than as a failure.
+    /// </summary>
+    public static void ThrowIfRouteNotSupported(string json, Corridor corridor)
+    {
+        try
+        {
+            using var doc = JsonDocument.Parse(json);
+            if (doc.RootElement.OptionalPath("errors") is { ValueKind: JsonValueKind.Array } errors)
+            {
+                foreach (var error in errors.EnumerateArray())
+                {
+                    if (error.OptionalPath("code").GetStringOrNull() == "error.route.not.supported")
+                    {
+                        throw new ProviderNotSupportedException(
+                            $"Wise does not send {corridor.SendCurrency}→{corridor.ReceiveCurrency} " +
+                            $"({error.OptionalPath("message").GetStringOrNull()})");
+                    }
+                }
+            }
+        }
+        catch (JsonException)
+        {
+            // Not a Wise error body; the caller reports the HTTP status instead.
+        }
     }
 }
