@@ -18,6 +18,7 @@ public static class ProviderRegistration
         AddProvider<RemitlyProvider>(services, configuration, "Remitly", o => o.Retry.Delay = TimeSpan.FromSeconds(6));
         AddProvider<TaptapSendProvider>(services, configuration, "TaptapSend");
         AddProvider<WorldRemitProvider>(services, configuration, "WorldRemit");
+        AddProvider<XeProvider>(services, configuration, "Xe");
         return services;
     }
 
