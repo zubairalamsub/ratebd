@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #e9f5f0;
+  --color-brand-100: #cce8dc;
+  --color-brand-600: #00704f;
+  --color-brand-700: #005c41;
+  --color-brand-800: #004632;
+  --color-accent-600: #c8102e;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Bengali", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-bengali: "Noto Sans Bengali", "Hind Siliguri", "Nirmala UI", "Vrinda", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+  }
+
+  :lang(bn) body {
+    font-family: var(--font-bengali);
+    line-height: 1.7;
+  }
+
+  a {
+    @apply text-brand-700 underline decoration-brand-100 underline-offset-2 hover:decoration-brand-700;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-700;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-semibold tracking-tight text-slate-900;
+  }
+
+  .prose-block p,
+  .prose-block li {
+    @apply leading-relaxed text-slate-700;
+  }
+
+  .prose-block p + p {
+    @apply mt-3;
+  }
+}
+
+/* Numbers line up in table columns. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

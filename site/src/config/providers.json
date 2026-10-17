@@ -1,0 +1,40 @@
+{
+  "$comment": "One entry per tracked provider. engineName must match the provider name the engine writes to /data. affiliateUrl is a placeholder: leave null until you have a real affiliate link from the provider's programme; /go/{slug} then falls back to the official homepage.",
+  "providers": [
+    {
+      "slug": "wise",
+      "engineName": "Wise",
+      "name": "Wise",
+      "homepage": "https://wise.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "remitly",
+      "engineName": "Remitly",
+      "name": "Remitly",
+      "homepage": "https://www.remitly.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "taptap-send",
+      "engineName": "TaptapSend",
+      "name": "Taptap Send",
+      "homepage": "https://www.taptapsend.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "worldremit",
+      "engineName": "WorldRemit",
+      "name": "WorldRemit",
+      "homepage": "https://www.worldremit.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "xe",
+      "engineName": "Xe",
+      "name": "Xe",
+      "homepage": "https://www.xe.com",
+      "affiliateUrl": null
+    }
+  ]
+}

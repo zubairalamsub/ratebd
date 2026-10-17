@@ -1,0 +1,6 @@
+# Cloudflare Pages project config (Git integration builds this on every push to main).
+# Dashboard settings: root directory = site, build command = "npm ci && npm run build", output = dist.
+# The build reads ../data, which Cloudflare's full-repo clone provides.
+name = "ratebd"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-10-01"
