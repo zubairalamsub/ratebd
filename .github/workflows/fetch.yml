@@ -23,7 +23,7 @@ jobs:
     # The job commits to main, so only run it for main (a dispatch from another branch would push that branch).
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
 

@@ -61,11 +61,7 @@ jobs:
           RATEBD_Engine__DataDirectory="$RUNNER_TEMP/smoke" \
           RATEBD_Engine__FailWhenNothingFetched=false \
           RATEBD_Providers__MidMarket__BangladeshBankHtmlPath="$PWD/tests/RateBd.Engine.Tests/Fixtures/bangladesh-bank-exchangerate.html" \
-          RATEBD_Providers__Wise__Enabled=false \
-          RATEBD_Providers__Remitly__Enabled=false \
-          RATEBD_Providers__TaptapSend__Enabled=false \
-          RATEBD_Providers__WorldRemit__Enabled=false \
-          RATEBD_Providers__Xe__Enabled=false \
+          RATEBD_Engine__OnlyProviders__0=MidMarket \
             ./publish/ratebd-engine
           grep -q '"usdBdt": 123.4500' "$RUNNER_TEMP/smoke/gbp-bdt.json"
           echo "Native binary size: $(du -h publish/ratebd-engine | cut -f1)"
