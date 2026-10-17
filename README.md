@@ -1,6 +1,7 @@
 # ratebd
 
-Remittance rate comparison for sending money to Bangladesh from the UK (GBP), the USA (USD), Italy (EUR), the UAE (AED), Malaysia (MYR) and Singapore (SGD).
+Remittance rate comparison for sending money to Bangladesh from the UK (GBP), the USA (USD), Italy (EUR), the UAE (AED),
+Saudi Arabia (SAR), Kuwait (KWD), Qatar (QAR), Oman (OMR), Malaysia (MYR) and Singapore (SGD).
 
 **Live site:** https://ratebd.pages.dev (Cloudflare Pages, rebuilt on every push to `main`).
 Everything runs on free tiers: no servers, no database, no VMs.
@@ -30,8 +31,10 @@ dotnet run -c Release --project engine/src/RateBd.Engine
 ```
 
 The run writes to `data/` at the root of the checkout. Each provider is a separate class implementing
-`IRateProvider`. A provider that throws is logged and marked `failed` without stopping the run; its last good
-quotes are carried forward with `stale: true`.
+`IRateProvider`, or `IPostedRateProvider` for exchange houses that publish a rate but no fee (see below). A provider
+that throws is logged and marked `failed` without stopping the run; its last good quotes are carried forward with
+`stale: true`. Providers collected only from some countries implement `ISendCountryScoped` and are skipped elsewhere,
+with no status entry.
 
 ### Providers and sources
 
@@ -45,7 +48,31 @@ Each parser is tested against real responses saved in `engine/tests/RateBd.Engin
 | Taptap Send | `GET api.taptapsend.com/api/fxRates` (one feed for every corridor) |
 | WorldRemit | `POST api.worldremit.com/graphql` |
 | Xe | `POST launchpad-api.xe.com/v2/quotes` |
+| Western Union (SA, KW, QA) | `POST westernunion.com/wuconnect/prices/catalog`, the send-money form's price catalogue; bank deposit |
+| Al Mulla Exchange (KW) | `POST app-kwt.almullaexchange.com/pub/xtrate/get`; best correspondent route (often Western Union's network, at Western Union's price) |
+| Skrill (KW) | `POST transfers.skrill.com/api/transfers/v4/marketing/preview` after the calculator's anonymous session |
+| Paysend (KW) | Rate and fee tariff embedded in `paysend.com/en/send-money/from-kuwait-to-bangladesh` |
 | MidMarket (benchmark) | Bangladesh Bank USD/BDT WAR, crossed with [fawazahmed0/currency-api](https://github.com/fawazahmed0/exchange-api) |
+
+**Posted rates (no fee published).** Many Gulf exchange houses publish a rate but not their fee, so there is no total
+cost to rank. They are stored as `postedRates` and shown in a separate list under each route's table, best rate first:
+
+| Exchange house | Country | Source |
+|---|---|---|
+| Ooredoo Money | QA | `POST mmapi.ooredoo.qa:4443/…/getIRDeliveryOptionList`: one rate per partner (MoneyGram, Western Union, Al Zaman, …) with a fee range |
+| Gulf Exchange | QA | `POST gulfexchange.com.qa/en/convert-currency` with the home page's session and CSRF token |
+| Al Zaman Exchange | QA | `GET alzamanexchange.com/api/getRate.php?cid=6` (TT rate) |
+| Habib Qatar International Exchange | QA | `GET hqie.com.qa/Account/ConvertCurr` |
+| Al Mirqab Exchange | QA | `GET almirqabexchange.com/view_rates.jsp` (DRAFT/TT column) |
+| Unimoni | OM | `POST unimoni.om/crm/live/rate` |
+| Purshottam Kanji Exchange | OM | `GET pkexchange.com.om/rates/` (TT column, dated page) |
+| Joyalukkas Exchange | KW, OM | `GET admin.joyalukkasexchange.com/api/currency-converter?region=1\|3` (TT rate) |
+| Al Ansari Exchange | KW | `alansariexchange.com.kw` converter (`admin-ajax.php`, page nonce) |
+| Aman Exchange | KW | `GET portal.amankuwait.com/amsweb/api/rate` (dated board) |
+
+A posted rate that its source dates more than three days back counts as a failure, so the last good rate stays on the
+site marked stale instead of being shown as current. Ooredoo Money's fee range ("Starting from QAR 20") is kept as
+`feeNote` and shown in place of "Not published".
 
 Coverage, verified against each provider's own responses on 2026-10-17. ✗ means the provider's data shows it does not
 serve that route; the site lists it as "not offered".
@@ -59,25 +86,42 @@ serve that route; the site lists it as "not offered".
 | Xe | ✅ | ✅ | ✅ | ✗ `isXemtSupported: false` | ✗ | ✗ |
 | MidMarket | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-Saudi Arabia, Kuwait, Qatar and Oman were also checked. None of the five providers sends from them: Wise returns 422
-`route.not.supported`, Remitly returns 400 for those conduits, Taptap Send and Xe don't list them, and WorldRemit offers
-only airtime top-up. They will need Gulf-specific providers before they can be added.
+None of those five providers sends from Saudi Arabia, Kuwait, Qatar or Oman: Wise returns 422 `route.not.supported`,
+Remitly returns 400 for those conduits, Taptap Send and Xe don't list them, and WorldRemit offers only airtime top-up.
+The Gulf routes therefore use Gulf providers, researched and re-verified on 2026-10-17:
+
+| Route | Full quotes (ranked) | Posted rates (no fee) |
+|---|---|---|
+| SAR (Saudi Arabia) | Western Union | – |
+| KWD (Kuwait) | Western Union, Al Mulla, Skrill, Paysend | Joyalukkas, Al Ansari, Aman |
+| QAR (Qatar) | Western Union | Ooredoo Money (8 partners), Gulf Exchange, Al Zaman, Habib Qatar, Al Mirqab |
+| OMR (Oman) | – | Unimoni, PK Exchange, Joyalukkas |
+
+Checked and left out:
+- **App or login only:** Al Rajhi (Tahweel, urpay), STC Bank, Enjaz, ANB TeleMoney, LuLu Money, Global Money Exchange and most Gulf banks.
+- **No public quote source:** MoneyGram and Ria have no Gulf calculator.
+- **Terms forbid it:** Alfardan Exchange (robots.txt and terms ban automated access), Al Dar Exchange (terms bar storing site content) and BEC Kuwait (content for internal, non-commercial use only). Al Dar still appears as an Ooredoo Money partner.
+- **Blocks non-browser clients:** KIECO (403 to .NET's HTTP client); no workaround is attempted.
+- **Not reliable enough:** Musandam Exchange (TLS certificate expired 2026-10-05) and Wasel Exchange (hand-edited branch boards).
 
 Source notes:
 - **Remitly** returns a first-transfer promo price. ratebd shows the standard price instead: `base_rate` with the undiscounted fee.
 - **Remitly** answers anonymous calls with HTTP 429 `NOT_ALLOWED` far more often when they lack the `Remitly-DeviceEnvironmentID` header its own site sends. The provider reads that server-issued ID from a public converter page once per run, sends the same headers, paces requests, and retries once with a fresh ID before carrying the last quote forward.
 - **Taptap Send** publishes one rate per corridor. Its BD corridors carry no fee schedule, so the fee is 0. It gives no delivery method or speed, and those show as "Not specified".
 - **Xe:** every response says *"Automatic extraction of rates is prohibited under the Terms of Use."* Xe is included at the project owner's request. To turn it off, set `Providers:Xe:Enabled=false` (env `RATEBD_Providers__Xe__Enabled=false`).
+- **Western Union** prices a request from a random `wu_device_id` cookie that its page script generates in the browser (no server involvement). Without one the API answers from a different price tier that the site never shows, so the provider sends a fresh random ID each run, exactly as a browser visit would, and rejects any response outside the website's price segment (`N00`). westernunion.com uses Akamai bot management; a 403 is reported as a failure and the last quote is carried forward.
+- **Skrill** opens the same anonymous session its calculator does (three GETs, no login) and echoes its `XSRF-TOKEN`. Its first-transfer discount is ignored.
 - **Bangladesh Bank** serves a JavaScript bot challenge to plain HTTP clients. CI saves the page with headless Chromium (`engine/tools/bb-snapshot`, Playwright), and the engine parses that file with AngleSharp. GBP and AED mid rates are `USD/BDT ÷ units-per-USD`.
 
 ### How quotes are normalised
 
 - `sendAmount` is the total the sender pays, fee included.
-- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Remitly, WorldRemit, Xe, Taptap). Wise already deducts its fee, so its own `targetAmount` is used.
+- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Remitly, WorldRemit, Xe, Taptap, Western Union, Al Mulla, Skrill). Wise and Paysend already deduct their fee from the amount sent.
 - One quote per provider per amount:
   - Wise uses bank transfer.
   - WorldRemit uses whichever payout method delivers most.
   - Xe uses its default option.
+  - Western Union and Skrill use bank deposit; Al Mulla its best route.
 - Missing data is never invented. A field the source doesn't give shows as "Not specified".
 
 ### Data files
@@ -92,9 +136,15 @@ UTC day, and a rerun on the same day overwrites it.
   "midMarket": { "rate": 164.2248, "usdBdt": 123.45, "usdBdtDate": "2026-10-17", "sendPerUsd": 0.7517, "stale": false, ... },
   "providers": [ { "name": "Wise", "status": "ok|failed|stale|not_supported", "message": null }, ... ],
   "quotes": [ { "provider": "Wise", "sendAmount": 1000, "rate": 163.916, "fee": 8.86, "receiveAmount": 162463.70,
-                "deliveryMethod": "Bank deposit", "speed": "Within 2 days", "fetchedAt": "...", "stale": false }, ... ]
+                "deliveryMethod": "Bank deposit", "speed": "Within 2 days", "fetchedAt": "...", "stale": false }, ... ],
+  "postedRateProviders": [ { "name": "Unimoni", "status": "ok", "message": null }, ... ],
+  "postedRates": [ { "provider": "OoredooMoney", "rate": 33.900144, "deliveryMethod": "Bank deposit", "speed": "Same Day",
+                     "partner": "Alzaman Exchange", "feeNote": "Starting from QAR 20", "publishedAt": "...",
+                     "fetchedAt": "...", "stale": false }, ... ]
 }
 ```
+
+Snapshots written before posted rates existed have neither `postedRate…` list; the engine and site read them as empty.
 
 ### Configuration
 
@@ -105,7 +155,7 @@ with the `RATEBD_` prefix or unprefixed, using `__` for nesting:
 |---|---|---|
 | `Engine:DataDirectory` | `data/` at the git root | Output folder |
 | `Engine:SendAmounts` | `[500, 1000]` | Default amounts per corridor |
-| `Engine:Corridors` | GBP, USD, EUR (IT), AED, MYR, SGD → BDT | Corridor list; each can set its own `SendAmounts` (MYR uses `[1000, 2000]`) |
+| `Engine:Corridors` | GBP, USD, EUR (IT), AED, SAR, KWD, QAR, OMR, MYR, SGD → BDT | Corridor list; each can set its own `SendAmounts` (MYR, SAR and QAR use `[1000, 2000]`, KWD and OMR `[100, 200]`) |
 | `Engine:ProviderTimeoutSeconds` | `90` | Cap per provider per corridor, retries included |
 | `Engine:FailWhenNothingFetched` | `true` | Exit code 2 if no provider returned a fresh quote |
 | `Providers:{Name}:Enabled` | `true` | Turn a provider off |
@@ -127,13 +177,14 @@ npm run dev
 
 The site has these pages. Every page also exists in Bengali under `/bn/...`.
 - `/`
-- `/send-money-{gbp|usd|eur|aed|myr|sgd}-to-bangladesh`
-- `/providers/{wise|remitly|taptap-send|worldremit|xe}`
+- `/send-money-{gbp|usd|eur|aed|sar|kwd|qar|omr|myr|sgd}-to-bangladesh`
+- `/providers/{slug}` for every provider in `site/src/config/providers.json`
 - `/how-rates-work`
 - `/government-incentive`
 
 What the site does:
 - **Corridor table:** sorted by amount received. Columns are rate, fee, you receive, margin vs mid-market, delivery, speed and an inline-SVG 7-day sparkline. Rows show a stale badge when a quote was carried forward.
+- **Exchange-house rates:** posted rates without a fee get their own list under the table, best rate first, with the fee shown as "Not published" (or the source's own fee wording). They are never ranked against full quotes. Oman, where no provider publishes a full quote, shows only this list.
 - **Amount switch:** CSS only (`:has()`). The site ships no client-side JavaScript.
 - **SEO:** sitemap (`@astrojs/sitemap`, with hreflang), canonical and OpenGraph tags, and JSON-LD `Table` and `FAQPage`.
 - **Lighthouse (mobile, local preview):** 100 for performance, accessibility, best practices and SEO on the home, corridor, provider and methodology pages, in both languages.
@@ -189,9 +240,9 @@ GitHub disables scheduled workflows in public repos after 60 days without reposi
 |---|---|---|
 | Builds | 500 / month, 1 concurrent | ~31 daily data builds + your pushes |
 | Build timeout | 20 min | ~1 min (`npm ci` + `astro build`) |
-| Files per deployment | 20,000 | ~30 |
+| Files per deployment | 20,000 | ~75 |
 | File size | 25 MiB | largest is the 40 KB OG image |
-| `_redirects` | 2,000 static + 100 dynamic | 5 |
+| `_redirects` | 2,000 static + 100 dynamic | 19 |
 
 **If you hit the 500-builds limit:**
 - **What happens:** new builds are refused until the month resets. The last successful deployment keeps serving.
@@ -206,4 +257,5 @@ Every source is free and keyless. They can still change or block automated reque
 - **Failing provider:** it shows as `stale` (last good quote) or `failed` in the data and on the site. The run continues.
 - **Remitly** answered `429` to GitHub-hosted runners until the provider started sending the page-issued device ID; the first run with it (17 Oct 2026) got fresh quotes on both corridors. See its provider notes.
 - **Bangladesh Bank** needs the headless-browser snapshot. If that fails, the benchmark is carried forward as stale.
+- **Gulf sources** were verified from a machine outside the Gulf; the first scheduled runs show whether any of them treat GitHub's runners differently. Western Union is the most likely to (Akamai).
 - **Alerts:** check the job summary of each `fetch` run, which has a status table per corridor.
