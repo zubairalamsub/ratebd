@@ -31,11 +31,18 @@ jobs:
       - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "10.0.x"
-          cache: true
-          cache-dependency-path: engine/**/packages.lock.json
+
+      # No packages.lock.json: PublishAot makes the SDK add ILCompiler/ILLink packages pinned to its own
+      # runtime patch, which would tie a lock file to one exact SDK. All package versions are exact in the csproj.
+      - name: Cache NuGet packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('engine/**/*.csproj', 'engine/Directory.Build.props') }}
+          restore-keys: nuget-${{ runner.os }}-
 
       - name: Restore
-        run: dotnet restore RateBd.slnx --locked-mode
+        run: dotnet restore RateBd.slnx
 
       - name: Build
         run: dotnet build RateBd.slnx -c Release --no-restore

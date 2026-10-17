@@ -25,14 +25,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # The published binary is cached by a hash of the engine sources. On a hit (every day the engine
-      # code has not changed) no .NET SDK is installed or run at all.
+      # The published binary is cached by a hash of the engine sources plus the month, so it is rebuilt when the
+      # code changes and at least monthly to pick up .NET runtime patches. On a hit no .NET SDK is installed at all.
+      - name: Compute cache month
+        id: month
+        run: echo "value=$(date -u +%Y-%m)" >> "$GITHUB_OUTPUT"
+
       - name: Restore cached engine binary
         id: engine-cache
         uses: actions/cache@v6
         with:
           path: engine/publish
-          key: engine-aot-linux-x64-${{ hashFiles('engine/src/**', 'engine/Directory.Build.props', 'engine/global.json') }}
+          key: engine-aot-linux-x64-${{ steps.month.outputs.value }}-${{ hashFiles('engine/src/**', 'engine/Directory.Build.props', 'engine/global.json') }}
 
       # Install the SDK under the home directory so it can be cached between runs.
       - name: Point .NET install at a cacheable directory
@@ -51,14 +55,22 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "10.0.x"
-          cache: true
-          cache-dependency-path: engine/**/packages.lock.json
+
+      # No packages.lock.json: PublishAot makes the SDK add ILCompiler/ILLink packages pinned to its own
+      # runtime patch, which would tie a lock file to one exact SDK. All package versions are exact in the csproj.
+      - name: Cache NuGet packages
+        if: steps.engine-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('engine/**/*.csproj', 'engine/Directory.Build.props') }}
+          restore-keys: nuget-${{ runner.os }}-
 
       - name: Publish engine (Native AOT)
         if: steps.engine-cache.outputs.cache-hit != 'true'
         working-directory: engine
         run: |
-          dotnet restore src/RateBd.Engine/RateBd.Engine.csproj --locked-mode
+          dotnet restore src/RateBd.Engine/RateBd.Engine.csproj -r linux-x64
           dotnet publish src/RateBd.Engine/RateBd.Engine.csproj -c Release -r linux-x64 --no-restore -o publish
 
       - uses: actions/setup-node@v7

@@ -5,8 +5,6 @@
     <AssemblyName>ratebd-engine</AssemblyName>
     <RootNamespace>RateBd.Engine</RootNamespace>
     <PublishAot>true</PublishAot>
-    <!-- Listed so packages.lock.json covers the AOT compiler packs and CI can restore in locked mode. -->
-    <RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
     <!-- Show each trim/AOT warning individually instead of one per assembly. -->
