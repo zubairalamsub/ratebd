@@ -2,7 +2,7 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T16:48:12.2351205Z",
+  "generatedAt": "2026-10-17T17:00:13.4375433Z",
   "midMarket": {
     "rate": 33.6147,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.6725,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
+    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
     "stale": false
   },
   "providers": [
@@ -19,42 +19,9 @@
       "name": "MidMarket",
       "status": "ok",
       "message": null
-    },
-    {
-      "name": "Wise",
-      "status": "not_supported",
-      "message": "Wise offers no fundable pay-in method for AED\u2192BDT (disabled: error.payInmethod.disabled)"
-    },
-    {
-      "name": "Remitly",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "TaptapSend",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "WorldRemit",
-      "status": "not_supported",
-      "message": "WorldRemit offers no money-transfer payout method for AE\u2192BD"
     }
   ],
   "quotes": [
-    {
-      "provider": "TaptapSend",
-      "corridor": "aed-bdt",
-      "sendCurrency": "AED",
-      "sendAmount": 500,
-      "rate": 33.65,
-      "fee": 0,
-      "receiveAmount": 16825.00,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:04.436274Z",
-      "stale": false
-    },
     {
       "provider": "MidMarket",
       "corridor": "aed-bdt",
@@ -65,33 +32,7 @@
       "receiveAmount": 16807.35,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
-      "stale": false
-    },
-    {
-      "provider": "Remitly",
-      "corridor": "aed-bdt",
-      "sendCurrency": "AED",
-      "sendAmount": 500,
-      "rate": 33.54,
-      "fee": 9.00,
-      "receiveAmount": 16468.14,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:08.8436293Z",
-      "stale": false
-    },
-    {
-      "provider": "TaptapSend",
-      "corridor": "aed-bdt",
-      "sendCurrency": "AED",
-      "sendAmount": 1000,
-      "rate": 33.65,
-      "fee": 0,
-      "receiveAmount": 33650.00,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:04.436274Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     },
     {
@@ -104,20 +45,7 @@
       "receiveAmount": 33614.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
-      "stale": false
-    },
-    {
-      "provider": "Remitly",
-      "corridor": "aed-bdt",
-      "sendCurrency": "AED",
-      "sendAmount": 1000,
-      "rate": 33.54,
-      "fee": 9.00,
-      "receiveAmount": 33238.14,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:12.2345249Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     }
   ],

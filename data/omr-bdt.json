@@ -2,7 +2,7 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T16:48:47.3468522Z",
+  "generatedAt": "2026-10-17T17:00:33.0704393Z",
   "midMarket": {
     "rate": 322.8239,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.38240659,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
+    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
     "stale": false
   },
   "providers": [
@@ -19,26 +19,6 @@
       "name": "MidMarket",
       "status": "ok",
       "message": null
-    },
-    {
-      "name": "Wise",
-      "status": "not_supported",
-      "message": "Wise does not send OMR\u2192BDT (Sorry, you can\u0027t send between these currencies right now.)"
-    },
-    {
-      "name": "Remitly",
-      "status": "not_supported",
-      "message": "Remitly does not offer OM\u2192BD transfers"
-    },
-    {
-      "name": "TaptapSend",
-      "status": "not_supported",
-      "message": "Taptap Send does not list OM (OMR) as a send country"
-    },
-    {
-      "name": "WorldRemit",
-      "status": "not_supported",
-      "message": "WorldRemit offers no money-transfer payout method for OM\u2192BD"
     }
   ],
   "quotes": [
@@ -52,7 +32,7 @@
       "receiveAmount": 32282.39,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     },
     {
@@ -65,7 +45,7 @@
       "receiveAmount": 64564.78,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     }
   ],
@@ -97,7 +77,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T16:48:45.404883Z",
+      "fetchedAt": "2026-10-17T17:00:31.3023894Z",
       "stale": false
     },
     {
@@ -110,7 +90,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-16T20:00:00Z",
-      "fetchedAt": "2026-10-17T16:48:45.5136273Z",
+      "fetchedAt": "2026-10-17T17:00:31.0677415Z",
       "stale": false
     },
     {
@@ -123,7 +103,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T16:48:47.346058Z",
+      "fetchedAt": "2026-10-17T17:00:33.0695747Z",
       "stale": false
     }
   ]

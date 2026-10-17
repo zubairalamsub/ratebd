@@ -2,7 +2,7 @@
   "corridor": "myr-bdt",
   "sendCurrency": "MYR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T16:48:22.3903283Z",
+  "generatedAt": "2026-10-17T17:00:13.4443181Z",
   "midMarket": {
     "rate": 30.2267,
     "usdBdt": 123.4500,
@@ -11,32 +11,12 @@
     "sendPerUsd": 4.08413593,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
+    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
     "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "Wise",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "Remitly",
-      "status": "not_supported",
-      "message": "Remitly does not offer MY\u2192BD transfers"
-    },
-    {
-      "name": "TaptapSend",
-      "status": "not_supported",
-      "message": "Taptap Send does not list MY (MYR) as a send country"
-    },
-    {
-      "name": "WorldRemit",
       "status": "ok",
       "message": null
     }
@@ -52,33 +32,7 @@
       "receiveAmount": 30226.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
-      "stale": false
-    },
-    {
-      "provider": "WorldRemit",
-      "corridor": "myr-bdt",
-      "sendCurrency": "MYR",
-      "sendAmount": 1000,
-      "rate": 30.115,
-      "fee": 5,
-      "receiveAmount": 29964.43,
-      "deliveryMethod": "Mobile wallet (bKash)",
-      "speed": "Same day",
-      "fetchedAt": "2026-10-17T16:48:21.550887Z",
-      "stale": false
-    },
-    {
-      "provider": "Wise",
-      "corridor": "myr-bdt",
-      "sendCurrency": "MYR",
-      "sendAmount": 1000,
-      "rate": 30.1206,
-      "fee": 21.01,
-      "receiveAmount": 29487.77,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 20 hours",
-      "fetchedAt": "2026-10-17T16:48:20.1679152Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     },
     {
@@ -91,33 +45,7 @@
       "receiveAmount": 60453.40,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
-      "stale": false
-    },
-    {
-      "provider": "WorldRemit",
-      "corridor": "myr-bdt",
-      "sendCurrency": "MYR",
-      "sendAmount": 2000,
-      "rate": 30.115,
-      "fee": 5,
-      "receiveAmount": 60079.43,
-      "deliveryMethod": "Mobile wallet (bKash)",
-      "speed": "Same day",
-      "fetchedAt": "2026-10-17T16:48:22.3899086Z",
-      "stale": false
-    },
-    {
-      "provider": "Wise",
-      "corridor": "myr-bdt",
-      "sendCurrency": "MYR",
-      "sendAmount": 2000,
-      "rate": 30.1206,
-      "fee": 30.81,
-      "receiveAmount": 59313.18,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 20 hours",
-      "fetchedAt": "2026-10-17T16:48:20.4134211Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     }
   ],

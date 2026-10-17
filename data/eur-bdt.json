@@ -2,7 +2,7 @@
   "corridor": "eur-bdt",
   "sendCurrency": "EUR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T16:48:19.8884227Z",
+  "generatedAt": "2026-10-17T17:00:13.4418663Z",
   "midMarket": {
     "rate": 138.7458,
     "usdBdt": 123.4500,
@@ -11,32 +11,12 @@
     "sendPerUsd": 0.88975695,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
+    "fetchedAt": "2026-10-17T17:00:13.3783141Z",
     "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "Wise",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "Remitly",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "TaptapSend",
-      "status": "ok",
-      "message": null
-    },
-    {
-      "name": "WorldRemit",
       "status": "ok",
       "message": null
     }
@@ -52,59 +32,7 @@
       "receiveAmount": 69372.90,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
-      "stale": false
-    },
-    {
-      "provider": "TaptapSend",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 500,
-      "rate": 138.25,
-      "fee": 0,
-      "receiveAmount": 69125.00,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:04.436274Z",
-      "stale": false
-    },
-    {
-      "provider": "Remitly",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 500,
-      "rate": 137.25,
-      "fee": 0.99,
-      "receiveAmount": 68489.12,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:16.4812203Z",
-      "stale": false
-    },
-    {
-      "provider": "Wise",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 500,
-      "rate": 138.234,
-      "fee": 6.42,
-      "receiveAmount": 68229.54,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 20 hours",
-      "fetchedAt": "2026-10-17T16:48:16.3421508Z",
-      "stale": false
-    },
-    {
-      "provider": "WorldRemit",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 500,
-      "rate": 134.0817,
-      "fee": 3.99,
-      "receiveAmount": 66505.86,
-      "deliveryMethod": "Mobile wallet (bKash)",
-      "speed": "Same day",
-      "fetchedAt": "2026-10-17T16:48:17.6706315Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     },
     {
@@ -117,59 +45,7 @@
       "receiveAmount": 138745.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
-      "stale": false
-    },
-    {
-      "provider": "TaptapSend",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 1000,
-      "rate": 138.25,
-      "fee": 0,
-      "receiveAmount": 138250.00,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:04.436274Z",
-      "stale": false
-    },
-    {
-      "provider": "Remitly",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 1000,
-      "rate": 137.25,
-      "fee": 0.99,
-      "receiveAmount": 137114.12,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Not specified",
-      "fetchedAt": "2026-10-17T16:48:19.8880286Z",
-      "stale": false
-    },
-    {
-      "provider": "Wise",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 1000,
-      "rate": 138.234,
-      "fee": 10.55,
-      "receiveAmount": 136775.63,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 20 hours",
-      "fetchedAt": "2026-10-17T16:48:16.7172807Z",
-      "stale": false
-    },
-    {
-      "provider": "WorldRemit",
-      "corridor": "eur-bdt",
-      "sendCurrency": "EUR",
-      "sendAmount": 1000,
-      "rate": 134.0817,
-      "fee": 3.99,
-      "receiveAmount": 133546.71,
-      "deliveryMethod": "Mobile wallet (bKash)",
-      "speed": "Same day",
-      "fetchedAt": "2026-10-17T16:48:18.5012748Z",
+      "fetchedAt": "2026-10-17T17:00:13.3783141Z",
       "stale": false
     }
   ],
