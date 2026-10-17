@@ -14,9 +14,11 @@ interface Props {
   end: string;
   /** What the values are: taka received (default) or a posted exchange rate */
   kind?: "receive" | "rate";
+  /** Render nothing (rather than a dash) until there are two days to draw */
+  hideEmpty?: boolean;
 }
 
-const { locale, name, points, end, kind = "receive" } = Astro.props;
+const { locale, name, points, end, kind = "receive", hideEmpty = false } = Astro.props;
 const width = 96;
 const height = 28;
 const pad = 3;
@@ -70,7 +72,9 @@ const stroke = direction === "down" ? "#c8102e" : "#00704f";
       ))}
       {last && <circle cx={last.x} cy={last.y} r="2.25" fill={stroke} />}
     </svg>
-  ) : (
-    <span class="text-xs text-slate-600">{t(locale, "trend.none")}</span>
+  ) : hideEmpty ? null : (
+    <span class="text-xs text-slate-600" title={t(locale, "trend.none")}>
+      <span aria-hidden="true">–</span><span class="sr-only">{t(locale, "trend.none")}</span>
+    </span>
   )
 }

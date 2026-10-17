@@ -1,4 +1,6 @@
 ---
+// Quotes for one amount, most taka first. Below the lg breakpoint each provider is a card (the full table would need
+// sideways scrolling and hide "You receive"); from lg up it is a table. Both are rendered; CSS shows one.
 import Sparkline from "./Sparkline.astro";
 import StaleBadge from "./StaleBadge.astro";
 import { topRows, windowEnd, type CorridorMeta, type Row } from "../lib/data";
@@ -18,16 +20,90 @@ const { locale, corridor, amount, rows } = Astro.props;
 const best = topRows(rows);
 const amountText = sendAmount(locale, amount, corridor.sendCurrency);
 const caption = t(locale, "table.caption", { from: corridor.sendCurrency, amount: amountText });
+const end = windowEnd(corridor.id);
+const marginText = (margin: number | null, short: boolean) =>
+  margin === null
+    ? "–"
+    : margin < 0
+      ? t(locale, short ? "margin.betterShort" : "margin.better", { value: percent(locale, -margin) })
+      : percent(locale, margin);
 const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
-const td = "px-3 py-3 align-middle whitespace-nowrap";
+const td = "px-3 py-3 align-middle";
+const visitClass =
+  "inline-flex min-h-11 items-center justify-center rounded-lg border border-brand-700 px-3 font-medium text-brand-700 no-underline hover:bg-brand-50";
 ---
 
-<div
-  class="relative overflow-x-auto rounded-lg border border-slate-200"
-  role="region"
-  aria-label={caption}
-  tabindex="0"
->
+<ol class="grid gap-3 md:grid-cols-2 lg:hidden" aria-label={caption}>
+  {
+    rows.length === 0 && (
+      <li class="rounded-xl border border-slate-200 p-5 text-center text-slate-600 md:col-span-2">{t(locale, "table.empty")}</li>
+    )
+  }
+  {
+    rows.map((row) => {
+      const q = row.quote;
+      const isBest = best.includes(row);
+      return (
+        <li
+          class:list={[
+            "flex flex-col rounded-xl border p-4",
+            isBest ? "border-brand-600 bg-brand-50/50 ring-1 ring-brand-600" : "border-slate-200 bg-white",
+            q.stale && "text-slate-600",
+          ]}
+        >
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0">
+              <a href={localePath(locale, providerPath(row.provider.slug))} class="font-semibold text-slate-900">
+                {row.provider.name}
+              </a>
+              {(isBest || q.stale) && (
+                <div class="mt-1 flex flex-wrap gap-1">
+                  {isBest && (
+                    <span class="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-semibold text-white">{t(locale, "table.best")}</span>
+                  )}
+                  {q.stale && <StaleBadge locale={locale} name={row.provider.name} fetchedAt={q.fetchedAt} />}
+                </div>
+              )}
+            </div>
+            <Sparkline locale={locale} name={row.provider.name} points={row.trend} end={end} hideEmpty />
+          </div>
+          <p class="mt-3 tabular">
+            <span class="block text-xs text-slate-600">{t(locale, "table.receive")}</span>
+            <span class="text-2xl font-bold text-slate-900">{money(locale, q.receiveAmount, "BDT")}</span>
+          </p>
+          <dl class="mt-3 grid grid-cols-3 gap-2 border-t border-slate-200 pt-3 text-sm tabular">
+            <div>
+              <dt class="text-xs text-slate-600">{t(locale, "table.rate")}</dt>
+              <dd class="font-medium text-slate-900">{rate(locale, q.rate)}</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-slate-600">{t(locale, "table.fee")}</dt>
+              <dd class="font-medium text-slate-900">{money(locale, q.fee, corridor.sendCurrency)}</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-slate-600" title={t(locale, "margin.title")}>{t(locale, "margin.short")}</dt>
+              <dd class:list={["font-medium", row.marginPct !== null && row.marginPct < 0 ? "text-brand-700" : "text-slate-900"]}>
+                {marginText(row.marginPct, true)}
+              </dd>
+            </div>
+          </dl>
+          <div class="mt-auto flex items-center justify-between gap-3 pt-3">
+            <p class="min-w-0 text-sm text-slate-700">
+              <span class:list={[isUnspecified(q.deliveryMethod) && "text-slate-600"]}>{label(locale, q.deliveryMethod)}</span>
+              <span aria-hidden="true"> · </span>
+              <span class:list={[isUnspecified(q.speed) && "text-slate-600"]}>{label(locale, q.speed)}</span>
+            </p>
+            <a href={goPath(row.provider.slug)} rel="nofollow sponsored noopener" class:list={[visitClass, "shrink-0 px-4"]}>
+              {t(locale, "table.visitShort")}<span class="sr-only"> {row.provider.name}</span>
+            </a>
+          </div>
+        </li>
+      );
+    })
+  }
+</ol>
+
+<div class="relative hidden overflow-x-auto rounded-xl border border-slate-200 lg:block" role="region" aria-label={caption} tabindex="0">
   <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
     <caption class="sr-only">{caption}</caption>
     <thead class="bg-slate-50">
@@ -56,7 +132,6 @@ const td = "px-3 py-3 align-middle whitespace-nowrap";
       {
         rows.map((row) => {
           const q = row.quote;
-          const margin = row.marginPct;
           const isBest = best.includes(row);
           return (
             <tr class:list={[isBest ? "bg-brand-50/60" : undefined, q.stale && "text-slate-600"]}>
@@ -66,37 +141,27 @@ const td = "px-3 py-3 align-middle whitespace-nowrap";
                     {row.provider.name}
                   </a>
                   {isBest && (
-                    <span class="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-semibold text-white">
-                      {t(locale, "table.best")}
-                    </span>
+                    <span class="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-semibold text-white">{t(locale, "table.best")}</span>
                   )}
                   {q.stale && <StaleBadge locale={locale} name={row.provider.name} fetchedAt={q.fetchedAt} />}
                 </span>
               </th>
-              <td class:list={[td, "text-right"]}>{rate(locale, q.rate)}</td>
-              <td class:list={[td, "text-right"]}>{money(locale, q.fee, corridor.sendCurrency)}</td>
-              <td class:list={[td, "text-right text-base font-semibold text-slate-900"]}>
+              <td class:list={[td, "whitespace-nowrap text-right"]}>{rate(locale, q.rate)}</td>
+              <td class:list={[td, "whitespace-nowrap text-right"]}>{money(locale, q.fee, corridor.sendCurrency)}</td>
+              <td class:list={[td, "whitespace-nowrap text-right text-base font-semibold text-slate-900"]}>
                 {money(locale, q.receiveAmount, "BDT")}
               </td>
-              <td class:list={[td, "text-right"]}>
-                {margin === null
-                  ? "–"
-                  : margin < 0
-                    ? <span class="text-brand-700">{t(locale, "margin.better", { value: percent(locale, -margin) })}</span>
-                    : percent(locale, margin)}
+              <td class:list={[td, "text-right", row.marginPct !== null && row.marginPct < 0 && "text-brand-700"]}>
+                {marginText(row.marginPct, false)}
               </td>
               <td class:list={[td, isUnspecified(q.deliveryMethod) && "text-slate-600"]}>{label(locale, q.deliveryMethod)}</td>
               <td class:list={[td, isUnspecified(q.speed) && "text-slate-600"]}>{label(locale, q.speed)}</td>
               <td class={td}>
-                <Sparkline locale={locale} name={row.provider.name} points={row.trend} end={windowEnd(corridor.id)} />
+                <Sparkline locale={locale} name={row.provider.name} points={row.trend} end={end} />
               </td>
-              <td class={td}>
-                <a
-                  href={goPath(row.provider.slug)}
-                  rel="nofollow sponsored noopener"
-                  class="inline-flex min-h-11 items-center rounded-md border border-brand-700 px-3 font-medium text-brand-700 no-underline hover:bg-brand-50"
-                >
-                  {t(locale, "table.visit", { name: row.provider.name })}
+              <td class:list={[td, "text-right"]}>
+                <a href={goPath(row.provider.slug)} rel="nofollow sponsored noopener" class={visitClass}>
+                  {t(locale, "table.visitShort")}<span class="sr-only"> {row.provider.name}</span>
                 </a>
               </td>
             </tr>

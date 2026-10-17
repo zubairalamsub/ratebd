@@ -58,20 +58,23 @@ const td = "px-3 py-2 whitespace-nowrap";
 ---
 
 <BaseLayout locale={locale} title={title} description={description} path={path}>
-  <h1 class="text-2xl sm:text-3xl">{title}</h1>
-  <p class="mt-3 max-w-3xl text-slate-700">{t(locale, givesFeeRange ? "provider.leadPostedRange" : postsRates ? "provider.leadPosted" : "provider.lead", { name: provider.name })}</p>
-  <p class="mt-4">
-    <a
-      href={goPath(provider.slug)}
-      rel="nofollow sponsored noopener"
-      class="inline-flex min-h-11 items-center rounded-md bg-brand-700 px-4 font-semibold text-white no-underline hover:bg-brand-800"
-      >{t(locale, "table.visit", { name: provider.name })}</a
-    >
-  </p>
+  <div class="rounded-2xl bg-gradient-to-br from-brand-50 to-white px-5 py-6 ring-1 ring-brand-100 sm:px-8 sm:py-8">
+    <h1 class="text-2xl sm:text-3xl">{title}</h1>
+    <p class="mt-3 max-w-3xl text-slate-700">{t(locale, givesFeeRange ? "provider.leadPostedRange" : postsRates ? "provider.leadPosted" : "provider.lead", { name: provider.name })}</p>
+    <p class="mt-4 flex flex-wrap items-center gap-3">
+      <a
+        href={goPath(provider.slug)}
+        rel="nofollow sponsored noopener"
+        class="inline-flex min-h-11 items-center rounded-lg bg-brand-700 px-4 font-semibold text-white no-underline hover:bg-brand-800"
+        >{t(locale, "table.visit", { name: provider.name })}</a
+      >
+      <span class="text-sm text-slate-600">{list(locale, routes.filter((r) => r.status?.status !== "not_supported").map((r) => r.corridor.sendCurrency))}</span>
+    </p>
+  </div>
 
   {
     routes.map(({ corridor, snapshot, quotes, posted, history, rateHistory, headlineAmount, status }) => (
-      <section class="mt-10" aria-labelledby={`route-${corridor.id}`}>
+      <section class="mt-6 rounded-2xl border border-slate-200 p-4 sm:p-6" aria-labelledby={`route-${corridor.id}`}>
         <h2 id={`route-${corridor.id}`} class="text-xl">
           {t(locale, "home.from", { country: t(locale, corridor.countryKey) })}
           <span class="ml-1 font-normal text-slate-600">({t(locale, "provider.route", { from: corridor.sendCurrency })})</span>
@@ -87,7 +90,45 @@ const td = "px-3 py-2 whitespace-nowrap";
 
         {quotes.length > 0 && (
           <>
-            <div class="relative mt-3 overflow-x-auto rounded-lg border border-slate-200" role="region" tabindex="0"
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2 md:hidden">
+              {quotes.map((q) => {
+                const m = marginPct(q, snapshot.midMarket?.rate);
+                return (
+                  <li class:list={["rounded-xl border border-slate-200 p-4", q.stale && "text-slate-600"]}>
+                    <p class="flex flex-wrap items-center justify-between gap-2">
+                      <span class="font-semibold text-slate-900">{sendAmount(locale, q.sendAmount, corridor.sendCurrency)}</span>
+                      {q.stale && <StaleBadge locale={locale} name={provider.name} fetchedAt={q.fetchedAt} />}
+                    </p>
+                    <p class="mt-2 tabular">
+                      <span class="block text-xs text-slate-600">{t(locale, "table.receive")}</span>
+                      <span class="text-xl font-bold text-slate-900">{money(locale, q.receiveAmount, "BDT")}</span>
+                    </p>
+                    <dl class="mt-2 grid grid-cols-3 gap-2 border-t border-slate-200 pt-2 text-sm tabular">
+                      <div>
+                        <dt class="text-xs text-slate-600">{t(locale, "table.rate")}</dt>
+                        <dd class="font-medium">{rate(locale, q.rate)}</dd>
+                      </div>
+                      <div>
+                        <dt class="text-xs text-slate-600">{t(locale, "table.fee")}</dt>
+                        <dd class="font-medium">{money(locale, q.fee, corridor.sendCurrency)}</dd>
+                      </div>
+                      <div>
+                        <dt class="text-xs text-slate-600">{t(locale, "margin.short")}</dt>
+                        <dd class:list={["font-medium", m !== null && m < 0 && "text-brand-700"]}>
+                          {m === null ? "–" : m < 0 ? t(locale, "margin.betterShort", { value: percent(locale, -m) }) : percent(locale, m)}
+                        </dd>
+                      </div>
+                    </dl>
+                    <p class="mt-2 text-sm text-slate-700">
+                      {label(locale, q.deliveryMethod)}
+                      <span aria-hidden="true"> · </span>
+                      {label(locale, q.speed)}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+            <div class="relative mt-3 hidden overflow-x-auto rounded-lg border border-slate-200 md:block" role="region" tabindex="0"
               aria-label={`${provider.name} ${corridor.sendCurrency} → BDT`}>
               <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
                 <caption class="sr-only">{provider.name} {corridor.sendCurrency} → BDT</caption>
@@ -168,7 +209,36 @@ const td = "px-3 py-2 whitespace-nowrap";
 
         {posted.length > 0 && (
           <>
-            <div class="relative mt-3 overflow-x-auto rounded-lg border border-slate-200" role="region" tabindex="0"
+            <ul class="mt-3 divide-y divide-slate-100 rounded-xl border border-slate-200 md:hidden">
+              {posted.map((r) => (
+                <li class:list={["flex items-start justify-between gap-3 p-4", r.stale && "text-slate-600"]}>
+                  <div class="min-w-0">
+                    {r.partner && <p class="font-medium text-slate-900">{r.partner}</p>}
+                    <p class="text-sm text-slate-700">
+                      {t(locale, "table.fee")}: {r.feeNote ? feeNote(locale, r.feeNote) : t(locale, "posted.feeNone")}
+                      <span aria-hidden="true"> · </span>
+                      {label(locale, r.deliveryMethod)}
+                      {!isUnspecified(r.speed) && (
+                        <>
+                          <span aria-hidden="true"> · </span>
+                          {label(locale, r.speed)}
+                        </>
+                      )}
+                    </p>
+                    {r.stale && (
+                      <div class="mt-1">
+                        <StaleBadge locale={locale} name={provider.name} fetchedAt={r.fetchedAt} />
+                      </div>
+                    )}
+                  </div>
+                  <p class="shrink-0 text-right tabular">
+                    <span class="block text-xs text-slate-600">{t(locale, "table.rate")}</span>
+                    <span class="text-lg font-bold text-slate-900">{rate(locale, r.rate)}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <div class="relative mt-3 hidden overflow-x-auto rounded-lg border border-slate-200 md:block" role="region" tabindex="0"
               aria-label={`${provider.name} ${corridor.sendCurrency} → BDT`}>
               <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
                 <caption class="sr-only">{provider.name} {corridor.sendCurrency} → BDT</caption>

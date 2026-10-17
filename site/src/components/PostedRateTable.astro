@@ -1,6 +1,6 @@
 ---
 // Exchange-house rates published without a fee. Kept out of RateTable: with no fee there is no total cost, so these
-// are listed by rate and never ranked against full quotes.
+// are listed by rate and never ranked against full quotes. Cards below the lg breakpoint, a table from lg up.
 import StaleBadge from "./StaleBadge.astro";
 import type { CorridorMeta, PostedRow } from "../lib/data";
 import { money, rate, sendAmount } from "../i18n/format";
@@ -19,10 +19,69 @@ interface Props {
 const { locale, corridor, amount, rows } = Astro.props;
 const caption = t(locale, "posted.caption", { from: corridor.sendCurrency });
 const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
-const td = "px-3 py-3 align-middle whitespace-nowrap";
+const td = "px-3 py-3 align-middle";
+const atRate = (r: number) => (amount === undefined ? "" : money(locale, Math.round(amount * r * 100) / 100, "BDT"));
 ---
 
-<div class="relative overflow-x-auto rounded-lg border border-slate-200" role="region" aria-label={caption} tabindex="0">
+<ol class="grid gap-3 md:grid-cols-2 lg:hidden" aria-label={caption}>
+  {
+    rows.map(({ posted, provider }) => (
+      <li class:list={["flex flex-col rounded-xl border border-slate-200 bg-white p-4", posted.stale && "text-slate-600"]}>
+        <div class="flex items-start justify-between gap-3">
+          <div class="min-w-0">
+            {posted.partner ? (
+              <>
+                <span class="font-semibold text-slate-900">{posted.partner}</span>
+                <a href={localePath(locale, providerPath(provider.slug))} class="block text-xs">
+                  {t(locale, "posted.via", { name: provider.name })}
+                </a>
+              </>
+            ) : (
+              <a href={localePath(locale, providerPath(provider.slug))} class="font-semibold text-slate-900">
+                {provider.name}
+              </a>
+            )}
+            {posted.stale && (
+              <div class="mt-1">
+                <StaleBadge locale={locale} name={provider.name} fetchedAt={posted.fetchedAt} />
+              </div>
+            )}
+          </div>
+          <p class="shrink-0 text-right tabular">
+            <span class="block text-xs text-slate-600">{t(locale, "table.rate")}</span>
+            <span class="text-xl font-bold text-slate-900">{rate(locale, posted.rate)}</span>
+          </p>
+        </div>
+        <p class="mt-2 text-sm text-slate-700">
+          <span class:list={[!posted.feeNote && "text-slate-600"]}>
+            {t(locale, "table.fee")}: {posted.feeNote ? feeNote(locale, posted.feeNote) : t(locale, "posted.feeNone")}
+          </span>
+          <span aria-hidden="true"> · </span>
+          <span class:list={[isUnspecified(posted.deliveryMethod) && "text-slate-600"]}>{label(locale, posted.deliveryMethod)}</span>
+          {!isUnspecified(posted.speed) && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <span>{label(locale, posted.speed)}</span>
+            </>
+          )}
+        </p>
+        {amount !== undefined && (
+          <p class="mt-1 text-sm text-slate-600 tabular">
+            {t(locale, "posted.beforeFees", { amount: sendAmount(locale, amount, corridor.sendCurrency) })}:{" "}
+            <span class="font-medium text-slate-900">{atRate(posted.rate)}</span>
+          </p>
+        )}
+        <div class="mt-auto pt-2">
+          <a href={goPath(provider.slug)} rel="nofollow sponsored noopener" class="inline-flex min-h-11 items-center font-medium">
+            {t(locale, "table.visit", { name: provider.name })} →
+          </a>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<div class="relative hidden overflow-x-auto rounded-xl border border-slate-200 lg:block" role="region" aria-label={caption} tabindex="0">
   <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
     <caption class="sr-only">{caption}</caption>
     <thead class="bg-slate-50">
@@ -63,22 +122,20 @@ const td = "px-3 py-3 align-middle whitespace-nowrap";
                 {posted.stale && <StaleBadge locale={locale} name={provider.name} fetchedAt={posted.fetchedAt} />}
               </span>
             </th>
-            <td class:list={[td, "text-right text-base font-semibold text-slate-900"]}>{rate(locale, posted.rate)}</td>
-            {amount !== undefined && (
-              <td class:list={[td, "text-right"]}>{money(locale, Math.round(amount * posted.rate * 100) / 100, "BDT")}</td>
-            )}
+            <td class:list={[td, "whitespace-nowrap text-right text-base font-semibold text-slate-900"]}>{rate(locale, posted.rate)}</td>
+            {amount !== undefined && <td class:list={[td, "whitespace-nowrap text-right"]}>{atRate(posted.rate)}</td>}
             <td class:list={[td, !posted.feeNote && "text-slate-600"]}>
               {posted.feeNote ? feeNote(locale, posted.feeNote) : t(locale, "posted.feeNone")}
             </td>
             <td class:list={[td, isUnspecified(posted.deliveryMethod) && "text-slate-600"]}>{label(locale, posted.deliveryMethod)}</td>
             <td class:list={[td, isUnspecified(posted.speed) && "text-slate-600"]}>{label(locale, posted.speed)}</td>
-            <td class={td}>
+            <td class:list={[td, "text-right"]}>
               <a
                 href={goPath(provider.slug)}
                 rel="nofollow sponsored noopener"
-                class="inline-flex min-h-11 items-center rounded-md border border-brand-700 px-3 font-medium text-brand-700 no-underline hover:bg-brand-50"
+                class="inline-flex min-h-11 items-center rounded-lg border border-brand-700 px-3 font-medium text-brand-700 no-underline hover:bg-brand-50"
               >
-                {t(locale, "table.visit", { name: provider.name })}
+                {t(locale, "table.visitShort")}<span class="sr-only"> {provider.name}</span>
               </a>
             </td>
           </tr>
