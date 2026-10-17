@@ -12,9 +12,11 @@ interface Props {
   points: TrendPoint[];
   /** yyyy-MM-dd of the last day in the window */
   end: string;
+  /** What the values are: taka received (default) or a posted exchange rate */
+  kind?: "receive" | "rate";
 }
 
-const { locale, name, points, end } = Astro.props;
+const { locale, name, points, end, kind = "receive" } = Astro.props;
 const width = 96;
 const height = 28;
 const pad = 3;
@@ -55,7 +57,7 @@ const stroke = direction === "down" ? "#c8102e" : "#00704f";
       height={height}
       viewBox={`0 0 ${width} ${height}`}
       role="img"
-      aria-label={t(locale, "trend.label", {
+      aria-label={t(locale, kind === "rate" ? "trend.rateLabel" : "trend.label", {
         name,
         n: fresh.length,
         first: date(locale, fresh[0]!.date),

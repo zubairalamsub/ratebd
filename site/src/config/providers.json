@@ -35,6 +35,104 @@
       "name": "Xe",
       "homepage": "https://www.xe.com",
       "affiliateUrl": null
+    },
+    {
+      "slug": "western-union",
+      "engineName": "WesternUnion",
+      "name": "Western Union",
+      "homepage": "https://www.westernunion.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "al-mulla-exchange",
+      "engineName": "AlMulla",
+      "name": "Al Mulla Exchange",
+      "homepage": "https://www.almullaexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "skrill",
+      "engineName": "Skrill",
+      "name": "Skrill",
+      "homepage": "https://www.skrill.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "paysend",
+      "engineName": "Paysend",
+      "name": "Paysend",
+      "homepage": "https://paysend.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "ooredoo-money",
+      "engineName": "OoredooMoney",
+      "name": "Ooredoo Money",
+      "homepage": "https://www.ooredoomoney.qa",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "gulf-exchange",
+      "engineName": "GulfExchange",
+      "name": "Gulf Exchange",
+      "homepage": "https://gulfexchange.com.qa",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "al-zaman-exchange",
+      "engineName": "AlZaman",
+      "name": "Al Zaman Exchange",
+      "homepage": "https://alzamanexchange.com.qa",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "habib-qatar",
+      "engineName": "HabibQatar",
+      "name": "Habib Qatar International Exchange",
+      "homepage": "https://hqie.com.qa",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "al-mirqab-exchange",
+      "engineName": "AlMirqab",
+      "name": "Al Mirqab Exchange",
+      "homepage": "https://almirqabexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "unimoni-oman",
+      "engineName": "Unimoni",
+      "name": "Unimoni Oman",
+      "homepage": "https://www.unimoni.om",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "pk-exchange",
+      "engineName": "PKExchange",
+      "name": "Purshottam Kanji Exchange",
+      "homepage": "https://www.pkexchange.com.om",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "joyalukkas-exchange",
+      "engineName": "Joyalukkas",
+      "name": "Joyalukkas Exchange",
+      "homepage": "https://www.joyalukkasexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "al-ansari-exchange-kuwait",
+      "engineName": "AlAnsari",
+      "name": "Al Ansari Exchange",
+      "homepage": "https://alansariexchange.com.kw",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "aman-exchange",
+      "engineName": "Aman",
+      "name": "Aman Exchange",
+      "homepage": "https://www.amankuwait.com",
+      "affiliateUrl": null
     }
   ]
 }

@@ -2,7 +2,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import providersConfig from "../config/providers.json";
-import type { CorridorSnapshot, ProviderStatus, Quote } from "./types";
+import type { CorridorSnapshot, PostedRate, ProviderStatus, Quote } from "./types";
 
 declare const __RATEBD_DATA_DIR__: string;
 const DATA_DIR = __RATEBD_DATA_DIR__;
@@ -10,7 +10,17 @@ const DATA_DIR = __RATEBD_DATA_DIR__;
 export const BENCHMARK = "MidMarket";
 export const SPARKLINE_DAYS = 7;
 
-export type CountryKey = "country.uk" | "country.uae" | "country.us" | "country.it" | "country.my" | "country.sg";
+export type CountryKey =
+  | "country.uk"
+  | "country.uae"
+  | "country.us"
+  | "country.it"
+  | "country.my"
+  | "country.sg"
+  | "country.sa"
+  | "country.kw"
+  | "country.qa"
+  | "country.om";
 
 export type RegionKey = "region.west" | "region.gulf" | "region.asia";
 
@@ -32,6 +42,10 @@ const ALL_CORRIDORS: CorridorMeta[] = [
   { id: "usd-bdt", from: "usd", sendCurrency: "USD", receiveCurrency: "BDT", countryKey: "country.us", region: "region.west" },
   { id: "eur-bdt", from: "eur", sendCurrency: "EUR", receiveCurrency: "BDT", countryKey: "country.it", region: "region.west" },
   { id: "aed-bdt", from: "aed", sendCurrency: "AED", receiveCurrency: "BDT", countryKey: "country.uae", region: "region.gulf" },
+  { id: "sar-bdt", from: "sar", sendCurrency: "SAR", receiveCurrency: "BDT", countryKey: "country.sa", region: "region.gulf" },
+  { id: "kwd-bdt", from: "kwd", sendCurrency: "KWD", receiveCurrency: "BDT", countryKey: "country.kw", region: "region.gulf" },
+  { id: "qar-bdt", from: "qar", sendCurrency: "QAR", receiveCurrency: "BDT", countryKey: "country.qa", region: "region.gulf" },
+  { id: "omr-bdt", from: "omr", sendCurrency: "OMR", receiveCurrency: "BDT", countryKey: "country.om", region: "region.gulf" },
   { id: "myr-bdt", from: "myr", sendCurrency: "MYR", receiveCurrency: "BDT", countryKey: "country.my", region: "region.asia" },
   { id: "sgd-bdt", from: "sgd", sendCurrency: "SGD", receiveCurrency: "BDT", countryKey: "country.sg", region: "region.asia" },
 ];
@@ -170,6 +184,17 @@ export function rowsFor(id: string, amount: number): Row[] {
     });
 }
 
+/**
+ * Rows that share the most taka received among fresh (non-stale) quotes. Several rows can tie: Al Mulla, for one,
+ * often routes through Western Union at exactly Western Union's price. Empty when every quote is stale.
+ */
+export function topRows(rows: Row[]): Row[] {
+  const fresh = rows.filter((r) => !r.quote.stale);
+  if (fresh.length === 0) return [];
+  const most = Math.max(...fresh.map((r) => r.quote.receiveAmount));
+  return fresh.filter((r) => r.quote.receiveAmount === most);
+}
+
 /** Send amounts quoted on a corridor, largest (the headline amount) first. */
 export function amountsFor(id: string): number[] {
   return [...new Set(loadSnapshot(id).quotes.map((q) => q.sendAmount))].sort((a, b) => b - a);
@@ -179,18 +204,58 @@ export function benchmarkQuote(id: string, amount: number): Quote | undefined {
   return loadSnapshot(id).quotes.find((q) => q.provider === BENCHMARK && q.sendAmount === amount);
 }
 
-/** Providers that returned nothing usable this run (not supported, or failed with no earlier quote). */
+/** Statuses of every provider run on a corridor: quoting providers first, then exchange houses with posted rates. */
+function allStatuses(id: string): ProviderStatus[] {
+  const snapshot = loadSnapshot(id);
+  return [...snapshot.providers, ...(snapshot.postedRateProviders ?? [])];
+}
+
+/** Providers that returned nothing usable this run (not supported, or failed with no earlier data). */
 export function unavailable(id: string): { provider: ProviderMeta; status: ProviderStatus }[] {
-  return loadSnapshot(id)
-    .providers.filter((s) => s.name !== BENCHMARK && (s.status === "not_supported" || s.status === "failed"))
+  return allStatuses(id)
+    .filter((s) => s.name !== BENCHMARK && (s.status === "not_supported" || s.status === "failed"))
     .flatMap((status) => {
       const provider = providerByEngineName(status.name);
       return provider ? [{ provider, status }] : [];
     });
 }
 
+/**
+ * A provider's status on a corridor. Undefined means it was not run there at all: providers collected only from
+ * certain countries (a Kuwaiti exchange house, say) have no entry elsewhere.
+ */
 export function statusFor(id: string, engineName: string): ProviderStatus | undefined {
-  return loadSnapshot(id).providers.find((p) => p.name === engineName);
+  return allStatuses(id).find((p) => p.name === engineName);
+}
+
+/** Providers with data on at least one route; a disabled or not-yet-run provider gets no page. */
+export const LISTED_PROVIDERS: ProviderMeta[] = PROVIDERS.filter((p) =>
+  CORRIDORS.some((c) => statusFor(c.id, p.engineName) !== undefined),
+);
+
+export interface PostedRow {
+  posted: PostedRate;
+  provider: ProviderMeta;
+}
+
+/** Exchange-house rates published without a fee, best rate first. */
+export function postedRowsFor(id: string): PostedRow[] {
+  return (loadSnapshot(id).postedRates ?? [])
+    .slice()
+    .sort((a, b) => b.rate - a.rate)
+    .flatMap((posted) => {
+      const provider = providerByEngineName(posted.provider);
+      return provider ? [{ posted, provider }] : [];
+    });
+}
+
+/** A provider's best posted rate per day across the sparkline window (rates without a fee, so no amount). */
+export function postedTrendFor(id: string, engineName: string): TrendPoint[] {
+  return loadHistory(id).map((h) => {
+    const rates = (h.snapshot.postedRates ?? []).filter((r) => r.provider === engineName);
+    const best = rates.length ? rates.reduce((a, b) => (b.rate > a.rate ? b : a)) : undefined;
+    return { date: h.date, value: best?.rate ?? null, stale: best?.stale ?? false };
+  });
 }
 
 /** Most recent time any data on the site was generated. */

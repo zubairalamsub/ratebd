@@ -1,17 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PostedRateTable from "../components/PostedRateTable.astro";
 import RateTable from "../components/RateTable.astro";
 import {
+  BENCHMARK,
   CORRIDORS,
   PROVIDERS,
   amountsFor,
   benchmarkQuote,
   corridorByFrom,
   loadSnapshot,
+  postedRowsFor,
   rowsFor,
+  topRows,
   unavailable,
 } from "../lib/data";
 import { date, dateTime, list, money, number, rate, sendAmount } from "../i18n/format";
+import { feeNote } from "../i18n/labels";
 import { corridorPath, localePath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
 
@@ -26,16 +31,23 @@ const snapshot = loadSnapshot(corridor.id);
 const mid = snapshot.midMarket;
 const country = t(locale, corridor.countryKey);
 const path = corridorPath(corridor.from);
-const amounts = amountsFor(corridor.id);
+const posted = postedRowsFor(corridor.id);
+// A route is rate-only when every quoting provider reports it does not serve it (Oman today). A provider that merely
+// failed doesn't make it so: the ranked table stays, with that provider listed as unavailable.
+const rateOnly =
+  posted.length > 0 && snapshot.providers.every((s) => s.name === BENCHMARK || s.status === "not_supported");
+const amounts = rateOnly ? [] : amountsFor(corridor.id);
 const tables = amounts.map((amount) => ({ amount, rows: rowsFor(corridor.id, amount) }));
 const missing = unavailable(corridor.id);
 const quotedNames = PROVIDERS.filter((p) => snapshot.quotes.some((q) => q.provider === p.engineName)).map((p) => p.name);
+const postedNames = PROVIDERS.filter((p) => posted.some((r) => r.posted.provider === p.engineName)).map((p) => p.name);
 
 const title = t(locale, "corridor.title", { country, from: corridor.sendCurrency });
-const description = t(locale, "corridor.description", {
-  from: corridor.sendCurrency,
-  providers: list(locale, quotedNames),
-});
+// Only providers with quotes are said to give fees and taka received; exchange houses are named as posting rates.
+const description =
+  quotedNames.length === 0 && postedNames.length > 0
+    ? t(locale, "corridor.descriptionPosted", { from: corridor.sendCurrency, providers: list(locale, postedNames) })
+    : t(locale, "corridor.description", { from: corridor.sendCurrency, providers: list(locale, quotedNames) });
 const amountId = (amount: number) => `amount-${corridor.from}-${amount}`;
 
 // CSS-only amount switch: radio inputs carry amt-{index}; Tailwind needs these class names written out literally.
@@ -50,25 +62,52 @@ if (amounts.length > TOGGLE_LABEL.length) {
 }
 
 // FAQ content is rendered on the page and mirrored in FAQPage JSON-LD.
-const headline = tables[0]!;
-const best = headline.rows.find((r) => !r.quote.stale) ?? headline.rows[0];
-const headlineAmount = sendAmount(locale, headline.amount, corridor.sendCurrency);
+const headline = tables[0];
+const headlineAmount = headline ? sendAmount(locale, headline.amount, corridor.sendCurrency) : "";
+const top = headline ? topRows(headline.rows) : [];
+const best = top[0] ?? headline?.rows[0];
+// Tied rows are named together only when they are the same price (rate and fee), so the answer stays exact.
+const bestNames =
+  best && top.length > 1 && top.every((r) => r.quote.rate === best.quote.rate && r.quote.fee === best.quote.fee)
+    ? list(locale, top.map((r) => r.provider.name))
+    : best?.provider.name;
+const bestPosted = posted.find((r) => !r.posted.stale) ?? posted[0];
+const postedName = (r: (typeof posted)[number]) =>
+  r.posted.partner ? `${r.posted.partner} (${t(locale, "posted.via", { name: r.provider.name })})` : r.provider.name;
 const faqs = [
-  {
-    q: t(locale, "faq.best.q", { amount: headlineAmount }),
-    a: best
-      ? t(locale, "faq.best.a", {
-          name: best.provider.name,
-          receive: money(locale, best.quote.receiveAmount, "BDT"),
-          amount: headlineAmount,
-          rate: rate(locale, best.quote.rate),
-          fee: money(locale, best.quote.fee, corridor.sendCurrency),
-          date: dateTime(locale, best.quote.fetchedAt),
-        })
-      : t(locale, "faq.best.none", { amount: headlineAmount }),
-  },
+  ...(headline
+    ? [
+        {
+          q: t(locale, "faq.best.q", { amount: headlineAmount }),
+          a: best
+            ? t(locale, "faq.best.a", {
+                name: bestNames ?? best.provider.name,
+                receive: money(locale, best.quote.receiveAmount, "BDT"),
+                amount: headlineAmount,
+                rate: rate(locale, best.quote.rate),
+                fee: money(locale, best.quote.fee, corridor.sendCurrency),
+                date: dateTime(locale, best.quote.fetchedAt),
+              })
+            : t(locale, "faq.best.none", { amount: headlineAmount }),
+        },
+      ]
+    : []),
+  ...(bestPosted
+    ? [
+        {
+          q: t(locale, "faq.posted.q"),
+          a: t(locale, bestPosted.posted.feeNote ? "faq.posted.aRange" : "faq.posted.a", {
+            name: postedName(bestPosted),
+            from: corridor.sendCurrency,
+            rate: rate(locale, bestPosted.posted.rate),
+            date: dateTime(locale, bestPosted.posted.fetchedAt),
+            fee: bestPosted.posted.feeNote ? feeNote(locale, bestPosted.posted.feeNote) : "",
+          }),
+        },
+      ]
+    : []),
   { q: t(locale, "faq.mid.q"), a: t(locale, "faq.mid.a") },
-  { q: t(locale, "faq.margin.q"), a: t(locale, "faq.margin.a") },
+  ...(rateOnly ? [] : [{ q: t(locale, "faq.margin.q"), a: t(locale, "faq.margin.a") }]),
   { q: t(locale, "faq.update.q"), a: t(locale, "faq.update.a") },
   { q: t(locale, "faq.incentive.q"), a: t(locale, "faq.incentive.a") },
 ];
@@ -87,6 +126,19 @@ const jsonLd = [
     inLanguage: locale,
     dateModified: snapshot.generatedAt,
   })),
+  ...(posted.length > 0
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "Table",
+          "@id": `${pageUrl}#posted-heading`,
+          name: t(locale, "posted.caption", { from: corridor.sendCurrency }),
+          about: title,
+          inLanguage: locale,
+          dateModified: snapshot.generatedAt,
+        },
+      ]
+    : []),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -105,7 +157,7 @@ const jsonLd = [
     {t(locale, "corridor.h1", { country })}
     <span class="mt-1 block text-lg font-medium text-slate-600">{corridor.sendCurrency} → BDT</span>
   </h1>
-  <p class="mt-3 max-w-3xl text-slate-700">{t(locale, "corridor.lead")}</p>
+  <p class="mt-3 max-w-3xl text-slate-700">{rateOnly ? t(locale, "corridor.leadPosted", { country }) : t(locale, "corridor.lead")}</p>
   <nav aria-label={t(locale, "corridor.otherRoutes")} class="mt-4">
     <ul class="flex flex-wrap gap-2 text-sm">
       {
@@ -162,50 +214,66 @@ const jsonLd = [
     }
   </section>
 
-  <div class="group mt-8">
-    <fieldset class="flex flex-wrap items-center gap-2">
-      <legend class="mb-2 w-full text-sm font-semibold text-slate-800">{t(locale, "corridor.amount")}</legend>
-      {
-        tables.map(({ amount }, i) => (
-          <>
-            <input type="radio" name={`amount-${corridor.from}`} id={amountId(amount)} class={`sr-only amt-${i}`} checked={i === 0} />
-            <label
-              for={amountId(amount)}
-              class:list={[
-                "inline-flex min-h-11 cursor-pointer items-center rounded-full border border-slate-300 px-4 font-medium text-slate-800",
-                TOGGLE_LABEL[i],
-              ]}
-            >
-              {sendAmount(locale, amount, corridor.sendCurrency)}
-            </label>
-          </>
-        ))
-      }
-    </fieldset>
+  {
+    tables.length > 0 && (
+      <div class="group mt-8">
+        <fieldset class="flex flex-wrap items-center gap-2">
+          <legend class="mb-2 w-full text-sm font-semibold text-slate-800">{t(locale, "corridor.amount")}</legend>
+          {
+            tables.map(({ amount }, i) => (
+              <>
+                <input type="radio" name={`amount-${corridor.from}`} id={amountId(amount)} class={`sr-only amt-${i}`} checked={i === 0} />
+                <label
+                  for={amountId(amount)}
+                  class:list={[
+                    "inline-flex min-h-11 cursor-pointer items-center rounded-full border border-slate-300 px-4 font-medium text-slate-800",
+                    TOGGLE_LABEL[i],
+                  ]}
+                >
+                  {sendAmount(locale, amount, corridor.sendCurrency)}
+                </label>
+              </>
+            ))
+          }
+        </fieldset>
 
-    {
-      tables.map(({ amount, rows }, i) => {
-        const bench = benchmarkQuote(corridor.id, amount);
-        const visibility = TOGGLE_PANEL[i];
-        return (
-          <section id={`table-${amountId(amount)}`} class:list={["mt-4", visibility]} aria-labelledby={`h-${amountId(amount)}`}>
-            <h2 id={`h-${amountId(amount)}`} class="sr-only">
-              {t(locale, "corridor.send", { amount: sendAmount(locale, amount, corridor.sendCurrency) })}
-            </h2>
-            <RateTable locale={locale} corridor={corridor} amount={amount} rows={rows} />
-            {bench && (
-              <p class="mt-2 text-sm text-slate-600">
-                {t(locale, "mid.receive", {
-                  amount: sendAmount(locale, amount, corridor.sendCurrency),
-                  receive: money(locale, bench.receiveAmount, "BDT"),
-                })}
-              </p>
-            )}
-          </section>
-        );
-      })
-    }
-  </div>
+        {
+          tables.map(({ amount, rows }, i) => {
+            const bench = benchmarkQuote(corridor.id, amount);
+            const visibility = TOGGLE_PANEL[i];
+            return (
+              <section id={`table-${amountId(amount)}`} class:list={["mt-4", visibility]} aria-labelledby={`h-${amountId(amount)}`}>
+                <h2 id={`h-${amountId(amount)}`} class="sr-only">
+                  {t(locale, "corridor.send", { amount: sendAmount(locale, amount, corridor.sendCurrency) })}
+                </h2>
+                <RateTable locale={locale} corridor={corridor} amount={amount} rows={rows} />
+                {bench && (
+                  <p class="mt-2 text-sm text-slate-600">
+                    {t(locale, "mid.receive", {
+                      amount: sendAmount(locale, amount, corridor.sendCurrency),
+                      receive: money(locale, bench.receiveAmount, "BDT"),
+                    })}
+                  </p>
+                )}
+              </section>
+            );
+          })
+        }
+      </div>
+    )
+  }
+
+  {
+    posted.length > 0 && (
+      <section aria-labelledby="posted-heading" class="mt-8">
+        <h2 id="posted-heading" class="text-lg">{t(locale, "posted.title")}</h2>
+        <p class="mt-1 max-w-3xl text-sm text-slate-700">{t(locale, "posted.lead")}</p>
+        <div class="mt-3">
+          <PostedRateTable locale={locale} corridor={corridor} amount={headline?.amount ?? amountsFor(corridor.id)[0]} rows={posted} />
+        </div>
+      </section>
+    )
+  }
 
   {
     missing.length > 0 && (

@@ -34,6 +34,23 @@ export interface MidMarketInfo {
   stale: boolean;
 }
 
+/** A rate an exchange house publishes without a fee; listed apart from quotes and never ranked against them. */
+export interface PostedRate {
+  provider: string;
+  corridor: string;
+  sendCurrency: string;
+  rate: number;
+  deliveryMethod: string;
+  speed: string;
+  /** For an aggregator such as Ooredoo Money: the exchange house behind the rate */
+  partner: string | null;
+  /** Fee wording published next to the rate, verbatim; null when none */
+  feeNote: string | null;
+  publishedAt: string | null;
+  fetchedAt: string;
+  stale: boolean;
+}
+
 export interface CorridorSnapshot {
   corridor: string;
   sendCurrency: string;
@@ -42,4 +59,7 @@ export interface CorridorSnapshot {
   midMarket: MidMarketInfo | null;
   providers: ProviderStatus[];
   quotes: Quote[];
+  /** Absent in snapshots written before posted rates existed */
+  postedRateProviders?: ProviderStatus[];
+  postedRates?: PostedRate[];
 }

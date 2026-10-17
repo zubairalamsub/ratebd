@@ -45,6 +45,14 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
         p: [
           "Providers charge in different ways: some take the fee out of the amount you send, others add it on top. To compare like with like, we treat the amount as the total you pay, fee included. For providers that add the fee on top, we work out what would arrive if the fee came out of that total: received = (amount − fee) × rate.",
           "Where a provider offers several ways to pay or receive, we use one consistent option: Wise paid by bank transfer, Remitly's standard price rather than its first-transfer discount, the WorldRemit payout method that delivers most, and Xe's default option. Taptap Send publishes one rate per route with no fee for Bangladesh.",
+          "In the Gulf: Western Union's bank-deposit price as a website visitor sees it, Al Mulla Exchange's best correspondent route, Skrill's standard bank-deposit price, and Paysend's card payout with its fee taken from the amount sent.",
+        ],
+      },
+      {
+        h: "Exchange-house rates",
+        p: [
+          "Many people in the Gulf send through exchange houses that publish a rate but not their fee, which is usually added at the counter or in the app. Without the fee there is no total cost to compare, so these rates are listed separately on the route page, best rate first, and never mixed into the ranked table.",
+          "Where the source dates its rate, a rate more than three days old is not treated as current: the last rate we collected stays on the page, marked Stale. For Ooredoo Money, which lists several partner exchange houses, we show each partner's best rate and its published fee range.",
         ],
       },
       {
@@ -104,6 +112,14 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
         p: [
           "প্রতিষ্ঠানগুলো ভিন্ন ভিন্নভাবে ফি নেয়: কেউ পাঠানো অঙ্ক থেকে ফি কাটে, কেউ ওপরে যোগ করে। সমানে সমান তুলনার জন্য আমরা অঙ্কটিকে ফিসহ মোট পরিশোধ হিসেবে ধরি। যারা ফি ওপরে যোগ করে, তাদের ক্ষেত্রে ফি ওই মোট থেকে কাটলে কত পৌঁছাত তা হিসাব করি: প্রাপ্ত = (অঙ্ক − ফি) × রেট।",
           "কোনো প্রতিষ্ঠান একাধিক পরিশোধ বা গ্রহণের পদ্ধতি দিলে আমরা একটি সামঞ্জস্যপূর্ণ বিকল্প ব্যবহার করি: Wise-এ ব্যাংক ট্রান্সফারে পরিশোধ, Remitly-এর প্রথম ট্রান্সফারের ছাড় নয় বরং সাধারণ দাম, WorldRemit-এর যে পেআউট পদ্ধতিতে সবচেয়ে বেশি টাকা পৌঁছায় সেটি, এবং Xe-এর ডিফল্ট বিকল্প। Taptap Send প্রতিটি পথে একটি রেট প্রকাশ করে এবং বাংলাদেশের জন্য কোনো ফি উল্লেখ করে না।",
+          "উপসাগরীয় দেশগুলোতে: ওয়েবসাইটের দর্শক যেভাবে দেখেন সেভাবে Western Union-এর ব্যাংক অ্যাকাউন্টে জমার দাম, Al Mulla Exchange-এর সেরা করেসপন্ডেন্ট ব্যাংকের পথ, Skrill-এর ব্যাংক অ্যাকাউন্টে জমার সাধারণ দাম, এবং Paysend-এর কার্ডে পাঠানো, যার ফি পাঠানো অঙ্ক থেকেই কাটা হয়।",
+        ],
+      },
+      {
+        h: "এক্সচেঞ্জ হাউসের রেট",
+        p: [
+          "উপসাগরীয় দেশগুলোতে অনেকে এমন এক্সচেঞ্জ হাউসের মাধ্যমে টাকা পাঠান, যারা রেট প্রকাশ করে কিন্তু ফি নয়; ফি সাধারণত কাউন্টারে বা অ্যাপে যোগ হয়। ফি ছাড়া মোট খরচের তুলনা করা যায় না, তাই এই রেটগুলো পথের পাতায় আলাদাভাবে, সেরা রেট আগে রেখে দেখানো হয়, এবং র‍্যাংক করা টেবিলের সঙ্গে কখনো মেশানো হয় না।",
+          "যেখানে উৎস রেটের তারিখ দেয়, সেখানে তিন দিনের বেশি পুরোনো রেটকে বর্তমান ধরা হয় না: আমাদের সংগ্রহ করা সর্বশেষ রেটটি ‘পুরোনো’ চিহ্নসহ দেখানো হয়। Ooredoo Money একাধিক অংশীদার এক্সচেঞ্জ হাউসের রেট দেখায়; আমরা প্রতিটি অংশীদারের সেরা রেট ও প্রকাশিত ফির সীমা দেখাই।",
         ],
       },
       {

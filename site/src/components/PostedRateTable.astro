@@ -1,0 +1,89 @@
+---
+// Exchange-house rates published without a fee. Kept out of RateTable: with no fee there is no total cost, so these
+// are listed by rate and never ranked against full quotes.
+import StaleBadge from "./StaleBadge.astro";
+import type { CorridorMeta, PostedRow } from "../lib/data";
+import { money, rate, sendAmount } from "../i18n/format";
+import { feeNote, isUnspecified, label } from "../i18n/labels";
+import { goPath, localePath, providerPath } from "../i18n/routes";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  corridor: CorridorMeta;
+  /** The headline amount, used to show what the rate alone converts it to; omitted when the route has none */
+  amount?: number;
+  rows: PostedRow[];
+}
+
+const { locale, corridor, amount, rows } = Astro.props;
+const caption = t(locale, "posted.caption", { from: corridor.sendCurrency });
+const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
+const td = "px-3 py-3 align-middle whitespace-nowrap";
+---
+
+<div class="relative overflow-x-auto rounded-lg border border-slate-200" role="region" aria-label={caption} tabindex="0">
+  <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
+    <caption class="sr-only">{caption}</caption>
+    <thead class="bg-slate-50">
+      <tr>
+        <th scope="col" class={th}>{t(locale, "posted.house")}</th>
+        <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.rate")}</th>
+        {
+          amount !== undefined && (
+            <th scope="col" class:list={[th, "text-right"]}>
+              {t(locale, "posted.beforeFees", { amount: sendAmount(locale, amount, corridor.sendCurrency) })}
+            </th>
+          )
+        }
+        <th scope="col" class={th}>{t(locale, "table.fee")}</th>
+        <th scope="col" class={th}>{t(locale, "table.delivery")}</th>
+        <th scope="col" class={th}>{t(locale, "table.speed")}</th>
+        <th scope="col" class={th}><span class="sr-only">{t(locale, "table.visitHeader")}</span></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-100 bg-white">
+      {
+        rows.map(({ posted, provider }) => (
+          <tr class:list={[posted.stale && "text-slate-600"]}>
+            <th scope="row" class:list={[td, "text-left font-medium"]}>
+              <span class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                {posted.partner ? (
+                  <span>
+                    <span class="text-slate-900">{posted.partner}</span>
+                    <a href={localePath(locale, providerPath(provider.slug))} class="block text-xs font-normal">
+                      {t(locale, "posted.via", { name: provider.name })}
+                    </a>
+                  </span>
+                ) : (
+                  <a href={localePath(locale, providerPath(provider.slug))} class="text-slate-900">
+                    {provider.name}
+                  </a>
+                )}
+                {posted.stale && <StaleBadge locale={locale} name={provider.name} fetchedAt={posted.fetchedAt} />}
+              </span>
+            </th>
+            <td class:list={[td, "text-right text-base font-semibold text-slate-900"]}>{rate(locale, posted.rate)}</td>
+            {amount !== undefined && (
+              <td class:list={[td, "text-right"]}>{money(locale, Math.round(amount * posted.rate * 100) / 100, "BDT")}</td>
+            )}
+            <td class:list={[td, !posted.feeNote && "text-slate-600"]}>
+              {posted.feeNote ? feeNote(locale, posted.feeNote) : t(locale, "posted.feeNone")}
+            </td>
+            <td class:list={[td, isUnspecified(posted.deliveryMethod) && "text-slate-600"]}>{label(locale, posted.deliveryMethod)}</td>
+            <td class:list={[td, isUnspecified(posted.speed) && "text-slate-600"]}>{label(locale, posted.speed)}</td>
+            <td class={td}>
+              <a
+                href={goPath(provider.slug)}
+                rel="nofollow sponsored noopener"
+                class="inline-flex min-h-11 items-center rounded-md border border-brand-700 px-3 font-medium text-brand-700 no-underline hover:bg-brand-50"
+              >
+                {t(locale, "table.visit", { name: provider.name })}
+              </a>
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

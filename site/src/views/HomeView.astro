@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StaleBadge from "../components/StaleBadge.astro";
-import { CORRIDORS, PROVIDERS, REGIONS, amountsFor, loadSnapshot, rowsFor } from "../lib/data";
-import { dateTime, money, percent, sendAmount } from "../i18n/format";
+import { CORRIDORS, LISTED_PROVIDERS, REGIONS, amountsFor, loadSnapshot, postedRowsFor, rowsFor, topRows } from "../lib/data";
+import { dateTime, list, money, percent, rate, sendAmount } from "../i18n/format";
 import { corridorPath, localePath, providerPath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
 
@@ -14,11 +14,21 @@ const { locale } = Astro.props;
 const cards = CORRIDORS.map((corridor) => {
   const amount = amountsFor(corridor.id)[0] ?? 0;
   const rows = rowsFor(corridor.id, amount);
+  const top = topRows(rows);
+  const best = top[0] ?? rows[0];
+  const posted = postedRowsFor(corridor.id);
   return {
     corridor,
     amount,
     snapshot: loadSnapshot(corridor.id),
-    best: rows.find((r) => !r.quote.stale) ?? rows[0],
+    best,
+    // Providers tied at the same price are named together.
+    bestNames:
+      best && top.length > 1 && top.every((r) => r.quote.rate === best.quote.rate && r.quote.fee === best.quote.fee)
+        ? list(locale, top.map((r) => r.provider.name))
+        : best?.provider.name,
+    // Shown when a route has no quotes at all.
+    bestPosted: posted.find((r) => !r.posted.stale) ?? posted[0],
   };
 });
 const groups = REGIONS.map((region) => ({ region, cards: cards.filter((c) => c.corridor.region === region) })).filter(
@@ -52,7 +62,7 @@ const jsonLd = [
         </h3>
         <div class="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {
-            group.cards.map(({ corridor, amount, snapshot, best }) => (
+            group.cards.map(({ corridor, amount, snapshot, best, bestNames, bestPosted }) => (
               <section class="flex flex-col rounded-xl border border-slate-200 p-5 shadow-sm" aria-labelledby={`card-${corridor.id}`}>
                 <h4 id={`card-${corridor.id}`} class="text-lg font-semibold">
                   {t(locale, "home.from", { country: t(locale, corridor.countryKey) })}
@@ -69,10 +79,25 @@ const jsonLd = [
                       {money(locale, best.quote.receiveAmount, "BDT")}
                     </dd>
                     <dd class="flex flex-wrap items-center gap-2 text-sm text-slate-700">
-                      {best.provider.name}
+                      {bestNames}
                       {best.quote.stale && <StaleBadge locale={locale} name={best.provider.name} fetchedAt={best.quote.fetchedAt} />}
                       {best.marginPct !== null && best.marginPct >= 0 && (
                         <span class="text-slate-600"> · {t(locale, "table.margin")}: {percent(locale, best.marginPct)}</span>
+                      )}
+                    </dd>
+                  </dl>
+                ) : bestPosted ? (
+                  <dl class="mt-3">
+                    <dt class="text-sm text-slate-600">
+                      {t(locale, bestPosted.posted.stale ? "home.bestPostedStale" : "home.bestPosted")}
+                    </dt>
+                    <dd class="mt-1 text-2xl font-semibold text-brand-800 tabular">
+                      {t(locale, "posted.rateValue", { from: corridor.sendCurrency, rate: rate(locale, bestPosted.posted.rate) })}
+                    </dd>
+                    <dd class="flex flex-wrap items-center gap-2 text-sm text-slate-700">
+                      {bestPosted.posted.partner ?? bestPosted.provider.name}
+                      {bestPosted.posted.stale && (
+                        <StaleBadge locale={locale} name={bestPosted.provider.name} fetchedAt={bestPosted.posted.fetchedAt} />
                       )}
                     </dd>
                   </dl>
@@ -114,7 +139,7 @@ const jsonLd = [
     <h2 id="providers-heading" class="text-xl">{t(locale, "provider.allTitle")}</h2>
     <ul class="mt-3 flex flex-wrap gap-2">
       {
-        PROVIDERS.map((p) => (
+        LISTED_PROVIDERS.map((p) => (
           <li>
             <a
               href={localePath(locale, providerPath(p.slug))}
