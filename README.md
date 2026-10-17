@@ -1,6 +1,8 @@
 # ratebd
 
 Remittance rate comparison for sending money to Bangladesh (GBP→BDT and AED→BDT).
+
+**Live site:** https://ratebd.pages.dev (Cloudflare Pages, rebuilt on every push to `main`).
 Everything runs on free tiers: no servers, no database, no VMs.
 
 ```
@@ -129,12 +131,12 @@ What the site does:
 
    | Setting | Value |
    |---|---|
-   | Framework preset | Astro |
+   | Framework preset | None (the settings below are all that is needed) |
    | Root directory | `site` |
    | Build command | `npm run build` |
    | Build output | `dist` |
 
-   [`site/wrangler.toml`](site/wrangler.toml) also sets `pages_build_output_dir`. Node comes from `site/.nvmrc` (22).
+   [`site/wrangler.toml`](site/wrangler.toml) also sets `pages_build_output_dir`. The live project also sets the environment variable `NODE_VERSION=22`, matching `site/.nvmrc`.
 3. Optional: set `SITE_URL` to your custom domain. Without it, canonical URLs use `https://ratebd.pages.dev`.
 4. Optional: under **Settings → Builds → Build watch paths**, include `site/*` and `data/*`. Engine-only commits then don't use a build.
 
