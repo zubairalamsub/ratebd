@@ -40,3 +40,30 @@ public class RemitlyParserTests
         Assert.Contains("NOT_ALLOWED", ex.Message);
     }
 }
+
+public class RemitlyDeviceIdTests
+{
+    [Fact]
+    public void Device_id_is_read_from_the_page_context()
+    {
+        // Real page excerpt with the ID value redacted (see the fixture's header comment).
+        var id = RemitlyParser.ParseDeviceEnvironmentId(Fixture.Read("remitly-converter-page-excerpt.html"), []);
+
+        Assert.Equal("REDACTEDDEVICEENVIRONMENTIDFORTESTS0123456789", id);
+    }
+
+    [Fact]
+    public void Falls_back_to_the_de_id_cookie()
+    {
+        var id = RemitlyParser.ParseDeviceEnvironmentId("<html></html>",
+            ["ci_session=abc; Path=/", "de_id=AbCdEfGhIjKlMnOpQrStUv_-12; Max-Age=315360000; Path=/; Secure"]);
+
+        Assert.Equal("AbCdEfGhIjKlMnOpQrStUv_-12", id);
+    }
+
+    [Fact]
+    public void Returns_null_when_absent()
+    {
+        Assert.Null(RemitlyParser.ParseDeviceEnvironmentId("<html>no context</html>", ["other=1"]));
+    }
+}

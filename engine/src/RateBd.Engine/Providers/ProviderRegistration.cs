@@ -16,8 +16,8 @@ public static class ProviderRegistration
         services.Configure<MidMarketOptions>(configuration.GetSection(MidMarketOptions.Section));
         AddProvider<MidMarketProvider>(services, configuration, "MidMarket");
         AddProvider<WiseProvider>(services, configuration, "Wise");
-        // Remitly answers bursts with 429 "try again in a couple of minutes": back off for longer.
-        AddProvider<RemitlyProvider>(services, configuration, "Remitly", o => o.Retry.Delay = TimeSpan.FromSeconds(6));
+        // Remitly's 429s cleared within seconds in testing; the provider itself retries once more with a fresh device ID.
+        AddProvider<RemitlyProvider>(services, configuration, "Remitly");
         AddProvider<TaptapSendProvider>(services, configuration, "TaptapSend");
         AddProvider<WorldRemitProvider>(services, configuration, "WorldRemit");
         AddProvider<XeProvider>(services, configuration, "Xe");

@@ -1,12 +1,13 @@
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using RateBd.Engine.Json;
 using RateBd.Engine.Models;
 using RateBd.Engine.Providers;
 
 namespace RateBd.Engine.Parsing;
 
-/// <summary>Parses responses from <c>GET https://api.remitly.io/v3/calculator/estimate</c>.</summary>
-internal static class RemitlyParser
+/// <summary>Parses responses from <c>GET https://api.remitly.com/v3/calculator/estimate</c> and the device ID on Remitly pages.</summary>
+internal static partial class RemitlyParser
 {
     /// <summary>
     /// Uses Remitly's standard ("everyday") price: <c>exchange_rate.base_rate</c> and the undiscounted
@@ -42,4 +43,32 @@ internal static class RemitlyParser
         return new Quote("Remitly", corridor.Id, corridor.SendCurrency, sendAmount, rate, fee,
             QuoteMath.ReceiveFor(sendAmount, fee, rate), delivery, Labels.NotSpecified, fetchedAt, Stale: false);
     }
+
+    /// <summary>
+    /// Extracts the server-issued device ID that remitly.com pages embed as <c>"deviceEnvironmentId":"…"</c> in their
+    /// page context, falling back to the <c>de_id</c> cookie the same response sets.
+    /// </summary>
+    public static string? ParseDeviceEnvironmentId(string html, IEnumerable<string> setCookieHeaders)
+    {
+        var match = DeviceIdRegex().Match(html);
+        if (match.Success)
+        {
+            return match.Groups[1].Value;
+        }
+        foreach (var header in setCookieHeaders)
+        {
+            var cookie = DeIdCookieRegex().Match(header);
+            if (cookie.Success)
+            {
+                return cookie.Groups[1].Value;
+            }
+        }
+        return null;
+    }
+
+    [GeneratedRegex("\"deviceEnvironmentId\":\"([A-Za-z0-9_-]{16,})\"")]
+    private static partial Regex DeviceIdRegex();
+
+    [GeneratedRegex(@"(?:^|;\s*)de_id=([A-Za-z0-9_-]{16,})")]
+    private static partial Regex DeIdCookieRegex();
 }
