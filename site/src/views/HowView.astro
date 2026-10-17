@@ -30,7 +30,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "What we collect",
         p: [
-          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for quotes on two typical amounts from each sending country we track, for example SAR 1,000 and SAR 2,000 from Saudi Arabia or KWD 100 and KWD 200 from Kuwait. Rates and fees are taken exactly as each provider quotes them; we never type in or estimate a rate. We only collect from providers whose published terms allow it (see the legal notice). The amount received is then normalised to the same total payment, as explained below.",
+          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for quotes on two typical amounts from each sending country we track, for example KWD 100 and KWD 200 from Kuwait or OMR 100 and OMR 200 from Oman. Rates and fees are taken exactly as each provider quotes them; we never type in or estimate a rate. We only collect from providers whose published terms allow it (see the legal notice). The amount received is then normalised to the same total payment, as explained below.",
           "If a provider does not offer a route at all, for example a provider that does not serve senders in a particular country, it is listed as not offered rather than left out silently.",
         ],
       },
@@ -45,14 +45,14 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
         h: "Same total payment for everyone",
         p: [
           "Providers charge in different ways: some take the fee out of the amount you send, others add it on top. To compare like with like, we treat the amount as the total you pay, fee included. For providers that add the fee on top, we work out what would arrive if the fee came out of that total: received = (amount − fee) × rate.",
-          "Where a provider offers several ways to pay or receive, we use one consistent option: Western Union's bank-deposit price as a website visitor sees it, Al Mulla Exchange's best correspondent route, Skrill's standard bank-deposit price rather than its first-transfer discount, and Paysend's card payout with its fee taken from the amount sent.",
+          "Where a provider offers several ways to pay or receive, we use one consistent option: Al Mulla Exchange quotes several correspondent-bank routes, and we show its best rate with that route's fee.",
         ],
       },
       {
         h: "Exchange-house rates",
         p: [
           "Many people in the Gulf send through exchange houses that publish a rate but not their fee, which is usually added at the counter or in the app. Without the fee there is no total cost to compare, so these rates are listed separately on the route page, best rate first, and never mixed into the ranked table.",
-          "Where the source dates its rate, a rate more than three days old is not treated as current: the last rate we collected stays on the page, marked Stale. For Ooredoo Money, which lists several partner exchange houses, we show each partner's best rate and its published fee range.",
+          "Where the source dates its rate, a rate more than three days old is not treated as current: the last rate we collected stays on the page, marked Stale.",
         ],
       },
       {
@@ -96,7 +96,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "আমরা কী সংগ্রহ করি",
         p: [
-          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে আমাদের তালিকার প্রতিটি দেশ থেকে দুটি সাধারণ অঙ্ক পাঠানোর কোট চায়, যেমন সৌদি আরব থেকে ১,০০০ ও ২,০০০ রিয়াল বা কুয়েত থেকে ১০০ ও ২০০ দিনার। প্রতিষ্ঠান যেভাবে দেয়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। শুধু যেসব প্রতিষ্ঠানের প্রকাশিত শর্তে অনুমতি আছে, সেখান থেকেই তথ্য সংগ্রহ করা হয় (আইনি নোটিশ দেখুন)। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
+          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে আমাদের তালিকার প্রতিটি দেশ থেকে দুটি সাধারণ অঙ্ক পাঠানোর কোট চায়, যেমন কুয়েত থেকে ১০০ ও ২০০ দিনার বা ওমান থেকে ১০০ ও ২০০ রিয়াল। প্রতিষ্ঠান যেভাবে দেয়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। শুধু যেসব প্রতিষ্ঠানের প্রকাশিত শর্তে অনুমতি আছে, সেখান থেকেই তথ্য সংগ্রহ করা হয় (আইনি নোটিশ দেখুন)। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
           "কোনো প্রতিষ্ঠান কোনো পথে সেবা না দিলে, যেমন কোনো নির্দিষ্ট দেশের প্রেরকদের সেবা দেয় না এমন প্রতিষ্ঠান, সেটি চুপচাপ বাদ না দিয়ে ‘সেবা নেই’ হিসেবে দেখানো হয়।",
         ],
       },
@@ -111,14 +111,14 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
         h: "সবার জন্য একই মোট পরিশোধ",
         p: [
           "প্রতিষ্ঠানগুলো ভিন্ন ভিন্নভাবে ফি নেয়: কেউ পাঠানো অঙ্ক থেকে ফি কাটে, কেউ ওপরে যোগ করে। সমানে সমান তুলনার জন্য আমরা অঙ্কটিকে ফিসহ মোট পরিশোধ হিসেবে ধরি। যারা ফি ওপরে যোগ করে, তাদের ক্ষেত্রে ফি ওই মোট থেকে কাটলে কত পৌঁছাত তা হিসাব করি: প্রাপ্ত = (অঙ্ক − ফি) × রেট।",
-          "কোনো প্রতিষ্ঠান একাধিক পরিশোধ বা গ্রহণের পদ্ধতি দিলে আমরা একটি সামঞ্জস্যপূর্ণ বিকল্প ব্যবহার করি: ওয়েবসাইটের দর্শক যেভাবে দেখেন সেভাবে Western Union-এর ব্যাংক অ্যাকাউন্টে জমার দাম, Al Mulla Exchange-এর সেরা করেসপন্ডেন্ট ব্যাংকের পথ, প্রথম ট্রান্সফারের ছাড় নয় বরং Skrill-এর ব্যাংক অ্যাকাউন্টে জমার সাধারণ দাম, এবং Paysend-এর কার্ডে পাঠানো, যার ফি পাঠানো অঙ্ক থেকেই কাটা হয়।",
+          "কোনো প্রতিষ্ঠান একাধিক পরিশোধ বা গ্রহণের পদ্ধতি দিলে আমরা একটি সামঞ্জস্যপূর্ণ বিকল্প ব্যবহার করি: Al Mulla Exchange কয়েকটি করেসপন্ডেন্ট ব্যাংকের পথের দাম দেয়; আমরা তার সেরা রেট ও সেই পথের ফি দেখাই।",
         ],
       },
       {
         h: "এক্সচেঞ্জ হাউসের রেট",
         p: [
           "উপসাগরীয় দেশগুলোতে অনেকে এমন এক্সচেঞ্জ হাউসের মাধ্যমে টাকা পাঠান, যারা রেট প্রকাশ করে কিন্তু ফি নয়; ফি সাধারণত কাউন্টারে বা অ্যাপে যোগ হয়। ফি ছাড়া মোট খরচের তুলনা করা যায় না, তাই এই রেটগুলো পথের পাতায় আলাদাভাবে, সেরা রেট আগে রেখে দেখানো হয়, এবং র‍্যাংক করা টেবিলের সঙ্গে কখনো মেশানো হয় না।",
-          "যেখানে উৎস রেটের তারিখ দেয়, সেখানে তিন দিনের বেশি পুরোনো রেটকে বর্তমান ধরা হয় না: আমাদের সংগ্রহ করা সর্বশেষ রেটটি ‘পুরোনো’ চিহ্নসহ দেখানো হয়। Ooredoo Money একাধিক অংশীদার এক্সচেঞ্জ হাউসের রেট দেখায়; আমরা প্রতিটি অংশীদারের সেরা রেট ও প্রকাশিত ফির সীমা দেখাই।",
+          "যেখানে উৎস রেটের তারিখ দেয়, সেখানে তিন দিনের বেশি পুরোনো রেটকে বর্তমান ধরা হয় না: আমাদের সংগ্রহ করা সর্বশেষ রেটটি ‘পুরোনো’ চিহ্নসহ দেখানো হয়।",
         ],
       },
       {

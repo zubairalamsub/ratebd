@@ -42,7 +42,7 @@ export interface PostedRate {
   rate: number;
   deliveryMethod: string;
   speed: string;
-  /** For an aggregator such as Ooredoo Money: the exchange house behind the rate */
+  /** For an aggregator that lists several exchange houses: the one behind the rate */
   partner: string | null;
   /** Fee wording published next to the rate, verbatim; null when none */
   feeNote: string | null;

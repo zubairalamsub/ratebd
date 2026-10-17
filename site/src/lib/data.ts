@@ -193,8 +193,8 @@ export function rowsFor(id: string, amount: number): Row[] {
 }
 
 /**
- * Rows that share the most taka received among fresh (non-stale) quotes. Several rows can tie: Al Mulla, for one,
- * often routes through Western Union at exactly Western Union's price. Empty when every quote is stale.
+ * Rows that share the most taka received among fresh (non-stale) quotes. Several rows can tie when providers route
+ * through the same network at the same price. Empty when every quote is stale.
  */
 export function topRows(rows: Row[]): Row[] {
   const fresh = rows.filter((r) => !r.quote.stale);

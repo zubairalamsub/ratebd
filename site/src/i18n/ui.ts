@@ -161,28 +161,14 @@ const en = {
   "provider.compare": "Compare with other providers from {country}",
   "provider.allTitle": "Providers we track",
 
-  "source.WesternUnion":
-    "Western Union's public price calculator for Saudi Arabia, Kuwait and Qatar, as a website visitor sees it. We show its bank-deposit price; any fee is added on top, so we deduct it from the amount sent. Western Union's Oman site has no online calculator.",
   "source.AlMulla":
-    "Al Mulla Exchange's public calculator (Kuwait). It prices each correspondent-bank route; we show the best rate, with its fee (added on top) deducted from the amount sent. Its best route is often Western Union's network, in which case its price matches Western Union's.",
-  "source.Skrill":
-    "Skrill Money Transfer's public calculator (Kuwait), paying by debit card into a bank account. We show the standard price, not its first-transfer discount.",
-  "source.Paysend":
-    "The rate and fee tariff on Paysend's public Kuwait-to-Bangladesh page. Paysend deducts its fee from the amount sent and pays out to a bank card.",
-  "source.OoredooMoney":
-    "The send-money page of Ooredoo Money, Qatar's mobile wallet, which lists the rate of each partner exchange house (MoneyGram, Western Union, Al Zaman and others). It gives a fee range rather than an exact fee, so these appear as posted rates.",
-  "source.GulfExchange": "Gulf Exchange's public currency converter (Qatar), for a bank transfer. No fee is published.",
-  "source.AlZaman": "The telegraphic-transfer (TT) rate on Al Zaman Exchange's website (Qatar). No fee is published.",
+    "Al Mulla Exchange's public calculator (Kuwait). It prices each correspondent-bank route; we show the best rate, with its fee (added on top) deducted from the amount sent.",
   "source.HabibQatar": "The currency converter on Habib Qatar International Exchange's website. No fee or payout method is given.",
   "source.AlMirqab": "The DRAFT/TT rate in Al Mirqab Exchange's public rates table (Qatar). No fee is published.",
   "source.Unimoni":
     "Unimoni Oman's live-rate converter. A service fee is charged on top but not published, and the rate is the same for every payout method.",
   "source.PKExchange":
     "The TT (bank transfer) rate on Purshottam Kanji Exchange's dated \"Today's Exchange Rates\" page (Oman), which it labels indicative. The commission is shown only on the receipt.",
-  "source.Joyalukkas":
-    "The TT (bank transfer) rate from Joyalukkas Exchange's website converter, for Kuwait and Oman. No fee is published for these countries.",
-  "source.AlAnsari":
-    "The bank-transfer rate from Al Ansari Exchange Kuwait's website converter, which it labels indicative. No fee is published.",
   "source.Aman":
     "The transfer rate on Aman Exchange's rate board (Kuwait). A rate the board dates more than three days back is not treated as current. No fee is published.",
 
@@ -370,28 +356,14 @@ const bn: Record<UiKey, string> = {
   "provider.compare": "{country} থেকে অন্যান্য প্রতিষ্ঠানের সঙ্গে তুলনা করুন",
   "provider.allTitle": "যেসব প্রতিষ্ঠান আমরা দেখি",
 
-  "source.WesternUnion":
-    "সৌদি আরব, কুয়েত ও কাতারের জন্য Western Union-এর পাবলিক দামের ক্যালকুলেটর, ওয়েবসাইটের একজন দর্শক যেভাবে দেখেন। আমরা ব্যাংক অ্যাকাউন্টে জমার দাম দেখাই; কোনো ফি থাকলে তা আলাদাভাবে যোগ হয়, তাই আমরা তা পাঠানো অঙ্ক থেকে বাদ দিই। ওমানের জন্য Western Union-এর ওয়েবসাইটে কোনো অনলাইন ক্যালকুলেটর নেই।",
   "source.AlMulla":
-    "Al Mulla Exchange-এর পাবলিক ক্যালকুলেটর (কুয়েত)। এটি প্রতিটি করেসপন্ডেন্ট ব্যাংকের পথের দাম দেয়; আমরা সেরা রেটটি দেখাই, এবং এর ফি (আলাদাভাবে যোগ হয়) পাঠানো অঙ্ক থেকে বাদ দিই। এর সেরা পথ প্রায়ই Western Union-এর নেটওয়ার্ক; তখন এর দাম Western Union-এর দামের সমান হয়।",
-  "source.Skrill":
-    "Skrill Money Transfer-এর পাবলিক ক্যালকুলেটর (কুয়েত), ডেবিট কার্ডে পরিশোধ করে ব্যাংক অ্যাকাউন্টে পাঠানো ধরে। আমরা সাধারণ দাম দেখাই, প্রথম ট্রান্সফারের ছাড় নয়।",
-  "source.Paysend":
-    "Paysend-এর কুয়েত থেকে বাংলাদেশ পাতায় প্রকাশিত রেট ও ফির হার। Paysend পাঠানো অঙ্ক থেকেই ফি কেটে নেয় এবং ব্যাংক কার্ডে টাকা পাঠায়।",
-  "source.OoredooMoney":
-    "কাতারের মোবাইল ওয়ালেট Ooredoo Money-এর টাকা পাঠানোর পাতা, যেখানে প্রতিটি অংশীদার এক্সচেঞ্জ হাউসের (MoneyGram, Western Union, Al Zaman প্রভৃতি) রেট দেখানো হয়। এতে নির্দিষ্ট ফি নয়, ফির একটি সীমা দেওয়া থাকে, তাই এগুলো ঘোষিত রেট হিসেবে দেখানো হয়।",
-  "source.GulfExchange": "Gulf Exchange-এর পাবলিক মুদ্রা রূপান্তরকারী (কাতার), ব্যাংক ট্রান্সফারের জন্য। কোনো ফি প্রকাশ করা হয় না।",
-  "source.AlZaman": "Al Zaman Exchange-এর ওয়েবসাইটের টেলিগ্রাফিক ট্রান্সফার (TT) রেট (কাতার)। কোনো ফি প্রকাশ করা হয় না।",
+    "Al Mulla Exchange-এর পাবলিক ক্যালকুলেটর (কুয়েত)। এটি প্রতিটি করেসপন্ডেন্ট ব্যাংকের পথের দাম দেয়; আমরা সেরা রেটটি দেখাই, এবং এর ফি (আলাদাভাবে যোগ হয়) পাঠানো অঙ্ক থেকে বাদ দিই।",
   "source.HabibQatar": "Habib Qatar International Exchange-এর ওয়েবসাইটের মুদ্রা রূপান্তরকারী। কোনো ফি বা পাঠানোর পদ্ধতি জানানো হয় না।",
   "source.AlMirqab": "Al Mirqab Exchange-এর পাবলিক রেট তালিকার DRAFT/TT রেট (কাতার)। কোনো ফি প্রকাশ করা হয় না।",
   "source.Unimoni":
     "Unimoni Oman-এর লাইভ রেট রূপান্তরকারী। সার্ভিস ফি আলাদাভাবে নেওয়া হয় কিন্তু প্রকাশ করা হয় না, এবং সব পাঠানোর পদ্ধতিতে রেট একই।",
   "source.PKExchange":
     "Purshottam Kanji Exchange-এর তারিখযুক্ত ‘Today's Exchange Rates’ পাতার TT (ব্যাংক ট্রান্সফার) রেট (ওমান), যাকে তারা আনুমানিক বলে উল্লেখ করে। কমিশন শুধু রসিদে দেখানো হয়।",
-  "source.Joyalukkas":
-    "কুয়েত ও ওমানের জন্য Joyalukkas Exchange-এর ওয়েবসাইটের রূপান্তরকারী থেকে TT (ব্যাংক ট্রান্সফার) রেট। এই দেশগুলোর জন্য কোনো ফি প্রকাশ করা হয় না।",
-  "source.AlAnsari":
-    "Al Ansari Exchange Kuwait-এর ওয়েবসাইটের রূপান্তরকারী থেকে ব্যাংক ট্রান্সফার রেট, যাকে তারা আনুমানিক বলে উল্লেখ করে। কোনো ফি প্রকাশ করা হয় না।",
   "source.Aman":
     "Aman Exchange-এর রেট বোর্ডের ট্রান্সফার রেট (কুয়েত)। বোর্ডে তিন দিনের বেশি পুরোনো তারিখের রেটকে বর্তমান ধরা হয় না। কোনো ফি প্রকাশ করা হয় না।",
 

@@ -41,7 +41,7 @@ const routes = CORRIDORS.filter((corridor) => statusFor(corridor.id, provider.en
 });
 // An exchange house that only posts rates (no fee) is described as such.
 const postsRates = CORRIDORS.some((c) => (loadSnapshot(c.id).postedRateProviders ?? []).some((s) => s.name === provider.engineName));
-// Ooredoo Money gives a fee range ("Starting from QAR 20") rather than no fee at all.
+// Some sources give a fee range (e.g. "Starting from QAR 20") rather than no fee at all.
 const givesFeeRange = routes.some((r) => r.posted.some((p) => p.feeNote));
 // Only name the routes the provider actually serves (a provider that merely failed today still counts).
 const servedCountries = routes.filter((r) => r.status?.status !== "not_supported").map((r) => t(locale, r.corridor.countryKey));
