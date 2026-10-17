@@ -20,6 +20,9 @@ public sealed class EngineOptions
 
     /// <summary>Exit with a non-zero code when no provider returned a fresh quote on any corridor.</summary>
     public bool FailWhenNothingFetched { get; set; } = true;
+
+    /// <summary>When set, only these providers run (e.g. <c>["MidMarket"]</c> for an offline smoke test).</summary>
+    public string[] OnlyProviders { get; set; } = [];
 }
 
 public sealed class CorridorOptions

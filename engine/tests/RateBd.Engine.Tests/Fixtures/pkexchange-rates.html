@@ -1,0 +1,643 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PK-Exchange</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/order.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link rel="icon" href= 
+"/static/Images/pk-logo-d.jpg" 
+          type="image/x-icon"> 
+
+<script src="/static/js/main.js"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<!-- HTML Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand " href="/"><img src="/static/Images/pk-logo.png" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link " href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#services-section">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#legacy-section">Legacy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#about-section">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#contact-section">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/rates/">Rates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#orders-page">Buy Now</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/branches/">Branches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/gallery/">Gallery</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Add this JavaScript code at the bottom of your body tag -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+
+    // Add click event listener to each nav link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Check if navbar is expanded (visible on mobile)
+            if (navbarCollapse.classList.contains('show')) {
+                // Use Bootstrap's collapse method to close the navbar
+                navbarToggler.click();
+            }
+        });
+    });
+
+    // Additional handler for hash links (section navigation)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                // Smooth scroll to the section
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close navbar if open
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            }
+        });
+    });
+});
+</script>
+    <!-- Main Content -->
+    <div class="">
+        
+<div class="container mt-5">
+    <h2 class="text-center my-4 mt-5" style="padding-top:3rem;">Today's Exchange Rates</h2>
+    <p class="text-center text-muted">17/10/2026</p>
+    <div class="alert alert-info text-center">
+        These rates are indicative and subject to change based on market fluctuations. 
+    </div>
+    
+    <div class="row">
+        <!-- Main rates table -->
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Country</th>
+                            <th colspan="2" class="remittance-section">Remittance</th>
+                            <th colspan="2" class="forex-section">FOREX</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="remittance-section">TT</th>
+                            <th class="remittance-section">Cash Pay</th>
+                            <th class="forex-section">Buy</th>
+                            <th class="forex-section">Sell</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/saudi-arabia.png" alt="SAUDI ARABIA" class="country-flag mr-2">
+                                    
+                                    <span>SAUDI ARABIA</span>
+                                </div>
+                            </td>
+                            <td> <b>9.72 </b></td>
+                            <td> <b>8.79</b> </td>
+                            <td> <b>9.85</b>  </td>
+                            <td> <b>9.70</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/United_Arab_Emirates_5P0OIzd_xLDtfOd.png" alt="UAE" class="country-flag mr-2">
+                                    
+                                    <span>UAE</span>
+                                </div>
+                            </td>
+                            <td> <b>9.52 </b></td>
+                            <td> <b>9.52</b> </td>
+                            <td> <b>9.61</b>  </td>
+                            <td> <b>9.52</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/united-states-of-america.png" alt="USA" class="country-flag mr-2">
+                                    
+                                    <span>USA</span>
+                                </div>
+                            </td>
+                            <td> <b>2.59 </b></td>
+                            <td> <b>2.45</b> </td>
+                            <td> <b>2.60</b>  </td>
+                            <td> <b>2.58</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/united-kingdom.png" alt="UNITED KINGDOM" class="country-flag mr-2">
+                                    
+                                    <span>UNITED KINGDOM</span>
+                                </div>
+                            </td>
+                            <td> <b>1.90 </b></td>
+                            <td> <b>1.89</b> </td>
+                            <td> <b>2.00</b>  </td>
+                            <td> <b>1.90</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/european-union.png" alt="EURO" class="country-flag mr-2">
+                                    
+                                    <span>EURO</span>
+                                </div>
+                            </td>
+                            <td> <b>2.30 </b></td>
+                            <td> <b>2.17</b> </td>
+                            <td> <b>2.32</b>  </td>
+                            <td> <b>2.17</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/India-flag_iCyE1Sw_nSHuC4w.png" alt="INDIA" class="country-flag mr-2">
+                                    
+                                    <span>INDIA</span>
+                                </div>
+                            </td>
+                            <td> <b>246.30 </b></td>
+                            <td> <b>245.42</b> </td>
+                            <td> <b>250.00</b>  </td>
+                            <td> <b>222.22</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Bangladesh-fllag_tamyTKD_thI5uN8.png" alt="BANGLADESH" class="country-flag mr-2">
+                                    
+                                    <span>BANGLADESH</span>
+                                </div>
+                            </td>
+                            <td> <b>320.00 </b></td>
+                            <td> <b>320.00</b> </td>
+                            <td> <b>333.30</b>  </td>
+                            <td> <b>285.71</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Pakistan-flag_Gr8ydho_9Orf1ly.png" alt="PAKISTAN" class="country-flag mr-2">
+                                    
+                                    <span>PAKISTAN</span>
+                                </div>
+                            </td>
+                            <td> <b>719.10 </b></td>
+                            <td> <b>719.10</b> </td>
+                            <td> <b>833.33</b>  </td>
+                            <td> <b>625.00</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Philippines-flag_yACqZtO_yv1cbaK.png" alt="PHILIPPINES" class="country-flag mr-2">
+                                    
+                                    <span>PHILIPPINES</span>
+                                </div>
+                            </td>
+                            <td> <b>163.00 </b></td>
+                            <td> <b>163.00</b> </td>
+                            <td> <b>162.50</b>  </td>
+                            <td> <b>162.50</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Nepal-flag_JAYXWGP_ia10qld.png" alt="NEPAL" class="country-flag mr-2">
+                                    
+                                    <span>NEPAL</span>
+                                </div>
+                            </td>
+                            <td> <b>392.75 </b></td>
+                            <td> <b>392.75</b> </td>
+                            <td> <b>400.00</b>  </td>
+                            <td> <b>322.58</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Sri_Lanka-flag_AZIMhIl_Q0YDvsv.png" alt="SRI LANKA" class="country-flag mr-2">
+                                    
+                                    <span>SRI LANKA</span>
+                                </div>
+                            </td>
+                            <td> <b>859.75 </b></td>
+                            <td> <b>859.75</b> </td>
+                            <td> <b>833.33</b>  </td>
+                            <td> <b>625.00</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/thailand.png" alt="THAILAND" class="country-flag mr-2">
+                                    
+                                    <span>THAILAND</span>
+                                </div>
+                            </td>
+                            <td> <b>87.71 </b></td>
+                            <td> <b>87.64</b> </td>
+                            <td> <b>87.71</b>  </td>
+                            <td> <b>80.64</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/singapore.png" alt="SINGAPORE" class="country-flag mr-2">
+                                    
+                                    <span>SINGAPORE</span>
+                                </div>
+                            </td>
+                            <td> <b>2.59 </b></td>
+                            <td> <b>2.59</b> </td>
+                            <td> <b>3.63</b>  </td>
+                            <td> <b>3.23</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/malaysia.png" alt="MALAYSIA" class="country-flag mr-2">
+                                    
+                                    <span>MALAYSIA</span>
+                                </div>
+                            </td>
+                            <td> <b>10.91 </b></td>
+                            <td> <b>10.91</b> </td>
+                            <td> <b>11.76</b>  </td>
+                            <td> <b>10.00</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/bahrain.png" alt="BAHRAIN" class="country-flag mr-2">
+                                    
+                                    <span>BAHRAIN</span>
+                                </div>
+                            </td>
+                            <td> <b>1.00 </b></td>
+                            <td> <b>0.95</b> </td>
+                            <td> <b>1.00</b>  </td>
+                            <td> <b>0.97</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/kuwait.png" alt="KUWAIT" class="country-flag mr-2">
+                                    
+                                    <span>KUWAIT</span>
+                                </div>
+                            </td>
+                            <td> &nbsp; </td>
+                            <td> <b>0.78</b> </td>
+                            <td> <b>0.84</b>  </td>
+                            <td> <b>0.74</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/qatar.png" alt="QATAR" class="country-flag mr-2">
+                                    
+                                    <span>QATAR</span>
+                                </div>
+                            </td>
+                            <td> &nbsp; </td>
+                            <td> <b>9.41</b> </td>
+                            <td> <b>9.80</b>  </td>
+                            <td> <b>9.52</b> </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Tanzania-flag_DQS91e3_SwvJaCo.png" alt="TANZANIA" class="country-flag mr-2">
+                                    
+                                    <span>TANZANIA</span>
+                                </div>
+                            </td>
+                            <td> <b>6570.43 </b></td>
+                            <td> <b>6570.28</b> </td>
+                            <td> &nbsp; </td>
+                            <td> &nbsp; </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <img src="/media/images/Kenya-flag_tWEoIt5_HQFoE0H.png" alt="KENYA" class="country-flag mr-2">
+                                    
+                                    <span>KENYA</span>
+                                </div>
+                            </td>
+                            <td> <b>333.52 </b></td>
+                            <td> <b>333.59</b> </td>
+                            <td> &nbsp; </td>
+                            <td> &nbsp; </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gold and Silver rates on the right -->
+        <div class="col-md-4">
+            <!-- Gold Rates -->
+            <div class="mb-4">
+                <h4 class="text-center">Gold Rates</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="gold-section">
+                            <th>Weight</th>
+                            <th>Buy  <img src="/static/Images/Light.svg"
+       style="height:15px; width:auto;"></th>
+                            <th>Sell  <img src="/static/Images/Light.svg"
+       style="height:15px; width:auto;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td> <b>1 GRM - 22CT </b></td>
+                            <td> <b>46.970 </b></td>
+                            <td> <b>48.964 </b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td> <b>1 GRM - 24CT </b></td>
+                            <td> <b>51.055 </b></td>
+                            <td> <b>52.178 </b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td> <b>10 TOLA </b></td>
+                            <td> <b>6001.000 </b></td>
+                            <td> <b>6081.000 </b></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Silver Rates -->
+            <div>
+                <h4 class="text-center">Silver Rates</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="silver-section">
+                            <th>Weight</th>
+                            <th>Buy  <img src="/static/Images/Light.svg"
+       style="height:15px; width:auto;"></th>
+                            <th>Sell  <img src="/static/Images/Light.svg"
+       style="height:15px; width:auto;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td> <b>1 GRM </b></td>
+                            <td> <b>0.719 </b></td>
+                            <td> <b>0.803 </b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td> <b>1 KILO </b></td>
+                            <td> <b>719.000 </b></td>
+                            <td> <b>803.000 </b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td> <b>500 GRM </b></td>
+                            <td> <b>360.000 </b></td>
+                            <td> <b>416.000 </b></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this to your existing styles -->
+<style>
+    .table .remittance-section {
+        background-color: #4CAF50 !important;
+        color: white !important;
+    }
+    .table .forex-section {
+        background-color: #2196F3 !important;
+        color: white !important;
+    }
+    .table .gold-section {
+        background-color: #FFD700 !important;
+        color: black !important;
+    }
+    .table .silver-section {
+        background-color: #C0C0C0 !important;
+        color: black !important;
+    }
+
+    /* White Space Columns */
+    .spacing-column {
+        background-color: white !important;
+        width: 30px;  /* Adjust as needed */
+        border: none !important;
+    }
+
+    .alert-info {
+        background-color: #f8f9fa;
+        border-color: #dee2e6;
+        color: #666;
+        margin: 20px 0;
+    }
+    thead th {
+        font-weight: 600;
+    }
+    .table th {
+        padding: 15px 10px;
+    }
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #dee2e6;
+    }
+    .thead-light th {
+        background-color: #f8f9fa;
+    }
+    .country-flag {
+        width: 30px;
+        height: 20px;
+        object-fit: contain;
+        margin-right: 10px;
+    }
+    td .d-flex {
+        justify-content: flex-start;
+    }
+
+    /* Additional styles for the right-side tables */
+    .col-md-4 .table {
+        font-size: 0.9rem;  /* Slightly smaller font for side tables */
+    }
+    
+    .col-md-4 h4 {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    @media (max-width: 768px) {
+        .col-md-4 {
+            margin-top: 2rem;
+        }
+    }
+</style>
+
+
+    </div>
+    <section style="background: #152079;">
+        <footer class="footer footer-div text-light mt">
+          <div class="container-fluid
+          ">
+              <div class="row">
+                  <div class="col-lg-3 pk-log-footer" >
+                      <img src="/static/Images/pk-logo.png" alt="">
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-xs-6 ">
+                     
+                      <ul class="list-unstyled footer-list p-2">
+                          <li> <a class="nav-link " href="/">HOME</a></li>
+                          <li> <a class="nav-link " href="/#services-section
+                            ">SERVICES</a></li>
+                          <li> <a class="nav-link " href="/#legacy-section
+                            ">LEGACY</a></li>
+                          <li>  <a class="nav-link" href="/#about-section">ABOUT US</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-lg-3 col-md-6  col-xs-6  ">
+                 
+                    <ul class="list-unstyled footer-list p-2">
+                        <li>   <a class="nav-link " href="/#contact-section">CONTACT US</a></li>
+                        <li>  <a class="nav-link " href="/branches/">BRANCHES</a></li>
+                        <li>          <a class="nav-link " href="/key_facts_page/">KEY FACTS</a></li>
+                        <li>  <a class="nav-link " href="/fraud_alert/">FRAUD REPORT</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6  col-xs-6  ">
+                 
+                    <ul class="list-unstyled footer-list">
+                        <li>    <a class="nav-link " target="_blank" href="https://www.facebook.com/pkexchange/"><img style="width: 1.1rem; margin: .4rem;" src="/static/Images/facebook-icon.svg" alt="">Facebook</a></li>
+                        <li>   <a class="nav-link " target="_blank" href="https://www.instagram.com/pkexchange/?hl=en"><img style="width: 1.2rem;  margin: .4rem;" src="/static/Images/instagram-icon.svg" alt="">Instagram</a></li>
+                        <li>  <a class="nav-link" target="_blank" href="https://www.linkedin.com/company/purshottam-kanji-exchange/"><img style="width: 1.2rem;  margin: .4rem;" src="/static/Images/linkedin-icon.svg" alt="">LinkedIn</a></li>
+                        <li>          <a class="nav-link" target="_blank" href="https://x.com/pkexchange1"><img style="width: 1.2rem;  margin: .4rem;" src="/static/Images/twitter-icon.png" alt="">Twitter</a></li>
+                    </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="text-center ">
+                <p style="" class="text-nowrap m-0 d-inline">PK © 2025. All Rights Reserved.</p>
+                <a class="nav-link p-0 d-inline " href="/privacy/">Privacy Policy, </a>
+                <a class="nav-link p-0 d-inline " href="/tandc/">Terms and Conditions, </a>
+                <a class="nav-link p-0 d-inline " href="/fandq/">F&Q  </a>
+               <p ><a href="https://finnest.io/" target="_blank"  style="text-decoration: none; color: rgb(146, 146, 146); font-size: .9rem;">Powered By Finnest Technologies</a></p> 
+                              </div>
+          </div>
+      </footer>
+      
+      
+      </section>
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

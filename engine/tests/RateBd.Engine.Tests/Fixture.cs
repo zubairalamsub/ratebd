@@ -14,6 +14,9 @@ internal static class Fixture
     public static readonly Corridor MyrBdt = new("myr-bdt", "MYR", "BDT", "MY", "BD");
     public static readonly Corridor SgdBdt = new("sgd-bdt", "SGD", "BDT", "SG", "BD");
     public static readonly Corridor SarBdt = new("sar-bdt", "SAR", "BDT", "SA", "BD");
+    public static readonly Corridor KwdBdt = new("kwd-bdt", "KWD", "BDT", "KW", "BD");
+    public static readonly Corridor QarBdt = new("qar-bdt", "QAR", "BDT", "QA", "BD");
+    public static readonly Corridor OmrBdt = new("omr-bdt", "OMR", "BDT", "OM", "BD");
 
     public static readonly DateTime FetchedAt = new(2026, 10, 17, 8, 0, 0, DateTimeKind.Utc);
 
