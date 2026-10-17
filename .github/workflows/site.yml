@@ -46,7 +46,7 @@ jobs:
 
       - name: Verify build output
         run: |
-          test -f dist/_redirects && grep -q "^/go/wise " dist/_redirects
+          grep -q "^/go/wise " dist/_redirects
           test -f dist/sitemap-index.xml
           test -f dist/send-money-gbp-to-bangladesh.html
           test -f dist/bn/send-money-aed-to-bangladesh.html

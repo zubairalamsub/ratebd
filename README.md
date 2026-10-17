@@ -158,7 +158,7 @@ Cloudflare builds every push to `main`. That includes the daily `data: rates …
   - `timeout-minutes: 10` caps a hung run.
 
 **If Actions minutes run out** (private repo only), or you want to use fewer:
-- **What happens:** scheduled runs stop until the next billing cycle. The site stays up with the last data, and the stale badges show its age.
+- **What happens:** scheduled runs stop until the next billing cycle. The site stays up with the last data. No rebuild happens, so stale badges do not appear; only the "Last updated" date shows how old the data is.
 - Reduce the cron, for example `0 3 * * 1,4` for twice a week.
 - Drop the Bangladesh Bank snapshot step, the slowest step. MidMarket then carries its last value forward as stale.
 - Add a spending limit of $0 (the default) so you're never billed.

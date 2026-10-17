@@ -20,6 +20,8 @@ env:
 
 jobs:
   fetch:
+    # The job commits to main, so only run it for main (a dispatch from another branch would push that branch).
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -70,8 +72,10 @@ jobs:
         if: steps.engine-cache.outputs.cache-hit != 'true'
         working-directory: engine
         run: |
-          dotnet restore src/RateBd.Engine/RateBd.Engine.csproj -r linux-x64
-          dotnet publish src/RateBd.Engine/RateBd.Engine.csproj -c Release -r linux-x64 --no-restore -o publish
+          # ci.yml is the gate for warnings and NuGet advisories. Here a new advisory or analyzer warning on the
+          # monthly rebuild must not stop the data pipeline, so neither is treated as an error.
+          dotnet restore src/RateBd.Engine/RateBd.Engine.csproj -r linux-x64 -p:NuGetAudit=false -p:TreatWarningsAsErrors=false
+          dotnet publish src/RateBd.Engine/RateBd.Engine.csproj -c Release -r linux-x64 --no-restore -o publish -p:TreatWarningsAsErrors=false
 
       - uses: actions/setup-node@v7
         with:
