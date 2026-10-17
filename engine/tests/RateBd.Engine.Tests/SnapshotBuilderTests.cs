@@ -40,7 +40,7 @@ public class SnapshotBuilderTests
     public void Failed_provider_without_history_is_marked_failed()
     {
         var snapshot = SnapshotBuilder.Build(Fixture.GbpBdt,
-            [ProviderResult.Failed("Xe", "boom")], benchmark: null, previous: null, Now);
+            [ProviderResult.Failed("WorldRemit", "boom")], benchmark: null, previous: null, Now);
 
         Assert.Empty(snapshot.Quotes);
         Assert.Equal(ProviderStatus.Failed, Assert.Single(snapshot.Providers).Status);

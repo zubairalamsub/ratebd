@@ -25,7 +25,6 @@ public static class ProviderRegistration
         AddProvider<RemitlyProvider>(services, configuration, "Remitly");
         AddProvider<TaptapSendProvider>(services, configuration, "TaptapSend");
         AddProvider<WorldRemitProvider>(services, configuration, "WorldRemit");
-        AddProvider<XeProvider>(services, configuration, "Xe");
 
         // Gulf providers (Saudi Arabia, Kuwait, Qatar, Oman), verified 2026-10-17.
         // Western Union's price depends on a cookie sent by hand, so its client must not manage cookies itself.

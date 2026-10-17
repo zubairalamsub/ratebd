@@ -172,46 +172,6 @@ public class NewCorridorTests
         Assert.Empty(WorldRemitParser.ParsePayOutMethods(Fixture.Read("worldremit-payoutmethods-sa-bd.json")));
     }
 
-    // ---------------------------------------------------------------- Xe
-
-    [Theory]
-    [InlineData("xe-usd-bdt-500.json", "usd", 500, 122.8484, 4.00, "Typically 3 business days")]
-    [InlineData("xe-usd-bdt-1000.json", "usd", 1000, 122.8484, 0.00, "Typically 3 business days")]
-    [InlineData("xe-eur-bdt-500.json", "eur", 500, 137.8581, 4.00, "Typically within 48 hours")]
-    public void Xe_usa_and_italy_use_default_option(string fixture, string from, decimal amount, decimal rate, decimal fee,
-        string speed)
-    {
-        var corridor = from == "usd" ? Fixture.UsdBdt : Fixture.EurBdt;
-
-        var quote = XeParser.Parse(Fixture.Read(fixture), corridor, amount, Fixture.FetchedAt);
-
-        Assert.Equal(rate, quote.Rate);
-        Assert.Equal(fee, quote.Fee);
-        Assert.Equal(Math.Round((amount - fee) * rate, 2), quote.ReceiveAmount);
-        Assert.Equal(speed, quote.Speed);
-        Assert.Equal("Bank deposit", quote.DeliveryMethod);
-    }
-
-    [Fact]
-    public void Xe_quote006_is_not_supported()
-    {
-        var ex = Assert.Throws<ProviderNotSupportedException>(() =>
-            XeParser.ThrowIfCurrencyNotAvailable(Fixture.Read("xe-sar-bdt-400.json"), Fixture.SarBdt));
-
-        Assert.Contains("QUOTE006", ex.Message);
-    }
-
-    [Fact]
-    public async Task Xe_rejects_unsupported_send_country_without_a_request()
-    {
-        var handler = new FakeHandler(_ => throw new InvalidOperationException("no request expected"));
-        var provider = new XeProvider(new HttpClient(handler), TimeProvider.System);
-
-        await Assert.ThrowsAsync<ProviderNotSupportedException>(() =>
-            provider.GetQuotesAsync(Fixture.SgdBdt, [500m], CancellationToken.None));
-        Assert.Empty(handler.Requests);
-    }
-
     // ---------------------------------------------------------------- MidMarket
 
     [Theory]

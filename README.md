@@ -47,7 +47,6 @@ Each parser is tested against real responses saved in `engine/tests/RateBd.Engin
 | Remitly | `GET api.remitly.com/v3/calculator/estimate` with the page-issued device ID; bank deposit where offered |
 | Taptap Send | `GET api.taptapsend.com/api/fxRates` (one feed for every corridor) |
 | WorldRemit | `POST api.worldremit.com/graphql` |
-| Xe | `POST launchpad-api.xe.com/v2/quotes` |
 | Western Union (SA, KW, QA) | `POST westernunion.com/wuconnect/prices/catalog`, the send-money form's price catalogue; bank deposit |
 | Al Mulla Exchange (KW) | `POST app-kwt.almullaexchange.com/pub/xtrate/get`; best correspondent route (often Western Union's network, at Western Union's price) |
 | Skrill (KW) | `POST transfers.skrill.com/api/transfers/v4/marketing/preview` after the calculator's anonymous session |
@@ -83,11 +82,10 @@ serve that route; the site lists it as "not offered".
 | Remitly | ✅ | ✅ | ✅ | ✅ | ✗ not a send country | ✅ |
 | Taptap Send | ✅ | ✅ | ✅ | ✅ | ✗ | ✗ |
 | WorldRemit | ✅ | ✅ | ✅ | ✗ | ✅ | ✗ |
-| Xe | ✅ | ✅ | ✅ | ✗ `isXemtSupported: false` | ✗ | ✗ |
 | MidMarket | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-None of those five providers sends from Saudi Arabia, Kuwait, Qatar or Oman: Wise returns 422 `route.not.supported`,
-Remitly returns 400 for those conduits, Taptap Send and Xe don't list them, and WorldRemit offers only airtime top-up.
+None of those four providers sends from Saudi Arabia, Kuwait, Qatar or Oman: Wise returns 422 `route.not.supported`,
+Remitly returns 400 for those conduits, Taptap Send doesn't list them, and WorldRemit offers only airtime top-up.
 The Gulf routes therefore use Gulf providers, researched and re-verified on 2026-10-17:
 
 | Route | Full quotes (ranked) | Posted rates (no fee) |
@@ -108,7 +106,7 @@ Source notes:
 - **Remitly** returns a first-transfer promo price. ratebd shows the standard price instead: `base_rate` with the undiscounted fee.
 - **Remitly** answers anonymous calls with HTTP 429 `NOT_ALLOWED` far more often when they lack the `Remitly-DeviceEnvironmentID` header its own site sends. The provider reads that server-issued ID from a public converter page once per run, sends the same headers, paces requests, and retries once with a fresh ID before carrying the last quote forward.
 - **Taptap Send** publishes one rate per corridor. Its BD corridors carry no fee schedule, so the fee is 0. It gives no delivery method or speed, and those show as "Not specified".
-- **Xe:** every response says *"Automatic extraction of rates is prohibited under the Terms of Use."* Xe is included at the project owner's request. To turn it off, set `Providers:Xe:Enabled=false` (env `RATEBD_Providers__Xe__Enabled=false`).
+- **Xe** is not collected: its quote responses say automatic extraction of rates is prohibited under its Terms of Use. It was removed on 2026-10-17.
 - **Western Union** prices a request from a random `wu_device_id` cookie that its page script generates in the browser (no server involvement). Without one the API answers from a different price tier that the site never shows, so the provider sends a fresh random ID each run, exactly as a browser visit would, and rejects any response outside the website's price segment (`N00`). westernunion.com uses Akamai bot management; a 403 is reported as a failure and the last quote is carried forward.
 - **Skrill** opens the same anonymous session its calculator does (three GETs, no login) and echoes its `XSRF-TOKEN`. Its first-transfer discount is ignored.
 - **Bangladesh Bank** serves a JavaScript bot challenge to plain HTTP clients. CI saves the page with headless Chromium (`engine/tools/bb-snapshot`, Playwright), and the engine parses that file with AngleSharp. GBP and AED mid rates are `USD/BDT ÷ units-per-USD`.
@@ -116,11 +114,10 @@ Source notes:
 ### How quotes are normalised
 
 - `sendAmount` is the total the sender pays, fee included.
-- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Remitly, WorldRemit, Xe, Taptap, Western Union, Al Mulla, Skrill). Wise and Paysend already deduct their fee from the amount sent.
+- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Remitly, WorldRemit, Taptap, Western Union, Al Mulla, Skrill). Wise and Paysend already deduct their fee from the amount sent.
 - One quote per provider per amount:
   - Wise uses bank transfer.
   - WorldRemit uses whichever payout method delivers most.
-  - Xe uses its default option.
   - Western Union and Skrill use bank deposit; Al Mulla its best route.
 - Missing data is never invented. A field the source doesn't give shows as "Not specified".
 
