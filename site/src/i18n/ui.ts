@@ -21,23 +21,24 @@ const en = {
 
   "home.title": "Compare money transfer rates to Bangladesh",
   "home.description":
-    "Daily comparison of what Wise, Remitly, Taptap Send, WorldRemit and Xe deliver in taka from the UK and UAE, measured against the Bangladesh Bank mid-market rate.",
+    "Daily comparison of what Wise, Remitly, Taptap Send, WorldRemit and Xe deliver in taka from the UK and UAE, measured against a mid-market benchmark based on Bangladesh Bank's USD/BDT rate.",
   "home.lead":
     "Every day we ask each provider what your family in Bangladesh would receive and compare it with the mid-market rate, so you can see the real cost: the fee plus the exchange-rate margin.",
   "home.bestFor": "Most taka for {amount} today",
+  "home.bestForStale": "Most taka for {amount} (no fresh quotes on the last update)",
   "home.compare": "Compare all providers",
   "home.routes": "Choose where you send from",
   "home.from": "From {country}",
   "home.why.title": "What we compare",
   "home.why.1": "The taka that arrives, after fees, for the same amount sent.",
-  "home.why.2": "How far each rate is from the Bangladesh Bank mid-market rate.",
+  "home.why.2": "How far each rate is from a mid-market benchmark based on Bangladesh Bank's USD/BDT rate.",
   "home.why.3": "Delivery method and speed, as each provider reports them.",
   "home.noQuotes": "No live quotes on this route today.",
 
   "corridor.title": "Send money from {country} to Bangladesh ({from} → BDT)",
   "corridor.h1": "Send money from {country} to Bangladesh",
   "corridor.description":
-    "Today's {from} to BDT rates, fees and the taka you receive from {providers}, compared with the Bangladesh Bank mid-market rate. Updated daily.",
+    "Today's {from} to BDT rates, fees and the taka you receive from {providers}, compared with a mid-market benchmark based on Bangladesh Bank's USD/BDT rate. Updated daily.",
   "corridor.lead":
     "Amounts below are what the recipient gets when you pay the stated amount in total, fees included. Sorted by the most taka received.",
   "corridor.amount": "Amount you send",
@@ -53,6 +54,7 @@ const en = {
   "table.speed": "Speed",
   "table.trend": "7-day trend",
   "table.visit": "Go to {name}",
+  "table.visitHeader": "Provider website",
   "table.best": "Best",
   "table.empty": "No provider returned a quote for this amount.",
 
@@ -63,7 +65,7 @@ const en = {
   "margin.title": "How much less you get than at the mid-market rate, fees included",
 
   "trend.none": "Not enough history yet",
-  "trend.label": "{name}: taka received over the last {n} days, from {first} to {last}",
+  "trend.label": "{name}: taka received on {n} days between {first} and {last}",
 
   "mid.title": "Mid-market benchmark",
   "mid.rate": "1 {from} = {rate} BDT",
@@ -101,7 +103,7 @@ const en = {
     "Remittances sent through formal channels can qualify for a government cash incentive paid to the recipient in Bangladesh. It is not included in the amounts above. See the government incentive page for the current rules.",
 
   "provider.title": "{name}: rates to Bangladesh",
-  "provider.description": "Today's {name} exchange rates and fees for sending money to Bangladesh from the UK and UAE, with a 7-day history.",
+  "provider.description": "Today's {name} exchange rates and fees for sending money to Bangladesh from {countries}, with a 7-day history.",
   "provider.lead": "What {name} delivered in taka on each route we track, from its public price calculator.",
   "provider.route": "{from} → BDT",
   "provider.notSupported": "Not available: {reason}",
@@ -124,7 +126,7 @@ const en = {
 
   "how.title": "How we compare remittance rates",
   "how.description":
-    "How ratebd collects remittance quotes, calculates the margin against the Bangladesh Bank mid-market rate, and handles stale or missing data.",
+    "How ratebd collects remittance quotes, calculates the margin against a mid-market benchmark built from Bangladesh Bank's USD/BDT rate, and handles stale or missing data.",
 
   "incentive.title": "Bangladesh government remittance incentive",
   "incentive.description":
@@ -157,23 +159,24 @@ const bn: Record<UiKey, string> = {
 
   "home.title": "বাংলাদেশে টাকা পাঠানোর রেট তুলনা করুন",
   "home.description":
-    "যুক্তরাজ্য ও আমিরাত থেকে Wise, Remitly, Taptap Send, WorldRemit ও Xe কত টাকা পৌঁছে দেয়, বাংলাদেশ ব্যাংকের মিড-মার্কেট রেটের সঙ্গে তার প্রতিদিনের তুলনা।",
+    "যুক্তরাজ্য ও আমিরাত থেকে Wise, Remitly, Taptap Send, WorldRemit ও Xe কত টাকা পৌঁছে দেয়, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের সঙ্গে তার প্রতিদিনের তুলনা।",
   "home.lead":
     "প্রতিদিন আমরা প্রতিটি প্রতিষ্ঠানের কাছ থেকে জেনে নিই বাংলাদেশে আপনার পরিবার কত টাকা পাবে, এবং তা মিড-মার্কেট রেটের সঙ্গে তুলনা করি। এতে আসল খরচ বোঝা যায়: ফি এবং বিনিময় হারের মার্জিন।",
   "home.bestFor": "আজ {amount} পাঠালে সবচেয়ে বেশি টাকা",
+  "home.bestForStale": "{amount} পাঠালে সবচেয়ে বেশি টাকা (সর্বশেষ হালনাগাদে নতুন কোট পাওয়া যায়নি)",
   "home.compare": "সব প্রতিষ্ঠানের তুলনা দেখুন",
   "home.routes": "কোথা থেকে পাঠাবেন বেছে নিন",
   "home.from": "{country} থেকে",
   "home.why.title": "আমরা কী তুলনা করি",
   "home.why.1": "একই পরিমাণ পাঠালে ফি বাদে কত টাকা পৌঁছায়।",
-  "home.why.2": "প্রতিটি রেট বাংলাদেশ ব্যাংকের মিড-মার্কেট রেট থেকে কতটা দূরে।",
+  "home.why.2": "প্রতিটি রেট বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ড থেকে কতটা দূরে।",
   "home.why.3": "প্রতিষ্ঠানগুলোর জানানো পাঠানোর পদ্ধতি ও সময়।",
   "home.noQuotes": "আজ এই পথে কোনো লাইভ কোট নেই।",
 
   "corridor.title": "{country} থেকে বাংলাদেশে টাকা পাঠান ({from} → BDT)",
   "corridor.h1": "{country} থেকে বাংলাদেশে টাকা পাঠান",
   "corridor.description":
-    "{providers} থেকে আজকের {from} থেকে টাকার রেট, ফি ও প্রাপ্ত টাকার পরিমাণ, বাংলাদেশ ব্যাংকের মিড-মার্কেট রেটের সঙ্গে তুলনা। প্রতিদিন হালনাগাদ।",
+    "{providers} থেকে আজকের {from} থেকে টাকার রেট, ফি ও প্রাপ্ত টাকার পরিমাণ, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের সঙ্গে তুলনা। প্রতিদিন হালনাগাদ।",
   "corridor.lead":
     "নিচের পরিমাণগুলো হলো ফিসহ মোট উল্লিখিত অঙ্ক পরিশোধ করলে প্রাপক যত টাকা পান। সবচেয়ে বেশি টাকা যেখানে, সেটি সবার আগে।",
   "corridor.amount": "আপনি কত পাঠাবেন",
@@ -189,6 +192,7 @@ const bn: Record<UiKey, string> = {
   "table.speed": "সময়",
   "table.trend": "৭ দিনের প্রবণতা",
   "table.visit": "{name}-এ যান",
+  "table.visitHeader": "প্রতিষ্ঠানের ওয়েবসাইট",
   "table.best": "সেরা",
   "table.empty": "এই পরিমাণের জন্য কোনো প্রতিষ্ঠান কোট দেয়নি।",
 
@@ -199,7 +203,7 @@ const bn: Record<UiKey, string> = {
   "margin.title": "ফিসহ হিসাবে মিড-মার্কেট রেটের তুলনায় কতটা কম পাওয়া যায়",
 
   "trend.none": "এখনো যথেষ্ট ইতিহাস নেই",
-  "trend.label": "{name}: গত {n} দিনে প্রাপ্ত টাকা, {first} থেকে {last}",
+  "trend.label": "{name}: {first} থেকে {last} পর্যন্ত {n} দিনে প্রাপ্ত টাকা",
 
   "mid.title": "মিড-মার্কেট মানদণ্ড",
   "mid.rate": "১ {from} = {rate} টাকা",
@@ -237,7 +241,7 @@ const bn: Record<UiKey, string> = {
     "বৈধ পথে পাঠানো রেমিট্যান্স বাংলাদেশে প্রাপকের জন্য সরকারি নগদ প্রণোদনার যোগ্য হতে পারে। ওপরের পরিমাণে এটি ধরা হয়নি। বর্তমান নিয়ম জানতে সরকারি প্রণোদনা পাতাটি দেখুন।",
 
   "provider.title": "{name}: বাংলাদেশে পাঠানোর রেট",
-  "provider.description": "যুক্তরাজ্য ও আমিরাত থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর আজকের বিনিময় হার ও ফি, ৭ দিনের ইতিহাসসহ।",
+  "provider.description": "{countries} থেকে বাংলাদেশে টাকা পাঠাতে {name}-এর আজকের বিনিময় হার ও ফি, ৭ দিনের ইতিহাসসহ।",
   "provider.lead": "আমরা যে পথগুলো দেখি, তাতে {name}-এর পাবলিক ক্যালকুলেটর অনুযায়ী কত টাকা পৌঁছেছে।",
   "provider.route": "{from} → BDT",
   "provider.notSupported": "পাওয়া যায় না: {reason}",
@@ -248,7 +252,7 @@ const bn: Record<UiKey, string> = {
   "provider.compare": "{country} থেকে অন্যান্য প্রতিষ্ঠানের সঙ্গে তুলনা করুন",
   "provider.allTitle": "যেসব প্রতিষ্ঠান আমরা দেখি",
 
-  "source.Wise": "Wise-এর পাবলিক কোট সেবা, যা তাদের ওয়েবসাইটের ক্যালকুলেটর ব্যবহার করে, ব্যাংক ট্রান্সফারে পরিশোধ ধরে। Wise পাঠানো অঙ্ক থেকেই ফি কেটে নেয়।",
+  "source.Wise": "Wise-এর পাবলিক কোট সেবা (তাদের ওয়েবসাইটের ক্যালকুলেটরও এই সেবাটিই ব্যবহার করে), ব্যাংক ট্রান্সফারে পরিশোধ ধরে। Wise পাঠানো অঙ্ক থেকেই ফি কেটে নেয়।",
   "source.Remitly":
     "Remitly-এর পাবলিক ক্যালকুলেটর। আমরা সাধারণ দাম (নিয়মিত রেট ও ফি) দেখাই, প্রথম ট্রান্সফারে দেওয়া এককালীন ছাড় নয়।",
   "source.TaptapSend":
@@ -260,7 +264,7 @@ const bn: Record<UiKey, string> = {
 
   "how.title": "আমরা কীভাবে রেমিট্যান্স রেট তুলনা করি",
   "how.description":
-    "ratebd কীভাবে রেমিট্যান্স কোট সংগ্রহ করে, বাংলাদেশ ব্যাংকের মিড-মার্কেট রেটের তুলনায় মার্জিন হিসাব করে, এবং পুরোনো বা অনুপস্থিত তথ্য সামলায়।",
+    "ratebd কীভাবে রেমিট্যান্স কোট সংগ্রহ করে, বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ডের তুলনায় মার্জিন হিসাব করে, এবং পুরোনো বা অনুপস্থিত তথ্য সামলায়।",
 
   "incentive.title": "বাংলাদেশ সরকারের রেমিট্যান্স প্রণোদনা",
   "incentive.description":

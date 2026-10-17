@@ -29,7 +29,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "What we collect",
         p: [
-          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for a quote on sending 500 and 1,000 from the UK (GBP) and the UAE (AED) to Bangladesh (BDT). Quotes are saved exactly as the provider returns them; we never type in or estimate a rate ourselves.",
+          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for a quote on sending 500 and 1,000 from the UK (GBP) and the UAE (AED) to Bangladesh (BDT). Rates and fees are taken exactly as each provider quotes them; we never type in or estimate a rate. The amount received is then normalised to the same total payment, as explained below.",
           "If a provider does not offer a route at all, for example a provider that does not serve senders in the UAE, it is listed as not offered rather than left out silently.",
         ],
       },
@@ -88,7 +88,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "আমরা কী সংগ্রহ করি",
         p: [
-          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে যুক্তরাজ্য (GBP) ও আমিরাত (AED) থেকে বাংলাদেশে (BDT) ৫০০ ও ১,০০০ পাঠানোর কোট চায়। প্রতিষ্ঠান যেভাবে দেয়, কোট ঠিক সেভাবেই সংরক্ষণ করা হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না।",
+          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে যুক্তরাজ্য (GBP) ও আমিরাত (AED) থেকে বাংলাদেশে (BDT) ৫০০ ও ১,০০০ পাঠানোর কোট চায়। প্রতিষ্ঠান যেভাবে দেয়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
           "কোনো প্রতিষ্ঠান কোনো পথে সেবা না দিলে, যেমন আমিরাতের প্রেরকদের সেবা দেয় না এমন প্রতিষ্ঠান, সেটি চুপচাপ বাদ না দিয়ে ‘সেবা নেই’ হিসেবে দেখানো হয়।",
         ],
       },
@@ -103,7 +103,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
         h: "সবার জন্য একই মোট পরিশোধ",
         p: [
           "প্রতিষ্ঠানগুলো ভিন্ন ভিন্নভাবে ফি নেয়: কেউ পাঠানো অঙ্ক থেকে ফি কাটে, কেউ ওপরে যোগ করে। সমানে সমান তুলনার জন্য আমরা অঙ্কটিকে ফিসহ মোট পরিশোধ হিসেবে ধরি। যারা ফি ওপরে যোগ করে, তাদের ক্ষেত্রে ফি ওই মোট থেকে কাটলে কত পৌঁছাত তা হিসাব করি: প্রাপ্ত = (অঙ্ক − ফি) × রেট।",
-          "কোনো প্রতিষ্ঠান একাধিক পরিশোধ বা গ্রহণের পদ্ধতি দিলে আমরা একটি সামঞ্জস্যপূর্ণ বিকল্প ব্যবহার করি: Wise-এ ব্যাংক ট্রান্সফারে পরিশোধ, Remitly-এর প্রথম ট্রান্সফারের ছাড় নয় বরং সাধারণ দাম, WorldRemit-এর যে পেআউট পদ্ধতিতে সবচেয়ে বেশি পৌঁছায়, এবং Xe-এর ডিফল্ট বিকল্প। Taptap Send প্রতিটি পথে একটি রেট প্রকাশ করে এবং বাংলাদেশের জন্য কোনো ফি উল্লেখ করে না।",
+          "কোনো প্রতিষ্ঠান একাধিক পরিশোধ বা গ্রহণের পদ্ধতি দিলে আমরা একটি সামঞ্জস্যপূর্ণ বিকল্প ব্যবহার করি: Wise-এ ব্যাংক ট্রান্সফারে পরিশোধ, Remitly-এর প্রথম ট্রান্সফারের ছাড় নয় বরং সাধারণ দাম, WorldRemit-এর যে পেআউট পদ্ধতিতে সবচেয়ে বেশি টাকা পৌঁছায় সেটি, এবং Xe-এর ডিফল্ট বিকল্প। Taptap Send প্রতিটি পথে একটি রেট প্রকাশ করে এবং বাংলাদেশের জন্য কোনো ফি উল্লেখ করে না।",
         ],
       },
       {
@@ -135,7 +135,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
         a: "মানদণ্ডটি বাংলাদেশ ব্যাংকের আগের কর্মদিবসের ভারিত গড় রেট ও দৈনিক ক্রস রেট ব্যবহার করে, তাই এটি লাইভ বাজার থেকে সামান্য পিছিয়ে থাকতে পারে।",
       },
       {
-        q: "প্রথম ট্রান্সফারের প্রচারণা কি ধরা হয়?",
+        q: "প্রথম ট্রান্সফারের ছাড় বা অফার কি ধরা হয়?",
         a: "না। আমরা প্রতিটি প্রতিষ্ঠানের সাধারণ দাম দেখাই, যাতে নিয়মিত ট্রান্সফারেও তুলনাটি প্রযোজ্য থাকে।",
       },
     ],

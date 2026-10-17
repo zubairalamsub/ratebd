@@ -72,21 +72,53 @@ export interface HistoryPoint {
   snapshot: CorridorSnapshot;
 }
 
-/** The last {@link SPARKLINE_DAYS} daily snapshots for a corridor, oldest first. */
+/** yyyy-MM-dd of the latest snapshot: the last day of the sparkline window. */
+export function windowEnd(id: string): string {
+  return loadSnapshot(id).generatedAt.slice(0, 10);
+}
+
+/** Whole days from `date` back to `end` (both yyyy-MM-dd). */
+export function daysBefore(date: string, end: string): number {
+  return Math.round((Date.parse(`${end}T00:00:00Z`) - Date.parse(`${date}T00:00:00Z`)) / 86_400_000);
+}
+
+/**
+ * Daily snapshots dated within the last {@link SPARKLINE_DAYS} calendar days up to the latest snapshot, oldest first.
+ * Missing days are simply absent, so charts can show them as gaps.
+ */
 export function loadHistory(id: string): HistoryPoint[] {
   let history = historyCache.get(id);
   if (!history) {
     const dir = join(DATA_DIR, "history", id);
+    const end = windowEnd(id);
     const files = existsSync(dir)
       ? readdirSync(dir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort()
       : [];
-    history = files.slice(-SPARKLINE_DAYS).map((f) => ({
-      date: f.slice(0, 10),
-      snapshot: readJson<CorridorSnapshot>(join(dir, f)),
-    }));
+    history = files
+      .map((f) => f.slice(0, 10))
+      .filter((date) => {
+        const back = daysBefore(date, end);
+        return back >= 0 && back < SPARKLINE_DAYS;
+      })
+      .map((date) => ({ date, snapshot: readJson<CorridorSnapshot>(join(dir, `${date}.json`)) }));
     historyCache.set(id, history);
   }
   return history;
+}
+
+export interface TrendPoint {
+  date: string;
+  value: number | null;
+  /** The quote stored for that day was carried forward from an earlier fetch. */
+  stale: boolean;
+}
+
+/** One provider's received amount for one send amount across the sparkline window. */
+export function trendFor(id: string, engineName: string, amount: number): TrendPoint[] {
+  return loadHistory(id).map((h) => {
+    const q = h.snapshot.quotes.find((x) => x.provider === engineName && x.sendAmount === amount);
+    return { date: h.date, value: q?.receiveAmount ?? null, stale: q?.stale ?? false };
+  });
 }
 
 export interface Row {
@@ -94,9 +126,7 @@ export interface Row {
   provider: ProviderMeta;
   /** (mid − effective rate) / mid, as a percentage; negative means better than the benchmark */
   marginPct: number | null;
-  /** Receive amounts for the same provider and amount over the last days (null where missing) */
-  trend: (number | null)[];
-  trendDates: string[];
+  trend: TrendPoint[];
 }
 
 export function marginPct(quote: Quote, midRate: number | undefined): number | null {
@@ -108,7 +138,6 @@ export function marginPct(quote: Quote, midRate: number | undefined): number | n
 /** Provider quotes for one amount, best (most received) first. The benchmark is excluded. */
 export function rowsFor(id: string, amount: number): Row[] {
   const snapshot = loadSnapshot(id);
-  const history = loadHistory(id);
   const mid = snapshot.midMarket?.rate;
   return snapshot.quotes
     .filter((q) => q.provider !== BENCHMARK && q.sendAmount === amount)
@@ -120,10 +149,7 @@ export function rowsFor(id: string, amount: number): Row[] {
         quote,
         provider,
         marginPct: marginPct(quote, mid),
-        trend: history.map(
-          (h) => h.snapshot.quotes.find((q) => q.provider === quote.provider && q.sendAmount === amount)?.receiveAmount ?? null,
-        ),
-        trendDates: history.map((h) => h.date),
+        trend: trendFor(id, quote.provider, amount),
       }];
     });
 }

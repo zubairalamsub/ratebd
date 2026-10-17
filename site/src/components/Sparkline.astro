@@ -1,49 +1,55 @@
 ---
 // Inline SVG sparkline of daily values; no chart library, no JavaScript.
+// Points are placed by calendar day within the window, so missing days show as gaps; carried-forward (stale)
+// values are left out because they were not fetched on that day.
+import { SPARKLINE_DAYS, daysBefore, type TrendPoint } from "../lib/data";
 import { date } from "../i18n/format";
 import { t, type Locale } from "../i18n/ui";
 
 interface Props {
   locale: Locale;
   name: string;
-  values: (number | null)[];
-  dates: string[];
+  points: TrendPoint[];
+  /** yyyy-MM-dd of the last day in the window */
+  end: string;
 }
 
-const { locale, name, values, dates } = Astro.props;
+const { locale, name, points, end } = Astro.props;
 const width = 96;
 const height = 28;
 const pad = 3;
 
-const points = values
-  .map((v, i) => (v === null ? null : { i, v }))
-  .filter((p): p is { i: number; v: number } => p !== null);
+const fresh = points.filter((p): p is TrendPoint & { value: number } => p.value !== null && !p.stale);
 
-let path = "";
+const segments: string[] = [];
 let last: { x: number; y: number } | null = null;
 let direction: "up" | "down" | "flat" = "flat";
-if (points.length >= 2) {
-  const min = Math.min(...points.map((p) => p.v));
-  const max = Math.max(...points.map((p) => p.v));
+if (fresh.length >= 2) {
+  const min = Math.min(...fresh.map((p) => p.value));
+  const max = Math.max(...fresh.map((p) => p.value));
   const span = max - min || 1;
-  const step = (width - pad * 2) / Math.max(values.length - 1, 1);
-  const coords = points.map((p) => ({
-    x: pad + p.i * step,
+  const step = (width - pad * 2) / (SPARKLINE_DAYS - 1);
+  let segment = "";
+  let previousDay = -2;
+  for (const p of fresh) {
+    const day = SPARKLINE_DAYS - 1 - daysBefore(p.date, end);
+    const x = pad + day * step;
     // Flat series sit in the middle rather than on the floor.
-    y: max === min ? height / 2 : pad + (1 - (p.v - min) / span) * (height - pad * 2),
-  }));
-  path = coords.map((c, i) => `${i === 0 ? "M" : "L"}${c.x.toFixed(1)} ${c.y.toFixed(1)}`).join(" ");
-  last = coords.at(-1)!;
-  const delta = points.at(-1)!.v - points[0]!.v;
+    const y = max === min ? height / 2 : pad + (1 - (p.value - min) / span) * (height - pad * 2);
+    // Break the line across missing days.
+    segment += `${day === previousDay + 1 && segment ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)} `;
+    previousDay = day;
+    last = { x, y };
+  }
+  segments.push(segment.trim());
+  const delta = fresh.at(-1)!.value - fresh[0]!.value;
   direction = Math.abs(delta) < 0.005 ? "flat" : delta > 0 ? "up" : "down";
 }
 const stroke = direction === "down" ? "#c8102e" : "#00704f";
-const firstDate = dates[points[0]?.i ?? 0];
-const lastDate = dates[points.at(-1)?.i ?? 0];
 ---
 
 {
-  points.length >= 2 ? (
+  fresh.length >= 2 ? (
     <svg
       width={width}
       height={height}
@@ -51,13 +57,15 @@ const lastDate = dates[points.at(-1)?.i ?? 0];
       role="img"
       aria-label={t(locale, "trend.label", {
         name,
-        n: points.length,
-        first: firstDate ? date(locale, firstDate) : "",
-        last: lastDate ? date(locale, lastDate) : "",
+        n: fresh.length,
+        first: date(locale, fresh[0]!.date),
+        last: date(locale, fresh.at(-1)!.date),
       })}
       class="block"
     >
-      <path d={path} fill="none" stroke={stroke} stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round" />
+      {segments.map((d) => (
+        <path d={d} fill="none" stroke={stroke} stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round" />
+      ))}
       {last && <circle cx={last.x} cy={last.y} r="2.25" fill={stroke} />}
     </svg>
   ) : (

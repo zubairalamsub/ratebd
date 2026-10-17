@@ -12,9 +12,11 @@ interface Props {
   /** Locale-neutral path of this page, e.g. "/how-rates-work" */
   path: string;
   jsonLd?: object[];
+  /** Error pages have no canonical URL or language alternates; the language switch goes to the other home page. */
+  errorPage?: boolean;
 }
 
-const { locale, title, description, path, jsonLd = [] } = Astro.props;
+const { locale, title, description, path, jsonLd = [], errorPage = false } = Astro.props;
 const site = Astro.site!;
 const url = (l: Locale) => new URL(localePath(l, path), site).href;
 const canonical = url(locale);
@@ -31,6 +33,7 @@ const nav = [
   { href: localePath(locale, "/government-incentive"), text: t(locale, "nav.incentive") },
 ];
 const current = localePath(locale, path);
+const switchHref = errorPage ? localePath(other, "/") : localePath(other, path);
 ---
 
 <!doctype html>
@@ -40,10 +43,18 @@ const current = localePath(locale, path);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={url("en")} />
-    <link rel="alternate" hreflang="bn" href={url("bn")} />
-    <link rel="alternate" hreflang="x-default" href={url("en")} />
+    {
+      errorPage ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="en" href={url("en")} />
+          <link rel="alternate" hreflang="bn" href={url("bn")} />
+          <link rel="alternate" hreflang="x-default" href={url("en")} />
+        </>
+      )
+    }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#005c41" />
@@ -52,7 +63,7 @@ const current = localePath(locale, path);
     <meta property="og:site_name" content={t(locale, "site.name")} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!errorPage && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -82,7 +93,7 @@ const current = localePath(locale, path);
           {t(locale, "site.name")}
         </a>
         <a
-          href={localePath(other, path)}
+          href={switchHref}
           hreflang={other}
           title={t(locale, "lang.switchLabel")}
           class="relative inline-flex min-h-11 items-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-800 no-underline hover:border-brand-700"

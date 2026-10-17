@@ -3,7 +3,7 @@
 // Update the date and the facts together when Bangladesh Bank or the Finance Division changes the rules.
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { CORRIDORS, rowsFor } from "../lib/data";
-import { date, money, sendAmount } from "../i18n/format";
+import { date, integer, money, sendAmount } from "../i18n/format";
 import { corridorPath, localePath } from "../i18n/routes";
 import { t, type Locale } from "../i18n/ui";
 
@@ -292,7 +292,7 @@ const jsonLd = [
                 {f.text}{" "}
                 {f.sources.map((key) => (
                   <a href={`#source-${sourceNumber(key)}`} class="text-sm">
-                    [{c.sourceLabel} {sourceNumber(key)}]
+                    [{c.sourceLabel} {integer(locale, sourceNumber(key))}]
                   </a>
                 ))}
               </dd>
@@ -328,7 +328,7 @@ const jsonLd = [
               {p.text}{" "}
               {p.sources.map((key) => (
                 <a href={`#source-${sourceNumber(key)}`} class="text-sm">
-                  [{c.sourceLabel} {sourceNumber(key)}]
+                  [{c.sourceLabel} {integer(locale, sourceNumber(key))}]
                 </a>
               ))}
             </li>
@@ -353,7 +353,7 @@ const jsonLd = [
 
     <section class="mt-10" aria-labelledby="sources">
       <h2 id="sources" class="text-xl">{c.sourcesTitle}</h2>
-      <ol class="mt-3 list-decimal space-y-1 pl-6 text-sm">
+      <ol class:list={["mt-3 space-y-1 pl-6 text-sm", locale === "bn" ? "[list-style-type:bengali]" : "list-decimal"]}>
         {
           sourceKeys.map((key) => (
             <li id={`source-${sourceNumber(key)}`}>

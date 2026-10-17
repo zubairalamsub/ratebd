@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Sparkline from "../components/Sparkline.astro";
 import StaleBadge from "../components/StaleBadge.astro";
-import { CORRIDORS, PROVIDERS, SEND_AMOUNTS, loadHistory, loadSnapshot, marginPct, statusFor } from "../lib/data";
+import { CORRIDORS, PROVIDERS, SEND_AMOUNTS, loadSnapshot, marginPct, statusFor, trendFor, windowEnd } from "../lib/data";
 import { date, dateTime, money, percent, rate, sendAmount } from "../i18n/format";
 import { isUnspecified, label } from "../i18n/labels";
 import { corridorPath, goPath, localePath, providerPath } from "../i18n/routes";
@@ -17,7 +17,14 @@ const { locale, slug } = Astro.props;
 const provider = PROVIDERS.find((p) => p.slug === slug)!;
 const path = providerPath(slug);
 const title = t(locale, "provider.title", { name: provider.name });
-const description = t(locale, "provider.description", { name: provider.name });
+// Only name the routes the provider actually serves (a provider that merely failed today still counts).
+const servedCountries = CORRIDORS.filter((c) => statusFor(c.id, provider.engineName)?.status !== "not_supported").map((c) =>
+  t(locale, c.countryKey),
+);
+const description = t(locale, "provider.description", {
+  name: provider.name,
+  countries: servedCountries.join(locale === "bn" ? " ও " : " and "),
+});
 const headlineAmount = SEND_AMOUNTS[0];
 
 const routes = CORRIDORS.map((corridor) => {
@@ -25,12 +32,7 @@ const routes = CORRIDORS.map((corridor) => {
   const quotes = snapshot.quotes
     .filter((q) => q.provider === provider.engineName)
     .sort((a, b) => b.sendAmount - a.sendAmount);
-  const history = loadHistory(corridor.id).map((h) => ({
-    date: h.date,
-    receive:
-      h.snapshot.quotes.find((q) => q.provider === provider.engineName && q.sendAmount === headlineAmount)?.receiveAmount ??
-      null,
-  }));
+  const history = trendFor(corridor.id, provider.engineName, headlineAmount);
   return { corridor, snapshot, quotes, history, status: statusFor(corridor.id, provider.engineName) };
 });
 const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
@@ -115,7 +117,7 @@ const td = "px-3 py-2 whitespace-nowrap";
               {t(locale, "provider.history", { amount: sendAmount(locale, headlineAmount, corridor.sendCurrency) })}
             </h3>
             <div class="mt-2 flex flex-wrap items-start gap-6">
-              <Sparkline locale={locale} name={provider.name} values={history.map((h) => h.receive)} dates={history.map((h) => h.date)} />
+              <Sparkline locale={locale} name={provider.name} points={history} end={windowEnd(corridor.id)} />
               <table class="text-sm tabular">
                 <caption class="sr-only">
                   {t(locale, "provider.history", { amount: sendAmount(locale, headlineAmount, corridor.sendCurrency) })}
@@ -128,9 +130,16 @@ const td = "px-3 py-2 whitespace-nowrap";
                 </thead>
                 <tbody>
                   {history.map((h) => (
-                    <tr>
+                    <tr class:list={[h.stale && "text-slate-600"]}>
                       <td class="pr-6">{date(locale, h.date)}</td>
-                      <td class="text-right">{h.receive === null ? "–" : money(locale, h.receive, "BDT")}</td>
+                      <td class="text-right">
+                        {h.value === null ? "–" : money(locale, h.value, "BDT")}
+                        {h.stale && (
+                          <span class="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900">
+                            {t(locale, "badge.stale")}
+                          </span>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
