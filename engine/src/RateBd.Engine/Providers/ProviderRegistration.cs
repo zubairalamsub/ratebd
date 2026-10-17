@@ -20,11 +20,8 @@ public static class ProviderRegistration
             o.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
             o.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
         });
-        AddProvider<WiseProvider>(services, configuration, "Wise");
-        // Remitly's 429s cleared within seconds in testing; the provider itself retries once more with a fresh device ID.
-        AddProvider<RemitlyProvider>(services, configuration, "Remitly");
-        AddProvider<TaptapSendProvider>(services, configuration, "TaptapSend");
-        AddProvider<WorldRemitProvider>(services, configuration, "WorldRemit");
+        // Wise, Remitly, Taptap Send, WorldRemit and Xe were removed on 2026-10-17: their terms forbid automated
+        // collection (Wise's is ambiguous). They return only with written permission or an official API.
 
         // Gulf providers (Saudi Arabia, Kuwait, Qatar, Oman), verified 2026-10-17.
         // Western Union's price depends on a cookie sent by hand, so its client must not manage cookies itself.

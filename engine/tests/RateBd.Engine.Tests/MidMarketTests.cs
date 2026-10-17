@@ -50,4 +50,21 @@ public class MidMarketTests
         Assert.Equal(0.75m, gbp.SendPerUsd);
         Assert.False(gbp.Stale);
     }
+
+    [Theory]
+    [InlineData("usd", 1)]
+    [InlineData("eur", 0)]
+    [InlineData("myr", 0)]
+    [InlineData("sgd", 0)]
+    public void MidMarket_crosses_every_new_currency(string from, int isUsd)
+    {
+        var corridor = from switch { "usd" => Fixture.UsdBdt, "eur" => Fixture.EurBdt, "myr" => Fixture.MyrBdt, _ => Fixture.SgdBdt };
+        var cross = CurrencyApiParser.Parse(Fixture.Read("currency-api-usd.json"));
+        var bb = new BangladeshBankRate(123.45m, "2026-10-17");
+
+        var info = MidMarketProvider.Calculate(corridor, bb, cross, Fixture.FetchedAt);
+
+        Assert.Equal(isUsd == 1 ? 1m : cross.For(corridor.SendCurrency), info.SendPerUsd);
+        Assert.Equal(Math.Round(123.45m / info.SendPerUsd, 4, MidpointRounding.AwayFromZero), info.Rate);
+    }
 }

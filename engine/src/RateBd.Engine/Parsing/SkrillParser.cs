@@ -25,7 +25,7 @@ internal static class SkrillParser
         var receive = amounts.Path("receive").GetFlexibleDecimal();
 
         // "receive" is send × rate: the fee (0 when captured) is added on top, so normalise to "pays sendAmount in total".
-        // discounts[] (e.g. FTC, a first-transfer promotion) are ignored, as for Remitly's promo price.
+        // discounts[] (e.g. FTC, a first-transfer promotion) are ignored: the comparison uses standard prices.
         var normalised = fee == 0 ? receive : QuoteMath.ReceiveFor(sendAmount, fee, rate);
 
         return new Quote("Skrill", corridor.Id, corridor.SendCurrency, sendAmount, rate, fee, normalised, deliveryMethod,
