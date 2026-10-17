@@ -2,7 +2,7 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T13:37:01.5257506Z",
+  "generatedAt": "2026-10-17T16:48:47.3468522Z",
   "midMarket": {
     "rate": 322.8239,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.38240659,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
     "stale": false
   },
   "providers": [
@@ -39,11 +39,6 @@
       "name": "WorldRemit",
       "status": "not_supported",
       "message": "WorldRemit offers no money-transfer payout method for OM\u2192BD"
-    },
-    {
-      "name": "Xe",
-      "status": "not_supported",
-      "message": "Xe Money Transfer is not available to senders in OM (isXemtSupported=false on xe.com)"
     }
   ],
   "quotes": [
@@ -57,7 +52,7 @@
       "receiveAmount": 32282.39,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -70,7 +65,7 @@
       "receiveAmount": 64564.78,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     }
   ],
@@ -102,7 +97,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:37:01.0148637Z",
+      "fetchedAt": "2026-10-17T16:48:45.404883Z",
       "stale": false
     },
     {
@@ -115,7 +110,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-16T20:00:00Z",
-      "fetchedAt": "2026-10-17T13:37:01.3648698Z",
+      "fetchedAt": "2026-10-17T16:48:45.5136273Z",
       "stale": false
     },
     {
@@ -128,7 +123,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:37:01.5250772Z",
+      "fetchedAt": "2026-10-17T16:48:47.346058Z",
       "stale": false
     }
   ]

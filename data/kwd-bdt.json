@@ -2,7 +2,7 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T13:36:56.1387251Z",
+  "generatedAt": "2026-10-17T16:48:38.9059095Z",
   "midMarket": {
     "rate": 397.1380,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.31084913,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
     "stale": false
   },
   "providers": [
@@ -39,11 +39,6 @@
       "name": "WorldRemit",
       "status": "not_supported",
       "message": "WorldRemit offers no money-transfer payout method for KW\u2192BD"
-    },
-    {
-      "name": "Xe",
-      "status": "not_supported",
-      "message": "Xe Money Transfer is not available to senders in KW (isXemtSupported=false on xe.com)"
     },
     {
       "name": "WesternUnion",
@@ -77,7 +72,7 @@
       "receiveAmount": 39713.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -90,7 +85,7 @@
       "receiveAmount": 39586.51,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T13:36:48.4690563Z",
+      "fetchedAt": "2026-10-17T16:48:31.1343857Z",
       "stale": false
     },
     {
@@ -103,7 +98,7 @@
       "receiveAmount": 39586.51,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T13:36:51.7065946Z",
+      "fetchedAt": "2026-10-17T16:48:34.3015472Z",
       "stale": false
     },
     {
@@ -116,7 +111,7 @@
       "receiveAmount": 39503.42,
       "deliveryMethod": "Bank card",
       "speed": "In a few minutes",
-      "fetchedAt": "2026-10-17T13:36:49.3269153Z",
+      "fetchedAt": "2026-10-17T16:48:32.0036395Z",
       "stale": false
     },
     {
@@ -129,7 +124,7 @@
       "receiveAmount": 37670.14,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T13:36:51.1727788Z",
+      "fetchedAt": "2026-10-17T16:48:33.9856923Z",
       "stale": false
     },
     {
@@ -142,7 +137,7 @@
       "receiveAmount": 79674.12,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T13:36:52.0007757Z",
+      "fetchedAt": "2026-10-17T16:48:34.6103963Z",
       "stale": false
     },
     {
@@ -155,7 +150,7 @@
       "receiveAmount": 79674.12,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T13:36:56.1374468Z",
+      "fetchedAt": "2026-10-17T16:48:38.9045775Z",
       "stale": false
     },
     {
@@ -168,7 +163,7 @@
       "receiveAmount": 79427.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -181,7 +176,7 @@
       "receiveAmount": 79205.35,
       "deliveryMethod": "Bank card",
       "speed": "In a few minutes",
-      "fetchedAt": "2026-10-17T13:36:49.3269153Z",
+      "fetchedAt": "2026-10-17T16:48:32.0036395Z",
       "stale": false
     },
     {
@@ -194,7 +189,7 @@
       "receiveAmount": 75340.28,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T13:36:54.7619376Z",
+      "fetchedAt": "2026-10-17T16:48:37.7426215Z",
       "stale": false
     }
   ],
@@ -226,7 +221,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:36:48.7239853Z",
+      "fetchedAt": "2026-10-17T16:48:31.6178552Z",
       "stale": false
     },
     {
@@ -239,7 +234,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:36:50.9216107Z",
+      "fetchedAt": "2026-10-17T16:48:33.0652423Z",
       "stale": false
     },
     {
@@ -252,7 +247,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-17T11:54:17.8245Z",
-      "fetchedAt": "2026-10-17T13:36:49.7781998Z",
+      "fetchedAt": "2026-10-17T16:48:32.2209912Z",
       "stale": false
     }
   ]

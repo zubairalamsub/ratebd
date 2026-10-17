@@ -2,7 +2,7 @@
   "corridor": "sgd-bdt",
   "sendCurrency": "SGD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T13:36:43.7704283Z",
+  "generatedAt": "2026-10-17T16:48:26.1608874Z",
   "midMarket": {
     "rate": 96.4780,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 1.27956682,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
     "stale": false
   },
   "providers": [
@@ -39,11 +39,6 @@
       "name": "WorldRemit",
       "status": "not_supported",
       "message": "WorldRemit offers no money-transfer payout method for SG\u2192BD"
-    },
-    {
-      "name": "Xe",
-      "status": "not_supported",
-      "message": "Xe Money Transfer is not available to senders in SG (isXemtSupported=false on xe.com)"
     }
   ],
   "quotes": [
@@ -57,7 +52,7 @@
       "receiveAmount": 48239.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -69,8 +64,8 @@
       "fee": 5.69,
       "receiveAmount": 47513.08,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 23 hours",
-      "fetchedAt": "2026-10-17T13:36:40.3062281Z",
+      "speed": "Within 20 hours",
+      "fetchedAt": "2026-10-17T16:48:22.6664516Z",
       "stale": false
     },
     {
@@ -78,12 +73,12 @@
       "corridor": "sgd-bdt",
       "sendCurrency": "SGD",
       "sendAmount": 500,
-      "rate": 94.48,
+      "rate": 94.46,
       "fee": 4.99,
-      "receiveAmount": 46768.54,
+      "receiveAmount": 46758.64,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T13:36:40.4062516Z",
+      "fetchedAt": "2026-10-17T16:48:22.7776333Z",
       "stale": false
     },
     {
@@ -96,7 +91,7 @@
       "receiveAmount": 96478.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -108,8 +103,8 @@
       "fee": 8.63,
       "receiveAmount": 95290.48,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 23 hours",
-      "fetchedAt": "2026-10-17T13:36:40.5505737Z",
+      "speed": "Within 20 hours",
+      "fetchedAt": "2026-10-17T16:48:22.9025183Z",
       "stale": false
     },
     {
@@ -117,12 +112,12 @@
       "corridor": "sgd-bdt",
       "sendCurrency": "SGD",
       "sendAmount": 1000,
-      "rate": 94.48,
+      "rate": 94.46,
       "fee": 4.99,
-      "receiveAmount": 94008.54,
+      "receiveAmount": 93988.64,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T13:36:43.7700881Z",
+      "fetchedAt": "2026-10-17T16:48:26.1604701Z",
       "stale": false
     }
   ],

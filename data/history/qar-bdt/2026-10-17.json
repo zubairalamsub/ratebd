@@ -2,7 +2,7 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T13:37:00.2920017Z",
+  "generatedAt": "2026-10-17T16:48:44.858203Z",
   "midMarket": {
     "rate": 33.9148,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.64,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
     "stale": false
   },
   "providers": [
@@ -41,11 +41,6 @@
       "message": "WorldRemit offers no money-transfer payout method for QA\u2192BD"
     },
     {
-      "name": "Xe",
-      "status": "not_supported",
-      "message": "Xe Money Transfer is not available to senders in QA (isXemtSupported=false on xe.com)"
-    },
-    {
       "name": "WesternUnion",
       "status": "ok",
       "message": null
@@ -62,7 +57,7 @@
       "receiveAmount": 33914.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -75,7 +70,7 @@
       "receiveAmount": 33794.52,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T13:36:56.6207342Z",
+      "fetchedAt": "2026-10-17T16:48:39.56609Z",
       "stale": false
     },
     {
@@ -88,7 +83,7 @@
       "receiveAmount": 67829.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -101,7 +96,7 @@
       "receiveAmount": 67589.04,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 1 day",
-      "fetchedAt": "2026-10-17T13:37:00.2916328Z",
+      "fetchedAt": "2026-10-17T16:48:43.4099414Z",
       "stale": false
     }
   ],
@@ -137,26 +132,26 @@
       "provider": "OoredooMoney",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
-      "rate": 33.900144,
+      "rate": 33.920152,
       "deliveryMethod": "Bank deposit",
       "speed": "Same Day",
       "partner": "Alzaman Exchange",
       "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
       "provider": "OoredooMoney",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
-      "rate": 33.900102,
+      "rate": 33.920094,
       "deliveryMethod": "Bank deposit",
       "speed": "Next bank working day",
       "partner": "Arabian Exchange",
       "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
@@ -169,7 +164,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:36:58.0543761Z",
+      "fetchedAt": "2026-10-17T16:48:41.4709319Z",
       "stale": false
     },
     {
@@ -182,7 +177,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:36:58.3842983Z",
+      "fetchedAt": "2026-10-17T16:48:41.6864872Z",
       "stale": false
     },
     {
@@ -195,7 +190,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:36:57.3877289Z",
+      "fetchedAt": "2026-10-17T16:48:41.4479338Z",
       "stale": false
     },
     {
@@ -207,8 +202,8 @@
       "speed": "1-2 working days",
       "partner": "Transfast",
       "feeNote": "20 QR to 30 QR",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
@@ -220,8 +215,8 @@
       "speed": "Next working day",
       "partner": "Aldar Exchange",
       "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
@@ -233,8 +228,8 @@
       "speed": "In a Few Hours",
       "partner": "MoneyGram",
       "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
@@ -247,7 +242,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T13:36:59.415894Z",
+      "fetchedAt": "2026-10-17T16:48:44.8573369Z",
       "stale": false
     },
     {
@@ -259,8 +254,8 @@
       "speed": "Next Working Day",
       "partner": "Western Union",
       "feeNote": "20 QR to 30 QR",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
@@ -272,8 +267,8 @@
       "speed": "Next working day",
       "partner": "Gulf Exchange",
       "feeNote": "Starting from QAR 20",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     },
     {
@@ -285,8 +280,8 @@
       "speed": "In 1 Hour",
       "partner": "Thunes",
       "feeNote": "20 QR to 30 QR",
-      "publishedAt": "2026-10-17T13:34:25.529Z",
-      "fetchedAt": "2026-10-17T13:36:57.1212093Z",
+      "publishedAt": "2026-10-17T16:46:23.869Z",
+      "fetchedAt": "2026-10-17T16:48:40.0765284Z",
       "stale": false
     }
   ]

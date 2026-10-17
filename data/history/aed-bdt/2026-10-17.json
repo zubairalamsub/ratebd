@@ -2,7 +2,7 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T13:36:29.4960039Z",
+  "generatedAt": "2026-10-17T16:48:12.2351205Z",
   "midMarket": {
     "rate": 33.6147,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.6725,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+    "fetchedAt": "2026-10-17T16:48:02.0577021Z",
     "stale": false
   },
   "providers": [
@@ -39,11 +39,6 @@
       "name": "WorldRemit",
       "status": "not_supported",
       "message": "WorldRemit offers no money-transfer payout method for AE\u2192BD"
-    },
-    {
-      "name": "Xe",
-      "status": "not_supported",
-      "message": "Xe Money Transfer is not available to senders in AE (isXemtSupported=false on xe.com)"
     }
   ],
   "quotes": [
@@ -57,7 +52,7 @@
       "receiveAmount": 16825.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T13:36:22.7312914Z",
+      "fetchedAt": "2026-10-17T16:48:04.436274Z",
       "stale": false
     },
     {
@@ -70,7 +65,7 @@
       "receiveAmount": 16807.35,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -83,7 +78,7 @@
       "receiveAmount": 16468.14,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T13:36:26.0507097Z",
+      "fetchedAt": "2026-10-17T16:48:08.8436293Z",
       "stale": false
     },
     {
@@ -96,7 +91,7 @@
       "receiveAmount": 33650.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T13:36:22.7312914Z",
+      "fetchedAt": "2026-10-17T16:48:04.436274Z",
       "stale": false
     },
     {
@@ -109,7 +104,7 @@
       "receiveAmount": 33614.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T13:36:20.2530791Z",
+      "fetchedAt": "2026-10-17T16:48:02.0577021Z",
       "stale": false
     },
     {
@@ -122,7 +117,7 @@
       "receiveAmount": 33238.14,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T13:36:29.4953895Z",
+      "fetchedAt": "2026-10-17T16:48:12.2345249Z",
       "stale": false
     }
   ],
