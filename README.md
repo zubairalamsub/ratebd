@@ -1,7 +1,9 @@
 # ratebd
 
-Remittance rate comparison for sending money to Bangladesh from the UK (GBP), the USA (USD), Italy (EUR), the UAE (AED),
-Saudi Arabia (SAR), Kuwait (KWD), Qatar (QAR), Oman (OMR), Malaysia (MYR) and Singapore (SGD).
+Remittance rate comparison for sending money to Bangladesh. It only collects from providers whose published terms allow
+it, so today the site shows Saudi Arabia (SAR), Kuwait (KWD), Qatar (QAR) and Oman (OMR). The engine also tracks the
+UK, USA, Italy, UAE, Malaysia and Singapore, and those routes reappear on the site as soon as a permitted provider has
+data for them (see "Removed providers" below).
 
 **Live site:** https://ratebd.pages.dev (Cloudflare Pages, rebuilt on every push to `main`).
 Everything runs on free tiers: no servers, no database, no VMs.
@@ -39,14 +41,12 @@ with no status entry.
 ### Providers and sources
 
 All sources are public, unauthenticated endpoints that the providers' own websites call. No API keys are needed.
-Each parser is tested against real responses saved in `engine/tests/RateBd.Engine.Tests/Fixtures`.
+Each source's robots.txt and published terms (including customer and user agreements) were checked before it was
+added; a source whose terms forbid automated collection is not used. Each parser is tested against real responses saved
+in `engine/tests/RateBd.Engine.Tests/Fixtures`.
 
 | Provider | Source |
 |---|---|
-| Wise | `POST api.wise.com/v3/quotes/`, bank-transfer pay-in |
-| Remitly | `GET api.remitly.com/v3/calculator/estimate` with the page-issued device ID; bank deposit where offered |
-| Taptap Send | `GET api.taptapsend.com/api/fxRates` (one feed for every corridor) |
-| WorldRemit | `POST api.worldremit.com/graphql` |
 | Western Union (SA, KW, QA) | `POST westernunion.com/wuconnect/prices/catalog`, the send-money form's price catalogue; bank deposit |
 | Al Mulla Exchange (KW) | `POST app-kwt.almullaexchange.com/pub/xtrate/get`; best correspondent route (often Western Union's network, at Western Union's price) |
 | Skrill (KW) | `POST transfers.skrill.com/api/transfers/v4/marketing/preview` after the calculator's anonymous session |
@@ -73,20 +73,7 @@ A posted rate that its source dates more than three days back counts as a failur
 site marked stale instead of being shown as current. Ooredoo Money's fee range ("Starting from QAR 20") is kept as
 `feeNote` and shown in place of "Not published".
 
-Coverage, verified against each provider's own responses on 2026-10-17. ✗ means the provider's data shows it does not
-serve that route; the site lists it as "not offered".
-
-| Provider | GBP (UK) | USD (USA) | EUR (Italy) | AED (UAE) | MYR (Malaysia) | SGD (Singapore) |
-|---|---|---|---|---|---|---|
-| Wise | ✅ | ✅ | ✅ | ✗ only a disabled balance pay-in | ✅ | ✅ |
-| Remitly | ✅ | ✅ | ✅ | ✅ | ✗ not a send country | ✅ |
-| Taptap Send | ✅ | ✅ | ✅ | ✅ | ✗ | ✗ |
-| WorldRemit | ✅ | ✅ | ✅ | ✗ | ✅ | ✗ |
-| MidMarket | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-
-None of those four providers sends from Saudi Arabia, Kuwait, Qatar or Oman: Wise returns 422 `route.not.supported`,
-Remitly returns 400 for those conduits, Taptap Send doesn't list them, and WorldRemit offers only airtime top-up.
-The Gulf routes therefore use Gulf providers, researched and re-verified on 2026-10-17:
+The Gulf routes use Gulf providers, researched and re-verified on 2026-10-17:
 
 | Route | Full quotes (ranked) | Posted rates (no fee) |
 |---|---|---|
@@ -102,22 +89,29 @@ Checked and left out:
 - **Blocks non-browser clients:** KIECO (403 to .NET's HTTP client); no workaround is attempted.
 - **Not reliable enough:** Musandam Exchange (TLS certificate expired 2026-10-05) and Wasel Exchange (hand-edited branch boards).
 
+### Removed providers
+
+Removed on 2026-10-17 after a terms review. Each can return only with the provider's written permission or through an
+official API (for example an affiliate programme). Their code is in git history up to commit `577d86b`.
+
+| Provider | Why |
+|---|---|
+| Xe | Its quote responses state that automatic extraction of rates is prohibited under its Terms of Use |
+| Remitly | User agreements ban robots, spiders and scrapers; `api.remitly.com/robots.txt` disallows everything |
+| Taptap Send | User agreements ban robots, spiders and scrapers and public or commercial reuse without permission |
+| WorldRemit | Terms ban monitoring or copying its channels with robots or automatic devices without written permission |
+| Wise | Ambiguous: its quote endpoint is publicly documented, but the customer agreement bans robots monitoring its websites and commercial use of its materials without permission. It can return through Wise's affiliate API with a token |
+
 Source notes:
-- **Remitly** returns a first-transfer promo price. ratebd shows the standard price instead: `base_rate` with the undiscounted fee.
-- **Remitly** answers anonymous calls with HTTP 429 `NOT_ALLOWED` far more often when they lack the `Remitly-DeviceEnvironmentID` header its own site sends. The provider reads that server-issued ID from a public converter page once per run, sends the same headers, paces requests, and retries once with a fresh ID before carrying the last quote forward.
-- **Taptap Send** publishes one rate per corridor. Its BD corridors carry no fee schedule, so the fee is 0. It gives no delivery method or speed, and those show as "Not specified".
-- **Xe** is not collected: its quote responses say automatic extraction of rates is prohibited under its Terms of Use. It was removed on 2026-10-17.
 - **Western Union** prices a request from a random `wu_device_id` cookie that its page script generates in the browser (no server involvement). Without one the API answers from a different price tier that the site never shows, so the provider sends a fresh random ID each run, exactly as a browser visit would, and rejects any response outside the website's price segment (`N00`). westernunion.com uses Akamai bot management; a 403 is reported as a failure and the last quote is carried forward.
 - **Skrill** opens the same anonymous session its calculator does (three GETs, no login) and echoes its `XSRF-TOKEN`. Its first-transfer discount is ignored.
-- **Bangladesh Bank** serves a JavaScript bot challenge to plain HTTP clients. CI saves the page with headless Chromium (`engine/tools/bb-snapshot`, Playwright), and the engine parses that file with AngleSharp. GBP and AED mid rates are `USD/BDT ÷ units-per-USD`.
+- **Bangladesh Bank** serves a JavaScript bot challenge to plain HTTP clients. CI saves the page with headless Chromium (`engine/tools/bb-snapshot`, Playwright), and the engine parses that file with AngleSharp. Mid rates are `USD/BDT ÷ units-per-USD` for each send currency.
 
 ### How quotes are normalised
 
 - `sendAmount` is the total the sender pays, fee included.
-- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Remitly, WorldRemit, Taptap, Western Union, Al Mulla, Skrill). Wise and Paysend already deduct their fee from the amount sent.
+- `receiveAmount = (sendAmount − fee) × rate`. This is recalculated for providers that add the fee on top (Western Union, Al Mulla, Skrill). Paysend already deducts its fee from the amount sent.
 - One quote per provider per amount:
-  - Wise uses bank transfer.
-  - WorldRemit uses whichever payout method delivers most.
   - Western Union and Skrill use bank deposit; Al Mulla its best route.
 - Missing data is never invented. A field the source doesn't give shows as "Not specified".
 
@@ -128,12 +122,12 @@ UTC day, and a rerun on the same day overwrites it.
 
 ```jsonc
 {
-  "corridor": "gbp-bdt", "sendCurrency": "GBP", "receiveCurrency": "BDT",
+  "corridor": "kwd-bdt", "sendCurrency": "KWD", "receiveCurrency": "BDT",
   "generatedAt": "2026-10-17T08:14:07Z",
-  "midMarket": { "rate": 164.2248, "usdBdt": 123.45, "usdBdtDate": "2026-10-17", "sendPerUsd": 0.7517, "stale": false, ... },
-  "providers": [ { "name": "Wise", "status": "ok|failed|stale|not_supported", "message": null }, ... ],
-  "quotes": [ { "provider": "Wise", "sendAmount": 1000, "rate": 163.916, "fee": 8.86, "receiveAmount": 162463.70,
-                "deliveryMethod": "Bank deposit", "speed": "Within 2 days", "fetchedAt": "...", "stale": false }, ... ],
+  "midMarket": { "rate": 397.138, "usdBdt": 123.45, "usdBdtDate": "2026-10-17", "sendPerUsd": 0.3108, "stale": false, ... },
+  "providers": [ { "name": "WesternUnion", "status": "ok|failed|stale|not_supported", "message": null }, ... ],
+  "quotes": [ { "provider": "WesternUnion", "sendAmount": 200, "rate": 400.8760545, "fee": 1.25, "receiveAmount": 79674.12,
+                "deliveryMethod": "Bank deposit", "speed": "Within 1 day", "fetchedAt": "...", "stale": false }, ... ],
   "postedRateProviders": [ { "name": "Unimoni", "status": "ok", "message": null }, ... ],
   "postedRates": [ { "provider": "OoredooMoney", "rate": 33.900144, "deliveryMethod": "Bank deposit", "speed": "Same Day",
                      "partner": "Alzaman Exchange", "feeNote": "Starting from QAR 20", "publishedAt": "...",
@@ -255,7 +249,6 @@ GitHub disables scheduled workflows in public repos after 60 days without reposi
 
 Every source is free and keyless. They can still change or block automated requests:
 - **Failing provider:** it shows as `stale` (last good quote) or `failed` in the data and on the site. The run continues.
-- **Remitly** answered `429` to GitHub-hosted runners until the provider started sending the page-issued device ID; the first run with it (17 Oct 2026) got fresh quotes on both corridors. See its provider notes.
 - **Bangladesh Bank** needs the headless-browser snapshot. If that fails, the benchmark is carried forward as stale.
 - **Gulf sources** were verified from a machine outside the Gulf; the first scheduled runs show whether any of them treat GitHub's runners differently. Western Union is the most likely to (Akamai).
 - **Alerts:** check the job summary of each `fetch` run, which has a status table per corridor.
