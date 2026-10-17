@@ -49,7 +49,7 @@ public sealed class RemitlyProvider(HttpClient http, TimeProvider time, ILogger<
     {
         if (!Alpha3.TryGetValue(c.SendCountry, out var from) || !Alpha3.TryGetValue(c.ReceiveCountry, out var to))
         {
-            throw new ProviderNotSupportedException($"No Remitly conduit mapping for {c.SendCountry}→{c.ReceiveCountry}");
+            throw new ProviderNotSupportedException($"Remitly does not offer {c.SendCountry}→{c.ReceiveCountry} transfers");
         }
 
         var conduit = Uri.EscapeDataString($"{from}:{c.SendCurrency}-{to}:{c.ReceiveCurrency}");
