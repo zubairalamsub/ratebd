@@ -49,6 +49,15 @@
   .prose-block p + p {
     @apply mt-3;
   }
+
+  /* Disclosure widgets draw their own chevron. */
+  summary {
+    @apply cursor-pointer list-none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 /* Numbers line up in table columns. */

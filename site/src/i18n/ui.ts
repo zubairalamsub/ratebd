@@ -44,6 +44,7 @@ const en = {
   "home.why.2": "How far each rate is from a mid-market benchmark based on Bangladesh Bank's USD/BDT rate.",
   "home.why.3": "Delivery method and speed, as each provider reports them.",
   "home.noQuotes": "No live quotes on this route today.",
+  "home.stats": "{countries} sending countries · {providers} providers · updated daily at 09:00 Dhaka time",
   "home.bestPosted": "Best exchange-house rate today (exact fee not published)",
   "home.bestPostedStale": "Best exchange-house rate (no fresh rates on the last update)",
 
@@ -60,6 +61,7 @@ const en = {
   "corridor.amount": "Amount you send",
   "corridor.send": "Send {amount}",
   "corridor.otherRoutes": "Other sending countries",
+  "corridor.changeCountry": "Change country",
 
   "table.caption": "{from} → BDT quotes for sending {amount} in total, most taka first",
   "table.provider": "Provider",
@@ -72,6 +74,7 @@ const en = {
   "table.trend": "7-day trend",
   "table.visit": "Go to {name}",
   "table.visitHeader": "Provider website",
+  "table.visitShort": "Visit",
   "table.best": "Best",
   "table.empty": "No provider returned a quote for this amount.",
 
@@ -90,6 +93,8 @@ const en = {
 
   "margin.better": "{value} above mid-market",
   "margin.title": "How much less you get than at the mid-market rate, fees included",
+  "margin.short": "Margin",
+  "margin.betterShort": "{value} above mid",
 
   "trend.none": "Not enough history yet",
   "trend.label": "{name}: taka received on {n} days between {first} and {last}",
@@ -102,11 +107,13 @@ const en = {
   "mid.receive": "At this rate with no fee, {amount} would deliver {receive}.",
   "mid.stale": "The benchmark could not be refreshed on the last update; this value is from {date}.",
   "mid.unavailable": "The mid-market benchmark is not available right now.",
+  "mid.how": "How is this calculated?",
 
   "updated.label": "Last updated {date}",
   "updated.schedule": "Rates are collected once a day at 03:00 UTC (09:00 in Dhaka).",
 
   "unavailable.title": "Not available on this route",
+  "unavailable.count": "Not available on this route ({n})",
   "status.not_supported": "Not offered",
   "status.failed": "Could not fetch a quote on the last update",
 
@@ -196,6 +203,8 @@ const en = {
 
   "footer.data": "Data updated daily from public provider calculators. Not financial advice.",
   "footer.source": "Source code and data",
+  "footer.routes": "Sending countries",
+  "footer.about": "About the data",
   "notFound.title": "Page not found",
   "notFound.body": "That page does not exist. Try the comparison for your route:",
 } as const;
@@ -244,6 +253,7 @@ const bn: Record<UiKey, string> = {
   "home.why.2": "প্রতিটি রেট বাংলাদেশ ব্যাংকের ডলার/টাকা রেটভিত্তিক মিড-মার্কেট মানদণ্ড থেকে কতটা দূরে।",
   "home.why.3": "প্রতিষ্ঠানগুলোর জানানো পাঠানোর পদ্ধতি ও সময়।",
   "home.noQuotes": "আজ এই পথে কোনো লাইভ কোট নেই।",
+  "home.stats": "{countries}টি প্রেরক দেশ · {providers}টি প্রতিষ্ঠান · প্রতিদিন ঢাকা সময় সকাল ৯টায় হালনাগাদ",
   "home.bestPosted": "আজ এক্সচেঞ্জ হাউসের সেরা রেট (নির্দিষ্ট ফি প্রকাশিত নয়)",
   "home.bestPostedStale": "এক্সচেঞ্জ হাউসের সেরা রেট (সর্বশেষ হালনাগাদে নতুন রেট পাওয়া যায়নি)",
 
@@ -260,6 +270,7 @@ const bn: Record<UiKey, string> = {
   "corridor.amount": "আপনি কত পাঠাবেন",
   "corridor.send": "{amount} পাঠালে",
   "corridor.otherRoutes": "অন্যান্য প্রেরক দেশ",
+  "corridor.changeCountry": "দেশ বদলান",
 
   "table.caption": "মোট {amount} পাঠালে {from} → BDT কোট, সবচেয়ে বেশি টাকা আগে",
   "table.provider": "প্রতিষ্ঠান",
@@ -272,6 +283,7 @@ const bn: Record<UiKey, string> = {
   "table.trend": "৭ দিনের প্রবণতা",
   "table.visit": "{name}-এ যান",
   "table.visitHeader": "প্রতিষ্ঠানের ওয়েবসাইট",
+  "table.visitShort": "ভিজিট",
   "table.best": "সেরা",
   "table.empty": "এই পরিমাণের জন্য কোনো প্রতিষ্ঠান কোট দেয়নি।",
 
@@ -290,6 +302,8 @@ const bn: Record<UiKey, string> = {
 
   "margin.better": "মিড-মার্কেটের চেয়ে {value} বেশি",
   "margin.title": "ফিসহ হিসাবে মিড-মার্কেট রেটের তুলনায় কতটা কম পাওয়া যায়",
+  "margin.short": "মার্জিন",
+  "margin.betterShort": "মিড-মার্কেটের চেয়ে {value} বেশি",
 
   "trend.none": "এখনো যথেষ্ট ইতিহাস নেই",
   "trend.label": "{name}: {first} থেকে {last} পর্যন্ত {n} দিনে প্রাপ্ত টাকা",
@@ -302,11 +316,13 @@ const bn: Record<UiKey, string> = {
   "mid.receive": "ফি ছাড়া এই রেটে {amount} পাঠালে পৌঁছাত {receive}।",
   "mid.stale": "সর্বশেষ হালনাগাদে মানদণ্ডটি নতুন করা যায়নি; এই মান {date} তারিখের।",
   "mid.unavailable": "মিড-মার্কেট মানদণ্ড এখন পাওয়া যাচ্ছে না।",
+  "mid.how": "এটি কীভাবে হিসাব করা হয়?",
 
   "updated.label": "সর্বশেষ হালনাগাদ {date}",
   "updated.schedule": "রেট প্রতিদিন একবার সংগ্রহ করা হয়, ০৩:০০ UTC-তে (ঢাকায় সকাল ৯টা)।",
 
   "unavailable.title": "এই পথে পাওয়া যায় না",
+  "unavailable.count": "এই পথে পাওয়া যায় না ({n})",
   "status.not_supported": "সেবা নেই",
   "status.failed": "সর্বশেষ হালনাগাদে কোট আনা যায়নি",
 
@@ -396,6 +412,8 @@ const bn: Record<UiKey, string> = {
 
   "footer.data": "প্রতিষ্ঠানগুলোর পাবলিক ক্যালকুলেটর থেকে প্রতিদিন হালনাগাদ। এটি আর্থিক পরামর্শ নয়।",
   "footer.source": "সোর্স কোড ও তথ্য",
+  "footer.routes": "প্রেরক দেশ",
+  "footer.about": "তথ্য সম্পর্কে",
   "notFound.title": "পাতাটি পাওয়া যায়নি",
   "notFound.body": "এই পাতাটি নেই। আপনার পথের তুলনা দেখুন:",
 };
