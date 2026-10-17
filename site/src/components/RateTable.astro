@@ -1,0 +1,106 @@
+---
+import Sparkline from "./Sparkline.astro";
+import StaleBadge from "./StaleBadge.astro";
+import type { CorridorMeta, Row } from "../lib/data";
+import { money, percent, rate, sendAmount } from "../i18n/format";
+import { isUnspecified, label } from "../i18n/labels";
+import { goPath, localePath, providerPath } from "../i18n/routes";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  corridor: CorridorMeta;
+  amount: number;
+  rows: Row[];
+}
+
+const { locale, corridor, amount, rows } = Astro.props;
+const amountText = sendAmount(locale, amount, corridor.sendCurrency);
+const caption = t(locale, "table.caption", { from: corridor.sendCurrency, amount: amountText });
+const th = "px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 whitespace-nowrap";
+const td = "px-3 py-3 align-middle whitespace-nowrap";
+---
+
+<div
+  class="relative overflow-x-auto rounded-lg border border-slate-200"
+  role="region"
+  aria-label={caption}
+  tabindex="0"
+>
+  <table class="min-w-full divide-y divide-slate-200 text-sm tabular">
+    <caption class="sr-only">{caption}</caption>
+    <thead class="bg-slate-50">
+      <tr>
+        <th scope="col" class={th}>{t(locale, "table.provider")}</th>
+        <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.rate")}</th>
+        <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.fee")}</th>
+        <th scope="col" class:list={[th, "text-right"]}>{t(locale, "table.receive")}</th>
+        <th scope="col" class:list={[th, "text-right"]} title={t(locale, "margin.title")}>{t(locale, "table.margin")}</th>
+        <th scope="col" class={th}>{t(locale, "table.delivery")}</th>
+        <th scope="col" class={th}>{t(locale, "table.speed")}</th>
+        <th scope="col" class={th}>{t(locale, "table.trend")}</th>
+        <th scope="col" class={th}><span class="sr-only">{t(locale, "table.visit", { name: "" })}</span></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-100 bg-white">
+      {
+        rows.length === 0 && (
+          <tr>
+            <td colspan="9" class="px-3 py-6 text-center text-slate-600">
+              {t(locale, "table.empty")}
+            </td>
+          </tr>
+        )
+      }
+      {
+        rows.map((row, index) => {
+          const q = row.quote;
+          const margin = row.marginPct;
+          return (
+            <tr class:list={[index === 0 && !q.stale ? "bg-brand-50/60" : undefined, q.stale && "text-slate-600"]}>
+              <th scope="row" class:list={[td, "text-left font-medium"]}>
+                <span class="flex flex-wrap items-center gap-2">
+                  <a href={localePath(locale, providerPath(row.provider.slug))} class="text-slate-900">
+                    {row.provider.name}
+                  </a>
+                  {index === 0 && !q.stale && (
+                    <span class="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-semibold text-white">
+                      {t(locale, "table.best")}
+                    </span>
+                  )}
+                  {q.stale && <StaleBadge locale={locale} name={row.provider.name} fetchedAt={q.fetchedAt} />}
+                </span>
+              </th>
+              <td class:list={[td, "text-right"]}>{rate(locale, q.rate)}</td>
+              <td class:list={[td, "text-right"]}>{money(locale, q.fee, corridor.sendCurrency)}</td>
+              <td class:list={[td, "text-right text-base font-semibold text-slate-900"]}>
+                {money(locale, q.receiveAmount, "BDT")}
+              </td>
+              <td class:list={[td, "text-right"]}>
+                {margin === null
+                  ? "–"
+                  : margin < 0
+                    ? <span class="text-brand-700">{t(locale, "margin.better", { value: percent(locale, -margin) })}</span>
+                    : percent(locale, margin)}
+              </td>
+              <td class:list={[td, isUnspecified(q.deliveryMethod) && "text-slate-600"]}>{label(locale, q.deliveryMethod)}</td>
+              <td class:list={[td, isUnspecified(q.speed) && "text-slate-600"]}>{label(locale, q.speed)}</td>
+              <td class={td}>
+                <Sparkline locale={locale} name={row.provider.name} values={row.trend} dates={row.trendDates} />
+              </td>
+              <td class={td}>
+                <a
+                  href={goPath(row.provider.slug)}
+                  rel="nofollow sponsored noopener"
+                  class="inline-flex min-h-11 items-center rounded-md border border-brand-700 px-3 font-medium text-brand-700 no-underline hover:bg-brand-50"
+                >
+                  {t(locale, "table.visit", { name: row.provider.name })}
+                </a>
+              </td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>

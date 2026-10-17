@@ -1,0 +1,12 @@
+---
+import CorridorView from "../views/CorridorView.astro";
+import { CORRIDORS } from "../lib/data";
+
+export function getStaticPaths() {
+  return CORRIDORS.map((c) => ({ params: { from: c.from } }));
+}
+
+const { from } = Astro.params;
+---
+
+<CorridorView locale="en" from={from!} />

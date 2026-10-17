@@ -1,0 +1,20 @@
+---
+import { dateTime } from "../i18n/format";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  name: string;
+  fetchedAt: string;
+}
+
+const { locale, name, fetchedAt } = Astro.props;
+const description = t(locale, "badge.staleTitle", { name, date: dateTime(locale, fetchedAt) });
+---
+
+<span
+  class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900"
+  title={description}
+>
+  {t(locale, "badge.stale")}<span class="sr-only">: {description}</span>
+</span>
