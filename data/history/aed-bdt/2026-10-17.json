@@ -2,7 +2,7 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T08:37:29.5400383Z",
+  "generatedAt": "2026-10-17T10:42:05.2458361Z",
   "midMarket": {
     "rate": 33.6147,
     "usdBdt": 123.4500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.6725,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T08:36:45.0337235Z",
+    "fetchedAt": "2026-10-17T10:41:58.0503664Z",
     "stale": false
   },
   "providers": [
@@ -27,8 +27,8 @@
     },
     {
       "name": "Remitly",
-      "status": "stale",
-      "message": "HttpRequestException: Response status code does not indicate success: 429 (Too Many Requests). (showing last good quote from 2026-10-17 08:14 UTC)"
+      "status": "ok",
+      "message": null
     },
     {
       "name": "TaptapSend",
@@ -57,7 +57,7 @@
       "receiveAmount": 16825.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T08:36:45.2864847Z",
+      "fetchedAt": "2026-10-17T10:41:58.1767168Z",
       "stale": false
     },
     {
@@ -70,7 +70,7 @@
       "receiveAmount": 16807.35,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T08:36:45.0337235Z",
+      "fetchedAt": "2026-10-17T10:41:58.0503664Z",
       "stale": false
     },
     {
@@ -83,8 +83,8 @@
       "receiveAmount": 16468.14,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T08:14:14.3227791Z",
-      "stale": true
+      "fetchedAt": "2026-10-17T10:42:02.0546517Z",
+      "stale": false
     },
     {
       "provider": "TaptapSend",
@@ -96,7 +96,7 @@
       "receiveAmount": 33650.00,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T08:36:45.2864847Z",
+      "fetchedAt": "2026-10-17T10:41:58.1767168Z",
       "stale": false
     },
     {
@@ -109,7 +109,7 @@
       "receiveAmount": 33614.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T08:36:45.0337235Z",
+      "fetchedAt": "2026-10-17T10:41:58.0503664Z",
       "stale": false
     },
     {
@@ -122,8 +122,8 @@
       "receiveAmount": 33238.14,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-17T08:14:27.5056976Z",
-      "stale": true
+      "fetchedAt": "2026-10-17T10:42:05.245621Z",
+      "stale": false
     }
   ]
 }
