@@ -25,7 +25,15 @@ public sealed class JsonDataStore(string root)
             return null;
         }
         using var stream = File.OpenRead(path);
-        return JsonSerializer.Deserialize(stream, RateBdJsonContext.Default.CorridorSnapshot);
+        var snapshot = JsonSerializer.Deserialize(stream, RateBdJsonContext.Default.CorridorSnapshot);
+        // Snapshots written before posted rates existed have neither list.
+        return snapshot is null
+            ? null
+            : snapshot with
+            {
+                PostedRateProviders = snapshot.PostedRateProviders ?? [],
+                PostedRates = snapshot.PostedRates ?? [],
+            };
     }
 
     public void Write(CorridorSnapshot snapshot)

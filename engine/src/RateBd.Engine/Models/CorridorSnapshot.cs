@@ -1,6 +1,8 @@
 namespace RateBd.Engine.Models;
 
 /// <summary>Everything written to <c>/data/{corridor}.json</c> for one run.</summary>
+/// <param name="PostedRateProviders">Status of each exchange house that publishes only a rate.</param>
+/// <param name="PostedRates">Rates without a published fee (see <see cref="PostedRate"/>), best rate first.</param>
 public sealed record CorridorSnapshot(
     string Corridor,
     string SendCurrency,
@@ -8,7 +10,9 @@ public sealed record CorridorSnapshot(
     DateTime GeneratedAt,
     MidMarketInfo? MidMarket,
     IReadOnlyList<ProviderStatus> Providers,
-    IReadOnlyList<Quote> Quotes);
+    IReadOnlyList<Quote> Quotes,
+    IReadOnlyList<ProviderStatus> PostedRateProviders,
+    IReadOnlyList<PostedRate> PostedRates);
 
 /// <summary>Outcome of one provider for one corridor.</summary>
 public sealed record ProviderStatus(string Name, string Status, string? Message)

@@ -11,7 +11,10 @@ public class SnapshotBuilderTests
         new MidMarketInfo(163.9m, 123.45m, "2026-10-17", "Bangladesh Bank", 0.7531m, "2026-10-16", "currency-api",
             Fixture.FetchedAt, Stale: false),
         [new ProviderStatus("Wise", ProviderStatus.Ok, null), new ProviderStatus("Remitly", ProviderStatus.Ok, null)],
-        [Fixture.Quote("Wise", 1000, 162463.70m), Fixture.Quote("Remitly", 1000, 163228.24m)]);
+        [Fixture.Quote("Wise", 1000, 162463.70m), Fixture.Quote("Remitly", 1000, 163228.24m)],
+        [new ProviderStatus("Unimoni", ProviderStatus.Ok, null)],
+        [new PostedRate("Unimoni", "gbp-bdt", "GBP", 319.9995m, "Not specified", "Not specified", null, null, null,
+            Fixture.FetchedAt, Stale: false)]);
 
     [Fact]
     public void Failed_provider_carries_forward_last_good_quote_as_stale()

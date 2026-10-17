@@ -37,7 +37,7 @@ public sealed class RateRunnerTests : IDisposable
                 new CorridorOptions { Id = "aed-bdt", SendCurrency = "AED", ReceiveCurrency = "BDT", SendCountry = "AE", ReceiveCountry = "BD" },
             ],
         };
-        return new RateRunner(providers, new JsonDataStore(_root), Microsoft.Extensions.Options.Options.Create(options),
+        return new RateRunner(providers, [], new JsonDataStore(_root), Microsoft.Extensions.Options.Options.Create(options),
             TimeProvider.System, NullLogger<RateRunner>.Instance);
     }
 
@@ -107,7 +107,7 @@ public sealed class RateRunnerTests : IDisposable
                 new CorridorOptions { Id = "usd-bdt", SendCurrency = "USD", ReceiveCurrency = "BDT", SendCountry = "US", ReceiveCountry = "BD" },
             ],
         };
-        var runner = new RateRunner([new FakeProvider("Echo", (c, a) => QuotesFor("Echo", c, a))], new JsonDataStore(_root),
+        var runner = new RateRunner([new FakeProvider("Echo", (c, a) => QuotesFor("Echo", c, a))], [], new JsonDataStore(_root),
             Microsoft.Extensions.Options.Options.Create(options), TimeProvider.System, NullLogger<RateRunner>.Instance);
 
         var snapshots = await runner.RunAsync(CancellationToken.None);

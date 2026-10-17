@@ -22,7 +22,7 @@ public sealed class JsonDataStoreTests : IDisposable
         var generatedAt = new DateTime(2026, 10, 17, 3, 0, 5, DateTimeKind.Utc);
         var snapshot = new CorridorSnapshot("gbp-bdt", "GBP", "BDT", generatedAt, null,
             [new ProviderStatus("Wise", ProviderStatus.Ok, null)],
-            [Fixture.Quote("Wise", 1000, 162463.70m)]);
+            [Fixture.Quote("Wise", 1000, 162463.70m)], [], []);
 
         store.Write(snapshot);
 
@@ -42,7 +42,7 @@ public sealed class JsonDataStoreTests : IDisposable
     public void Json_uses_camel_case_property_names()
     {
         var store = new JsonDataStore(_root);
-        store.Write(new CorridorSnapshot("aed-bdt", "AED", "BDT", Fixture.FetchedAt, null, [], []));
+        store.Write(new CorridorSnapshot("aed-bdt", "AED", "BDT", Fixture.FetchedAt, null, [], [], [], []));
 
         var json = File.ReadAllText(store.LatestPath("aed-bdt"));
         Assert.Contains("\"generatedAt\"", json);

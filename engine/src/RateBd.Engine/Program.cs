@@ -52,7 +52,8 @@ if (Environment.GetEnvironmentVariable("GITHUB_STEP_SUMMARY") is { Length: > 0 }
     await File.AppendAllTextAsync(summaryPath, RateRunner.Summarise(snapshots), cts.Token);
 }
 
-var fresh = snapshots.Sum(s => s.Providers.Count(p => p.Status == "ok" && p.Name != "MidMarket"));
+var fresh = snapshots.Sum(s => s.Providers.Concat(s.PostedRateProviders)
+    .Count(p => p.Status == "ok" && p.Name != "MidMarket"));
 if (fresh == 0 && host.Services.GetRequiredService<IOptions<EngineOptions>>().Value.FailWhenNothingFetched)
 {
     logger.LogCritical("No provider returned a fresh quote on any corridor; data was written with stale values only");
