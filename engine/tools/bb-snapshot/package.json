@@ -1,0 +1,12 @@
+{
+  "name": "bb-snapshot",
+  "private": true,
+  "description": "Saves the Bangladesh Bank exchange-rate page HTML using headless Chromium (the site sits behind a JavaScript bot challenge that plain HTTP clients cannot pass).",
+  "type": "module",
+  "scripts": {
+    "snapshot": "node snapshot.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  }
+}
