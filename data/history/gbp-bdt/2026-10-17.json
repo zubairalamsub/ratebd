@@ -1,0 +1,207 @@
+{
+  "corridor": "gbp-bdt",
+  "sendCurrency": "GBP",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-17T08:14:07.2059824Z",
+  "midMarket": {
+    "rate": 164.2248,
+    "usdBdt": 123.4500,
+    "usdBdtDate": "2026-10-17",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.7517136,
+    "crossRateDate": "2026-10-16",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-17T08:13:53.9424097Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Wise",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Remitly",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "TaptapSend",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "WorldRemit",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "Xe",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 500,
+      "rate": 164.2248,
+      "fee": 0,
+      "receiveAmount": 82112.40,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-17T08:13:53.9424097Z",
+      "stale": false
+    },
+    {
+      "provider": "Remitly",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 500,
+      "rate": 163.39,
+      "fee": 0.99,
+      "receiveAmount": 81533.24,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "fetchedAt": "2026-10-17T08:13:59.0175669Z",
+      "stale": false
+    },
+    {
+      "provider": "TaptapSend",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 500,
+      "rate": 163.00,
+      "fee": 0,
+      "receiveAmount": 81500.00,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "fetchedAt": "2026-10-17T08:13:57.4170795Z",
+      "stale": false
+    },
+    {
+      "provider": "Xe",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 500,
+      "rate": 163.9262,
+      "fee": 3.00,
+      "receiveAmount": 81471.32,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Typically within 48 hours",
+      "fetchedAt": "2026-10-17T08:13:55.841209Z",
+      "stale": false
+    },
+    {
+      "provider": "WorldRemit",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 500,
+      "rate": 163.8408,
+      "fee": 3.49,
+      "receiveAmount": 81348.60,
+      "deliveryMethod": "Mobile wallet (bKash)",
+      "speed": "Same day",
+      "fetchedAt": "2026-10-17T08:13:56.000559Z",
+      "stale": false
+    },
+    {
+      "provider": "Wise",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 500,
+      "rate": 163.916,
+      "fee": 5.28,
+      "receiveAmount": 81092.52,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 2 days",
+      "fetchedAt": "2026-10-17T08:13:54.0814234Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 1000,
+      "rate": 164.2248,
+      "fee": 0,
+      "receiveAmount": 164224.80,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-17T08:13:53.9424097Z",
+      "stale": false
+    },
+    {
+      "provider": "Xe",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 1000,
+      "rate": 163.9262,
+      "fee": 0.00,
+      "receiveAmount": 163926.20,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Typically within 48 hours",
+      "fetchedAt": "2026-10-17T08:13:57.4301607Z",
+      "stale": false
+    },
+    {
+      "provider": "Remitly",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 1000,
+      "rate": 163.39,
+      "fee": 0.99,
+      "receiveAmount": 163228.24,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "fetchedAt": "2026-10-17T08:14:07.2042898Z",
+      "stale": false
+    },
+    {
+      "provider": "TaptapSend",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 1000,
+      "rate": 163.00,
+      "fee": 0,
+      "receiveAmount": 163000.00,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "fetchedAt": "2026-10-17T08:13:57.4170795Z",
+      "stale": false
+    },
+    {
+      "provider": "WorldRemit",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 1000,
+      "rate": 163.8408,
+      "fee": 5.99,
+      "receiveAmount": 162859.39,
+      "deliveryMethod": "Mobile wallet (bKash)",
+      "speed": "Same day",
+      "fetchedAt": "2026-10-17T08:13:57.6813231Z",
+      "stale": false
+    },
+    {
+      "provider": "Wise",
+      "corridor": "gbp-bdt",
+      "sendCurrency": "GBP",
+      "sendAmount": 1000,
+      "rate": 163.916,
+      "fee": 8.86,
+      "receiveAmount": 162463.70,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 2 days",
+      "fetchedAt": "2026-10-17T08:13:54.4531725Z",
+      "stale": false
+    }
+  ]
+}
