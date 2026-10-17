@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RateBd.Engine/RateBd.Engine.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RateBd.Engine.Tests/RateBd.Engine.Tests.csproj" />
+  </Folder>
+</Solution>
