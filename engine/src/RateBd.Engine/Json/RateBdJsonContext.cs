@@ -5,6 +5,7 @@ namespace RateBd.Engine.Json;
 
 [JsonSourceGenerationOptions(
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
-    WriteIndented = true)]
+    WriteIndented = true,
+    NewLine = "\n")]
 [JsonSerializable(typeof(CorridorSnapshot))]
 internal sealed partial class RateBdJsonContext : JsonSerializerContext;
