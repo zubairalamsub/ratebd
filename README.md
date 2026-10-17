@@ -1,6 +1,6 @@
 # ratebd
 
-Remittance rate comparison for sending money to Bangladesh (GBP→BDT and AED→BDT).
+Remittance rate comparison for sending money to Bangladesh from the UK (GBP), the USA (USD), Italy (EUR), the UAE (AED), Malaysia (MYR) and Singapore (SGD).
 
 **Live site:** https://ratebd.pages.dev (Cloudflare Pages, rebuilt on every push to `main`).
 Everything runs on free tiers: no servers, no database, no VMs.
@@ -38,14 +38,30 @@ quotes are carried forward with `stale: true`.
 All sources are public, unauthenticated endpoints that the providers' own websites call. No API keys are needed.
 Each parser is tested against real responses saved in `engine/tests/RateBd.Engine.Tests/Fixtures`.
 
-| Provider | Source | GBP→BDT | AED→BDT |
-|---|---|---|---|
-| Wise | `POST api.wise.com/v3/quotes/`, bank-transfer pay-in | ✅ | Not supported: Wise only offers a disabled balance pay-in |
-| Remitly | `GET api.remitly.com/v3/calculator/estimate` with the page-issued device ID | ✅ | ✅ |
-| Taptap Send | `GET api.taptapsend.com/api/fxRates` | ✅ | ✅ |
-| WorldRemit | `POST api.worldremit.com/graphql` | ✅ | Not supported: the UAE isn't a WorldRemit send country |
-| Xe | `POST launchpad-api.xe.com/v2/quotes` | ✅ | Not supported: Xe Money Transfer isn't offered to UAE residents |
-| MidMarket (benchmark) | Bangladesh Bank USD/BDT WAR, crossed with [fawazahmed0/currency-api](https://github.com/fawazahmed0/exchange-api) | ✅ | ✅ |
+| Provider | Source |
+|---|---|
+| Wise | `POST api.wise.com/v3/quotes/`, bank-transfer pay-in |
+| Remitly | `GET api.remitly.com/v3/calculator/estimate` with the page-issued device ID; bank deposit where offered |
+| Taptap Send | `GET api.taptapsend.com/api/fxRates` (one feed for every corridor) |
+| WorldRemit | `POST api.worldremit.com/graphql` |
+| Xe | `POST launchpad-api.xe.com/v2/quotes` |
+| MidMarket (benchmark) | Bangladesh Bank USD/BDT WAR, crossed with [fawazahmed0/currency-api](https://github.com/fawazahmed0/exchange-api) |
+
+Coverage, verified against each provider's own responses on 2026-10-17. ✗ means the provider's data shows it does not
+serve that route; the site lists it as "not offered".
+
+| Provider | GBP (UK) | USD (USA) | EUR (Italy) | AED (UAE) | MYR (Malaysia) | SGD (Singapore) |
+|---|---|---|---|---|---|---|
+| Wise | ✅ | ✅ | ✅ | ✗ only a disabled balance pay-in | ✅ | ✅ |
+| Remitly | ✅ | ✅ | ✅ | ✅ | ✗ not a send country | ✅ |
+| Taptap Send | ✅ | ✅ | ✅ | ✅ | ✗ | ✗ |
+| WorldRemit | ✅ | ✅ | ✅ | ✗ | ✅ | ✗ |
+| Xe | ✅ | ✅ | ✅ | ✗ `isXemtSupported: false` | ✗ | ✗ |
+| MidMarket | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+Saudi Arabia, Kuwait, Qatar and Oman were also checked. None of the five providers sends from them: Wise returns 422
+`route.not.supported`, Remitly returns 400 for those conduits, Taptap Send and Xe don't list them, and WorldRemit offers
+only airtime top-up. They will need Gulf-specific providers before they can be added.
 
 Source notes:
 - **Remitly** returns a first-transfer promo price. ratebd shows the standard price instead: `base_rate` with the undiscounted fee.
@@ -88,8 +104,8 @@ with the `RATEBD_` prefix or unprefixed, using `__` for nesting:
 | Setting | Default | Purpose |
 |---|---|---|
 | `Engine:DataDirectory` | `data/` at the git root | Output folder |
-| `Engine:SendAmounts` | `[500, 1000]` | Amounts quoted per corridor |
-| `Engine:Corridors` | GBP→BDT, AED→BDT | Corridor list |
+| `Engine:SendAmounts` | `[500, 1000]` | Default amounts per corridor |
+| `Engine:Corridors` | GBP, USD, EUR (IT), AED, MYR, SGD → BDT | Corridor list; each can set its own `SendAmounts` (MYR uses `[1000, 2000]`) |
 | `Engine:ProviderTimeoutSeconds` | `90` | Cap per provider per corridor, retries included |
 | `Engine:FailWhenNothingFetched` | `true` | Exit code 2 if no provider returned a fresh quote |
 | `Providers:{Name}:Enabled` | `true` | Turn a provider off |
@@ -111,7 +127,7 @@ npm run dev
 
 The site has these pages. Every page also exists in Bengali under `/bn/...`.
 - `/`
-- `/send-money-gbp-to-bangladesh` and `/send-money-aed-to-bangladesh`
+- `/send-money-{gbp|usd|eur|aed|myr|sgd}-to-bangladesh`
 - `/providers/{wise|remitly|taptap-send|worldremit|xe}`
 - `/how-rates-work`
 - `/government-incentive`
