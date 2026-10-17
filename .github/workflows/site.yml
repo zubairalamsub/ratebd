@@ -1,0 +1,53 @@
+name: site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/site.yml"
+  pull_request:
+    paths:
+      - "site/**"
+      - ".github/workflows/site.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Cloudflare Pages does the real deploy; this catches type errors and broken builds before it does.
+  site:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: site/.nvmrc
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Type-check
+        run: npm run check
+
+      - name: Build (reads ../data)
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          test -f dist/_redirects && grep -q "^/go/wise " dist/_redirects
+          test -f dist/sitemap-index.xml
+          test -f dist/send-money-gbp-to-bangladesh.html
+          test -f dist/bn/send-money-aed-to-bangladesh.html
+          echo "Pages: $(find dist -name '*.html' | wc -l); size: $(du -sh dist | cut -f1)"
