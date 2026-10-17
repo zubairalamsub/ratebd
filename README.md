@@ -146,7 +146,7 @@ Cloudflare builds every push to `main`. That includes the daily `data: rates …
 
 | Workflow | When | Measured duration | Minutes per month |
 |---|---|---|---|
-| `fetch.yml` | daily 03:00 UTC + manual | 2 min 15 s on a cold cache (including the AOT build). Shorter when the cached binary is reused: no SDK install and no publish | ~45–70 |
+| `fetch.yml` | daily 03:00 UTC + manual | 1 min 12 s on a cold cache, including the 29 s AOT publish (run #2, 17 Oct 2026). About 40 s when the cached binary is reused. Bangladesh Bank snapshot ~19 s, fetching all providers ~8 s | ~30–60 (GitHub rounds each job up to a whole minute) |
 | `ci.yml` | pushes touching `engine/**` | ~1 min | a few |
 | `site.yml` | pushes touching `site/**` | ~1 min | a few |
 
@@ -186,6 +186,6 @@ GitHub disables scheduled workflows in public repos after 60 days without reposi
 
 Every source is free and keyless. They can still change or block automated requests:
 - **Failing provider:** it shows as `stale` (last good quote) or `failed` in the data and on the site. The run continues.
-- **Remitly** has answered `429` to GitHub-hosted runners. See its provider notes.
+- **Remitly** answered `429` to GitHub-hosted runners until the provider started sending the page-issued device ID; the first run with it (17 Oct 2026) got fresh quotes on both corridors. See its provider notes.
 - **Bangladesh Bank** needs the headless-browser snapshot. If that fails, the benchmark is carried forward as stale.
 - **Alerts:** check the job summary of each `fetch` run, which has a status table per corridor.
