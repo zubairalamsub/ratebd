@@ -2,16 +2,16 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T17:46:12.4307959Z",
+  "generatedAt": "2026-10-18T07:51:01.5625622Z",
   "midMarket": {
-    "rate": 33.9148,
-    "usdBdt": 123.4500,
-    "usdBdtDate": "2026-10-17",
+    "rate": 33.9423,
+    "usdBdt": 123.5500,
+    "usdBdtDate": "2026-10-18",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.64,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T17:46:01.0319088Z",
+    "fetchedAt": "2026-10-18T07:50:51.7811536Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
       "sendAmount": 1000,
-      "rate": 33.9148,
+      "rate": 33.9423,
       "fee": 0,
-      "receiveAmount": 33914.80,
+      "receiveAmount": 33942.30,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
+      "fetchedAt": "2026-10-18T07:50:51.7811536Z",
       "stale": false
     },
     {
@@ -40,12 +40,12 @@
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
       "sendAmount": 2000,
-      "rate": 33.9148,
+      "rate": 33.9423,
       "fee": 0,
-      "receiveAmount": 67829.60,
+      "receiveAmount": 67884.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
+      "fetchedAt": "2026-10-18T07:50:51.7811536Z",
       "stale": false
     }
   ],
@@ -72,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:46:12.4295706Z",
+      "fetchedAt": "2026-10-18T07:51:01.5623445Z",
       "stale": false
     },
     {
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-17T17:46:11.0414536Z",
+      "fetchedAt": "2026-10-18T07:50:59.7317212Z",
       "stale": false
     }
   ]

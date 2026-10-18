@@ -2,16 +2,16 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-17T17:46:09.2928622Z",
+  "generatedAt": "2026-10-18T07:50:59.4795523Z",
   "midMarket": {
-    "rate": 397.1380,
-    "usdBdt": 123.4500,
-    "usdBdtDate": "2026-10-17",
+    "rate": 397.4597,
+    "usdBdt": 123.5500,
+    "usdBdtDate": "2026-10-18",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 0.31084913,
     "crossRateDate": "2026-10-17",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-17T17:46:01.0319088Z",
+    "fetchedAt": "2026-10-18T07:50:51.7811536Z",
     "stale": false
   },
   "providers": [
@@ -32,12 +32,12 @@
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
       "sendAmount": 100,
-      "rate": 397.1380,
+      "rate": 397.4597,
       "fee": 0,
-      "receiveAmount": 39713.80,
+      "receiveAmount": 39745.97,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
+      "fetchedAt": "2026-10-18T07:50:51.7811536Z",
       "stale": false
     },
     {
@@ -50,7 +50,7 @@
       "receiveAmount": 39586.51,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T17:46:04.4675696Z",
+      "fetchedAt": "2026-10-18T07:50:55.0207851Z",
       "stale": false
     },
     {
@@ -63,7 +63,7 @@
       "receiveAmount": 79674.12,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-17T17:46:09.2905168Z",
+      "fetchedAt": "2026-10-18T07:50:59.4792498Z",
       "stale": false
     },
     {
@@ -71,12 +71,12 @@
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
       "sendAmount": 200,
-      "rate": 397.1380,
+      "rate": 397.4597,
       "fee": 0,
-      "receiveAmount": 79427.60,
+      "receiveAmount": 79491.94,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-17T17:46:01.0319088Z",
+      "fetchedAt": "2026-10-18T07:50:51.7811536Z",
       "stale": false
     }
   ],
@@ -92,13 +92,13 @@
       "provider": "Aman",
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
-      "rate": 385.3817,
+      "rate": 385.5674,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-17T11:54:17.8245Z",
-      "fetchedAt": "2026-10-17T17:46:02.2085303Z",
+      "publishedAt": "2026-10-18T05:36:37.8368Z",
+      "fetchedAt": "2026-10-18T07:50:52.8967418Z",
       "stale": false
     }
   ]
