@@ -2,16 +2,16 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-18T07:51:01.5625622Z",
+  "generatedAt": "2026-10-19T08:34:42.7264309Z",
   "midMarket": {
-    "rate": 33.9423,
-    "usdBdt": 123.5500,
-    "usdBdtDate": "2026-10-18",
+    "rate": 33.9698,
+    "usdBdt": 123.6500,
+    "usdBdtDate": "2026-10-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.64,
-    "crossRateDate": "2026-10-17",
+    "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-18T07:50:51.7811536Z",
+    "fetchedAt": "2026-10-19T08:34:17.6329226Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
       "sendAmount": 1000,
-      "rate": 33.9423,
+      "rate": 33.9698,
       "fee": 0,
-      "receiveAmount": 33942.30,
+      "receiveAmount": 33969.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-18T07:50:51.7811536Z",
+      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
       "stale": false
     },
     {
@@ -40,12 +40,12 @@
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
       "sendAmount": 2000,
-      "rate": 33.9423,
+      "rate": 33.9698,
       "fee": 0,
-      "receiveAmount": 67884.60,
+      "receiveAmount": 67939.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-18T07:50:51.7811536Z",
+      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
       "stale": false
     }
   ],
@@ -63,19 +63,6 @@
   ],
   "postedRates": [
     {
-      "provider": "HabibQatar",
-      "corridor": "qar-bdt",
-      "sendCurrency": "QAR",
-      "rate": 33.90,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": null,
-      "fetchedAt": "2026-10-18T07:51:01.5623445Z",
-      "stale": false
-    },
-    {
       "provider": "AlMirqab",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
@@ -85,7 +72,20 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-18T07:50:59.7317212Z",
+      "fetchedAt": "2026-10-19T08:34:41.361094Z",
+      "stale": false
+    },
+    {
+      "provider": "HabibQatar",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.88,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-19T08:34:42.7261468Z",
       "stale": false
     }
   ]
