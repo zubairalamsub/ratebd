@@ -35,7 +35,7 @@ const country = t(locale, corridor.countryKey);
 const path = corridorPath(corridor.from);
 const posted = postedRowsFor(corridor.id);
 // A route is rate-only when every quoting provider reports it does not serve it or none runs there (for example Qatar,
-// Oman, the UAE and Singapore). A provider that merely failed doesn't make it so: the ranked table stays, with that
+// Oman and the UAE). A provider that merely failed doesn't make it so: the ranked table stays, with that
 // provider listed as unavailable.
 const rateOnly =
   posted.length > 0 && snapshot.providers.every((s) => s.name === BENCHMARK || s.status === "not_supported");

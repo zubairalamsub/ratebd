@@ -2,10 +2,8 @@
 
 Remittance rate comparison for sending money to Bangladesh. It only collects from sources whose published terms and
 robots.txt don't prohibit it, and the site shows a route only once a permitted provider has data for it: today Kuwait
-(KWD), Qatar (QAR) and Oman (OMR). Providers for the UAE (AED), the USA (USD) and Singapore (SGD) were added on
-2026-10-20; each must first pass the probe from a GitHub-hosted runner (see "Third-party sources" below), and those
-routes appear once a permitted provider has data. The engine also tracks Saudi Arabia, the UK, Italy and Malaysia,
-which reappear the same way (see "Removed providers" below).
+(KWD), Qatar (QAR), Oman (OMR), the UAE (AED) and the USA (USD). The engine also tracks Saudi Arabia, the UK, Italy,
+Malaysia and Singapore, which reappear the same way (see "Removed providers" below).
 
 **Live site:** https://ratebd.pages.dev (Cloudflare Pages, rebuilt on every push to `main`).
 Everything runs on free tiers: no servers, no database, no VMs.
@@ -71,15 +69,14 @@ rank. They are stored as `postedRates` and shown in a separate list under each r
 | Hadi Express Exchange | AE | `GET hadiexchange.ae/` (`data-rate` in the Money Transfer Rate converter) |
 | Ahalia Exchange | AE | `GET ahaliaexchange.com/` (inline `cc_data`, Bank Transfer Rate board) |
 | Sonali Exchange | US | `GET www.sonaliexchange.com/rates.asp` (`aspRate` field) |
-| Mustafa | SG | `GET www.mustafa.com.sg/` ("Draft Rates" block, Bangladesh Taka) |
 
 A posted rate that its source dates more than three days back counts as a failure, so the last good rate stays on the
 site marked stale instead of being shown as current. A fee range a source publishes next to its rate is kept as
 `feeNote` and shown in place of "Check with provider".
 
 Each route uses providers from its own country. The Kuwait, Qatar and Oman providers were researched and re-verified on
-2026-10-17. The UAE, USA and Singapore providers were added on 2026-10-20 and go live only once they pass the GitHub
-runner probe (see "Third-party sources"):
+2026-10-17. The UAE and USA providers were added on 2026-10-20, after passing two probes from GitHub-hosted runners
+(see "Third-party sources"):
 
 | Route | Full quotes (ranked) | Posted rates (rate only) |
 |---|---|---|
@@ -92,21 +89,21 @@ runner probe (see "Third-party sources"):
 | QAR (Qatar) | – | Habib Qatar, Al Mirqab |
 | OMR (Oman) | – | Unimoni, PK Exchange |
 | MYR (Malaysia) | – (hidden) | – |
-| SGD (Singapore) | – | Mustafa |
+| SGD (Singapore) | – (hidden) | – |
 
 For the six Kuwait, Qatar and Oman providers, no restricting clause was found in any readable robots.txt, website terms,
 customer terms or app listing (some in-app terms could not be opened).
 
-The eight UAE, USA and Singapore providers were added on 2026-10-20 after the same review of robots.txt, website terms
-and customer terms (researched on 2026-10-17; robots.txt re-checked on 2026-10-20). For all eight the test is the
+The seven UAE and USA providers were added on 2026-10-20 after the same review of robots.txt, website terms and
+customer terms (researched on 2026-10-17; robots.txt re-checked on 2026-10-20). For all seven the test is the
 absence of a restricting clause, not an explicit permission. The published terms of GCC, Lari, Hadi Express, Sonali
-and BA Express contain no clause restricting automated access, copying or commercial reuse. Orient, Ahalia and Mustafa
-publish no website terms of use: Orient and Ahalia publish customer terms with no restricting clause, and Mustafa,
-whose remittances are counter-only, publishes none.
+and BA Express contain no clause restricting automated access, copying or commercial reuse. Orient and Ahalia
+publish no website terms of use, and their customer terms contain no restricting clause.
 
 Checked and left out:
 - **App or login only:** Al Rajhi (Tahweel, urpay), STC Bank, Enjaz, ANB TeleMoney, LuLu Money, Global Money Exchange and most Gulf banks.
 - **No public quote source:** MoneyGram and Ria have no Gulf calculator.
+- **Unreachable from GitHub's runners:** Mustafa (Singapore) has no restricting terms, but it timed out from GitHub-hosted runners in two probes on 2026-10-20 while answering normally from Bangladesh. Its code is in git history at commit `f85a8c4`.
 - **Terms forbid it:** Alfardan Exchange (robots.txt and terms ban automated access), Al Dar Exchange (terms bar storing site content) and BEC Kuwait (content for internal, non-commercial use only).
 - **Blocks non-browser clients:** KIECO (403 to .NET's HTTP client); no workaround is attempted.
 - **Not reliable enough:** Musandam Exchange (TLS certificate expired 2026-10-05) and Wasel Exchange (hand-edited branch boards).
@@ -250,7 +247,7 @@ Cloudflare builds every push to `main`. That includes the daily `data: rates …
 | `fetch.yml` | daily 03:00 UTC + manual | 1 min 12 s on a cold cache, including the 29 s AOT publish (run #2, 17 Oct 2026). About 40 s when the cached binary is reused. Bangladesh Bank snapshot ~19 s, fetching all providers ~8 s | ~30–60 (GitHub rounds each job up to a whole minute) |
 | `ci.yml` | pushes touching `engine/**` | ~1 min | a few |
 | `site.yml` | pushes touching `site/**` | ~1 min | a few |
-| `probe.yml` | pushes to `probe/**` branches + manual | not measured yet | a few per new provider |
+| `probe.yml` | pushes to `probe/**` branches + manual | ~2 min (20 Oct 2026) | a few per new provider |
 
 - **This repository is public,** so standard GitHub-hosted runners cost nothing and have no minute cap.
 - **If you make it private,** the Free plan includes 2,000 Linux minutes a month. Daily fetches use under 5% of that.
@@ -290,5 +287,5 @@ Every source is free and keyless. They can still change or block automated reque
 - **Failing provider:** it shows as `stale` (last good quote) or `failed` in the data and on the site. The run continues.
 - **Bangladesh Bank** needs the headless-browser snapshot. If that fails, the benchmark is carried forward as stale.
 - **Kuwait, Qatar and Oman sources** were verified from a machine outside the Gulf and have answered GitHub's runners on every daily run since 2026-10-18.
-- **New providers are probed first.** The research probes went out from an IP in Bangladesh, but the daily fetch runs on GitHub's datacentre IPs, which Cloudflare, Imperva and other firewalls can treat differently. Before a new provider is merged to `main`, push the change to a `probe/**` branch (or dispatch `probe.yml` with a comma-separated `providers` list). The run fetches from a GitHub-hosted runner into a scratch folder, commits nothing, and posts each provider's status and rates as annotations. A provider that fails, is challenged or gets a 403 there is dropped, not worked around: remove its registration line and `appsettings.json` entry, its `site/src/config/providers.json` entry, its `source.*` strings in `site/src/i18n/ui.ts` and its rows here. The eight providers added on 2026-10-20 must pass this probe before they go live; Ahalia (behind Cloudflare) and Lari (behind a Barracuda firewall) are the most likely to be affected.
+- **New providers are probed first.** The research probes went out from an IP in Bangladesh, but the daily fetch runs on GitHub's datacentre IPs, which Cloudflare, Imperva and other firewalls can treat differently. Before a new provider is merged to `main`, push the change to a `probe/**` branch (or dispatch `probe.yml` with a comma-separated `providers` list). The run fetches from a GitHub-hosted runner into a scratch folder, commits nothing, and posts each provider's status and rates as annotations. A provider that fails, is challenged or gets a 403 there is dropped, not worked around: remove its registration line and `appsettings.json` entry, its `site/src/config/providers.json` entry, its `source.*` strings in `site/src/i18n/ui.ts` and its rows here. The eight providers added on 2026-10-20 were probed twice: seven answered, and Mustafa timed out both times, so it was dropped.
 - **Alerts:** check the job summary of each `fetch` run, which has a status table per corridor.

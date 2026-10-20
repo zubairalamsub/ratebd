@@ -114,10 +114,9 @@ public class GulfQuoteTests
             ["hadiexchange.ae"] = "hadiexpress-home.html",
             ["ahaliaexchange.com"] = "ahaliaexchange-home.html",
             ["www.sonaliexchange.com"] = "sonaliexchange-rates.html",
-            ["www.mustafa.com.sg"] = "mustafa-home.html",
         };
         string[] names = ["BAExpress", "GccExchange", "OrientExchange", "LariExchange", "HadiExpress", "AhaliaExchange",
-            "SonaliExchange", "Mustafa"];
+            "SonaliExchange"];
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(names.Select((name, i) => KeyValuePair.Create($"Engine:OnlyProviders:{i}", (string?)name)))
             .Build();
@@ -144,13 +143,12 @@ public class GulfQuoteTests
             {
                 "AE" => Fixture.AedBdt,
                 "US" => Fixture.UsdBdt,
-                "SG" => Fixture.SgdBdt,
                 var country => throw new InvalidOperationException($"No test corridor for {country}"),
             };
             rates.AddRange((await p.GetRatesAsync(corridor, CancellationToken.None)).Select(r => r.Rate));
         }
-        Assert.Equal([33.6447m, 33.6501m, 33.55m, 33.30m, 33.38m, 123.4m, 96.5065m], rates);
-        Assert.Equal(8, handler.Requests.Count);
+        Assert.Equal([33.6447m, 33.6501m, 33.55m, 33.30m, 33.38m, 123.4m], rates);
+        Assert.Equal(7, handler.Requests.Count);
         Assert.All(handler.Requests, r =>
             Assert.Equal(ProviderRegistration.BrowserUserAgent, string.Join(' ', r.Headers.GetValues("User-Agent"))));
     }

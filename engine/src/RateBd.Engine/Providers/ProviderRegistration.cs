@@ -38,8 +38,8 @@ public static class ProviderRegistration
         // Added 2026-10-20 after a terms review: no clause in these sources' robots.txt, website terms or customer
         // terms restricts this collection (researched 2026-10-17, robots.txt re-checked 2026-10-20). Each must also
         // answer the probe workflow (.github/workflows/probe.yml) from a GitHub-hosted runner before it goes live; one
-        // that is blocked or challenged there is dropped, not worked around. BA Express USA quotes a fee; the others
-        // publish a rate only.
+        // that is blocked or challenged there is dropped, not worked around: Mustafa (Singapore) timed out from the
+        // runners in two probes on 2026-10-20 and was dropped. BA Express USA quotes a fee; the others publish a rate only.
         AddProvider<BAExpressProvider>(services, configuration, "BAExpress");
         AddPostedRateProvider<GccExchangeProvider>(services, configuration, "GccExchange");
         AddPostedRateProvider<OrientExchangeProvider>(services, configuration, "OrientExchange");
@@ -47,7 +47,6 @@ public static class ProviderRegistration
         AddPostedRateProvider<HadiExpressProvider>(services, configuration, "HadiExpress");
         AddPostedRateProvider<AhaliaExchangeProvider>(services, configuration, "AhaliaExchange");
         AddPostedRateProvider<SonaliExchangeProvider>(services, configuration, "SonaliExchange");
-        AddPostedRateProvider<MustafaProvider>(services, configuration, "Mustafa");
         return services;
     }
 

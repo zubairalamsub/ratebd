@@ -185,8 +185,6 @@ const en = {
     "BA Express USA's public calculator, which gives a rate and a service fee for each amount. We treat the fee as added on top and deduct it from the amount sent. No payout method or delivery time is published.",
   "source.SonaliExchange":
     "The USD to BDT conversion rate on Sonali Exchange's \"Exchange Rates and Tariff\" page (USA). Sonali's terms say it does not currently charge the sender a fee; the page itself shows no fee, payout method or update date.",
-  "source.Mustafa":
-    "Today's rate for the Bangladesh taka in the \"Draft Rates\" (demand draft) list on Mustafa's home page (Singapore). Remittances are made at Mustafa's counter. No fee is published, and the \"Last Updated\" time on that page is simply when the page was served, so it is not used as the rate's date.",
 
   "how.title": "How we compare remittance rates",
   "how.description":
@@ -396,8 +394,6 @@ const bn: Record<UiKey, string> = {
     "BA Express USA-এর পাবলিক ক্যালকুলেটর, যা প্রতিটি অঙ্কের জন্য রেট ও সার্ভিস ফি দেয়। আমরা ফি আলাদাভাবে যোগ হয় ধরে নিয়ে তা পাঠানো অঙ্ক থেকে বাদ দিই। কোনো পাঠানোর পদ্ধতি বা সময় প্রকাশ করা হয় না।",
   "source.SonaliExchange":
     "Sonali Exchange-এর ‘Exchange Rates and Tariff’ পাতায় দেওয়া ডলার থেকে টাকার রূপান্তর রেট (যুক্তরাষ্ট্র)। Sonali-র শর্তাবলিতে বলা আছে যে বর্তমানে তারা প্রেরকের কাছ থেকে কোনো ফি নেয় না; পাতাটিতে কোনো ফি, পাঠানোর পদ্ধতি বা হালনাগাদের তারিখ দেখানো হয় না।",
-  "source.Mustafa":
-    "Mustafa-এর হোম পেজের ‘Draft Rates’ (ডিমান্ড ড্রাফট) তালিকায় বাংলাদেশি টাকার আজকের রেট (সিঙ্গাপুর)। Mustafa-এ রেমিট্যান্স কাউন্টারে গিয়ে পাঠাতে হয়। কোনো ফি প্রকাশ করা হয় না, এবং ওই পাতার ‘Last Updated’ সময়টি কেবল পাতাটি খোলার সময়, তাই একে রেটের তারিখ হিসেবে ধরা হয় না।",
 
   "how.title": "আমরা কীভাবে রেমিট্যান্স রেট তুলনা করি",
   "how.description":

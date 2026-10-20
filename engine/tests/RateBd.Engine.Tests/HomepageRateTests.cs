@@ -11,9 +11,8 @@ namespace RateBd.Engine.Tests;
 /// 427–509, the "Money Transfer Rate" converter and its note.</item>
 /// <item><c>ahaliaexchange-home.html</c>: https://ahaliaexchange.com/ (440,084 bytes) trimmed to an unmodified excerpt,
 /// lines 1184–2301, from the "Bank Transfer Rate" board to the end of the calculator script, including <c>cc_data</c>.</item>
-/// <item><c>mustafa-home.html</c>: https://www.mustafa.com.sg/ in full (20,709 bytes; line endings normalised to LF).</item>
 /// </list>
-/// None of the three publishes an update time, so none sets <see cref="PostedRate.PublishedAt"/>.
+/// Neither publishes an update time, so none sets <see cref="PostedRate.PublishedAt"/>.
 /// </summary>
 public sealed class HomepageRateTests
 {
@@ -111,54 +110,6 @@ public sealed class HomepageRateTests
         Assert.Equal(33.38m, Assert.Single(rates).Rate);
     }
 
-    // ---------------------------------------------------------------- Mustafa (Singapore)
-
-    [Fact]
-    public void Mustafa_reads_todays_draft_rate_and_ignores_the_server_clock()
-    {
-        var html = Fixture.Read("mustafa-home.html");
-        Assert.Contains("Last Updated On:20-10-2026", html); // the time the page was served, not a publish time
-
-        var rate = MustafaParser.Parse(html, Fixture.SgdBdt, "Bangladesh Taka", FetchedAt);
-
-        Assert.Equal("Mustafa", rate.Provider);
-        Assert.Equal(96.5065m, rate.Rate);
-        Assert.Equal("Not specified", rate.DeliveryMethod);
-        Assert.Null(rate.PublishedAt);
-        Assert.Null(rate.FeeNote);
-        Assert.False(rate.Stale);
-    }
-
-    [Theory]
-    [InlineData(">Draft Rates</h3>", ">Gold Rates</h3>")]
-    [InlineData("Bangladesh Taka </h3>", "Indian Rupee </h3>")]
-    [InlineData(">Todays Rate</td>", ">Yesterdays Rate</td>")]
-    [InlineData(">96.5065</td>", ">-</td>")]
-    public void Mustafa_without_a_usable_draft_rate_fails(string find, string replace)
-    {
-        var html = Fixture.Read("mustafa-home.html");
-        Assert.Contains(find, html);
-
-        Assert.Throws<FormatException>(() =>
-            MustafaParser.Parse(html.Replace(find, replace), Fixture.SgdBdt, "Bangladesh Taka", FetchedAt));
-    }
-
-    [Fact]
-    public async Task Mustafa_provider_gets_the_home_page_with_no_extra_headers()
-    {
-        var handler = new FakeHandler(_ => FakeHandler.Html(Fixture.Read("mustafa-home.html")));
-
-        var rates = await new MustafaProvider(new HttpClient(handler), new FixedTime(FetchedAt))
-            .GetRatesAsync(Fixture.SgdBdt, CancellationToken.None);
-
-        var request = Assert.Single(handler.Requests);
-        Assert.Equal(HttpMethod.Get, request.Method);
-        Assert.Equal("https://www.mustafa.com.sg/", request.RequestUri!.AbsoluteUri);
-        Assert.Empty(request.Headers);
-        Assert.Equal(96.5065m, Assert.Single(rates).Rate);
-        Assert.Null(rates[0].PublishedAt);
-    }
-
     // ---------------------------------------------------------------- Shared
 
     [Fact]
@@ -172,8 +123,6 @@ public sealed class HomepageRateTests
             new HadiExpressProvider(http, TimeProvider.System).GetRatesAsync(aedToInr, CancellationToken.None));
         await Assert.ThrowsAsync<ProviderNotSupportedException>(() =>
             new AhaliaExchangeProvider(http, TimeProvider.System).GetRatesAsync(Fixture.UsdBdt, CancellationToken.None));
-        await Assert.ThrowsAsync<ProviderNotSupportedException>(() =>
-            new MustafaProvider(http, TimeProvider.System).GetRatesAsync(Fixture.MyrBdt, CancellationToken.None));
         Assert.Empty(handler.Requests);
     }
 
@@ -184,6 +133,5 @@ public sealed class HomepageRateTests
 
         Assert.Equal("AE", Assert.Single(new HadiExpressProvider(http, TimeProvider.System).SendCountries));
         Assert.Equal("AE", Assert.Single(new AhaliaExchangeProvider(http, TimeProvider.System).SendCountries));
-        Assert.Equal("SG", Assert.Single(new MustafaProvider(http, TimeProvider.System).SendCountries));
     }
 }
