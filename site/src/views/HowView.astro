@@ -14,15 +14,18 @@ const { locale } = Astro.props;
 const title = t(locale, "how.title");
 const description = t(locale, "how.description");
 
-// Worked example from today's data: the best non-stale GBP quote for the headline amount.
-const corridor = CORRIDORS[0]!;
-const snapshot = loadSnapshot(corridor.id);
-const example = rowsFor(corridor.id, amountsFor(corridor.id)[0] ?? 0).find((r) => !r.quote.stale && r.marginPct !== null);
-const mid = snapshot.midMarket;
+// Worked example from today's data: the best fresh (non-stale) quote for the headline amount on the first route that
+// has one, so the example survives a day when the first route's only quoting provider is stale or failed.
+const example = CORRIDORS.flatMap((corridor) => {
+  const mid = loadSnapshot(corridor.id).midMarket;
+  const row = rowsFor(corridor.id, amountsFor(corridor.id)[0] ?? 0).find((r) => !r.quote.stale && r.marginPct !== null);
+  return row && mid ? [{ corridor, mid, row }] : [];
+})[0];
 
-type Section = { h: string; p: string[] };
+/** `example` marks the section the worked example follows. */
+type Section = { h: string; p: string[]; example?: true };
 
-const content: Record<Locale, { intro: string; sections: Section[]; example?: string[]; faq: { q: string; a: string }[] }> = {
+const content: Record<Locale, { intro: string; sections: Section[]; faq: { q: string; a: string }[] }> = {
   en: {
     intro:
       "ratebd answers one question: if you pay the same amount, how much taka arrives in Bangladesh with each provider? Here is exactly how we work that out.",
@@ -30,7 +33,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "What we collect",
         p: [
-          "Once a day at 03:00 UTC an automated job asks each provider's public price calculator for quotes on two typical amounts from each sending country we track, for example KWD 100 and KWD 200 from Kuwait or OMR 100 and OMR 200 from Oman. Rates and fees are taken exactly as each provider quotes them; we never type in or estimate a rate. We only collect from providers whose published terms allow it (see the legal notice). The amount received is then normalised to the same total payment, as explained below.",
+          "Once a day at 03:00 UTC an automated job reads each provider's public price calculator or rate page. Calculators are asked for quotes on two typical amounts from each sending country we track, for example KWD 100 and KWD 200 from Kuwait; rate pages give the rate an exchange house posts. Rates and fees are taken exactly as each provider shows them; we never type in or estimate a rate. We only collect from sources whose published terms and robots.txt don't prohibit it (see the legal notice). The amount received is then normalised to the same total payment, as explained below.",
           "If a provider does not offer a route at all, for example a provider that does not serve senders in a particular country, it is listed as not offered rather than left out silently.",
         ],
       },
@@ -51,12 +54,13 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "Exchange-house rates",
         p: [
-          "Many people in the Gulf send through exchange houses that publish a rate but not their fee, which is usually added at the counter or in the app. Without the fee there is no total cost to compare, so these rates are listed separately on the route page, best rate first, and never mixed into the ranked table.",
+          "Many people, in the Gulf and elsewhere, send through exchange houses that publish a rate but no exact fee next to it. The fee is usually added at the counter or in the app, and some houses list their charges only in a separate document, which we don't collect. Without an exact fee there is no total cost to compare, so these rates are listed separately on the route page, best rate first, and never mixed into the ranked table.",
           "Where the source dates its rate, a rate more than three days old is not treated as current: the last rate we collected stays on the page, marked Stale.",
         ],
       },
       {
         h: "Margin vs mid-market",
+        example: true,
         p: [
           "The margin column combines the fee and the exchange-rate markup into one number: margin = (mid-market rate − received ÷ amount sent) ÷ mid-market rate. A lower margin means more of your money reaches your family.",
         ],
@@ -96,7 +100,7 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "আমরা কী সংগ্রহ করি",
         p: [
-          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটরে আমাদের তালিকার প্রতিটি দেশ থেকে দুটি সাধারণ অঙ্ক পাঠানোর কোট চায়, যেমন কুয়েত থেকে ১০০ ও ২০০ দিনার বা ওমান থেকে ১০০ ও ২০০ রিয়াল। প্রতিষ্ঠান যেভাবে দেয়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। শুধু যেসব প্রতিষ্ঠানের প্রকাশিত শর্তে অনুমতি আছে, সেখান থেকেই তথ্য সংগ্রহ করা হয় (আইনি নোটিশ দেখুন)। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
+          "প্রতিদিন ০৩:০০ UTC-তে একটি স্বয়ংক্রিয় প্রক্রিয়া প্রতিটি প্রতিষ্ঠানের পাবলিক দামের ক্যালকুলেটর বা রেট পাতা পড়ে। ক্যালকুলেটরে আমাদের তালিকার প্রতিটি দেশ থেকে দুটি সাধারণ অঙ্ক পাঠানোর কোট চাওয়া হয়, যেমন কুয়েত থেকে ১০০ ও ২০০ দিনার; রেট পাতা থেকে পাওয়া যায় এক্সচেঞ্জ হাউসের ঘোষিত রেট। প্রতিষ্ঠান যেভাবে দেখায়, রেট ও ফি ঠিক সেভাবেই নেওয়া হয়; আমরা নিজেরা কোনো রেট লিখি বা অনুমান করি না। যেসব উৎসের প্রকাশিত শর্তাবলি ও robots.txt এটি নিষেধ করে না, শুধু সেখান থেকেই তথ্য সংগ্রহ করা হয় (আইনি নোটিশ দেখুন)। এরপর প্রাপ্ত টাকার পরিমাণ একই মোট পরিশোধের ভিত্তিতে সমন্বয় করা হয়, যা নিচে ব্যাখ্যা করা হয়েছে।",
           "কোনো প্রতিষ্ঠান কোনো পথে সেবা না দিলে, যেমন কোনো নির্দিষ্ট দেশের প্রেরকদের সেবা দেয় না এমন প্রতিষ্ঠান, সেটি চুপচাপ বাদ না দিয়ে ‘সেবা নেই’ হিসেবে দেখানো হয়।",
         ],
       },
@@ -117,12 +121,13 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
       {
         h: "এক্সচেঞ্জ হাউসের রেট",
         p: [
-          "উপসাগরীয় দেশগুলোতে অনেকে এমন এক্সচেঞ্জ হাউসের মাধ্যমে টাকা পাঠান, যারা রেট প্রকাশ করে কিন্তু ফি নয়; ফি সাধারণত কাউন্টারে বা অ্যাপে যোগ হয়। ফি ছাড়া মোট খরচের তুলনা করা যায় না, তাই এই রেটগুলো পথের পাতায় আলাদাভাবে, সেরা রেট আগে রেখে দেখানো হয়, এবং র‍্যাংক করা টেবিলের সঙ্গে কখনো মেশানো হয় না।",
+          "উপসাগরীয় দেশগুলোসহ নানা দেশে অনেকে এমন এক্সচেঞ্জ হাউসের মাধ্যমে টাকা পাঠান, যারা রেট প্রকাশ করে কিন্তু তার পাশে নির্দিষ্ট ফি দেয় না। ফি সাধারণত কাউন্টারে বা অ্যাপে যোগ হয়, আর কিছু হাউস তাদের চার্জ শুধু একটি আলাদা নথিতে দেয়, যা আমরা সংগ্রহ করি না। নির্দিষ্ট ফি ছাড়া মোট খরচের তুলনা করা যায় না, তাই এই রেটগুলো পথের পাতায় আলাদাভাবে, সেরা রেট আগে রেখে দেখানো হয়, এবং র‍্যাংক করা টেবিলের সঙ্গে কখনো মেশানো হয় না।",
           "যেখানে উৎস রেটের তারিখ দেয়, সেখানে তিন দিনের বেশি পুরোনো রেটকে বর্তমান ধরা হয় না: আমাদের সংগ্রহ করা সর্বশেষ রেটটি ‘পুরোনো’ চিহ্নসহ দেখানো হয়।",
         ],
       },
       {
         h: "মিড-মার্কেটের তুলনায় মার্জিন",
+        example: true,
         p: [
           "মার্জিন কলাম ফি এবং বিনিময় হারের বাড়তি অংশকে একটি সংখ্যায় মেলায়: মার্জিন = (মিড-মার্কেট রেট − প্রাপ্ত ÷ পাঠানো অঙ্ক) ÷ মিড-মার্কেট রেট। মার্জিন যত কম, আপনার অর্থের তত বেশি অংশ পরিবারের কাছে পৌঁছায়।",
         ],
@@ -158,31 +163,31 @@ const content: Record<Locale, { intro: string; sections: Section[]; example?: st
 };
 
 const page = content[locale];
-const exampleLines =
-  example && mid
-    ? (() => {
-        const q = example.quote;
-        const vars = {
-          name: example.provider.name,
-          amount: sendAmount(locale, q.sendAmount, corridor.sendCurrency),
-          fee: money(locale, q.fee, corridor.sendCurrency),
-          rate: rate(locale, q.rate),
-          receive: money(locale, q.receiveAmount, "BDT"),
-          effective: number(locale, q.receiveAmount / q.sendAmount, 4),
-          mid: rate(locale, mid.rate),
-          margin: percent(locale, example.marginPct!),
-        };
-        return locale === "bn"
-          ? [
-              `আজকের উদাহরণ: ${vars.name}-এ মোট ${vars.amount} পাঠালে (ফি ${vars.fee}, রেট ${vars.rate}) পৌঁছায় ${vars.receive}।`,
-              `কার্যকর রেট = ${vars.receive} ÷ ${vars.amount} = ${vars.effective}। মিড-মার্কেট রেট ${vars.mid}। মার্জিন = ${vars.margin}।`,
-            ]
-          : [
-              `Today's example: paying ${vars.amount} in total with ${vars.name} (fee ${vars.fee}, rate ${vars.rate}) delivers ${vars.receive}.`,
-              `Effective rate = ${vars.receive} ÷ ${vars.amount} = ${vars.effective}. Mid-market rate ${vars.mid}. Margin = ${vars.margin}.`,
-            ];
-      })()
-    : [];
+const exampleLines = example
+  ? (() => {
+      const { corridor, mid, row } = example;
+      const q = row.quote;
+      const vars = {
+        name: row.provider.name,
+        amount: sendAmount(locale, q.sendAmount, corridor.sendCurrency),
+        fee: money(locale, q.fee, corridor.sendCurrency),
+        rate: rate(locale, q.rate),
+        receive: money(locale, q.receiveAmount, "BDT"),
+        effective: number(locale, q.receiveAmount / q.sendAmount, 4),
+        mid: rate(locale, mid.rate),
+        margin: percent(locale, row.marginPct!),
+      };
+      return locale === "bn"
+        ? [
+            `আজকের উদাহরণ: ${vars.name}-এ মোট ${vars.amount} পাঠালে (ফি ${vars.fee}, রেট ${vars.rate}) পৌঁছায় ${vars.receive}।`,
+            `কার্যকর রেট = ${vars.receive} ÷ ${vars.amount} = ${vars.effective}। মিড-মার্কেট রেট ${vars.mid}। মার্জিন = ${vars.margin}।`,
+          ]
+        : [
+            `Today's example: paying ${vars.amount} in total with ${vars.name} (fee ${vars.fee}, rate ${vars.rate}) delivers ${vars.receive}.`,
+            `Effective rate = ${vars.receive} ÷ ${vars.amount} = ${vars.effective}. Mid-market rate ${vars.mid}. Margin = ${vars.margin}.`,
+          ];
+    })()
+  : [];
 
 const jsonLd = [
   {
@@ -199,13 +204,13 @@ const jsonLd = [
     <h1 class="text-2xl sm:text-3xl">{title}</h1>
     <p class="mt-4 text-lg">{page.intro}</p>
     {
-      page.sections.map((s, i) => (
+      page.sections.map((s) => (
         <section class="mt-8">
           <h2 class="text-xl">{s.h}</h2>
           <div class="mt-2">
             {s.p.map((para) => <p>{para}</p>)}
           </div>
-          {i === 3 && exampleLines.length > 0 && (
+          {s.example && exampleLines.length > 0 && (
             <div class="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm tabular">
               {exampleLines.map((line) => <p>{line}</p>)}
             </div>

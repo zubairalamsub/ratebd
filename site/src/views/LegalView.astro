@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const LEGAL_UPDATED = "2026-10-17";
+const LEGAL_UPDATED = "2026-10-20";
 const ISSUES_URL = "https://github.com/zubairalamsub/ratebd/issues/new?template=correction-or-removal.yml";
 const CLOUDFLARE_PRIVACY = "https://www.cloudflare.com/privacypolicy/";
 
@@ -43,7 +43,7 @@ const content: Record<Locale, { intro: string; sections: Section[] }> = {
         id: "accuracy",
         h: "Accuracy",
         p: [
-          "Rates and fees are indicative: they are a snapshot taken at the time shown on each page, can change at any time, and can differ with the amount, payment and payout method, your account, promotions and your location. Exchange-house rates are shown without fees, which those houses do not publish.",
+          "Rates and fees are indicative: they are a snapshot taken at the time shown on each page, can change at any time, and can differ with the amount, payment and payout method, your account, promotions and your location. Exchange-house rates are shown without fees, because we do not collect an exact fee for those houses; some publish their charges elsewhere on their own websites.",
           "We try to keep the information correct, but we do not guarantee that it is complete, accurate or up to date. Always confirm the final amount, fees and exchange rate with the provider before you send money.",
           "To the extent the law allows, ratebd accepts no liability for any loss or damage arising from the use of this site or reliance on its information.",
         ],
@@ -114,7 +114,7 @@ const content: Record<Locale, { intro: string; sections: Section[] }> = {
         id: "accuracy",
         h: "তথ্যের নির্ভুলতা",
         p: [
-          "রেট ও ফি আনুমানিক: এগুলো প্রতিটি পাতায় দেখানো সময়ের একটি স্ন্যাপশট, যেকোনো সময় বদলাতে পারে, এবং পাঠানোর অঙ্ক, পরিশোধ ও গ্রহণের পদ্ধতি, আপনার অ্যাকাউন্ট, প্রচারণা ও অবস্থানভেদে ভিন্ন হতে পারে। এক্সচেঞ্জ হাউসের রেট ফি ছাড়া দেখানো হয়, কারণ তারা ফি প্রকাশ করে না।",
+          "রেট ও ফি আনুমানিক: এগুলো প্রতিটি পাতায় দেখানো সময়ের একটি স্ন্যাপশট, যেকোনো সময় বদলাতে পারে, এবং পাঠানোর অঙ্ক, পরিশোধ ও গ্রহণের পদ্ধতি, আপনার অ্যাকাউন্ট, প্রচারণা ও অবস্থানভেদে ভিন্ন হতে পারে। এক্সচেঞ্জ হাউসের রেট ফি ছাড়া দেখানো হয়, কারণ আমরা তাদের নির্দিষ্ট ফি সংগ্রহ করি না; কেউ কেউ নিজেদের ওয়েবসাইটের অন্য কোথাও তাদের চার্জ প্রকাশ করে।",
           "আমরা তথ্য সঠিক রাখার চেষ্টা করি, তবে তা সম্পূর্ণ, নির্ভুল বা হালনাগাদ থাকবে এমন কোনো নিশ্চয়তা দিই না। টাকা পাঠানোর আগে সবসময় প্রতিষ্ঠানের কাছ থেকে চূড়ান্ত অঙ্ক, ফি ও বিনিময় হার নিশ্চিত করুন।",
           "আইন যতটুকু অনুমতি দেয়, এই সাইট ব্যবহার বা এর তথ্যের ওপর নির্ভর করার ফলে কোনো ক্ষতির জন্য ratebd দায়ী থাকবে না।",
         ],

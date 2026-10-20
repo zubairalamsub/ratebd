@@ -42,6 +42,62 @@
       "name": "Aman Exchange",
       "homepage": "https://www.amankuwait.com",
       "affiliateUrl": null
+    },
+    {
+      "slug": "gcc-exchange",
+      "engineName": "GccExchange",
+      "name": "GCC Exchange",
+      "homepage": "https://gccexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "orient-exchange",
+      "engineName": "OrientExchange",
+      "name": "Orient Exchange",
+      "homepage": "https://www.orientexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "lari-exchange",
+      "engineName": "LariExchange",
+      "name": "Lari Exchange",
+      "homepage": "https://www.lariexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "hadi-express-exchange",
+      "engineName": "HadiExpress",
+      "name": "Hadi Express Exchange",
+      "homepage": "https://hadiexchange.ae",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "ahalia-exchange",
+      "engineName": "AhaliaExchange",
+      "name": "Ahalia Exchange",
+      "homepage": "https://ahaliaexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "ba-express-usa",
+      "engineName": "BAExpress",
+      "name": "BA Express USA",
+      "homepage": "https://www.baexpress.net",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "sonali-exchange",
+      "engineName": "SonaliExchange",
+      "name": "Sonali Exchange",
+      "homepage": "https://www.sonaliexchange.com",
+      "affiliateUrl": null
+    },
+    {
+      "slug": "mustafa",
+      "engineName": "Mustafa",
+      "name": "Mustafa",
+      "homepage": "https://www.mustafa.com.sg",
+      "affiliateUrl": null
     }
   ]
 }
