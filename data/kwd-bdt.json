@@ -2,7 +2,7 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-19T08:34:41.1056794Z",
+  "generatedAt": "2026-10-20T08:15:30.1947263Z",
   "midMarket": {
     "rate": 398.1897,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.31053038,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
     "stale": false
   },
   "providers": [
@@ -37,7 +37,7 @@
       "receiveAmount": 39818.97,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     },
     {
@@ -45,12 +45,25 @@
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
       "sendAmount": 100,
-      "rate": 400.641026,
+      "rate": 401.2335659,
       "fee": 1.250,
-      "receiveAmount": 39563.30,
+      "receiveAmount": 39621.81,
       "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-19T08:34:28.6691134Z",
+      "speed": "Within 2 days",
+      "fetchedAt": "2026-10-20T08:15:25.9742552Z",
+      "stale": false
+    },
+    {
+      "provider": "AlMulla",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 401.2335659,
+      "fee": 1.250,
+      "receiveAmount": 79745.17,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 2 days",
+      "fetchedAt": "2026-10-20T08:15:30.1942552Z",
       "stale": false
     },
     {
@@ -63,20 +76,7 @@
       "receiveAmount": 79637.94,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
-      "stale": false
-    },
-    {
-      "provider": "AlMulla",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 200,
-      "rate": 400.641026,
-      "fee": 1.250,
-      "receiveAmount": 79627.40,
-      "deliveryMethod": "Bank deposit",
-      "speed": "Within 1 day",
-      "fetchedAt": "2026-10-19T08:34:41.1052798Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     }
   ],
@@ -97,8 +97,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-19T05:16:55.1605Z",
-      "fetchedAt": "2026-10-19T08:34:18.4858728Z",
+      "publishedAt": "2026-10-20T06:41:35.0129Z",
+      "fetchedAt": "2026-10-20T08:15:23.9721451Z",
       "stale": false
     }
   ]

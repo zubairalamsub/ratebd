@@ -2,7 +2,7 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-19T08:34:17.6344029Z",
+  "generatedAt": "2026-10-20T08:15:22.889132Z",
   "midMarket": {
     "rate": 33.6692,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.6725,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 16834.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 33669.20,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     }
   ],

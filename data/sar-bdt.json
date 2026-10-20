@@ -2,7 +2,7 @@
   "corridor": "sar-bdt",
   "sendCurrency": "SAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-19T08:34:17.636519Z",
+  "generatedAt": "2026-10-20T08:15:22.8912525Z",
   "midMarket": {
     "rate": 32.9733,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.75,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 32973.30,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 65946.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     }
   ],

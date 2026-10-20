@@ -2,7 +2,7 @@
   "corridor": "gbp-bdt",
   "sendCurrency": "GBP",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-19T08:34:17.6337859Z",
+  "generatedAt": "2026-10-20T08:15:22.8884523Z",
   "midMarket": {
     "rate": 164.7799,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.75039498,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 82389.95,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 164779.90,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-19T08:34:17.6329226Z",
+      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
       "stale": false
     }
   ],
