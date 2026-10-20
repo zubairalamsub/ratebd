@@ -2,7 +2,7 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-20T08:15:39.1327132Z",
+  "generatedAt": "2026-10-20T11:14:10.1829816Z",
   "midMarket": {
     "rate": 321.3913,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.38473345,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+    "fetchedAt": "2026-10-20T11:13:43.99294Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 32139.13,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 64278.26,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     }
   ],
@@ -72,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-20T08:15:39.1324585Z",
+      "fetchedAt": "2026-10-20T11:14:10.1823353Z",
       "stale": false
     },
     {
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-19T20:00:00Z",
-      "fetchedAt": "2026-10-20T08:15:38.9009146Z",
+      "fetchedAt": "2026-10-20T11:14:09.0568465Z",
       "stale": false
     }
   ]

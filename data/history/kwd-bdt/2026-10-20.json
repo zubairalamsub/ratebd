@@ -2,7 +2,7 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-20T08:15:30.1947263Z",
+  "generatedAt": "2026-10-20T11:14:05.3529934Z",
   "midMarket": {
     "rate": 398.1897,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 0.31053038,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+    "fetchedAt": "2026-10-20T11:13:43.99294Z",
     "stale": false
   },
   "providers": [
@@ -37,7 +37,7 @@
       "receiveAmount": 39818.97,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     },
     {
@@ -50,7 +50,7 @@
       "receiveAmount": 39621.81,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-20T08:15:25.9742552Z",
+      "fetchedAt": "2026-10-20T11:14:01.0342461Z",
       "stale": false
     },
     {
@@ -63,7 +63,7 @@
       "receiveAmount": 79745.17,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-20T08:15:30.1942552Z",
+      "fetchedAt": "2026-10-20T11:14:05.3515619Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 79637.94,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     }
   ],
@@ -98,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-20T06:41:35.0129Z",
-      "fetchedAt": "2026-10-20T08:15:23.9721451Z",
+      "fetchedAt": "2026-10-20T11:13:59.0820012Z",
       "stale": false
     }
   ]

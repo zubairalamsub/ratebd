@@ -2,7 +2,7 @@
   "corridor": "sgd-bdt",
   "sendCurrency": "SGD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-20T08:15:22.8908466Z",
+  "generatedAt": "2026-10-20T11:13:57.6912563Z",
   "midMarket": {
     "rate": 96.6451,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 1.279424,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+    "fetchedAt": "2026-10-20T11:13:43.99294Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 48322.55,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 96645.10,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     }
   ],

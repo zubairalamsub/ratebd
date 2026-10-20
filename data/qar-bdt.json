@@ -2,7 +2,7 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-20T08:15:36.8530207Z",
+  "generatedAt": "2026-10-20T11:14:08.424526Z",
   "midMarket": {
     "rate": 33.9698,
     "usdBdt": 123.6500,
@@ -11,7 +11,7 @@
     "sendPerUsd": 3.64,
     "crossRateDate": "2026-10-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+    "fetchedAt": "2026-10-20T11:13:43.99294Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 33969.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 67939.60,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-20T08:15:22.8874372Z",
+      "fetchedAt": "2026-10-20T11:13:43.99294Z",
       "stale": false
     }
   ],
@@ -72,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-20T08:15:30.5273487Z",
+      "fetchedAt": "2026-10-20T11:14:07.1328281Z",
       "stale": false
     },
     {
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-20T08:15:36.8527366Z",
+      "fetchedAt": "2026-10-20T11:14:08.4239258Z",
       "stale": false
     }
   ]
