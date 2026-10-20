@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><meta name="description" /><meta name="author" content="Tooplate" /><link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" rel="stylesheet" />
+    
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+    <title>
+	Mustafa
+</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" /><link rel="stylesheet" type="text/css" href="assets/css/owl-carousel.css" /><link rel="stylesheet" href="assets/css/tooplate-artxibition.css" />
+
+    <style>
+        nav-wrapper li {
+            display: block;
+            text-align: center;
+            background: none;
+            transition: background-color 300ms ease;
+            width: 16.6666667%;
+            float: left;
+        }
+
+        .nav-wrapper a {
+            position: relative;
+            display: inline-block;
+            width: 128px;
+            text-decoration: none;
+            color: white;
+            padding: 10px 0;
+            background: #34495e;
+            transition: background-color 300ms ease;
+        }
+
+        .nav-wrapper li a:hover {
+            background: #d5051d;
+        }
+
+        .RateShadows {
+            /*box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;*/
+            box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+        }
+
+        .ball {
+            position: absolute;
+            border-radius: 100%;
+            opacity: 0.7;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            myfunBalls();
+            //$('ul li a').click(function(){ $('li a').removeClass("active"); $(this).addClass("active"); });
+
+        });
+
+        function myfunBalls() {
+
+            // Some random colors
+            const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+
+            const numBalls = 10;
+            const balls = [];
+
+            for (let i = 0; i < numBalls; i++) {
+                let ball = document.createElement("div");
+                ball.classList.add("ball");
+                ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+                ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
+                ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
+                ball.style.transform = `scale(${Math.random()})`;
+                ball.style.width = `${Math.random()}em`;
+                ball.style.height = ball.style.width;
+
+                balls.push(ball);
+                document.body.append(ball);
+            }
+
+            // Keyframes
+            balls.forEach((el, i, ra) => {
+                let to = {
+                    x: Math.random() * (i % 2 === 0 ? -11 : 11),
+                    y: Math.random() * 12
+                };
+
+                let anim = el.animate(
+                    [
+                        { transform: "translate(0, 0)" },
+                        { transform: `translate(${to.x}rem, ${to.y}rem)` }
+                    ],
+                    {
+                        duration: (Math.random() + 1) * 2000, // random duration
+                        direction: "alternate",
+                        fill: "both",
+                        iterations: Infinity,
+                        easing: "ease-in-out"
+                    }
+                );
+            });
+        };
+
+    </script>
+
+</head>
+
+<body>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="Default.aspx" class="logo">
+                            <img src="Images/logo.png" /><em></em></a>
+                        <!-- ***** Logo End ***** -->
+
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a class="active" href="Default.aspx">Home</a></li>
+                            <li><a href="https://www.mustafa.com.sg/mustafalocationmap/floor.html">Find Department</a></li>
+                            <li><a href="https://mustafajewellery.com/">Jewellery</a></li>
+                            <li><a href="OurPeople.aspx">Our Peoples</a></li>
+                            <li><a href="AboutUs.aspx">History</a></li>
+                            <li><a href="ContactUs.aspx">Contact Us</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="mDivLine">
+        </div>
+    </header>
+
+    <!-- ***** Header Area End ***** -->
+
+    <form method="post" action="./" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="B4i0zNBGZMQEN3hDwo5qtgrKe3UKeoXygjGOdoKyj5Jxna+D8mzONJBdO0BIch0g56VJB62NRZMtf6Qx4+onP/hbraAFnA10wDwJth0beiANQgdyJbhT/ggMCBWBAex3c95B2pX9ObvxqU2FXM8mzy28oB82N1RbwXfuwGepZY1GvXS0WpdH/DVoEyFlRgrn35uYcbIFdgLu97kPXE3yd+vws0e6DtZ87oSRxBNSHfsZjOIWySlR1ec3h6itpxn4" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334" />
+</div>
+        <div>
+            <table id="demo" style="width: 100%;">
+                <tr>
+                    <td>
+                        <div class="container">
+
+                            
+    <script src="assets/js/carousel.js"></script>
+    <link href="assets/css/carousel.css" rel="stylesheet" />
+<meta http-equiv="refresh" content="10;">
+    <style>
+        .row {
+            margin: 5px;
+        }
+
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+        @media screen and (max-width: 599px) {
+            .column {
+                float: left;
+                text-align: center !important;
+                width: 100%;
+                margin-bottom: 10px;
+                border: none;
+                padding: 1em 1em;
+                background: rgba(255, 255, 255, 0.04);
+                -webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.25);
+            }
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 899px) {
+            .column {
+                float: left;
+                text-align: center !important;
+                width: 50%;
+                margin-bottom: 10px;
+                border: none;
+                padding: 1em 1em;
+                background: rgba(255, 255, 255, 0.04);
+                -webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.25);
+            }
+        }
+
+        @media screen and (min-width: 900px) and (max-width: 1300px) {
+            .column {
+                float: left;
+                text-align: center !important;
+                width: 33%;
+                margin-bottom: 10px;
+                border: none;
+                padding: 1em 1em;
+                background: rgba(255, 255, 255, 0.04);
+                -webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.25);
+            }
+        }
+
+        @media screen and (min-width: 1301px) {
+            .column {
+                float: left;
+                text-align: center !important;
+                width: 25%;
+                background: white;
+                margin-bottom: 10px;
+                border: none;
+                padding: 1em 1em;
+                background: rgba(255, 255, 255, 0.04);
+                -webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.25);
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            .column1 {
+                float: left;
+                text-align: center !important;
+                width: 100%;
+                min-height: 150px;
+                margin-left: 10px;
+                padding: 20px;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 15px;
+                color: white !important;
+                background: #51A428;
+                -webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.25);
+            }
+        }
+
+        @media screen and (min-width: 900px) {
+            .column1 {
+                float: left;
+                text-align: center !important;
+                width: 32%;
+                min-height: 150px;
+                margin-left: 10px;
+                padding: 20px;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 15px;
+                color: white;
+                background: #51A428;
+                -webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                -moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+                box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.25);
+            }
+        }
+
+        .main-banner2 {
+            /*background-image: url(../images/banner_bg.jpg);*/
+            background-image: url('../../Images/main-image1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+            padding: 0px 0px 0px 0px;
+            position: relative;
+        }
+
+        .Mustafafontcss {
+            font-weight: 800;
+            font-size: 4em;
+        }
+
+
+        .hrsfontcss {
+            font-weight: 500;
+            font-size: 2em;
+        }
+
+        .center {
+            background: floralwhite 29%;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0px 15px 0 15px;
+        }
+
+        .animate-charcter {
+            text-transform: uppercase;
+            background-image: linear-gradient( -225deg, #231557 0%, #15f388 29%, #ff1361 67%, #fff800 100% );
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            text-align: center;
+        }
+
+        @keyframes textclip {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .headline3 {
+            min-width: 300Px;
+        }
+
+
+
+
+
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .gallery {
+            background: #EEE;
+        }
+
+        .gallery-cell {
+            width: 33%;
+            height: 200px;
+            margin-right: 10px;
+            background: #8C8;
+            counter-increment: gallery-cell;
+        }
+
+            /* cell number */
+            .gallery-cell:before {
+                display: block;
+                text-align: center;
+                content: counter(gallery-cell);
+                line-height: 200px;
+                font-size: 80px;
+                color: white;
+            }
+    </style>
+
+    <div id="divbannerImage" class="row">
+        <img src="Images/main-image1.jpg" style="width: 100%;" />
+    </div>
+
+    <div id="divPromotion" class="row">
+        <div style="text-align: center; width: 100%;">
+            <div class="animate-charcter Mustafafontcss">Mustafa Centre</div>
+            <br />
+            <div class="animate-charcter hrsfontcss">Open 24Hrs - Always On 24/7 </div>
+        </div>
+    </div>
+
+    <div id="divTopSales" class="row">
+        <div class="center">
+            <p>
+                Mustafa has seen impressive growth since its inception. The first shop was established in 1971 in Campbell Lane in Little India, selling readymade garments.
+                                                <strong>In 1973 , a 900 Sq.Ft</strong> Shop space was rented along Serangoon Road. Electronic Items were added on to it's range of products.
+            </p>
+        </div>
+        <div style="padding-left: 30px;">
+            <h3 style="font-family: Verdana; font-size: 18px; color: #df4837; width: 100%; padding-top: 5%; padding-bottom: 3%">Draft Rates</h3>
+            <ul id="ulBDT">
+                <li id="liBDT" style="text-align: left;">
+                    <h3 id="ContentPlaceHolder1_h2" class="headline3" style="font-family: Verdana; font-size: 13px; background-color: #a37a05; color: white; width: 99%; border-top: 3px solid #a37a05; padding-top: 1%; text-align: left; padding-bottom: 1%">
+                        <img src="Images/bang.gif" />&nbsp;&nbsp;Bangladesh Taka </h3>
+                <table>
+	<tr Class="table table-sm">
+		<td width="79%" height="20%">Todays Rate</td>
+		<td style="text-align:right" height="20%">96.5065</td>
+	</tr>
+</table>
+</li>
+            </ul>
+            <ul id="ul1">
+                <li id="li1">
+                    <h3 id="h1" class="headline4" style="font-family: Verdana; font-size: 13px; text-align: left; background-color: #a37a05; color: white; width: 99%; border-top: 3px solid #a37a05; padding-top: 1%; padding-bottom: 1%; margin-top: 10px;">&nbsp;&nbsp;Mustafa Remittances To :</h3>
+                    <table class="table table-sm">
+                        <tr>
+                            <td style="text-align: left;">India</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Bangladesh</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Srilanka</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Indonesia</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+
+
+        </div>
+        <div style="padding-left: 30px;">
+            <div id="divtime" style="font-family: Verdana; text-align: left; font-size: 15px; color: #df4837; width: 100%">Last Updated On:20-10-2026<br/>06:07:13 pm&nbsp;&nbsp;10:07:13 am&nbsp;(GMT)</div>
+            <p></p>
+            <ul>
+                <li id="ContentPlaceHolder1_liSing" style="text-align: left;">
+                    <h3 id="ContentPlaceHolder1_h3Sing" class="headline3" style="font-family: Verdana; font-size: 13px; background-color: #a37a05; color: white; width: 100%; border-top: 3px solid #a37a05; padding-top: 1%; text-align: left; padding-bottom: 1%">
+                        <img src="Images/sing.gif" />&nbsp;&nbsp;Gold & Silver Rate In Sing Dollars</h3>
+                <table>
+	<tr Class="table table-sm">
+		<td width="75%" height="20%">22K-916 Jewellery</td>
+		<td style="text-align:right" width="23%" height="20%">163.80</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td width="75%" height="20%">24K-999 GoldBar 100g</td>
+		<td style="text-align:right" width="23%" height="20%">18101.00</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td width="75%" height="20%">Silver 1 Kilo Bar</td>
+		<td style="text-align:right" width="23%" height="20%">2887.00</td>
+	</tr>
+</table>
+</li>
+                <li></li>
+            </ul>
+            <br />
+            <ul>
+                <li id="ContentPlaceHolder1_liRatesinSing">
+                    <h3 id="ContentPlaceHolder1_h3RatesinSing" style="font-family: Verdana; font-size: 13px; background-color: #a37a05; color: white; width: 100%; border-top: 3px solid #a37a05; padding-top: 1%; text-align: left; padding-bottom: 1%">&nbsp;&nbsp;Forex Rates in Sing Dollars</h3>
+                <table>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">PAK RUPEE</td>
+		<td style="text-align:right" height="20%" width="20%">0.4800</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">SRI LANKA RP.</td>
+		<td style="text-align:right" height="20%" width="20%">0.4010</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">BAHRAIN DINAR</td>
+		<td style="text-align:right" height="20%" width="20%">3.4200</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">JORDAN DINAR</td>
+		<td style="text-align:right" height="20%" width="20%">1.8600</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">DENMARK CRONER</td>
+		<td style="text-align:right" height="20%" width="20%">0.2020</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">NORWAY KRONER</td>
+		<td style="text-align:right" height="20%" width="20%">0.1420</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">SOUTH AFRICA RAND</td>
+		<td style="text-align:right" height="20%" width="20%">0.0803</td>
+	</tr>
+	<tr Class="table table-sm">
+		<td style="text-align:left" height="20%" width="80%">MAURITIUS RPS</td>
+		<td style="text-align:right" height="20%" width="20%">2.8100</td>
+	</tr>
+</table>
+</li>
+            </ul>
+        </div>
+        <div style="padding-left: 60px;">
+            <br />
+            <div class="left-content">
+                <img src="images/norton1.png" alt="" />
+            </div>
+        </div>
+        <div style="padding-left: 70px;">
+            <div class="left-content">
+                <a href="https://www.visitsingapore.com/travel-tips/travelling-to-singapore/in-seasonal-highlights/" Target="_blank">
+                    <img src="images/JBUF.png" alt="" style="width: 200px; height: 133px;" /></a>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- *** Footer *** -->
+        <footer>
+            <div class="container">
+                <div class="sub-footer" style="text-align: center" >
+                    All right reserved Mustafa Online © 2024    
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery -->
+        <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="assets/js/popper.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <!-- Plugins -->
+        <script src="assets/js/scrollreveal.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <script src="assets/js/jquery.counterup.min.js"></script>
+        <script src="assets/js/imgfix.min.js"></script>
+        <script src="assets/js/mixitup.js"></script>
+        <script src="assets/js/accordions.js"></script>
+        <script src="assets/js/owl-carousel.js"></script>
+
+        <!-- Global Init -->
+        <script src="assets/js/custom.js"></script>
+
+    </form>
+
+</body>
+</html>

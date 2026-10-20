@@ -8,7 +8,7 @@ using RateBd.Engine.Providers;
 
 namespace RateBd.Engine.Tests;
 
-/// <summary>Al Mulla and provider registration, from responses captured on 2026-10-17.</summary>
+/// <summary>Al Mulla, from responses captured on 2026-10-17, and provider registration.</summary>
 public class GulfQuoteTests
 {
     // ---------------------------------------------------------------- Al Mulla
@@ -67,5 +67,91 @@ public class GulfQuoteTests
 
         Assert.Equal(["MidMarket"], provider.GetServices<IRateProvider>().Select(p => p.Name));
         Assert.Empty(provider.GetServices<IPostedRateProvider>());
+    }
+
+    [Fact]
+    public void Engine_clients_never_store_or_send_back_cookies()
+    {
+        // Some hosts set cookies on every response (Lari's firewall, Ahalia's Cloudflare); a retry must not echo them.
+        var services = new ServiceCollection().AddSingleton(TimeProvider.System).AddLogging();
+        services.AddRateProviders(new ConfigurationBuilder().Build());
+        using var provider = services.BuildServiceProvider();
+        var factory = provider.GetRequiredService<IHttpMessageHandlerFactory>();
+        var clients = provider.GetServices<IRateProvider>().Select(p => p.GetType().Name)
+            .Concat(provider.GetServices<IPostedRateProvider>().Select(p => p.GetType().Name))
+            .ToList();
+
+        Assert.Contains("LariExchangeProvider", clients);
+        Assert.Contains("AhaliaExchangeProvider", clients);
+        Assert.All(clients, name =>
+        {
+            var handler = factory.CreateHandler(name);
+            while (handler is DelegatingHandler delegating)
+            {
+                handler = delegating.InnerHandler!;
+            }
+            var useCookies = handler switch
+            {
+                HttpClientHandler h => h.UseCookies,
+                SocketsHttpHandler s => s.UseCookies,
+                _ => throw new InvalidOperationException($"{name} has an unexpected primary handler {handler.GetType()}"),
+            };
+            Assert.False(useCookies, name);
+        });
+    }
+
+    [Fact]
+    public async Task Providers_added_on_2026_10_20_register_and_answer_through_the_engine_clients()
+    {
+        // Each host answers with the response captured from it on 2026-10-20 (see UaeRateTests, HomepageRateTests and
+        // UsaRateTests).
+        var captured = new Dictionary<string, string>
+        {
+            ["www.baexpress.net"] = "baexpress-usd-bdt-500.json",
+            ["gccexchange.com"] = "gccexchange-rates.json",
+            ["www.orientexchange.com"] = "orientexchange-rates.json",
+            ["www.lariexchange.com"] = "lariexchange-bdt.html",
+            ["hadiexchange.ae"] = "hadiexpress-home.html",
+            ["ahaliaexchange.com"] = "ahaliaexchange-home.html",
+            ["www.sonaliexchange.com"] = "sonaliexchange-rates.html",
+            ["www.mustafa.com.sg"] = "mustafa-home.html",
+        };
+        string[] names = ["BAExpress", "GccExchange", "OrientExchange", "LariExchange", "HadiExpress", "AhaliaExchange",
+            "SonaliExchange", "Mustafa"];
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(names.Select((name, i) => KeyValuePair.Create($"Engine:OnlyProviders:{i}", (string?)name)))
+            .Build();
+        var handler = new FakeHandler(request => FakeHandler.Html(Fixture.Read(captured[request.RequestUri!.Host])));
+        var services = new ServiceCollection()
+            .AddSingleton<TimeProvider>(new FixedTime(new DateTime(2026, 10, 20, 10, 10, 0, DateTimeKind.Utc)))
+            .AddLogging();
+        services.AddRateProviders(configuration);
+        // Every typed client keeps the engine's default headers and resilience pipeline but answers offline.
+        services.ConfigureHttpClientDefaults(http => http.ConfigurePrimaryHttpMessageHandler(() => handler));
+        using var provider = services.BuildServiceProvider();
+
+        var quoting = Assert.Single(provider.GetServices<IRateProvider>());
+        Assert.Equal("BAExpress", quoting.Name);
+        var posted = provider.GetServices<IPostedRateProvider>().ToList();
+        Assert.Equal(names[1..], posted.Select(p => p.Name));
+
+        var quote = Assert.Single(await quoting.GetQuotesAsync(Fixture.UsdBdt, [500m], CancellationToken.None));
+        Assert.Equal(123.3m, quote.Rate);
+        var rates = new List<decimal>();
+        foreach (var p in posted)
+        {
+            var corridor = p.SendCountries.Single() switch
+            {
+                "AE" => Fixture.AedBdt,
+                "US" => Fixture.UsdBdt,
+                "SG" => Fixture.SgdBdt,
+                var country => throw new InvalidOperationException($"No test corridor for {country}"),
+            };
+            rates.AddRange((await p.GetRatesAsync(corridor, CancellationToken.None)).Select(r => r.Rate));
+        }
+        Assert.Equal([33.6447m, 33.6501m, 33.55m, 33.30m, 33.38m, 123.4m, 96.5065m], rates);
+        Assert.Equal(8, handler.Requests.Count);
+        Assert.All(handler.Requests, r =>
+            Assert.Equal(ProviderRegistration.BrowserUserAgent, string.Join(' ', r.Headers.GetValues("User-Agent"))));
     }
 }

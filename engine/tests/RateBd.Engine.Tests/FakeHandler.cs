@@ -19,4 +19,7 @@ internal sealed class FakeHandler(Func<HttpRequestMessage, HttpResponseMessage> 
 
     public static HttpResponseMessage Json(string body) =>
         new(HttpStatusCode.OK) { Content = new StringContent(body, System.Text.Encoding.UTF8, "application/json") };
+
+    public static HttpResponseMessage Html(string body) =>
+        new(HttpStatusCode.OK) { Content = new StringContent(body, System.Text.Encoding.UTF8, "text/html") };
 }

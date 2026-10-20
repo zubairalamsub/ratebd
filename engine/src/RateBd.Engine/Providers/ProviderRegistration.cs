@@ -34,6 +34,20 @@ public static class ProviderRegistration
         AddPostedRateProvider<UnimoniProvider>(services, configuration, "Unimoni");
         AddPostedRateProvider<PKExchangeProvider>(services, configuration, "PKExchange");
         AddPostedRateProvider<AmanProvider>(services, configuration, "Aman");
+
+        // Added 2026-10-20 after a terms review: no clause in these sources' robots.txt, website terms or customer
+        // terms restricts this collection (researched 2026-10-17, robots.txt re-checked 2026-10-20). Each must also
+        // answer the probe workflow (.github/workflows/probe.yml) from a GitHub-hosted runner before it goes live; one
+        // that is blocked or challenged there is dropped, not worked around. BA Express USA quotes a fee; the others
+        // publish a rate only.
+        AddProvider<BAExpressProvider>(services, configuration, "BAExpress");
+        AddPostedRateProvider<GccExchangeProvider>(services, configuration, "GccExchange");
+        AddPostedRateProvider<OrientExchangeProvider>(services, configuration, "OrientExchange");
+        AddPostedRateProvider<LariExchangeProvider>(services, configuration, "LariExchange");
+        AddPostedRateProvider<HadiExpressProvider>(services, configuration, "HadiExpress");
+        AddPostedRateProvider<AhaliaExchangeProvider>(services, configuration, "AhaliaExchange");
+        AddPostedRateProvider<SonaliExchangeProvider>(services, configuration, "SonaliExchange");
+        AddPostedRateProvider<MustafaProvider>(services, configuration, "Mustafa");
         return services;
     }
 
@@ -91,6 +105,21 @@ public static class ProviderRegistration
             http.DefaultRequestHeaders.UserAgent.ParseAdd(BrowserUserAgent);
             http.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/html;q=0.9, */*;q=0.8");
             http.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-GB,en;q=0.9");
+        });
+        // The engine sends no cookies. The default handler would store any a server sets (a firewall's visitor id, a
+        // bot-management cookie) and send them back on a retry, so cookie handling is switched off on whatever primary
+        // handler the client gets; tests that swap in a fake handler are left alone.
+        client.ConfigurePrimaryHttpMessageHandler((handler, _) =>
+        {
+            switch (handler)
+            {
+                case HttpClientHandler h:
+                    h.UseCookies = false;
+                    break;
+                case SocketsHttpHandler s:
+                    s.UseCookies = false;
+                    break;
+            }
         });
         client.AddStandardResilienceHandler(o =>
         {
