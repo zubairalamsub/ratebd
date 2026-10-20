@@ -1,0 +1,54 @@
+name: probe
+
+# Runs the engine on a GitHub-hosted runner without committing anything, to check that providers answer from the
+# runners' datacentre IPs (where bot protection can behave differently) before they go live. Triggered by pushes to
+# probe/** branches or on demand; each provider's result is posted as an annotation on the run.
+on:
+  push:
+    branches: ["probe/**"]
+  workflow_dispatch:
+    inputs:
+      providers:
+        description: "Engine provider names to probe, comma-separated (empty = every registered provider)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      # No Bangladesh Bank snapshot here, so MidMarket fails and posted rates skip the plausibility check; that is
+      # fine for a reachability probe. The scratch directory starts empty, so a failing provider shows as failed
+      # rather than as a stale carry-forward.
+      - name: Run the engine into a scratch directory
+        working-directory: engine
+        env:
+          PROVIDERS: ${{ inputs.providers }}
+          RATEBD_Engine__DataDirectory: ${{ runner.temp }}/probe
+          RATEBD_Engine__FailWhenNothingFetched: "false"
+        run: |
+          mkdir -p "$RUNNER_TEMP/probe"
+          i=0
+          for p in $(echo "$PROVIDERS" | tr ',' ' '); do
+            export "RATEBD_Engine__OnlyProviders__$i=$p"
+            i=$((i + 1))
+          done
+          dotnet run --project src/RateBd.Engine -c Release
+
+      - name: Report each provider
+        if: always()
+        run: python3 .github/scripts/probe_report.py "$RUNNER_TEMP/probe" | tee -a "$GITHUB_STEP_SUMMARY"
