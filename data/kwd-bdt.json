@@ -2,16 +2,16 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-21T08:21:34.2352177Z",
+  "generatedAt": "2026-10-22T08:23:06.7332548Z",
   "midMarket": {
-    "rate": 399.2402,
+    "rate": 399.1403,
     "usdBdt": 123.6500,
     "usdBdtDate": "2026-10-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.30971331,
-    "crossRateDate": "2026-10-20",
+    "sendPerUsd": 0.30979082,
+    "crossRateDate": "2026-10-21",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-21T08:21:15.763308Z",
+    "fetchedAt": "2026-10-22T08:22:48.9058873Z",
     "stale": false
   },
   "providers": [
@@ -32,12 +32,12 @@
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
       "sendAmount": 100,
-      "rate": 399.2402,
+      "rate": 399.1403,
       "fee": 0,
-      "receiveAmount": 39924.02,
+      "receiveAmount": 39914.03,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-21T08:21:15.763308Z",
+      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
       "stale": false
     },
     {
@@ -50,7 +50,7 @@
       "receiveAmount": 39621.81,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-21T08:21:29.8298366Z",
+      "fetchedAt": "2026-10-22T08:23:02.25055Z",
       "stale": false
     },
     {
@@ -58,12 +58,12 @@
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
       "sendAmount": 200,
-      "rate": 399.2402,
+      "rate": 399.1403,
       "fee": 0,
-      "receiveAmount": 79848.04,
+      "receiveAmount": 79828.06,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-21T08:21:15.763308Z",
+      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 79745.17,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-21T08:21:34.2348514Z",
+      "fetchedAt": "2026-10-22T08:23:06.7328995Z",
       "stale": false
     }
   ],
@@ -97,8 +97,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-21T06:34:51.4483Z",
-      "fetchedAt": "2026-10-21T08:21:27.5533432Z",
+      "publishedAt": "2026-10-22T05:22:35.944Z",
+      "fetchedAt": "2026-10-22T08:23:00.4479337Z",
       "stale": false
     }
   ]
