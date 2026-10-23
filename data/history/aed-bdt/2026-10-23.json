@@ -1,0 +1,146 @@
+{
+  "corridor": "aed-bdt",
+  "sendCurrency": "AED",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-23T08:29:30.0315871Z",
+  "midMarket": {
+    "rate": 33.6692,
+    "usdBdt": 123.6500,
+    "usdBdtDate": "2026-10-19",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 3.6725,
+    "crossRateDate": "2026-10-21",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-22T08:22:48.9058873Z",
+    "stale": true
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "stale",
+      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "sendAmount": 500,
+      "rate": 33.6692,
+      "fee": 0,
+      "receiveAmount": 16834.60,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
+      "stale": true
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "sendAmount": 1000,
+      "rate": 33.6692,
+      "fee": 0,
+      "receiveAmount": 33669.20,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
+      "stale": true
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "GccExchange",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "OrientExchange",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "LariExchange",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "HadiExpress",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AhaliaExchange",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "GccExchange",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.6602,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-23T07:30:20Z",
+      "fetchedAt": "2026-10-23T08:29:19.6701892Z",
+      "stale": false
+    },
+    {
+      "provider": "OrientExchange",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.6501,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-23T05:58:00Z",
+      "fetchedAt": "2026-10-23T08:29:20.3300244Z",
+      "stale": false
+    },
+    {
+      "provider": "LariExchange",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.55,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-23T08:28:00Z",
+      "fetchedAt": "2026-10-23T08:29:29.9996541Z",
+      "stale": false
+    },
+    {
+      "provider": "AhaliaExchange",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.38,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-23T08:29:19.6435968Z",
+      "stale": false
+    },
+    {
+      "provider": "HadiExpress",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.30,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-23T08:29:21.7109181Z",
+      "stale": false
+    }
+  ]
+}

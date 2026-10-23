@@ -2,7 +2,7 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-22T08:22:59.3486553Z",
+  "generatedAt": "2026-10-23T08:29:32.8546075Z",
   "midMarket": {
     "rate": 123.6500,
     "usdBdt": 123.6500,
@@ -12,13 +12,13 @@
     "crossRateDate": "2026-10-21",
     "crossRateSource": "fawazahmed0/currency-api",
     "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": false
+    "stale": true
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "ok",
-      "message": null
+      "status": "stale",
+      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
     },
     {
       "name": "BAExpress",
@@ -38,7 +38,7 @@
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
       "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "BAExpress",
@@ -50,7 +50,7 @@
       "receiveAmount": 61453.20,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-22T08:22:57.259625Z",
+      "fetchedAt": "2026-10-23T08:29:30.772756Z",
       "stale": false
     },
     {
@@ -64,7 +64,7 @@
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
       "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "BAExpress",
@@ -76,7 +76,7 @@
       "receiveAmount": 122906.40,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-22T08:22:59.3484624Z",
+      "fetchedAt": "2026-10-23T08:29:32.8544114Z",
       "stale": false
     }
   ],
@@ -98,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-22T08:22:57.1287355Z",
+      "fetchedAt": "2026-10-23T08:29:30.3121335Z",
       "stale": false
     }
   ]

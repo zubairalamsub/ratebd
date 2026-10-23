@@ -2,7 +2,7 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-22T08:23:06.7332548Z",
+  "generatedAt": "2026-10-23T08:29:40.1852722Z",
   "midMarket": {
     "rate": 399.1403,
     "usdBdt": 123.6500,
@@ -12,13 +12,13 @@
     "crossRateDate": "2026-10-21",
     "crossRateSource": "fawazahmed0/currency-api",
     "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": false
+    "stale": true
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "ok",
-      "message": null
+      "status": "stale",
+      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
     },
     {
       "name": "AlMulla",
@@ -38,7 +38,7 @@
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
       "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "AlMulla",
@@ -50,7 +50,7 @@
       "receiveAmount": 39621.81,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-22T08:23:02.25055Z",
+      "fetchedAt": "2026-10-23T08:29:35.8623836Z",
       "stale": false
     },
     {
@@ -64,7 +64,7 @@
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
       "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "AlMulla",
@@ -76,7 +76,7 @@
       "receiveAmount": 79745.17,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-22T08:23:06.7328995Z",
+      "fetchedAt": "2026-10-23T08:29:40.1848766Z",
       "stale": false
     }
   ],
@@ -97,8 +97,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-22T05:22:35.944Z",
-      "fetchedAt": "2026-10-22T08:23:00.4479337Z",
+      "publishedAt": "2026-10-23T08:02:22.5094Z",
+      "fetchedAt": "2026-10-23T08:29:33.9354284Z",
       "stale": false
     }
   ]

@@ -2,7 +2,7 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-22T08:23:11.4268061Z",
+  "generatedAt": "2026-10-23T08:29:43.673818Z",
   "midMarket": {
     "rate": 321.3147,
     "usdBdt": 123.6500,
@@ -12,13 +12,13 @@
     "crossRateDate": "2026-10-21",
     "crossRateSource": "fawazahmed0/currency-api",
     "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": false
+    "stale": true
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "ok",
-      "message": null
+      "status": "stale",
+      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
     }
   ],
   "quotes": [
@@ -33,7 +33,7 @@
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
       "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": false
+      "stale": true
     },
     {
       "provider": "MidMarket",
@@ -46,7 +46,7 @@
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
       "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": false
+      "stale": true
     }
   ],
   "postedRateProviders": [
@@ -72,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-22T08:23:10.8702721Z",
+      "fetchedAt": "2026-10-23T08:29:43.1246877Z",
       "stale": false
     },
     {
@@ -84,8 +84,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-21T20:00:00Z",
-      "fetchedAt": "2026-10-22T08:23:11.4250452Z",
+      "publishedAt": "2026-10-22T20:00:00Z",
+      "fetchedAt": "2026-10-23T08:29:43.6718028Z",
       "stale": false
     }
   ]
