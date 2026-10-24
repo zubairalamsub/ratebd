@@ -2,7 +2,7 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-23T08:29:32.8546075Z",
+  "generatedAt": "2026-10-24T07:57:43.1405749Z",
   "midMarket": {
     "rate": 123.6500,
     "usdBdt": 123.6500,
@@ -50,7 +50,7 @@
       "receiveAmount": 61453.20,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-23T08:29:30.772756Z",
+      "fetchedAt": "2026-10-24T07:57:41.0885359Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 122906.40,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-23T08:29:32.8544114Z",
+      "fetchedAt": "2026-10-24T07:57:43.1403633Z",
       "stale": false
     }
   ],
@@ -98,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-23T08:29:30.3121335Z",
+      "fetchedAt": "2026-10-24T07:57:40.9835308Z",
       "stale": false
     }
   ]

@@ -2,7 +2,7 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-23T08:29:30.0315871Z",
+  "generatedAt": "2026-10-24T07:57:40.846356Z",
   "midMarket": {
     "rate": 33.6692,
     "usdBdt": 123.6500,
@@ -87,7 +87,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-10-23T07:30:20Z",
-      "fetchedAt": "2026-10-23T08:29:19.6701892Z",
+      "fetchedAt": "2026-10-24T07:57:22.8692589Z",
       "stale": false
     },
     {
@@ -99,8 +99,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-23T05:58:00Z",
-      "fetchedAt": "2026-10-23T08:29:20.3300244Z",
+      "publishedAt": "2026-10-24T04:50:00Z",
+      "fetchedAt": "2026-10-24T07:57:23.7779836Z",
       "stale": false
     },
     {
@@ -112,8 +112,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-23T08:28:00Z",
-      "fetchedAt": "2026-10-23T08:29:29.9996541Z",
+      "publishedAt": "2026-10-24T07:45:00Z",
+      "fetchedAt": "2026-10-24T07:57:40.8104416Z",
       "stale": false
     },
     {
@@ -126,7 +126,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-23T08:29:19.6435968Z",
+      "fetchedAt": "2026-10-24T07:57:22.7866706Z",
       "stale": false
     },
     {
@@ -139,7 +139,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-23T08:29:21.7109181Z",
+      "fetchedAt": "2026-10-24T07:57:24.4209717Z",
       "stale": false
     }
   ]

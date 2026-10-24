@@ -2,7 +2,7 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-23T08:29:40.1852722Z",
+  "generatedAt": "2026-10-24T07:57:50.3738528Z",
   "midMarket": {
     "rate": 399.1403,
     "usdBdt": 123.6500,
@@ -50,7 +50,7 @@
       "receiveAmount": 39621.81,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-23T08:29:35.8623836Z",
+      "fetchedAt": "2026-10-24T07:57:46.0172734Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 79745.17,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-10-23T08:29:40.1848766Z",
+      "fetchedAt": "2026-10-24T07:57:50.3734191Z",
       "stale": false
     }
   ],
@@ -97,8 +97,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-23T08:02:22.5094Z",
-      "fetchedAt": "2026-10-23T08:29:33.9354284Z",
+      "publishedAt": "2026-10-24T04:59:16.5367Z",
+      "fetchedAt": "2026-10-24T07:57:43.983114Z",
       "stale": false
     }
   ]

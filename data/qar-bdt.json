@@ -2,7 +2,7 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-23T08:29:41.3523786Z",
+  "generatedAt": "2026-10-24T07:57:51.6964554Z",
   "midMarket": {
     "rate": 33.9698,
     "usdBdt": 123.6500,
@@ -72,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-23T08:29:40.5105753Z",
+      "fetchedAt": "2026-10-24T07:57:50.6489074Z",
       "stale": false
     },
     {
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-23T08:29:41.3521359Z",
+      "fetchedAt": "2026-10-24T07:57:51.6962203Z",
       "stale": false
     }
   ]

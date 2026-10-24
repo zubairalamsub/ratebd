@@ -2,7 +2,7 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-23T08:29:43.673818Z",
+  "generatedAt": "2026-10-24T07:57:58.5347231Z",
   "midMarket": {
     "rate": 321.3147,
     "usdBdt": 123.6500,
@@ -66,26 +66,26 @@
       "provider": "Unimoni",
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
-      "rate": 320.2501,
+      "rate": 320.3003,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-23T08:29:43.1246877Z",
+      "fetchedAt": "2026-10-24T07:57:58.5345109Z",
       "stale": false
     },
     {
       "provider": "PKExchange",
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
-      "rate": 320.25,
+      "rate": 320.30,
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-22T20:00:00Z",
-      "fetchedAt": "2026-10-23T08:29:43.6718028Z",
+      "publishedAt": "2026-10-23T20:00:00Z",
+      "fetchedAt": "2026-10-24T07:57:54.366838Z",
       "stale": false
     }
   ]
