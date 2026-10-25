@@ -2,23 +2,23 @@
   "corridor": "gbp-bdt",
   "sendCurrency": "GBP",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-24T07:57:22.6374781Z",
+  "generatedAt": "2026-10-25T08:10:30.0063397Z",
   "midMarket": {
-    "rate": 165.3917,
-    "usdBdt": 123.6500,
+    "rate": 165.5355,
+    "usdBdt": 123.7300,
     "usdBdtDate": "2026-10-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.74761902,
-    "crossRateDate": "2026-10-21",
+    "sendPerUsd": 0.74745289,
+    "crossRateDate": "2026-10-24",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": true
+    "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+    "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "stale",
-      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
+      "status": "ok",
+      "message": null
     }
   ],
   "quotes": [
@@ -27,26 +27,26 @@
       "corridor": "gbp-bdt",
       "sendCurrency": "GBP",
       "sendAmount": 500,
-      "rate": 165.3917,
+      "rate": 165.5355,
       "fee": 0,
-      "receiveAmount": 82695.85,
+      "receiveAmount": 82767.75,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     },
     {
       "provider": "MidMarket",
       "corridor": "gbp-bdt",
       "sendCurrency": "GBP",
       "sendAmount": 1000,
-      "rate": 165.3917,
+      "rate": 165.5355,
       "fee": 0,
-      "receiveAmount": 165391.70,
+      "receiveAmount": 165535.50,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     }
   ],
   "postedRateProviders": [],

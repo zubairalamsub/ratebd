@@ -2,23 +2,23 @@
   "corridor": "sar-bdt",
   "sendCurrency": "SAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-24T07:57:43.1431594Z",
+  "generatedAt": "2026-10-25T08:10:39.640932Z",
   "midMarket": {
-    "rate": 32.9733,
-    "usdBdt": 123.6500,
+    "rate": 32.9947,
+    "usdBdt": 123.7300,
     "usdBdtDate": "2026-10-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.75,
-    "crossRateDate": "2026-10-21",
+    "crossRateDate": "2026-10-24",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": true
+    "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+    "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "stale",
-      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
+      "status": "ok",
+      "message": null
     }
   ],
   "quotes": [
@@ -27,26 +27,26 @@
       "corridor": "sar-bdt",
       "sendCurrency": "SAR",
       "sendAmount": 1000,
-      "rate": 32.9733,
+      "rate": 32.9947,
       "fee": 0,
-      "receiveAmount": 32973.30,
+      "receiveAmount": 32994.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     },
     {
       "provider": "MidMarket",
       "corridor": "sar-bdt",
       "sendCurrency": "SAR",
       "sendAmount": 2000,
-      "rate": 32.9733,
+      "rate": 32.9947,
       "fee": 0,
-      "receiveAmount": 65946.60,
+      "receiveAmount": 65989.40,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     }
   ],
   "postedRateProviders": [],

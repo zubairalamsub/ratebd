@@ -2,23 +2,23 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-24T07:57:43.1405749Z",
+  "generatedAt": "2026-10-25T08:10:39.6384192Z",
   "midMarket": {
-    "rate": 123.6500,
-    "usdBdt": 123.6500,
+    "rate": 123.7300,
+    "usdBdt": 123.7300,
     "usdBdtDate": "2026-10-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 1,
-    "crossRateDate": "2026-10-21",
+    "crossRateDate": "2026-10-24",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": true
+    "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+    "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "stale",
-      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
+      "status": "ok",
+      "message": null
     },
     {
       "name": "BAExpress",
@@ -32,13 +32,13 @@
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
       "sendAmount": 500,
-      "rate": 123.6500,
+      "rate": 123.7300,
       "fee": 0,
-      "receiveAmount": 61825.00,
+      "receiveAmount": 61865.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     },
     {
       "provider": "BAExpress",
@@ -50,7 +50,7 @@
       "receiveAmount": 61453.20,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-24T07:57:41.0885359Z",
+      "fetchedAt": "2026-10-25T08:10:37.5916875Z",
       "stale": false
     },
     {
@@ -58,13 +58,13 @@
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
       "sendAmount": 1000,
-      "rate": 123.6500,
+      "rate": 123.7300,
       "fee": 0,
-      "receiveAmount": 123650.00,
+      "receiveAmount": 123730.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     },
     {
       "provider": "BAExpress",
@@ -76,7 +76,7 @@
       "receiveAmount": 122906.40,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-24T07:57:43.1403633Z",
+      "fetchedAt": "2026-10-25T08:10:39.6382068Z",
       "stale": false
     }
   ],
@@ -98,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-24T07:57:40.9835308Z",
+      "fetchedAt": "2026-10-25T08:10:36.9904732Z",
       "stale": false
     }
   ]

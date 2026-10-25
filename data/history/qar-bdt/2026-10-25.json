@@ -1,0 +1,92 @@
+{
+  "corridor": "qar-bdt",
+  "sendCurrency": "QAR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-25T08:10:52.2404761Z",
+  "midMarket": {
+    "rate": 33.9918,
+    "usdBdt": 123.7300,
+    "usdBdtDate": "2026-10-19",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 3.64,
+    "crossRateDate": "2026-10-24",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "sendAmount": 1000,
+      "rate": 33.9918,
+      "fee": 0,
+      "receiveAmount": 33991.80,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "sendAmount": 2000,
+      "rate": 33.9918,
+      "fee": 0,
+      "receiveAmount": 67983.60,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "HabibQatar",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AlMirqab",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "AlMirqab",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.92,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-25T08:10:47.5667182Z",
+      "stale": false
+    },
+    {
+      "provider": "HabibQatar",
+      "corridor": "qar-bdt",
+      "sendCurrency": "QAR",
+      "rate": 33.90,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-25T08:10:52.2402293Z",
+      "stale": false
+    }
+  ]
+}

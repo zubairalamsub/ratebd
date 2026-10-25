@@ -2,23 +2,23 @@
   "corridor": "myr-bdt",
   "sendCurrency": "MYR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-24T07:57:43.1419908Z",
+  "generatedAt": "2026-10-25T08:10:39.6397407Z",
   "midMarket": {
-    "rate": 30.2934,
-    "usdBdt": 123.6500,
+    "rate": 30.2834,
+    "usdBdt": 123.7300,
     "usdBdtDate": "2026-10-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 4.08174126,
-    "crossRateDate": "2026-10-21",
+    "sendPerUsd": 4.08574168,
+    "crossRateDate": "2026-10-24",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-    "stale": true
+    "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+    "stale": false
   },
   "providers": [
     {
       "name": "MidMarket",
-      "status": "stale",
-      "message": "FileNotFoundException: Bangladesh Bank snapshot not found; the bb-snapshot step probably failed (showing last good quote from 2026-10-22 08:22 UTC)"
+      "status": "ok",
+      "message": null
     }
   ],
   "quotes": [
@@ -27,26 +27,26 @@
       "corridor": "myr-bdt",
       "sendCurrency": "MYR",
       "sendAmount": 1000,
-      "rate": 30.2934,
+      "rate": 30.2834,
       "fee": 0,
-      "receiveAmount": 30293.40,
+      "receiveAmount": 30283.40,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     },
     {
       "provider": "MidMarket",
       "corridor": "myr-bdt",
       "sendCurrency": "MYR",
       "sendAmount": 2000,
-      "rate": 30.2934,
+      "rate": 30.2834,
       "fee": 0,
-      "receiveAmount": 60586.80,
+      "receiveAmount": 60566.80,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-22T08:22:48.9058873Z",
-      "stale": true
+      "fetchedAt": "2026-10-25T08:10:30.0051781Z",
+      "stale": false
     }
   ],
   "postedRateProviders": [],
