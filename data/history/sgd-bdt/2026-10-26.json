@@ -1,0 +1,54 @@
+{
+  "corridor": "sgd-bdt",
+  "sendCurrency": "SGD",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-26T08:36:33.7847484Z",
+  "midMarket": {
+    "rate": 96.8897,
+    "usdBdt": 123.7500,
+    "usdBdtDate": "2026-10-26",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 1.27722489,
+    "crossRateDate": "2026-10-25",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-26T08:36:24.2373835Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "sgd-bdt",
+      "sendCurrency": "SGD",
+      "sendAmount": 500,
+      "rate": 96.8897,
+      "fee": 0,
+      "receiveAmount": 48444.85,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-26T08:36:24.2373835Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "sgd-bdt",
+      "sendCurrency": "SGD",
+      "sendAmount": 1000,
+      "rate": 96.8897,
+      "fee": 0,
+      "receiveAmount": 96889.70,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-26T08:36:24.2373835Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
+}

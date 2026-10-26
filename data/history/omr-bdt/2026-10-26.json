@@ -1,0 +1,92 @@
+{
+  "corridor": "omr-bdt",
+  "sendCurrency": "OMR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-26T08:36:56.1972462Z",
+  "midMarket": {
+    "rate": 321.9111,
+    "usdBdt": 123.7500,
+    "usdBdtDate": "2026-10-26",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.38442293,
+    "crossRateDate": "2026-10-25",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-26T08:36:24.2373835Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "sendAmount": 100,
+      "rate": 321.9111,
+      "fee": 0,
+      "receiveAmount": 32191.11,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-26T08:36:24.2373835Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "sendAmount": 200,
+      "rate": 321.9111,
+      "fee": 0,
+      "receiveAmount": 64382.22,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-26T08:36:24.2373835Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "Unimoni",
+      "status": "stale",
+      "message": "HttpRequestException: The SSL connection could not be established, see inner exception. (showing last good rate from 2026-10-24 07:57 UTC)"
+    },
+    {
+      "name": "PKExchange",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "PKExchange",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "rate": 321.00,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-25T20:00:00Z",
+      "fetchedAt": "2026-10-26T08:36:46.9162721Z",
+      "stale": false
+    },
+    {
+      "provider": "Unimoni",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "rate": 320.3003,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-10-24T07:57:58.5345109Z",
+      "stale": true
+    }
+  ]
+}
