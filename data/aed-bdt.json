@@ -2,16 +2,16 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-28T09:23:17.8565434Z",
+  "generatedAt": "2026-10-29T09:30:25.0303623Z",
   "midMarket": {
-    "rate": 33.7590,
-    "usdBdt": 123.9800,
-    "usdBdtDate": "2026-10-28",
+    "rate": 33.7617,
+    "usdBdt": 123.9900,
+    "usdBdtDate": "2026-10-29",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.6725,
-    "crossRateDate": "2026-10-27",
+    "crossRateDate": "2026-10-28",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-28T09:23:10.7295384Z",
+    "fetchedAt": "2026-10-29T09:30:14.5336281Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
       "sendAmount": 500,
-      "rate": 33.7590,
+      "rate": 33.7617,
       "fee": 0,
-      "receiveAmount": 16879.50,
+      "receiveAmount": 16880.85,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-28T09:23:10.7295384Z",
+      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
       "stale": false
     },
     {
@@ -40,20 +40,20 @@
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
       "sendAmount": 1000,
-      "rate": 33.7590,
+      "rate": 33.7617,
       "fee": 0,
-      "receiveAmount": 33759.00,
+      "receiveAmount": 33761.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-28T09:23:10.7295384Z",
+      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
       "stale": false
     }
   ],
   "postedRateProviders": [
     {
       "name": "GccExchange",
-      "status": "stale",
-      "message": "FormatException: GccExchange last updated its AED rate on 2026-10-23 07:30 UTC (showing last good rate from 2026-10-25 08:10 UTC)"
+      "status": "ok",
+      "message": null
     },
     {
       "name": "OrientExchange",
@@ -81,39 +81,39 @@
       "provider": "OrientExchange",
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
-      "rate": 33.7400,
+      "rate": 33.7800,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-28T05:13:00Z",
-      "fetchedAt": "2026-10-28T09:23:11.790698Z",
+      "publishedAt": "2026-10-29T05:28:00Z",
+      "fetchedAt": "2026-10-29T09:30:15.4710423Z",
+      "stale": false
+    },
+    {
+      "provider": "LariExchange",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.75,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-29T09:22:00Z",
+      "fetchedAt": "2026-10-29T09:30:24.9923198Z",
       "stale": false
     },
     {
       "provider": "GccExchange",
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
-      "rate": 33.6602,
+      "rate": 33.6999,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-23T07:30:20Z",
-      "fetchedAt": "2026-10-25T08:10:30.2487443Z",
-      "stale": true
-    },
-    {
-      "provider": "LariExchange",
-      "corridor": "aed-bdt",
-      "sendCurrency": "AED",
-      "rate": 33.65,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": "2026-10-28T09:03:00Z",
-      "fetchedAt": "2026-10-28T09:23:17.8361188Z",
+      "publishedAt": "2026-10-29T09:15:18Z",
+      "fetchedAt": "2026-10-29T09:30:14.8710124Z",
       "stale": false
     },
     {
@@ -126,7 +126,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-28T09:23:10.9375707Z",
+      "fetchedAt": "2026-10-29T09:30:14.6745863Z",
       "stale": false
     },
     {
@@ -139,7 +139,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-28T09:23:12.9748861Z",
+      "fetchedAt": "2026-10-29T09:30:16.7184696Z",
       "stale": false
     }
   ]

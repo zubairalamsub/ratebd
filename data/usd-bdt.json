@@ -2,16 +2,16 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-28T09:23:20.2596799Z",
+  "generatedAt": "2026-10-29T09:30:27.5062704Z",
   "midMarket": {
-    "rate": 123.9800,
-    "usdBdt": 123.9800,
-    "usdBdtDate": "2026-10-28",
+    "rate": 123.9900,
+    "usdBdt": 123.9900,
+    "usdBdtDate": "2026-10-29",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 1,
-    "crossRateDate": "2026-10-27",
+    "crossRateDate": "2026-10-28",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-28T09:23:10.7295384Z",
+    "fetchedAt": "2026-10-29T09:30:14.5336281Z",
     "stale": false
   },
   "providers": [
@@ -32,12 +32,12 @@
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
       "sendAmount": 500,
-      "rate": 123.9800,
+      "rate": 123.9900,
       "fee": 0,
-      "receiveAmount": 61990.00,
+      "receiveAmount": 61995.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-28T09:23:10.7295384Z",
+      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
       "stale": false
     },
     {
@@ -50,7 +50,7 @@
       "receiveAmount": 61602.60,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-28T09:23:18.2184936Z",
+      "fetchedAt": "2026-10-29T09:30:25.4311473Z",
       "stale": false
     },
     {
@@ -58,12 +58,12 @@
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
       "sendAmount": 1000,
-      "rate": 123.9800,
+      "rate": 123.9900,
       "fee": 0,
-      "receiveAmount": 123980.00,
+      "receiveAmount": 123990.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-28T09:23:10.7295384Z",
+      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 123205.20,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-10-28T09:23:20.2594615Z",
+      "fetchedAt": "2026-10-29T09:30:27.5060333Z",
       "stale": false
     }
   ],
@@ -92,13 +92,13 @@
       "provider": "SonaliExchange",
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
-      "rate": 123.7,
+      "rate": 123.9,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-28T09:23:18.2399894Z",
+      "fetchedAt": "2026-10-29T09:30:25.4237912Z",
       "stale": false
     }
   ]
