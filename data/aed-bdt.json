@@ -2,16 +2,16 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-29T09:30:25.0303623Z",
+  "generatedAt": "2026-10-30T09:42:17.3414398Z",
   "midMarket": {
     "rate": 33.7617,
     "usdBdt": 123.9900,
     "usdBdtDate": "2026-10-29",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.6725,
-    "crossRateDate": "2026-10-28",
+    "crossRateDate": "2026-10-29",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-29T09:30:14.5336281Z",
+    "fetchedAt": "2026-10-30T09:42:11.3837446Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 16880.85,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
+      "fetchedAt": "2026-10-30T09:42:11.3837446Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 33761.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
+      "fetchedAt": "2026-10-30T09:42:11.3837446Z",
       "stale": false
     }
   ],
@@ -81,13 +81,26 @@
       "provider": "OrientExchange",
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
-      "rate": 33.7800,
+      "rate": 33.8400,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-29T05:28:00Z",
-      "fetchedAt": "2026-10-29T09:30:15.4710423Z",
+      "publishedAt": "2026-10-30T05:38:00Z",
+      "fetchedAt": "2026-10-30T09:42:12.4273773Z",
+      "stale": false
+    },
+    {
+      "provider": "GccExchange",
+      "corridor": "aed-bdt",
+      "sendCurrency": "AED",
+      "rate": 33.8006,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-30T09:32:19Z",
+      "fetchedAt": "2026-10-30T09:42:11.7175036Z",
       "stale": false
     },
     {
@@ -99,21 +112,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-29T09:22:00Z",
-      "fetchedAt": "2026-10-29T09:30:24.9923198Z",
-      "stale": false
-    },
-    {
-      "provider": "GccExchange",
-      "corridor": "aed-bdt",
-      "sendCurrency": "AED",
-      "rate": 33.6999,
-      "deliveryMethod": "Not specified",
-      "speed": "Not specified",
-      "partner": null,
-      "feeNote": null,
-      "publishedAt": "2026-10-29T09:15:18Z",
-      "fetchedAt": "2026-10-29T09:30:14.8710124Z",
+      "publishedAt": "2026-10-30T09:15:00Z",
+      "fetchedAt": "2026-10-30T09:42:17.3039264Z",
       "stale": false
     },
     {
@@ -126,7 +126,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-29T09:30:14.6745863Z",
+      "fetchedAt": "2026-10-30T09:42:11.4614715Z",
       "stale": false
     },
     {
@@ -139,7 +139,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-29T09:30:16.7184696Z",
+      "fetchedAt": "2026-10-30T09:42:13.0011557Z",
       "stale": false
     }
   ]

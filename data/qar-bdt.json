@@ -2,16 +2,16 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-29T09:30:38.1014254Z",
+  "generatedAt": "2026-10-30T09:42:28.1784493Z",
   "midMarket": {
     "rate": 34.0632,
     "usdBdt": 123.9900,
     "usdBdtDate": "2026-10-29",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.64,
-    "crossRateDate": "2026-10-28",
+    "crossRateDate": "2026-10-29",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-29T09:30:14.5336281Z",
+    "fetchedAt": "2026-10-30T09:42:11.3837446Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 34063.20,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
+      "fetchedAt": "2026-10-30T09:42:11.3837446Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 68126.40,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-29T09:30:14.5336281Z",
+      "fetchedAt": "2026-10-30T09:42:11.3837446Z",
       "stale": false
     }
   ],
@@ -72,20 +72,20 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-29T09:30:38.1011586Z",
+      "fetchedAt": "2026-10-30T09:42:28.178241Z",
       "stale": false
     },
     {
       "provider": "AlMirqab",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
-      "rate": 33.96,
+      "rate": 34.07,
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-29T09:30:36.3072325Z",
+      "fetchedAt": "2026-10-30T09:42:27.5379246Z",
       "stale": false
     }
   ]
