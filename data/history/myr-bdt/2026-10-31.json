@@ -1,0 +1,54 @@
+{
+  "corridor": "myr-bdt",
+  "sendCurrency": "MYR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-10-31T09:21:54.8484894Z",
+  "midMarket": {
+    "rate": 30.5960,
+    "usdBdt": 123.9900,
+    "usdBdtDate": "2026-10-29",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 4.0524918,
+    "crossRateDate": "2026-10-30",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-10-31T09:21:45.3439409Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "myr-bdt",
+      "sendCurrency": "MYR",
+      "sendAmount": 1000,
+      "rate": 30.5960,
+      "fee": 0,
+      "receiveAmount": 30596.00,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-31T09:21:45.3439409Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "myr-bdt",
+      "sendCurrency": "MYR",
+      "sendAmount": 2000,
+      "rate": 30.5960,
+      "fee": 0,
+      "receiveAmount": 61192.00,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-10-31T09:21:45.3439409Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
+}

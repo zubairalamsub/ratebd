@@ -2,16 +2,16 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-10-30T09:42:17.3414398Z",
+  "generatedAt": "2026-10-31T09:21:52.0823239Z",
   "midMarket": {
     "rate": 33.7617,
     "usdBdt": 123.9900,
     "usdBdtDate": "2026-10-29",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.6725,
-    "crossRateDate": "2026-10-29",
+    "crossRateDate": "2026-10-30",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-10-30T09:42:11.3837446Z",
+    "fetchedAt": "2026-10-31T09:21:45.3439409Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 16880.85,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-30T09:42:11.3837446Z",
+      "fetchedAt": "2026-10-31T09:21:45.3439409Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 33761.70,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-10-30T09:42:11.3837446Z",
+      "fetchedAt": "2026-10-31T09:21:45.3439409Z",
       "stale": false
     }
   ],
@@ -86,8 +86,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-30T05:38:00Z",
-      "fetchedAt": "2026-10-30T09:42:12.4273773Z",
+      "publishedAt": "2026-10-31T05:23:00Z",
+      "fetchedAt": "2026-10-31T09:21:46.4362668Z",
       "stale": false
     },
     {
@@ -99,8 +99,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-30T09:32:19Z",
-      "fetchedAt": "2026-10-30T09:42:11.7175036Z",
+      "publishedAt": "2026-10-31T09:15:21Z",
+      "fetchedAt": "2026-10-31T09:21:45.6965072Z",
       "stale": false
     },
     {
@@ -112,8 +112,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-10-30T09:15:00Z",
-      "fetchedAt": "2026-10-30T09:42:17.3039264Z",
+      "publishedAt": "2026-10-31T09:19:00Z",
+      "fetchedAt": "2026-10-31T09:21:52.0442809Z",
       "stale": false
     },
     {
@@ -126,7 +126,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-30T09:42:11.4614715Z",
+      "fetchedAt": "2026-10-31T09:21:45.5108509Z",
       "stale": false
     },
     {
@@ -139,7 +139,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-10-30T09:42:13.0011557Z",
+      "fetchedAt": "2026-10-31T09:21:48.58346Z",
       "stale": false
     }
   ]
