@@ -1,0 +1,92 @@
+{
+  "corridor": "omr-bdt",
+  "sendCurrency": "OMR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-11-01T10:11:17.8790487Z",
+  "midMarket": {
+    "rate": 323.3649,
+    "usdBdt": 124.3000,
+    "usdBdtDate": "2026-11-01",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.38439547,
+    "crossRateDate": "2026-10-31",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-11-01T10:10:58.4750153Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "sendAmount": 100,
+      "rate": 323.3649,
+      "fee": 0,
+      "receiveAmount": 32336.49,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-01T10:10:58.4750153Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "sendAmount": 200,
+      "rate": 323.3649,
+      "fee": 0,
+      "receiveAmount": 64672.98,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-01T10:10:58.4750153Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "Unimoni",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "PKExchange",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "PKExchange",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "rate": 321.50,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-10-31T20:00:00Z",
+      "fetchedAt": "2026-11-01T10:11:17.8776919Z",
+      "stale": false
+    },
+    {
+      "provider": "Unimoni",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "rate": 321.4999,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-11-01T10:11:17.2757326Z",
+      "stale": false
+    }
+  ]
+}
