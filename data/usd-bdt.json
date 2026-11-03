@@ -2,16 +2,16 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-02T10:39:39.1036599Z",
+  "generatedAt": "2026-11-03T10:31:23.5928034Z",
   "midMarket": {
-    "rate": 124.3000,
-    "usdBdt": 124.3000,
-    "usdBdtDate": "2026-11-02",
+    "rate": 124.3500,
+    "usdBdt": 124.3500,
+    "usdBdtDate": "2026-11-03",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 1,
-    "crossRateDate": "2026-11-01",
+    "crossRateDate": "2026-11-02",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-02T10:39:28.5501529Z",
+    "fetchedAt": "2026-11-03T10:31:13.6686636Z",
     "stale": false
   },
   "providers": [
@@ -32,12 +32,12 @@
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
       "sendAmount": 500,
-      "rate": 124.3000,
+      "rate": 124.3500,
       "fee": 0,
-      "receiveAmount": 62150.00,
+      "receiveAmount": 62175.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-02T10:39:28.5501529Z",
+      "fetchedAt": "2026-11-03T10:31:13.6686636Z",
       "stale": false
     },
     {
@@ -50,7 +50,7 @@
       "receiveAmount": 61801.80,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-11-02T10:39:37.0246489Z",
+      "fetchedAt": "2026-11-03T10:31:21.5338204Z",
       "stale": false
     },
     {
@@ -58,12 +58,12 @@
       "corridor": "usd-bdt",
       "sendCurrency": "USD",
       "sendAmount": 1000,
-      "rate": 124.3000,
+      "rate": 124.3500,
       "fee": 0,
-      "receiveAmount": 124300.00,
+      "receiveAmount": 124350.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-02T10:39:28.5501529Z",
+      "fetchedAt": "2026-11-03T10:31:13.6686636Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 123603.60,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-11-02T10:39:39.1034706Z",
+      "fetchedAt": "2026-11-03T10:31:23.5925641Z",
       "stale": false
     }
   ],
@@ -98,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-02T10:39:37.0240425Z",
+      "fetchedAt": "2026-11-03T10:31:21.5524981Z",
       "stale": false
     }
   ]
