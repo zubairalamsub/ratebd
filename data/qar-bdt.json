@@ -2,16 +2,16 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-03T10:31:32.2221074Z",
+  "generatedAt": "2026-11-04T10:34:44.3028165Z",
   "midMarket": {
     "rate": 34.1621,
     "usdBdt": 124.3500,
-    "usdBdtDate": "2026-11-03",
+    "usdBdtDate": "2026-11-04",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.64,
-    "crossRateDate": "2026-11-02",
+    "crossRateDate": "2026-11-03",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-03T10:31:13.6686636Z",
+    "fetchedAt": "2026-11-04T10:34:22.8679575Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 34162.10,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-03T10:31:13.6686636Z",
+      "fetchedAt": "2026-11-04T10:34:22.8679575Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 68324.20,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-03T10:31:13.6686636Z",
+      "fetchedAt": "2026-11-04T10:34:22.8679575Z",
       "stale": false
     }
   ],
@@ -66,26 +66,26 @@
       "provider": "HabibQatar",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
-      "rate": 34.20,
+      "rate": 34.22,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-03T10:31:32.2218244Z",
+      "fetchedAt": "2026-11-04T10:34:44.3025334Z",
       "stale": false
     },
     {
       "provider": "AlMirqab",
       "corridor": "qar-bdt",
       "sendCurrency": "QAR",
-      "rate": 34.17,
+      "rate": 34.19,
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-03T10:31:31.0177816Z",
+      "fetchedAt": "2026-11-04T10:34:43.0922464Z",
       "stale": false
     }
   ]
