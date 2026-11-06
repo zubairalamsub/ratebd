@@ -1,0 +1,105 @@
+{
+  "corridor": "usd-bdt",
+  "sendCurrency": "USD",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-11-06T10:28:44.0391706Z",
+  "midMarket": {
+    "rate": 124.3400,
+    "usdBdt": 124.3400,
+    "usdBdtDate": "2026-11-05",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 1,
+    "crossRateDate": "2026-11-05",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "BAExpress",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "usd-bdt",
+      "sendCurrency": "USD",
+      "sendAmount": 500,
+      "rate": 124.3400,
+      "fee": 0,
+      "receiveAmount": 62170.00,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+      "stale": false
+    },
+    {
+      "provider": "BAExpress",
+      "corridor": "usd-bdt",
+      "sendCurrency": "USD",
+      "sendAmount": 500,
+      "rate": 124.300000,
+      "fee": 2.00,
+      "receiveAmount": 61901.40,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "fetchedAt": "2026-11-06T10:28:41.9963354Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "usd-bdt",
+      "sendCurrency": "USD",
+      "sendAmount": 1000,
+      "rate": 124.3400,
+      "fee": 0,
+      "receiveAmount": 124340.00,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+      "stale": false
+    },
+    {
+      "provider": "BAExpress",
+      "corridor": "usd-bdt",
+      "sendCurrency": "USD",
+      "sendAmount": 1000,
+      "rate": 124.300000,
+      "fee": 4.00,
+      "receiveAmount": 123802.80,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "fetchedAt": "2026-11-06T10:28:44.0389574Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "SonaliExchange",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "SonaliExchange",
+      "corridor": "usd-bdt",
+      "sendCurrency": "USD",
+      "rate": 124.3,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-11-06T10:28:41.5235022Z",
+      "stale": false
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "corridor": "kwd-bdt",
+  "sendCurrency": "KWD",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-11-06T10:28:51.7406831Z",
+  "midMarket": {
+    "rate": 400.1407,
+    "usdBdt": 124.3400,
+    "usdBdtDate": "2026-11-05",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.31074067,
+    "crossRateDate": "2026-11-05",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    },
+    {
+      "name": "AlMulla",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 400.1407,
+      "fee": 0,
+      "receiveAmount": 40014.07,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+      "stale": false
+    },
+    {
+      "provider": "AlMulla",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 100,
+      "rate": 403.042000,
+      "fee": 1.250,
+      "receiveAmount": 39800.40,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 3 days",
+      "fetchedAt": "2026-11-06T10:28:47.3146454Z",
+      "stale": false
+    },
+    {
+      "provider": "AlMulla",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 403.042000,
+      "fee": 1.250,
+      "receiveAmount": 80104.60,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Within 3 days",
+      "fetchedAt": "2026-11-06T10:28:51.7403686Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 400.1407,
+      "fee": 0,
+      "receiveAmount": 80028.14,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "Aman",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "Aman",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "rate": 385.4441,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-11-06T05:34:54.6582Z",
+      "fetchedAt": "2026-11-06T10:28:44.9674007Z",
+      "stale": false
+    }
+  ]
+}
