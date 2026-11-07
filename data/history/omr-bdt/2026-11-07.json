@@ -1,0 +1,92 @@
+{
+  "corridor": "omr-bdt",
+  "sendCurrency": "OMR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-11-07T09:42:47.7483199Z",
+  "midMarket": {
+    "rate": 323.0203,
+    "usdBdt": 124.3400,
+    "usdBdtDate": "2026-11-05",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.38492937,
+    "crossRateDate": "2026-11-06",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-11-07T09:41:27.1994357Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "sendAmount": 100,
+      "rate": 323.0203,
+      "fee": 0,
+      "receiveAmount": 32302.03,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-07T09:41:27.1994357Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "sendAmount": 200,
+      "rate": 323.0203,
+      "fee": 0,
+      "receiveAmount": 64604.06,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-07T09:41:27.1994357Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [
+    {
+      "name": "Unimoni",
+      "status": "stale",
+      "message": "TimeoutRejectedException: The operation didn\u0027t complete within the allowed timeout of \u002700:01:00\u0027. (showing last good rate from 2026-11-06 10:28 UTC)"
+    },
+    {
+      "name": "PKExchange",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "postedRates": [
+    {
+      "provider": "Unimoni",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "rate": 322.5004,
+      "deliveryMethod": "Not specified",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": null,
+      "fetchedAt": "2026-11-06T10:28:54.3544813Z",
+      "stale": true
+    },
+    {
+      "provider": "PKExchange",
+      "corridor": "omr-bdt",
+      "sendCurrency": "OMR",
+      "rate": 322.50,
+      "deliveryMethod": "Bank deposit",
+      "speed": "Not specified",
+      "partner": null,
+      "feeNote": null,
+      "publishedAt": "2026-11-06T20:00:00Z",
+      "fetchedAt": "2026-11-07T09:41:49.4510891Z",
+      "stale": false
+    }
+  ]
+}

@@ -2,16 +2,16 @@
   "corridor": "usd-bdt",
   "sendCurrency": "USD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-06T10:28:44.0391706Z",
+  "generatedAt": "2026-11-07T09:41:36.9507844Z",
   "midMarket": {
     "rate": 124.3400,
     "usdBdt": 124.3400,
     "usdBdtDate": "2026-11-05",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 1,
-    "crossRateDate": "2026-11-05",
+    "crossRateDate": "2026-11-06",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+    "fetchedAt": "2026-11-07T09:41:27.1994357Z",
     "stale": false
   },
   "providers": [
@@ -37,7 +37,7 @@
       "receiveAmount": 62170.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+      "fetchedAt": "2026-11-07T09:41:27.1994357Z",
       "stale": false
     },
     {
@@ -50,7 +50,7 @@
       "receiveAmount": 61901.40,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-11-06T10:28:41.9963354Z",
+      "fetchedAt": "2026-11-07T09:41:34.8934614Z",
       "stale": false
     },
     {
@@ -63,7 +63,7 @@
       "receiveAmount": 124340.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-06T10:28:34.4964869Z",
+      "fetchedAt": "2026-11-07T09:41:27.1994357Z",
       "stale": false
     },
     {
@@ -76,7 +76,7 @@
       "receiveAmount": 123802.80,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
-      "fetchedAt": "2026-11-06T10:28:44.0389574Z",
+      "fetchedAt": "2026-11-07T09:41:36.950504Z",
       "stale": false
     }
   ],
@@ -98,7 +98,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-06T10:28:41.5235022Z",
+      "fetchedAt": "2026-11-07T09:41:34.7933506Z",
       "stale": false
     }
   ]
