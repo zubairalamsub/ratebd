@@ -2,16 +2,16 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-07T09:42:47.7483199Z",
+  "generatedAt": "2026-11-08T09:56:13.1935297Z",
   "midMarket": {
-    "rate": 323.0203,
+    "rate": 323.2984,
     "usdBdt": 124.3400,
-    "usdBdtDate": "2026-11-05",
+    "usdBdtDate": "2026-11-08",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.38492937,
-    "crossRateDate": "2026-11-06",
+    "sendPerUsd": 0.38459822,
+    "crossRateDate": "2026-11-07",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-07T09:41:27.1994357Z",
+    "fetchedAt": "2026-11-08T09:55:55.3441096Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 100,
-      "rate": 323.0203,
+      "rate": 323.2984,
       "fee": 0,
-      "receiveAmount": 32302.03,
+      "receiveAmount": 32329.84,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-07T09:41:27.1994357Z",
+      "fetchedAt": "2026-11-08T09:55:55.3441096Z",
       "stale": false
     },
     {
@@ -40,20 +40,20 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 200,
-      "rate": 323.0203,
+      "rate": 323.2984,
       "fee": 0,
-      "receiveAmount": 64604.06,
+      "receiveAmount": 64659.68,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-07T09:41:27.1994357Z",
+      "fetchedAt": "2026-11-08T09:55:55.3441096Z",
       "stale": false
     }
   ],
   "postedRateProviders": [
     {
       "name": "Unimoni",
-      "status": "stale",
-      "message": "TimeoutRejectedException: The operation didn\u0027t complete within the allowed timeout of \u002700:01:00\u0027. (showing last good rate from 2026-11-06 10:28 UTC)"
+      "status": "ok",
+      "message": null
     },
     {
       "name": "PKExchange",
@@ -72,8 +72,8 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-06T10:28:54.3544813Z",
-      "stale": true
+      "fetchedAt": "2026-11-08T09:56:13.0134441Z",
+      "stale": false
     },
     {
       "provider": "PKExchange",
@@ -84,8 +84,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-06T20:00:00Z",
-      "fetchedAt": "2026-11-07T09:41:49.4510891Z",
+      "publishedAt": "2026-11-07T20:00:00Z",
+      "fetchedAt": "2026-11-08T09:56:13.1915209Z",
       "stale": false
     }
   ]
