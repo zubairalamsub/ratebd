@@ -2,16 +2,16 @@
   "corridor": "kwd-bdt",
   "sendCurrency": "KWD",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-09T11:00:09.856179Z",
+  "generatedAt": "2026-11-10T10:50:50.8002873Z",
   "midMarket": {
-    "rate": 400.6206,
-    "usdBdt": 124.3500,
-    "usdBdtDate": "2026-11-09",
+    "rate": 399.9354,
+    "usdBdt": 124.4200,
+    "usdBdtDate": "2026-11-10",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.31039346,
-    "crossRateDate": "2026-11-08",
+    "sendPerUsd": 0.31110021,
+    "crossRateDate": "2026-11-09",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-09T10:59:46.6856735Z",
+    "fetchedAt": "2026-11-10T10:50:34.0599036Z",
     "stale": false
   },
   "providers": [
@@ -32,12 +32,12 @@
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
       "sendAmount": 100,
-      "rate": 400.6206,
+      "rate": 399.9354,
       "fee": 0,
-      "receiveAmount": 40062.06,
+      "receiveAmount": 39993.54,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-09T10:59:46.6856735Z",
+      "fetchedAt": "2026-11-10T10:50:34.0599036Z",
       "stale": false
     },
     {
@@ -50,20 +50,7 @@
       "receiveAmount": 39800.60,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-11-09T11:00:03.6068525Z",
-      "stale": false
-    },
-    {
-      "provider": "MidMarket",
-      "corridor": "kwd-bdt",
-      "sendCurrency": "KWD",
-      "sendAmount": 200,
-      "rate": 400.6206,
-      "fee": 0,
-      "receiveAmount": 80124.12,
-      "deliveryMethod": "Not applicable",
-      "speed": "Not applicable",
-      "fetchedAt": "2026-11-09T10:59:46.6856735Z",
+      "fetchedAt": "2026-11-10T10:50:46.6637863Z",
       "stale": false
     },
     {
@@ -76,7 +63,20 @@
       "receiveAmount": 80105.00,
       "deliveryMethod": "Bank deposit",
       "speed": "Within 2 days",
-      "fetchedAt": "2026-11-09T11:00:09.855753Z",
+      "fetchedAt": "2026-11-10T10:50:50.8000004Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "kwd-bdt",
+      "sendCurrency": "KWD",
+      "sendAmount": 200,
+      "rate": 399.9354,
+      "fee": 0,
+      "receiveAmount": 79987.08,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-10T10:50:34.0599036Z",
       "stale": false
     }
   ],
@@ -92,13 +92,13 @@
       "provider": "Aman",
       "corridor": "kwd-bdt",
       "sendCurrency": "KWD",
-      "rate": 403.2746,
+      "rate": 403.5317,
       "deliveryMethod": "Not specified",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-09T06:46:48.116Z",
-      "fetchedAt": "2026-11-09T11:00:00.0319941Z",
+      "publishedAt": "2026-11-10T09:22:35.1203Z",
+      "fetchedAt": "2026-11-10T10:50:44.8546911Z",
       "stale": false
     }
   ]
