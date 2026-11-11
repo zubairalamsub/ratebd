@@ -2,16 +2,16 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-10T10:50:54.4739447Z",
+  "generatedAt": "2026-11-11T10:27:04.0849289Z",
   "midMarket": {
-    "rate": 323.5624,
-    "usdBdt": 124.4200,
-    "usdBdtDate": "2026-11-10",
+    "rate": 323.9395,
+    "usdBdt": 124.6500,
+    "usdBdtDate": "2026-11-11",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.38453175,
-    "crossRateDate": "2026-11-09",
+    "sendPerUsd": 0.38479405,
+    "crossRateDate": "2026-11-10",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-10T10:50:34.0599036Z",
+    "fetchedAt": "2026-11-11T10:26:40.3961111Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 100,
-      "rate": 323.5624,
+      "rate": 323.9395,
       "fee": 0,
-      "receiveAmount": 32356.24,
+      "receiveAmount": 32393.95,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-10T10:50:34.0599036Z",
+      "fetchedAt": "2026-11-11T10:26:40.3961111Z",
       "stale": false
     },
     {
@@ -40,12 +40,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 200,
-      "rate": 323.5624,
+      "rate": 323.9395,
       "fee": 0,
-      "receiveAmount": 64712.48,
+      "receiveAmount": 64787.90,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-10T10:50:34.0599036Z",
+      "fetchedAt": "2026-11-11T10:26:40.3961111Z",
       "stale": false
     }
   ],
@@ -72,20 +72,20 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-10T10:50:53.8303822Z",
+      "fetchedAt": "2026-11-11T10:27:03.1517731Z",
       "stale": false
     },
     {
       "provider": "PKExchange",
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
-      "rate": 322.75,
+      "rate": 323.00,
       "deliveryMethod": "Bank deposit",
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-09T20:00:00Z",
-      "fetchedAt": "2026-11-10T10:50:54.4726954Z",
+      "publishedAt": "2026-11-10T20:00:00Z",
+      "fetchedAt": "2026-11-11T10:27:04.0836054Z",
       "stale": false
     }
   ]
