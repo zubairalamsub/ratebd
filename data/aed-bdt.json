@@ -2,16 +2,16 @@
   "corridor": "aed-bdt",
   "sendCurrency": "AED",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-14T09:53:03.8754096Z",
+  "generatedAt": "2026-11-15T10:28:58.0183476Z",
   "midMarket": {
-    "rate": 33.9687,
-    "usdBdt": 124.7500,
-    "usdBdtDate": "2026-11-12",
+    "rate": 33.9251,
+    "usdBdt": 124.5900,
+    "usdBdtDate": "2026-11-15",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.6725,
-    "crossRateDate": "2026-11-13",
+    "crossRateDate": "2026-11-15",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-14T09:52:54.5311952Z",
+    "fetchedAt": "2026-11-15T10:28:51.8402945Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
       "sendAmount": 500,
-      "rate": 33.9687,
+      "rate": 33.9251,
       "fee": 0,
-      "receiveAmount": 16984.35,
+      "receiveAmount": 16962.55,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-14T09:52:54.5311952Z",
+      "fetchedAt": "2026-11-15T10:28:51.8402945Z",
       "stale": false
     },
     {
@@ -40,12 +40,12 @@
       "corridor": "aed-bdt",
       "sendCurrency": "AED",
       "sendAmount": 1000,
-      "rate": 33.9687,
+      "rate": 33.9251,
       "fee": 0,
-      "receiveAmount": 33968.70,
+      "receiveAmount": 33925.10,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-14T09:52:54.5311952Z",
+      "fetchedAt": "2026-11-15T10:28:51.8402945Z",
       "stale": false
     }
   ],
@@ -87,7 +87,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": "2026-11-14T05:02:00Z",
-      "fetchedAt": "2026-11-14T09:52:55.3790097Z",
+      "fetchedAt": "2026-11-15T10:28:52.8937775Z",
       "stale": false
     },
     {
@@ -99,8 +99,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-14T09:45:04Z",
-      "fetchedAt": "2026-11-14T09:52:54.8243624Z",
+      "publishedAt": "2026-11-15T10:15:04Z",
+      "fetchedAt": "2026-11-15T10:28:52.1542463Z",
       "stale": false
     },
     {
@@ -112,8 +112,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-14T09:38:00Z",
-      "fetchedAt": "2026-11-14T09:53:03.8482477Z",
+      "publishedAt": "2026-11-15T09:59:00Z",
+      "fetchedAt": "2026-11-15T10:28:57.9802974Z",
       "stale": false
     },
     {
@@ -126,7 +126,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-14T09:52:54.6924731Z",
+      "fetchedAt": "2026-11-15T10:28:51.9285256Z",
       "stale": false
     },
     {
@@ -139,7 +139,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-14T09:52:56.2507687Z",
+      "fetchedAt": "2026-11-15T10:28:53.2034583Z",
       "stale": false
     }
   ]
