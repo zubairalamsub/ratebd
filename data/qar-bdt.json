@@ -2,16 +2,16 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-16T10:45:09.4879507Z",
+  "generatedAt": "2026-11-17T11:33:57.6569788Z",
   "midMarket": {
     "rate": 34.2720,
     "usdBdt": 124.7500,
-    "usdBdtDate": "2026-11-16",
+    "usdBdtDate": "2026-11-17",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.64,
-    "crossRateDate": "2026-11-15",
+    "crossRateDate": "2026-11-16",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-16T10:44:35.7291365Z",
+    "fetchedAt": "2026-11-17T11:32:39.6002392Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 34272.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-16T10:44:35.7291365Z",
+      "fetchedAt": "2026-11-17T11:32:39.6002392Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 68544.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-16T10:44:35.7291365Z",
+      "fetchedAt": "2026-11-17T11:32:39.6002392Z",
       "stale": false
     }
   ],
@@ -53,7 +53,7 @@
     {
       "name": "HabibQatar",
       "status": "stale",
-      "message": "HttpRequestException: Connection refused (hqie.com.qa:443) (showing last good rate from 2026-11-14 09:53 UTC)"
+      "message": "TimeoutRejectedException: The operation didn\u0027t complete within the allowed timeout of \u002700:01:00\u0027. (showing last good rate from 2026-11-14 09:53 UTC)"
     },
     {
       "name": "AlMirqab",
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-16T10:45:01.2171128Z",
+      "fetchedAt": "2026-11-17T11:32:58.0074561Z",
       "stale": false
     }
   ]
