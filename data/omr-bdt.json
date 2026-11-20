@@ -2,16 +2,16 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-19T11:22:40.5237091Z",
+  "generatedAt": "2026-11-20T11:00:36.1788543Z",
   "midMarket": {
-    "rate": 324.3190,
+    "rate": 324.1508,
     "usdBdt": 124.7500,
     "usdBdtDate": "2026-11-19",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.38465212,
-    "crossRateDate": "2026-11-18",
+    "sendPerUsd": 0.38485172,
+    "crossRateDate": "2026-11-19",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-19T11:21:02.1101628Z",
+    "fetchedAt": "2026-11-20T10:59:18.8737673Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 100,
-      "rate": 324.3190,
+      "rate": 324.1508,
       "fee": 0,
-      "receiveAmount": 32431.90,
+      "receiveAmount": 32415.08,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-19T11:21:02.1101628Z",
+      "fetchedAt": "2026-11-20T10:59:18.8737673Z",
       "stale": false
     },
     {
@@ -40,12 +40,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 200,
-      "rate": 324.3190,
+      "rate": 324.1508,
       "fee": 0,
-      "receiveAmount": 64863.80,
+      "receiveAmount": 64830.16,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-19T11:21:02.1101628Z",
+      "fetchedAt": "2026-11-20T10:59:18.8737673Z",
       "stale": false
     }
   ],
@@ -72,7 +72,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-19T11:22:40.2481838Z",
+      "fetchedAt": "2026-11-20T11:00:36.138419Z",
       "stale": false
     },
     {
@@ -84,8 +84,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-18T20:00:00Z",
-      "fetchedAt": "2026-11-19T11:22:40.522365Z",
+      "publishedAt": "2026-11-19T20:00:00Z",
+      "fetchedAt": "2026-11-20T11:00:36.1768789Z",
       "stale": false
     }
   ]
