@@ -1,0 +1,54 @@
+{
+  "corridor": "eur-bdt",
+  "sendCurrency": "EUR",
+  "receiveCurrency": "BDT",
+  "generatedAt": "2026-11-21T10:43:04.874507Z",
+  "midMarket": {
+    "rate": 137.0535,
+    "usdBdt": 124.7500,
+    "usdBdtDate": "2026-11-19",
+    "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
+    "sendPerUsd": 0.91022824,
+    "crossRateDate": "2026-11-20",
+    "crossRateSource": "fawazahmed0/currency-api",
+    "fetchedAt": "2026-11-21T10:42:56.0282059Z",
+    "stale": false
+  },
+  "providers": [
+    {
+      "name": "MidMarket",
+      "status": "ok",
+      "message": null
+    }
+  ],
+  "quotes": [
+    {
+      "provider": "MidMarket",
+      "corridor": "eur-bdt",
+      "sendCurrency": "EUR",
+      "sendAmount": 500,
+      "rate": 137.0535,
+      "fee": 0,
+      "receiveAmount": 68526.75,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-21T10:42:56.0282059Z",
+      "stale": false
+    },
+    {
+      "provider": "MidMarket",
+      "corridor": "eur-bdt",
+      "sendCurrency": "EUR",
+      "sendAmount": 1000,
+      "rate": 137.0535,
+      "fee": 0,
+      "receiveAmount": 137053.50,
+      "deliveryMethod": "Not applicable",
+      "speed": "Not applicable",
+      "fetchedAt": "2026-11-21T10:42:56.0282059Z",
+      "stale": false
+    }
+  ],
+  "postedRateProviders": [],
+  "postedRates": []
+}
