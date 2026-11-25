@@ -2,16 +2,16 @@
   "corridor": "qar-bdt",
   "sendCurrency": "QAR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-24T13:22:30.5228359Z",
+  "generatedAt": "2026-11-25T12:14:49.1244833Z",
   "midMarket": {
     "rate": 34.2720,
     "usdBdt": 124.7500,
-    "usdBdtDate": "2026-11-24",
+    "usdBdtDate": "2026-11-25",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
     "sendPerUsd": 3.64,
     "crossRateDate": "2026-11-24",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-24T13:21:13.5241741Z",
+    "fetchedAt": "2026-11-25T12:14:18.6111248Z",
     "stale": false
   },
   "providers": [
@@ -32,7 +32,7 @@
       "receiveAmount": 34272.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-24T13:21:13.5241741Z",
+      "fetchedAt": "2026-11-25T12:14:18.6111248Z",
       "stale": false
     },
     {
@@ -45,7 +45,7 @@
       "receiveAmount": 68544.00,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-24T13:21:13.5241741Z",
+      "fetchedAt": "2026-11-25T12:14:18.6111248Z",
       "stale": false
     }
   ],
@@ -53,7 +53,7 @@
     {
       "name": "HabibQatar",
       "status": "stale",
-      "message": "TimeoutRejectedException: The operation didn\u0027t complete within the allowed timeout of \u002700:01:00\u0027. (showing last good rate from 2026-11-14 09:53 UTC)"
+      "message": "HttpRequestException: The SSL connection could not be established, see inner exception. (showing last good rate from 2026-11-14 09:53 UTC)"
     },
     {
       "name": "AlMirqab",
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-24T13:21:30.8352801Z",
+      "fetchedAt": "2026-11-25T12:14:36.257398Z",
       "stale": false
     }
   ]
