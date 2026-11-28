@@ -2,16 +2,16 @@
   "corridor": "omr-bdt",
   "sendCurrency": "OMR",
   "receiveCurrency": "BDT",
-  "generatedAt": "2026-11-27T11:51:11.5967672Z",
+  "generatedAt": "2026-11-28T11:26:35.8676764Z",
   "midMarket": {
-    "rate": 324.3130,
+    "rate": 324.3027,
     "usdBdt": 124.7500,
     "usdBdtDate": "2026-11-26",
     "usdBdtSource": "Bangladesh Bank (USD/BDT weighted average rate)",
-    "sendPerUsd": 0.38465931,
-    "crossRateDate": "2026-11-26",
+    "sendPerUsd": 0.38467148,
+    "crossRateDate": "2026-11-27",
     "crossRateSource": "fawazahmed0/currency-api",
-    "fetchedAt": "2026-11-27T11:50:41.5325766Z",
+    "fetchedAt": "2026-11-28T11:26:08.2172277Z",
     "stale": false
   },
   "providers": [
@@ -27,12 +27,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 100,
-      "rate": 324.3130,
+      "rate": 324.3027,
       "fee": 0,
-      "receiveAmount": 32431.30,
+      "receiveAmount": 32430.27,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-27T11:50:41.5325766Z",
+      "fetchedAt": "2026-11-28T11:26:08.2172277Z",
       "stale": false
     },
     {
@@ -40,12 +40,12 @@
       "corridor": "omr-bdt",
       "sendCurrency": "OMR",
       "sendAmount": 200,
-      "rate": 324.3130,
+      "rate": 324.3027,
       "fee": 0,
-      "receiveAmount": 64862.60,
+      "receiveAmount": 64860.54,
       "deliveryMethod": "Not applicable",
       "speed": "Not applicable",
-      "fetchedAt": "2026-11-27T11:50:41.5325766Z",
+      "fetchedAt": "2026-11-28T11:26:08.2172277Z",
       "stale": false
     }
   ],
@@ -71,8 +71,8 @@
       "speed": "Not specified",
       "partner": null,
       "feeNote": null,
-      "publishedAt": "2026-11-26T20:00:00Z",
-      "fetchedAt": "2026-11-27T11:51:11.5954364Z",
+      "publishedAt": "2026-11-27T20:00:00Z",
+      "fetchedAt": "2026-11-28T11:26:35.8663674Z",
       "stale": false
     },
     {
@@ -85,7 +85,7 @@
       "partner": null,
       "feeNote": null,
       "publishedAt": null,
-      "fetchedAt": "2026-11-27T11:51:11.0267562Z",
+      "fetchedAt": "2026-11-28T11:26:34.9627984Z",
       "stale": false
     }
   ]
